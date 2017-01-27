@@ -1,12 +1,13 @@
 const path = require('path');
 
 module.exports = {
-  entry: {
-    app: 'index.js'
-  },
+  entry: 'main.jsx',
   output: {
-    path: './',
-    filename: '[name].bundle.js'
+    path: './docs/',
+    filename: 'bundle.js'
+  },
+  devServer: {
+    contentBase: 'docs'
   },
   devtool: 'source-map',
   resolve: {
@@ -17,11 +18,11 @@ module.exports = {
   module: {
     loaders: [
       { 
-        test: /\.js$/, 
+        test: /\.jsx$/, 
         exclude: /node_modules/, 
         loader: "babel", 
         query:{
-          presets: ['es2015']
+          presets: ['es2015', 'react']
         }
       }
     ]
