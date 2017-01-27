@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import Servant from './Servant.jsx';
+import Servants from './Servants.jsx';
 
 export default class Hello extends Component {
   render() {
     return (
       <div>
-          <Servant id="ギルガメッシュ" />
+          <Servants />
       </div>
     );
   }

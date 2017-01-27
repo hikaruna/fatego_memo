@@ -61,7 +61,7 @@
 	(0, _reactDom.render)(_react2.default.createElement(
 	  'div',
 	  null,
-	  _react2.default.createElement(_hello2.default, null)
+	  _react2.default.createElement(_hello2.default, { ref: 'hello' })
 	), document.getElementById('app'));
 
 /***/ },
@@ -21514,9 +21514,9 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Servant = __webpack_require__(179);
+	var _Servants = __webpack_require__(179);
 	
-	var _Servant2 = _interopRequireDefault(_Servant);
+	var _Servants2 = _interopRequireDefault(_Servants);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -21541,7 +21541,7 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(_Servant2.default, { id: '\u30AE\u30EB\u30AC\u30E1\u30C3\u30B7\u30E5' })
+	        _react2.default.createElement(_Servants2.default, null)
 	      );
 	    }
 	  }]);
@@ -21567,7 +21567,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _data = __webpack_require__(180);
+	var _ServantSummary = __webpack_require__(180);
+	
+	var _ServantSummary2 = _interopRequireDefault(_ServantSummary);
+	
+	var _data = __webpack_require__(181);
 	
 	var _data2 = _interopRequireDefault(_data);
 	
@@ -21579,52 +21583,144 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var Servant = function (_Component) {
-	  _inherits(Servant, _Component);
+	var Servants = function (_Component) {
+	  _inherits(Servants, _Component);
 	
-	  function Servant(props) {
-	    _classCallCheck(this, Servant);
+	  function Servants(props) {
+	    _classCallCheck(this, Servants);
 	
-	    var _this = _possibleConstructorReturn(this, (Servant.__proto__ || Object.getPrototypeOf(Servant)).call(this, props));
+	    var _this = _possibleConstructorReturn(this, (Servants.__proto__ || Object.getPrototypeOf(Servants)).call(this, props));
 	
-	    _this.data = _data2.default.servants.find(function (e, i) {
-	      return e.id === props.id;
-	    });
+	    _this.data = _data2.default.servants;
 	    return _this;
 	  }
 	
-	  _createClass(Servant, [{
+	  _createClass(Servants, [{
 	    key: 'render',
 	    value: function render() {
+	      var rows = [];
+	      for (var i = 0; i < this.data.length; i++) {
+	        var row = this.data[i];
+	        rows.push(_react2.default.createElement(_ServantSummary2.default, { id: row.id }));
+	      }
+	
 	      return _react2.default.createElement(
-	        'article',
+	        'table',
 	        null,
 	        _react2.default.createElement(
-	          'h1',
-	          null,
-	          this.data.id
-	        ),
-	        _react2.default.createElement(
-	          'sction',
+	          'thead',
 	          null,
 	          _react2.default.createElement(
-	            'h1',
+	            'tr',
 	            null,
-	            '\u30EC\u30A2\u30EA\u30C6\u30A3'
-	          ),
-	          this.data.rarity
+	            _react2.default.createElement(
+	              'th',
+	              null,
+	              '\u540D\u524D'
+	            ),
+	            _react2.default.createElement(
+	              'th',
+	              null,
+	              '\u2605'
+	            ),
+	            _react2.default.createElement(
+	              'th',
+	              null,
+	              '\u30AF\u30E9\u30B9'
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'tbody',
+	          null,
+	          _react2.default.createElement(_ServantSummary2.default, { id: this.data[0].id }),
+	          _react2.default.createElement(_ServantSummary2.default, { id: this.data[1].id })
 	        )
 	      );
 	    }
 	  }]);
 	
-	  return Servant;
+	  return Servants;
 	}(_react.Component);
 	
-	exports.default = Servant;
+	exports.default = Servants;
 
 /***/ },
 /* 180 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _data = __webpack_require__(181);
+	
+	var _data2 = _interopRequireDefault(_data);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var ServantSummary = function (_Component) {
+	  _inherits(ServantSummary, _Component);
+	
+	  function ServantSummary(props) {
+	    _classCallCheck(this, ServantSummary);
+	
+	    var _this = _possibleConstructorReturn(this, (ServantSummary.__proto__ || Object.getPrototypeOf(ServantSummary)).call(this, props));
+	
+	    _this.data = _data2.default.servants.find(function (e, i) {
+	      return e.id === props.id;
+	    });
+	    console.debug(_this.data);
+	    console.debug('hoge');
+	    return _this;
+	  }
+	
+	  _createClass(ServantSummary, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'tr',
+	        null,
+	        _react2.default.createElement(
+	          'td',
+	          null,
+	          this.data.id
+	        ),
+	        _react2.default.createElement(
+	          'td',
+	          null,
+	          this.data.rarity
+	        ),
+	        _react2.default.createElement(
+	          'td',
+	          null,
+	          this.data.class
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return ServantSummary;
+	}(_react.Component);
+	
+	exports.default = ServantSummary;
+
+/***/ },
+/* 181 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21636,7 +21732,11 @@
 	  servants: [{
 	    id: 'ギルガメッシュ',
 	    rarity: 5,
-	    clazz: 'アーチャー'
+	    class: 'アーチャー'
+	  }, {
+	    id: 'クー・フーリン',
+	    rarity: 3,
+	    class: 'ランサー'
 	  }],
 	  evolution_items: [{
 	    servant_id: 'ギルガメッシュ',

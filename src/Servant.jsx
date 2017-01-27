@@ -6,6 +6,7 @@ export default class Servant extends Component {
     super(props);
     this.data = allData.servants.find( (e,i) => e.id === props.id );
   }
+
   render() {
     return (
       <article>

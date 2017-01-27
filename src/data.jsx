@@ -3,7 +3,12 @@ export default {
     {
       id: 'ギルガメッシュ',
       rarity: 5,
-      clazz: 'アーチャー'
+      class: 'アーチャー'
+    },
+    {
+      id: 'クー・フーリン',
+      rarity: 3,
+      class: 'ランサー'
     }
   ],
   evolution_items: [

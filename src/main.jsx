@@ -5,7 +5,7 @@ import Hello from './hello.jsx';
 
 render(
   <div>
-    <Hello />
+    <Hello ref="hello"/>
   </div>,
   document.getElementById('app')
 );
