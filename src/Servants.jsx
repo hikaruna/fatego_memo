@@ -17,19 +17,22 @@ export default class Servants extends Component {
     }
 
     return (
-      <table>
-        <thead>
-          <tr>
-            <th>名前</th>
-            <th>★</th>
-            <th>クラス</th>
-          </tr>
-        </thead>
-        <tbody>
-          <ServantSummary id={this.data[0].id} />
-          <ServantSummary id={this.data[1].id} />
-        </tbody>
-      </table>
+      <div>
+        <table>
+          <thead>
+            <tr>
+              <th>名前</th>
+              <th>★</th>
+              <th>クラス</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ServantSummary id={this.data[0].id} />
+            <ServantSummary id={this.data[1].id} />
+          </tbody>
+        </table>
+        { this.props.children }
+      </div>
     );
   }
 }

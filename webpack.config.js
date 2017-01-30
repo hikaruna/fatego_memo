@@ -4,7 +4,8 @@ module.exports = {
   entry: 'main.jsx',
   output: {
     path: './docs/',
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    publicPath: '/fatego_memo/'
   },
   devServer: {
     contentBase: 'docs'
