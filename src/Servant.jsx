@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import allData from 'data.jsx';
+import { ServantData } from 'data.jsx';
 
 export default class Servant extends Component {
   constructor(props) {
     super(props);
-    this.data = allData.servants.find( (e,i) => e.id === props.id );
+    this.data = ServantData.find( (e,i) => e.id === props.id );
   }
 
   render() {

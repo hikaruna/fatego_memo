@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import ServantSummary from 'ServantSummary.jsx';
-import allData from 'data.jsx';
+import { ServantData } from 'data.jsx';
 
 export default class Servants extends Component {
 
   constructor(props) {
     super(props);
-    this.data = allData.servants;
+    this.data = ServantData;
   }
 
   render() {

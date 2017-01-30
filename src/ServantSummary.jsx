@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import allData from 'data.jsx';
+import { ServantData } from 'data.jsx';
 
 export default class ServantSummary extends Component {
   constructor(props) {
     super(props);
-    this.data = allData.servants.find( (e,i) => e.id === props.id );
-    console.debug(this.data);
-    console.debug('hoge');
+    this.data = ServantData.find( (e,i) => e.id === props.id );
   }
 
   render() {

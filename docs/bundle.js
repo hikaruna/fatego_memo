@@ -61,7 +61,7 @@
 	(0, _reactDom.render)(_react2.default.createElement(
 	  'div',
 	  null,
-	  _react2.default.createElement(_hello2.default, { ref: 'hello' })
+	  _react2.default.createElement(_hello2.default, null)
 	), document.getElementById('app'));
 
 /***/ },
@@ -21573,8 +21573,6 @@
 	
 	var _data = __webpack_require__(181);
 	
-	var _data2 = _interopRequireDefault(_data);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21591,7 +21589,7 @@
 	
 	    var _this = _possibleConstructorReturn(this, (Servants.__proto__ || Object.getPrototypeOf(Servants)).call(this, props));
 	
-	    _this.data = _data2.default.servants;
+	    _this.data = _data.ServantData;
 	    return _this;
 	  }
 	
@@ -21663,8 +21661,6 @@
 	
 	var _data = __webpack_require__(181);
 	
-	var _data2 = _interopRequireDefault(_data);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21681,11 +21677,9 @@
 	
 	    var _this = _possibleConstructorReturn(this, (ServantSummary.__proto__ || Object.getPrototypeOf(ServantSummary)).call(this, props));
 	
-	    _this.data = _data2.default.servants.find(function (e, i) {
+	    _this.data = _data.ServantData.find(function (e, i) {
 	      return e.id === props.id;
 	    });
-	    console.debug(_this.data);
-	    console.debug('hoge');
 	    return _this;
 	  }
 	
@@ -21728,49 +21722,52 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.default = {
-	  servants: [{
-	    id: 'ギルガメッシュ',
-	    rarity: 5,
-	    class: 'アーチャー'
-	  }, {
-	    id: 'クー・フーリン',
-	    rarity: 3,
-	    class: 'ランサー'
-	  }],
-	  evolution_items: [{
-	    servant_id: 'ギルガメッシュ',
-	    item_id: 'アーチャーピース',
-	    level: 1,
-	    number: 2
-	  }, {
-	    servant_id: 'ギルガメッシュ',
-	    item_id: 'ゴーストランタン',
-	    level: 2,
-	    number: 12
-	  }, {
-	    servant_id: 'ギルガメッシュ',
-	    item_id: 'アーチャーピース',
-	    level: 2,
-	    number: 12
-	  }],
-	  items: [{
-	    id: 'ゴーストランタン'
-	  }, {
-	    id: 'アーチャーピース'
-	  }],
-	  areas: [{
-	    id: '第一特異点'
-	  }],
-	  quests: [{
-	    id: 'パリ',
-	    areas_id: '第一特異点'
-	  }],
-	  item_quests: [{
-	    item_id: 'ゴーストランタン',
-	    quest_id: 'パリ'
-	  }]
-	};
+	var ServantData = exports.ServantData = [{
+	  id: 'ギルガメッシュ',
+	  rarity: 5,
+	  class: 'アーチャー'
+	}, {
+	  id: 'クー・フーリン',
+	  rarity: 3,
+	  class: 'ランサー'
+	}];
+	
+	var EvolutionItemData = exports.EvolutionItemData = [{
+	  servant_id: 'ギルガメッシュ',
+	  item_id: 'アーチャーピース',
+	  level: 1,
+	  number: 2
+	}, {
+	  servant_id: 'ギルガメッシュ',
+	  item_id: 'ゴーストランタン',
+	  level: 2,
+	  number: 12
+	}, {
+	  servant_id: 'ギルガメッシュ',
+	  item_id: 'アーチャーピース',
+	  level: 2,
+	  number: 12
+	}];
+	
+	var ItemData = exports.ItemData = [{
+	  id: 'ゴーストランタン'
+	}, {
+	  id: 'アーチャーピース'
+	}];
+	
+	var AreaData = exports.AreaData = [{
+	  id: '第一特異点'
+	}];
+	
+	var QuestData = exports.QuestData = [{
+	  id: 'パリ',
+	  areas_id: '第一特異点'
+	}];
+	
+	var ItemQuestData = exports.ItemQuestData = [{
+	  item_id: 'ゴーストランタン',
+	  quest_id: 'パリ'
+	}];
 
 /***/ }
 /******/ ]);
