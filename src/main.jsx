@@ -11,7 +11,7 @@ import Items from 'Items.jsx';
 import Item from 'Item.jsx';
 
 const history = useBasename(createHistory) ({
-  basename: '/fatego_memo'
+  basename: BASE_PATH
 });
 
 render((

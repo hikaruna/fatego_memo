@@ -34,7 +34,7 @@
 /******/ 	__webpack_require__.c = installedModules;
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "/fatego_memo/";
+/******/ 	__webpack_require__.p = "/fatego_memo";
 /******/
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(0);
@@ -83,7 +83,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var history = (0, _history.useBasename)(_history.createHistory)({
-	  basename: '/fatego_memo'
+	  basename: ("/fatego_memo")
 	});
 	
 	(0, _reactDom.render)(_react2.default.createElement(

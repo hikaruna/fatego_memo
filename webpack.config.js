@@ -1,11 +1,14 @@
 const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const publicPath = '/fatego_memo';
 
 module.exports = {
   entry: 'main.jsx',
   output: {
     path: './docs/',
     filename: 'bundle.js',
-    publicPath: '/fatego_memo/'
+    publicPath: publicPath
   },
   devServer: {
     contentBase: 'docs'
@@ -35,5 +38,18 @@ module.exports = {
         }
       }
     ]
-  }
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: 'src/index.html'
+    }),
+    new HtmlWebpackPlugin({
+      filename: '404.html',
+      template: 'src/404.html',
+      inject: false
+    }),
+    new webpack.DefinePlugin({
+      'BASE_PATH': JSON.stringify(publicPath)
+    })
+  ]
 };
