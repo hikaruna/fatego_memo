@@ -56,7 +56,7 @@ export const AreaData = [
 export const QuestData = [
   {
     id: 'パリ',
-    areas_id: '第一特異点'
+    area_id: '第一特異点'
   }
 ];
 

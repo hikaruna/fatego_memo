@@ -9,6 +9,7 @@ export default class Home extends Component {
         <ul>
           <li><Link to="/servants">サーヴァント一覧</Link></li>
           <li><Link to="/items">素材一覧</Link></li>
+          <li><Link to="/areas">エリア一覧</Link></li>
         </ul>
       </section>
     );

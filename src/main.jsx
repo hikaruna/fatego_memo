@@ -9,6 +9,8 @@ import Servants from 'Servants.jsx';
 import Servant from 'Servant.jsx';
 import Items from 'Items.jsx';
 import Item from 'Item.jsx';
+import Areas from 'Areas.jsx';
+import Area from 'Area.jsx';
 
 const history = useBasename(createHistory) ({
   basename: BASE_PATH
@@ -25,6 +27,10 @@ render((
       <Route name="素材一覧" path="items">
         <IndexRoute component={Items}/>
         <Route path=":id" component={Item}/>
+      </Route>
+      <Route name="Area一覧" path="areas">
+        <IndexRoute component={Areas}/>
+        <Route path=":id" component={Area}/>
       </Route>
     </Route>
   </Router>

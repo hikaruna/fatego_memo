@@ -1,6 +1,7 @@
 import { EvolutionItemData } from 'data.jsx';
 import Servant from 'models/Servant.js';
 import Item from 'models/Item.js';
+import Util from 'Util.js';
 
 export default class EvolutionItem {
 
@@ -28,14 +29,3 @@ export default class EvolutionItem {
     return Item.findBy(this.data.item_id);
   }
 }
-
-class Util {
-  static where(from, by) {
-    return from.filter(e => {
-      return Object.keys(by).reduce((ac,c)=> {
-        return ac && (by[c] === e[c]);
-      }, true);
-    });
-  }
-}
-

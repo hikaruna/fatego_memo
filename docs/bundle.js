@@ -72,13 +72,21 @@
 	
 	var _Servant2 = _interopRequireDefault(_Servant);
 	
-	var _Items = __webpack_require__(246);
+	var _Items = __webpack_require__(247);
 	
 	var _Items2 = _interopRequireDefault(_Items);
 	
-	var _Item = __webpack_require__(247);
+	var _Item = __webpack_require__(248);
 	
 	var _Item2 = _interopRequireDefault(_Item);
+	
+	var _Areas = __webpack_require__(249);
+	
+	var _Areas2 = _interopRequireDefault(_Areas);
+	
+	var _Area = __webpack_require__(252);
+	
+	var _Area2 = _interopRequireDefault(_Area);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -104,6 +112,12 @@
 	      { name: '\u7D20\u6750\u4E00\u89A7', path: 'items' },
 	      _react2.default.createElement(_reactRouter.IndexRoute, { component: _Items2.default }),
 	      _react2.default.createElement(_reactRouter.Route, { path: ':id', component: _Item2.default })
+	    ),
+	    _react2.default.createElement(
+	      _reactRouter.Route,
+	      { name: 'Area\u4E00\u89A7', path: 'areas' },
+	      _react2.default.createElement(_reactRouter.IndexRoute, { component: _Areas2.default }),
+	      _react2.default.createElement(_reactRouter.Route, { path: ':id', component: _Area2.default })
 	    )
 	  )
 	), document.getElementById('app'));
@@ -26893,6 +26907,15 @@
 	              { to: '/items' },
 	              '\u7D20\u6750\u4E00\u89A7'
 	            )
+	          ),
+	          _react2.default.createElement(
+	            'li',
+	            null,
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: '/areas' },
+	              '\u30A8\u30EA\u30A2\u4E00\u89A7'
+	            )
 	          )
 	        )
 	      );
@@ -27126,7 +27149,7 @@
 	
 	var QuestData = exports.QuestData = [{
 	  id: 'パリ',
-	  areas_id: '第一特異点'
+	  area_id: '第一特異点'
 	}];
 	
 	var ItemQuestData = exports.ItemQuestData = [{
@@ -27433,6 +27456,10 @@
 	
 	var _Item2 = _interopRequireDefault(_Item);
 	
+	var _Util = __webpack_require__(246);
+	
+	var _Util2 = _interopRequireDefault(_Util);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -27441,7 +27468,7 @@
 	  _createClass(EvolutionItem, null, [{
 	    key: 'where',
 	    value: function where(_where) {
-	      return Util.where(_data.EvolutionItemData, _where).map(function (e) {
+	      return _Util2.default.where(_data.EvolutionItemData, _where).map(function (e) {
 	        return new EvolutionItem(e);
 	      });
 	    }
@@ -27479,25 +27506,6 @@
 	}();
 	
 	exports.default = EvolutionItem;
-	
-	var Util = function () {
-	  function Util() {
-	    _classCallCheck(this, Util);
-	  }
-	
-	  _createClass(Util, null, [{
-	    key: 'where',
-	    value: function where(from, by) {
-	      return from.filter(function (e) {
-	        return Object.keys(by).reduce(function (ac, c) {
-	          return ac && by[c] === e[c];
-	        }, true);
-	      });
-	    }
-	  }]);
-
-	  return Util;
-	}();
 
 /***/ },
 /* 245 */
@@ -27561,6 +27569,41 @@
 
 /***/ },
 /* 246 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var Util = function () {
+	  function Util() {
+	    _classCallCheck(this, Util);
+	  }
+	
+	  _createClass(Util, null, [{
+	    key: "where",
+	    value: function where(from, by) {
+	      return from.filter(function (e) {
+	        return Object.keys(by).reduce(function (ac, c) {
+	          return ac && by[c] === e[c];
+	        }, true);
+	      });
+	    }
+	  }]);
+	
+	  return Util;
+	}();
+	
+	exports.default = Util;
+
+/***/ },
+/* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27647,7 +27690,7 @@
 	exports.default = Items;
 
 /***/ },
-/* 247 */
+/* 248 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27743,6 +27786,290 @@
 	}(_react.Component);
 	
 	exports.default = Item;
+
+/***/ },
+/* 249 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(178);
+	
+	var _data = __webpack_require__(241);
+	
+	var _Area = __webpack_require__(250);
+	
+	var _Area2 = _interopRequireDefault(_Area);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Areas = function (_Component) {
+	  _inherits(Areas, _Component);
+	
+	  function Areas(props) {
+	    _classCallCheck(this, Areas);
+	
+	    var _this = _possibleConstructorReturn(this, (Areas.__proto__ || Object.getPrototypeOf(Areas)).call(this, props));
+	
+	    _this.model = _Area2.default.all;
+	    return _this;
+	  }
+	
+	  _createClass(Areas, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'article',
+	        null,
+	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          '\u30A8\u30EA\u30A2\u4E00\u89A7'
+	        ),
+	        _react2.default.createElement(
+	          'ul',
+	          null,
+	          this.model.map(function (e) {
+	            return _react2.default.createElement(
+	              'li',
+	              { key: e.id },
+	              _react2.default.createElement(
+	                _reactRouter.Link,
+	                { to: '/areas/' + e.id },
+	                e.id
+	              )
+	            );
+	          })
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return Areas;
+	}(_react.Component);
+	
+	exports.default = Areas;
+
+/***/ },
+/* 250 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _data = __webpack_require__(241);
+	
+	var _Quest = __webpack_require__(251);
+	
+	var _Quest2 = _interopRequireDefault(_Quest);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var Area = function () {
+	  _createClass(Area, null, [{
+	    key: 'findBy',
+	    value: function findBy(id) {
+	      return new Area(_data.AreaData.find(function (e) {
+	        return e.id === id;
+	      }));
+	    }
+	  }, {
+	    key: 'all',
+	    get: function get() {
+	      return _data.AreaData.map(function (e) {
+	        return new Area(e);
+	      });
+	    }
+	  }]);
+	
+	  function Area(data) {
+	    _classCallCheck(this, Area);
+	
+	    this.data = data;
+	  }
+	
+	  _createClass(Area, [{
+	    key: 'id',
+	    get: function get() {
+	      return this.data.id;
+	    }
+	  }, {
+	    key: 'quest_ids',
+	    get: function get() {
+	      return _Quest2.default.where({ area_id: this.id }).map(function (e) {
+	        return e.id;
+	      });
+	    }
+	  }]);
+	
+	  return Area;
+	}();
+	
+	exports.default = Area;
+
+/***/ },
+/* 251 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _data = __webpack_require__(241);
+	
+	var _Util = __webpack_require__(246);
+	
+	var _Util2 = _interopRequireDefault(_Util);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var Quest = function () {
+	  _createClass(Quest, null, [{
+	    key: 'where',
+	    value: function where(_where) {
+	      return _Util2.default.where(_data.QuestData, _where).map(function (e) {
+	        return new Quest(e);
+	      });
+	    }
+	  }, {
+	    key: 'findBy',
+	    value: function findBy(id) {
+	      return new Quest(_data.QuestData.find(function (e) {
+	        return e.id === id;
+	      }));
+	    }
+	  }, {
+	    key: 'all',
+	    get: function get() {
+	      return _data.QuestData.map(function (e) {
+	        return new Quest(e);
+	      });
+	    }
+	  }]);
+	
+	  function Quest(data) {
+	    _classCallCheck(this, Quest);
+	
+	    this.data = data;
+	  }
+	
+	  _createClass(Quest, [{
+	    key: 'id',
+	    get: function get() {
+	      return this.data.id;
+	    }
+	  }]);
+	
+	  return Quest;
+	}();
+	
+	exports.default = Quest;
+
+/***/ },
+/* 252 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(178);
+	
+	var _Area = __webpack_require__(250);
+	
+	var _Area2 = _interopRequireDefault(_Area);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Area = function (_Component) {
+	  _inherits(Area, _Component);
+	
+	  function Area(props) {
+	    _classCallCheck(this, Area);
+	
+	    var _this = _possibleConstructorReturn(this, (Area.__proto__ || Object.getPrototypeOf(Area)).call(this, props));
+	
+	    _this.model = _Area2.default.findBy(props.params.id);
+	    return _this;
+	  }
+	
+	  _createClass(Area, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'article',
+	        null,
+	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          this.props.params.id
+	        ),
+	        _react2.default.createElement(
+	          'section',
+	          null,
+	          _react2.default.createElement(
+	            'ul',
+	            null,
+	            this.model.quest_ids.map(function (e) {
+	              return _react2.default.createElement(
+	                'li',
+	                { key: e },
+	                e
+	              );
+	            })
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return Area;
+	}(_react.Component);
+	
+	exports.default = Area;
 
 /***/ }
 /******/ ]);
