@@ -72,11 +72,11 @@
 	
 	var _Servant2 = _interopRequireDefault(_Servant);
 	
-	var _Items = __webpack_require__(243);
+	var _Items = __webpack_require__(246);
 	
 	var _Items2 = _interopRequireDefault(_Items);
 	
-	var _Item = __webpack_require__(244);
+	var _Item = __webpack_require__(247);
 	
 	var _Item2 = _interopRequireDefault(_Item);
 	
@@ -27154,6 +27154,10 @@
 	
 	var _data = __webpack_require__(241);
 	
+	var _Servant = __webpack_require__(243);
+	
+	var _Servant2 = _interopRequireDefault(_Servant);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -27170,6 +27174,7 @@
 	
 	    var _this = _possibleConstructorReturn(this, (Servant.__proto__ || Object.getPrototypeOf(Servant)).call(this, props));
 	
+	    _this.model = _Servant2.default.findBy(props.params.id);
 	    _this.data = _data.ServantData.find(function (e) {
 	      return e.id === props.params.id;
 	    });
@@ -27192,80 +27197,14 @@
 	  _createClass(Servant, [{
 	    key: 'render',
 	    value: function render() {
-	      var _this2 = this;
-	
-	      var evolutionItems = Array(4).fill().map(function (_, i) {
-	        var items = _this2.evolutionItems.filter(function (e) {
-	          return e.level === i + 1;
-	        }).map(function (e) {
-	          var to = '/items/' + e.item_id;
-	          return _react2.default.createElement(
-	            'tr',
-	            { key: e.item_id },
-	            _react2.default.createElement(
-	              'td',
-	              null,
-	              _react2.default.createElement(
-	                _reactRouter.Link,
-	                { to: to },
-	                e.item_id
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'td',
-	              null,
-	              e.number
-	            )
-	          );
-	        });
-	
-	        return _react2.default.createElement(
-	          'section',
-	          { key: i + 1 },
-	          _react2.default.createElement(
-	            'h1',
-	            null,
-	            '\u7B2C',
-	            i + 1,
-	            '\u6BB5\u968E'
-	          ),
-	          _react2.default.createElement(
-	            'table',
-	            null,
-	            _react2.default.createElement(
-	              'thead',
-	              null,
-	              _react2.default.createElement(
-	                'tr',
-	                null,
-	                _react2.default.createElement(
-	                  'th',
-	                  null,
-	                  '\u7D20\u6750'
-	                ),
-	                _react2.default.createElement(
-	                  'th',
-	                  null,
-	                  '\u5FC5\u8981\u500B\u6570'
-	                )
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'tbody',
-	              null,
-	              items
-	            )
-	          )
-	        );
-	      });
-	
+	      console.log(this.model.evolutions[1][0]);
 	      return _react2.default.createElement(
 	        'article',
 	        null,
 	        _react2.default.createElement(
 	          'h1',
 	          null,
-	          this.id
+	          this.model.id
 	        ),
 	        _react2.default.createElement(
 	          'section',
@@ -27278,7 +27217,7 @@
 	          _react2.default.createElement(
 	            'p',
 	            null,
-	            this.class
+	            this.model.class
 	          )
 	        ),
 	        _react2.default.createElement(
@@ -27292,22 +27231,144 @@
 	          _react2.default.createElement(
 	            'p',
 	            null,
-	            Array(this.rarity + 1).join('☆')
+	            this.rarity
 	          )
 	        ),
-	        _react2.default.createElement(
-	          'section',
-	          null,
-	          _react2.default.createElement(
-	            'h1',
-	            null,
-	            '\u518D\u81E8\u7D20\u6750'
-	          ),
-	          evolutionItems
-	        )
+	        this.evolutions
 	      );
 	    }
 	  }, {
+	    key: 'rarity',
+	    get: function get() {
+	      return Array(this.model.rarity + 1).join('☆');
+	    }
+	  }, {
+	    key: 'evolutions',
+	    get: function get() {
+	      return this.model.evolutions.map(function (evolutionItems, i) {
+	        return new Evolution(evolutionItems, i + 1).render();
+	      });
+	    }
+	  }]);
+	
+	  return Servant;
+	}(_react.Component);
+	
+	exports.default = Servant;
+	
+	var Evolution = function () {
+	  function Evolution(evolutionItems, level) {
+	    _classCallCheck(this, Evolution);
+	
+	    this.evolutionItems = evolutionItems;
+	    this.level = level;
+	  }
+	
+	  _createClass(Evolution, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'section',
+	        { key: this.level },
+	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          '\u7B2C',
+	          this.level,
+	          '\u6BB5\u968E'
+	        ),
+	        _react2.default.createElement(
+	          'table',
+	          null,
+	          _react2.default.createElement(
+	            'thead',
+	            null,
+	            _react2.default.createElement(
+	              'tr',
+	              null,
+	              _react2.default.createElement(
+	                'th',
+	                null,
+	                '\u7D20\u6750'
+	              ),
+	              _react2.default.createElement(
+	                'th',
+	                null,
+	                '\u5FC5\u8981\u500B\u6570'
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'tbody',
+	            null,
+	            this.evolutionItems.map(function (evolutionItem) {
+	              return _react2.default.createElement(
+	                'tr',
+	                { key: evolutionItem.item.id },
+	                _react2.default.createElement(
+	                  'td',
+	                  null,
+	                  _react2.default.createElement(
+	                    _reactRouter.Link,
+	                    { to: '/items/' + evolutionItem.item.id },
+	                    evolutionItem.item.id
+	                  )
+	                ),
+	                _react2.default.createElement(
+	                  'td',
+	                  null,
+	                  evolutionItem.number
+	                )
+	              );
+	            })
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Evolution;
+	}();
+
+/***/ },
+/* 243 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _data = __webpack_require__(241);
+	
+	var _EvolutionItem = __webpack_require__(244);
+	
+	var _EvolutionItem2 = _interopRequireDefault(_EvolutionItem);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var Servant = function () {
+	  _createClass(Servant, null, [{
+	    key: 'findBy',
+	    value: function findBy(id) {
+	      return new Servant(_data.ServantData.find(function (e) {
+	        return e.id === id;
+	      }));
+	    }
+	  }]);
+	
+	  function Servant(data) {
+	    _classCallCheck(this, Servant);
+	
+	    this.data = data;
+	  }
+	
+	  _createClass(Servant, [{
 	    key: 'id',
 	    get: function get() {
 	      return this.data.id;
@@ -27322,15 +27383,184 @@
 	    get: function get() {
 	      return this.data.rarity;
 	    }
+	  }, {
+	    key: 'evolutionItems',
+	    get: function get() {
+	      return _EvolutionItem2.default.where({ servant_id: this.id });
+	    }
+	  }, {
+	    key: 'items',
+	    get: function get() {
+	      return Array.from(new Set(this.evolutionItems.map(function (e) {
+	        return e.item;
+	      })));
+	    }
+	  }, {
+	    key: 'evolutions',
+	    get: function get() {
+	      var _this = this;
+	
+	      return [1, 2, 3, 4].map(function (e) {
+	        return _EvolutionItem2.default.where({ servant_id: _this.id, level: e });
+	      });
+	    }
 	  }]);
 	
 	  return Servant;
-	}(_react.Component);
+	}();
 	
 	exports.default = Servant;
 
 /***/ },
-/* 243 */
+/* 244 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _data = __webpack_require__(241);
+	
+	var _Servant = __webpack_require__(243);
+	
+	var _Servant2 = _interopRequireDefault(_Servant);
+	
+	var _Item = __webpack_require__(245);
+	
+	var _Item2 = _interopRequireDefault(_Item);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var EvolutionItem = function () {
+	  _createClass(EvolutionItem, null, [{
+	    key: 'where',
+	    value: function where(_where) {
+	      return Util.where(_data.EvolutionItemData, _where).map(function (e) {
+	        return new EvolutionItem(e);
+	      });
+	    }
+	  }]);
+	
+	  function EvolutionItem(data) {
+	    _classCallCheck(this, EvolutionItem);
+	
+	    this.data = data;
+	  }
+	
+	  _createClass(EvolutionItem, [{
+	    key: 'id',
+	    get: function get() {
+	      return this.data.id;
+	    }
+	  }, {
+	    key: 'number',
+	    get: function get() {
+	      return this.data.number;
+	    }
+	  }, {
+	    key: 'servant',
+	    get: function get() {
+	      return _Servant2.default.findBy(this.data.servant_id);
+	    }
+	  }, {
+	    key: 'item',
+	    get: function get() {
+	      return _Item2.default.findBy(this.data.item_id);
+	    }
+	  }]);
+	
+	  return EvolutionItem;
+	}();
+	
+	exports.default = EvolutionItem;
+	
+	var Util = function () {
+	  function Util() {
+	    _classCallCheck(this, Util);
+	  }
+	
+	  _createClass(Util, null, [{
+	    key: 'where',
+	    value: function where(from, by) {
+	      return from.filter(function (e) {
+	        return Object.keys(by).reduce(function (ac, c) {
+	          return ac && by[c] === e[c];
+	        }, true);
+	      });
+	    }
+	  }]);
+
+	  return Util;
+	}();
+
+/***/ },
+/* 245 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _data = __webpack_require__(241);
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var Item = function () {
+	  _createClass(Item, null, [{
+	    key: 'findBy',
+	    value: function findBy(id) {
+	      return new Item(_data.ItemData.find(function (e) {
+	        return e.id === id;
+	      }));
+	    }
+	  }]);
+	
+	  function Item(data) {
+	    _classCallCheck(this, Item);
+	
+	    this.data = data;
+	  }
+	
+	  _createClass(Item, [{
+	    key: 'id',
+	    get: function get() {
+	      return this.data.id;
+	    }
+	  }, {
+	    key: 'evolutionItems',
+	    get: function get() {
+	      var _this = this;
+	
+	      return _data.EvolutionItemData.filter(function (e) {
+	        return e.item_id === _this.id;
+	      });
+	    }
+	  }, {
+	    key: 'servants',
+	    get: function get() {
+	      return Array.from(new Set(this.evolutionItems.map(function (e) {
+	        return e.servant_id;
+	      })));
+	    }
+	  }]);
+	
+	  return Item;
+	}();
+	
+	exports.default = Item;
+
+/***/ },
+/* 246 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27417,7 +27647,7 @@
 	exports.default = Items;
 
 /***/ },
-/* 244 */
+/* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27511,66 +27741,6 @@
 	
 	  return Item;
 	}(_react.Component);
-	
-	exports.default = Item;
-
-/***/ },
-/* 245 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _data = __webpack_require__(241);
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	var Item = function () {
-	  _createClass(Item, null, [{
-	    key: 'findBy',
-	    value: function findBy(id) {
-	      return new Item(_data.ItemData.find(function (e) {
-	        return e.id === id;
-	      }));
-	    }
-	  }]);
-	
-	  function Item(data) {
-	    _classCallCheck(this, Item);
-	
-	    this.data = data;
-	  }
-	
-	  _createClass(Item, [{
-	    key: 'id',
-	    get: function get() {
-	      return this.data.id;
-	    }
-	  }, {
-	    key: 'evolutionItems',
-	    get: function get() {
-	      var _this = this;
-	
-	      return _data.EvolutionItemData.filter(function (e) {
-	        return e.item_id === _this.id;
-	      });
-	    }
-	  }, {
-	    key: 'servants',
-	    get: function get() {
-	      return Array.from(new Set(this.evolutionItems.map(function (e) {
-	        return e.servant_id;
-	      })));
-	    }
-	  }]);
-	
-	  return Item;
-	}();
 	
 	exports.default = Item;
 

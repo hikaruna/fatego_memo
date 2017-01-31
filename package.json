@@ -5,7 +5,7 @@
   "author": "hikaruna <me@hikaruna.net>",
   "license": "MIT",
   "scripts": {
-    "clean": "rm -rf lib docs/app.bundle.js docs/app.bundle.js.map",
+    "clean": "rm -rf lib docs/*",
     "prestart": "npm run build",
     "start": "webpack-dev-server -d --inline --history-api-fallback --progress",
     "test": "karma start --single-run",
