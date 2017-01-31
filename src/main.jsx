@@ -16,12 +16,16 @@ const history = useBasename(createHistory) ({
 
 render((
   <Router history={history}>
-    <Route path="/" component={App}>
+    <Route name="Top" path="/" component={App}>
       <IndexRoute component={Home}/>
-      <Route path="servants/:id" component={Servant}/>
-      <Route path="servants" component={Servants}/>
-      <Route path="items/:id" component={Item}/>
-      <Route path="items" component={Items}/>
+      <Route name="サーヴァント一覧" path="servants">
+        <IndexRoute component={Servants}/>
+        <Route path=":id" component={Servant}/>
+      </Route>
+      <Route name="素材一覧" path="items">
+        <IndexRoute component={Items}/>
+        <Route path=":id" component={Item}/>
+      </Route>
     </Route>
   </Router>
 ), document.getElementById('app'));
