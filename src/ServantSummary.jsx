@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 import { ServantData } from 'data.jsx';
-import Link from 'Link.jsx';
 
 export default class ServantSummary extends Component {
   constructor(props) {
@@ -9,12 +9,12 @@ export default class ServantSummary extends Component {
   }
 
   render() {
-    let a = `servants/${this.data.id}`;
+    let a = `/servants/${this.data.id}`;
     return (
       <tr>
-          <td><Link to={a} value={a} /></td>
-          <td>{this.data.rarity}</td>
-          <td>{this.data.class}</td>
+        <td><Link to={a}>{this.data.id}</Link></td>
+        <td>{this.data.rarity}</td>
+        <td>{this.data.class}</td>
       </tr>
     );
   }

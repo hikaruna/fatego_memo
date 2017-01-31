@@ -29,6 +29,12 @@ export const EvolutionItemData = [
     item_id: 'アーチャーピース',
     level: 2,
     number: 12
+  },
+  {
+    servant_id: 'クー・フーリン',
+    item_id: 'アーチャーピース',
+    level: 1,
+    number: 2
   }
 ];
 
