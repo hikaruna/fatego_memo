@@ -1,3 +1,5 @@
+import Inflector from 'i';
+
 export default class Util {
   static where(from, by) {
     return from.filter(e => {
@@ -24,8 +26,22 @@ String.prototype.toSnakeCase = function() {
   return this.split(".").map(e => e.replace(/^./, (a)=> a.toLowerCase()).split(/(?=[A-Z])/).join("_").replace(/_([A-Z])/, (a,b)=> "_" + b.toLowerCase())).join(".");
 };
 
+String.prototype.classify = function() {
+  return this.split('.').map(e => {
+    return e.split('_').map(e1 => e1.replace(/^./, (e2) => e2.toUpperCase())).join('');
+  }).join('.').singularize();
+};
+
 String.prototype.toCamelCase = function() {
   return this.replace(/_./g, function(s) {
     return s.charAt(1).toUpperCase();
   });
 };
+
+String.prototype.pluralize = function() {
+  return new Inflector().pluralize(this);
+}
+
+String.prototype.singularize = function() {
+  return new Inflector().singularize(this);
+}

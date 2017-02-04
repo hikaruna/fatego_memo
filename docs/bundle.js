@@ -68,27 +68,27 @@
 	
 	var _Servants2 = _interopRequireDefault(_Servants);
 	
-	var _Servant = __webpack_require__(247);
+	var _Servant = __webpack_require__(253);
 	
 	var _Servant2 = _interopRequireDefault(_Servant);
 	
-	var _Items = __webpack_require__(249);
+	var _Items = __webpack_require__(255);
 	
 	var _Items2 = _interopRequireDefault(_Items);
 	
-	var _Item = __webpack_require__(250);
+	var _Item = __webpack_require__(256);
 	
 	var _Item2 = _interopRequireDefault(_Item);
 	
-	var _Areas = __webpack_require__(251);
+	var _Areas = __webpack_require__(257);
 	
 	var _Areas2 = _interopRequireDefault(_Areas);
 	
-	var _Area = __webpack_require__(254);
+	var _Area = __webpack_require__(260);
 	
 	var _Area2 = _interopRequireDefault(_Area);
 	
-	var _Enemy = __webpack_require__(255);
+	var _Enemy = __webpack_require__(261);
 	
 	var _Enemy2 = _interopRequireDefault(_Enemy);
 	
@@ -27084,7 +27084,7 @@
 	
 	var _Util2 = _interopRequireDefault(_Util);
 	
-	var _servants = __webpack_require__(246);
+	var _servants = __webpack_require__(252);
 	
 	var _servants2 = _interopRequireDefault(_servants);
 	
@@ -35263,7 +35263,7 @@
 
 /***/ },
 /* 245 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
@@ -35272,6 +35272,12 @@
 	});
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _i = __webpack_require__(246);
+	
+	var _i2 = _interopRequireDefault(_i);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -35295,9 +35301,687 @@
 	}();
 	
 	exports.default = Util;
+	
+	
+	Number.prototype.times = function (func) {
+	  return Array(this).fill().map(function (e, i) {
+	    return i;
+	  });
+	};
+	
+	Array.prototype.flatten = function () {
+	  return Array.prototype.concat.apply([], this);
+	};
+	
+	Array.prototype.uniq = function () {
+	  return Array.from(new Set(this));
+	};
+	
+	String.prototype.toSnakeCase = function () {
+	  return this.split(".").map(function (e) {
+	    return e.replace(/^./, function (a) {
+	      return a.toLowerCase();
+	    }).split(/(?=[A-Z])/).join("_").replace(/_([A-Z])/, function (a, b) {
+	      return "_" + b.toLowerCase();
+	    });
+	  }).join(".");
+	};
+	
+	String.prototype.classify = function () {
+	  return this.split('.').map(function (e) {
+	    return e.split('_').map(function (e1) {
+	      return e1.replace(/^./, function (e2) {
+	        return e2.toUpperCase();
+	      });
+	    }).join('');
+	  }).join('.').singularize();
+	};
+	
+	String.prototype.toCamelCase = function () {
+	  return this.replace(/_./g, function (s) {
+	    return s.charAt(1).toUpperCase();
+	  });
+	};
+	
+	String.prototype.pluralize = function () {
+	  return new _i2.default().pluralize(this);
+	};
+	
+	String.prototype.singularize = function () {
+	  return new _i2.default().singularize(this);
+	};
 
 /***/ },
 /* 246 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// Requiring modules
+	
+	module.exports = function (attach) {
+	  var methods = __webpack_require__(247);
+	
+	  if (attach) {
+	    __webpack_require__(251)(methods);
+	  }
+	
+	  return methods
+	};
+
+
+/***/ },
+/* 247 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// The Inflector transforms words from singular to plural, class names to table names, modularized class names to ones without,
+	// and class names to foreign keys. The default inflections for pluralization, singularization, and uncountable words are kept
+	// in inflections.coffee
+	//
+	// If you discover an incorrect inflection and require it for your application, you'll need
+	// to correct it yourself (explained below).
+	
+	var util = __webpack_require__(248);
+	
+	var inflect = module.exports;
+	
+	// Import [inflections](inflections.html) instance
+	inflect.inflections = __webpack_require__(249)
+	
+	// Gives easy access to add inflections to this class
+	inflect.inflect = function (inflections_function) {
+	  inflections_function(inflect.inflections);
+	};
+	
+	// By default, _camelize_ converts strings to UpperCamelCase. If the argument to _camelize_
+	// is set to _false_ then _camelize_ produces lowerCamelCase.
+	//
+	// _camelize_ will also convert '/' to '.' which is useful for converting paths to namespaces.
+	//
+	//     "bullet_record".camelize()             // => "BulletRecord"
+	//     "bullet_record".camelize(false)        // => "bulletRecord"
+	//     "bullet_record/errors".camelize()      // => "BulletRecord.Errors"
+	//     "bullet_record/errors".camelize(false) // => "bulletRecord.Errors"
+	//
+	// As a rule of thumb you can think of _camelize_ as the inverse of _underscore_,
+	// though there are cases where that does not hold:
+	//
+	//     "SSLError".underscore.camelize // => "SslError"
+	inflect.camelize = function(lower_case_and_underscored_word, first_letter_in_uppercase) {
+	  var result;
+	  if (first_letter_in_uppercase == null) first_letter_in_uppercase = true;
+	  result = util.string.gsub(lower_case_and_underscored_word, /\/(.?)/, function($) {
+	    return "." + (util.string.upcase($[1]));
+	  });
+	  result = util.string.gsub(result, /(?:_)(.)/, function($) {
+	    return util.string.upcase($[1]);
+	  });
+	  if (first_letter_in_uppercase) {
+	    return util.string.upcase(result);
+	  } else {
+	    return util.string.downcase(result);
+	  }
+	};
+	
+	// Makes an underscored, lowercase form from the expression in the string.
+	//
+	// Changes '.' to '/' to convert namespaces to paths.
+	//
+	//     "BulletRecord".underscore()         // => "bullet_record"
+	//     "BulletRecord.Errors".underscore()  // => "bullet_record/errors"
+	//
+	// As a rule of thumb you can think of +underscore+ as the inverse of +camelize+,
+	// though there are cases where that does not hold:
+	//
+	//     "SSLError".underscore().camelize() // => "SslError"
+	inflect.underscore = function (camel_cased_word) {
+	  var self;
+	  self = util.string.gsub(camel_cased_word, /\./, '/');
+	  self = util.string.gsub(self, /([A-Z]+)([A-Z][a-z])/, "$1_$2");
+	  self = util.string.gsub(self, /([a-z\d])([A-Z])/, "$1_$2");
+	  self = util.string.gsub(self, /-/, '_');
+	  return self.toLowerCase();
+	};
+	
+	// Replaces underscores with dashes in the string.
+	//
+	//     "puni_puni".dasherize()   // => "puni-puni"
+	inflect.dasherize = function (underscored_word) {
+	  return util.string.gsub(underscored_word, /_/, '-');
+	};
+	
+	// Removes the module part from the expression in the string.
+	//
+	//     "BulletRecord.String.Inflections".demodulize() // => "Inflections"
+	//     "Inflections".demodulize()                     // => "Inflections"
+	inflect.demodulize = function (class_name_in_module) {
+	  return util.string.gsub(class_name_in_module, /^.*\./, '');
+	};
+	
+	// Creates a foreign key name from a class name.
+	// _separate_class_name_and_id_with_underscore_ sets whether
+	// the method should put '_' between the name and 'id'.
+	//
+	//     "Message".foreign_key()      // => "message_id"
+	//     "Message".foreign_key(false) // => "messageid"
+	//     "Admin::Post".foreign_key()  // => "post_id"
+	inflect.foreign_key = function (class_name, separate_class_name_and_id_with_underscore) {
+	  if (separate_class_name_and_id_with_underscore == null) {
+	    separate_class_name_and_id_with_underscore = true;
+	  }
+	  return inflect.underscore(inflect.demodulize(class_name)) + (separate_class_name_and_id_with_underscore ? "_id" : "id");
+	};
+	
+	// Turns a number into an ordinal string used to denote the position in an
+	// ordered sequence such as 1st, 2nd, 3rd, 4th.
+	//
+	//     ordinalize(1)     // => "1st"
+	//     ordinalize(2)     // => "2nd"
+	//     ordinalize(1002)  // => "1002nd"
+	//     ordinalize(1003)  // => "1003rd"
+	//     ordinalize(-11)   // => "-11th"
+	//     ordinalize(-1021) // => "-1021st"
+	inflect.ordinalize = function (number) {
+	  var _ref;
+	  number = parseInt(number);
+	  if ((_ref = Math.abs(number) % 100) === 11 || _ref === 12 || _ref === 13) {
+	    return "" + number + "th";
+	  } else {
+	    switch (Math.abs(number) % 10) {
+	      case 1:
+	        return "" + number + "st";
+	      case 2:
+	        return "" + number + "nd";
+	      case 3:
+	        return "" + number + "rd";
+	      default:
+	        return "" + number + "th";
+	    }
+	  }
+	};
+	
+	// Checks a given word for uncountability
+	//
+	//     "money".uncountability()     // => true
+	//     "my money".uncountability()  // => true
+	inflect.uncountability = function (word) {
+	  return inflect.inflections.uncountables.some(function(ele, ind, arr) {
+	    return word.match(new RegExp("(\\b|_)" + ele + "$", 'i')) != null;
+	  });
+	};
+	
+	// Returns the plural form of the word in the string.
+	//
+	//     "post".pluralize()             // => "posts"
+	//     "octopus".pluralize()          // => "octopi"
+	//     "sheep".pluralize()            // => "sheep"
+	//     "words".pluralize()            // => "words"
+	//     "CamelOctopus".pluralize()     // => "CamelOctopi"
+	inflect.pluralize = function (word) {
+	  var plural, result;
+	  result = word;
+	  if (word === '' || inflect.uncountability(word)) {
+	    return result;
+	  } else {
+	    for (var i = 0; i < inflect.inflections.plurals.length; i++) {
+	      plural = inflect.inflections.plurals[i];
+	      result = util.string.gsub(result, plural[0], plural[1]);
+	      if (word.match(plural[0]) != null) break;
+	    }
+	    return result;
+	  }
+	};
+	
+	// The reverse of _pluralize_, returns the singular form of a word in a string.
+	//
+	//     "posts".singularize()            // => "post"
+	//     "octopi".singularize()           // => "octopus"
+	//     "sheep".singularize()            // => "sheep"
+	//     "word".singularize()             // => "word"
+	//     "CamelOctopi".singularize()      // => "CamelOctopus"
+	inflect.singularize = function (word) {
+	  var result, singular;
+	  result = word;
+	  if (word === '' || inflect.uncountability(word)) {
+	    return result;
+	  } else {
+	    for (var i = 0; i < inflect.inflections.singulars.length; i++) {
+	      singular = inflect.inflections.singulars[i];
+	      result = util.string.gsub(result, singular[0], singular[1]);
+	      if (word.match(singular[0])) break;
+	    }
+	    return result;
+	  }
+	};
+	
+	// Capitalizes the first word and turns underscores into spaces and strips a
+	// trailing "_id", if any. Like _titleize_, this is meant for creating pretty output.
+	//
+	//     "employee_salary".humanize()   // => "Employee salary"
+	//     "author_id".humanize()         // => "Author"
+	inflect.humanize = function (lower_case_and_underscored_word) {
+	  var human, result;
+	  result = lower_case_and_underscored_word;
+	  for (var i = 0; i < inflect.inflections.humans.length; i++) {
+	    human = inflect.inflections.humans[i];
+	    result = util.string.gsub(result, human[0], human[1]);
+	  }
+	  result = util.string.gsub(result, /_id$/, "");
+	  result = util.string.gsub(result, /_/, " ");
+	  return util.string.capitalize(result, true);
+	};
+	
+	// Capitalizes all the words and replaces some characters in the string to create
+	// a nicer looking title. _titleize_ is meant for creating pretty output. It is not
+	// used in the Bullet internals.
+	//
+	//
+	//     "man from the boondocks".titleize()   // => "Man From The Boondocks"
+	//     "x-men: the last stand".titleize()    // => "X Men: The Last Stand"
+	inflect.titleize = function (word) {
+	  var self;
+	  self = inflect.humanize(inflect.underscore(word));
+	  return util.string.capitalize(self);
+	};
+	
+	// Create the name of a table like Bullet does for models to table names. This method
+	// uses the _pluralize_ method on the last word in the string.
+	//
+	//     "RawScaledScorer".tableize()   // => "raw_scaled_scorers"
+	//     "egg_and_ham".tableize()       // => "egg_and_hams"
+	//     "fancyCategory".tableize()     // => "fancy_categories"
+	inflect.tableize = function (class_name) {
+	  return inflect.pluralize(inflect.underscore(class_name));
+	};
+	
+	// Create a class name from a plural table name like Bullet does for table names to models.
+	// Note that this returns a string and not a Class.
+	//
+	//     "egg_and_hams".classify()   // => "EggAndHam"
+	//     "posts".classify()          // => "Post"
+	//
+	// Singular names are not handled correctly:
+	//
+	//     "business".classify()       // => "Busines"
+	inflect.classify = function (table_name) {
+	  return inflect.camelize(inflect.singularize(util.string.gsub(table_name, /.*\./, '')));
+	}
+
+
+/***/ },
+/* 248 */
+/***/ function(module, exports) {
+
+	// Some utility functions in js
+	
+	var u = module.exports = {
+	  array: {
+	    // Returns a copy of the array with the value removed once
+	    //
+	    //     [1, 2, 3, 1].del 1 #=> [2, 3, 1]
+	    //     [1, 2, 3].del 4    #=> [1, 2, 3]
+	    del: function (arr, val) {
+	      var index = arr.indexOf(val);
+	      if (index != -1) {
+	        if (index == 0) {
+	         return arr.slice(1)
+	        } else {
+	          return arr.slice(0, index).concat(arr.slice(index+1));
+	        }
+	      } else {
+	        return arr;
+	      }
+	    },
+	
+	    // Returns the first element of the array
+	    //
+	    //     [1, 2, 3].first() #=> 1
+	    first: function(arr) {
+	      return arr[0];
+	    },
+	
+	    // Returns the last element of the array
+	    //
+	    //     [1, 2, 3].last()  #=> 3
+	    last: function(arr) {
+	      return arr[arr.length-1];
+	    }
+	  },
+	  string: {
+	    // Returns a copy of str with all occurrences of pattern replaced with either replacement or the return value of a function.
+	    // The pattern will typically be a Regexp; if it is a String then no regular expression metacharacters will be interpreted
+	    // (that is /\d/ will match a digit, but ‘\d’ will match a backslash followed by a ‘d’).
+	    //
+	    // In the function form, the current match object is passed in as a parameter to the function, and variables such as
+	    // $[1], $[2], $[3] (where $ is the match object) will be set appropriately. The value returned by the function will be
+	    // substituted for the match on each call.
+	    //
+	    // The result inherits any tainting in the original string or any supplied replacement string.
+	    //
+	    //     "hello".gsub /[aeiou]/, '*'      #=> "h*ll*"
+	    //     "hello".gsub /[aeiou]/, '<$1>'   #=> "h<e>ll<o>"
+	    //     "hello".gsub /[aeiou]/, ($) {
+	    //       "<#{$[1]}>"                    #=> "h<e>ll<o>"
+	    //
+	    gsub: function (str, pattern, replacement) {
+	      var i, match, matchCmpr, matchCmprPrev, replacementStr, result, self;
+	      if (!((pattern != null) && (replacement != null))) return u.string.value(str);
+	      result = '';
+	      self = str;
+	      while (self.length > 0) {
+	        if ((match = self.match(pattern))) {
+	          result += self.slice(0, match.index);
+	          if (typeof replacement === 'function') {
+	            match[1] = match[1] || match[0];
+	            result += replacement(match);
+	          } else if (replacement.match(/\$[1-9]/)) {
+	            matchCmprPrev = match;
+	            matchCmpr = u.array.del(match, void 0);
+	            while (matchCmpr !== matchCmprPrev) {
+	              matchCmprPrev = matchCmpr;
+	              matchCmpr = u.array.del(matchCmpr, void 0);
+	            }
+	            match[1] = match[1] || match[0];
+	            replacementStr = replacement;
+	            for (i = 1; i <= 9; i++) {
+	              if (matchCmpr[i]) {
+	                replacementStr = u.string.gsub(replacementStr, new RegExp("\\\$" + i), matchCmpr[i]);
+	              }
+	            }
+	            result += replacementStr;
+	          } else {
+	            result += replacement;
+	          }
+	          self = self.slice(match.index + match[0].length);
+	        } else {
+	          result += self;
+	          self = '';
+	        }
+	      }
+	      return result;
+	    },
+	
+	    // Returns a copy of the String with the first letter being upper case
+	    //
+	    //     "hello".upcase #=> "Hello"
+	    upcase: function(str) {
+	      var self = u.string.gsub(str, /_([a-z])/, function ($) {
+	        return "_" + $[1].toUpperCase();
+	      });
+	      self = u.string.gsub(self, /\/([a-z])/, function ($) {
+	        return "/" + $[1].toUpperCase();
+	      });
+	      return self[0].toUpperCase() + self.substr(1);
+	    },
+	
+	    // Returns a copy of capitalized string
+	    //
+	    //     "employee salary" #=> "Employee Salary"
+	    capitalize: function (str, spaces) {
+	      var self = str.toLowerCase();
+	      if(!spaces) {
+	        self = u.string.gsub(self, /\s([a-z])/, function ($) {
+	          return " " + $[1].toUpperCase();
+	        });
+	      }
+	      return self[0].toUpperCase() + self.substr(1);
+	    },
+	
+	    // Returns a copy of the String with the first letter being lower case
+	    //
+	    //     "HELLO".downcase #=> "hELLO"
+	    downcase: function(str) {
+	      var self = u.string.gsub(str, /_([A-Z])/, function ($) {
+	        return "_" + $[1].toLowerCase();
+	      });
+	      self = u.string.gsub(self, /\/([A-Z])/, function ($) {
+	        return "/" + $[1].toLowerCase();
+	      });
+	      return self[0].toLowerCase() + self.substr(1);
+	    },
+	
+	    // Returns a string value for the String object
+	    //
+	    //     "hello".value() #=> "hello"
+	    value: function (str) {
+	      return str.substr(0);
+	    }
+	  }
+	}
+
+
+/***/ },
+/* 249 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// A singleton instance of this class is yielded by Inflector.inflections, which can then be used to specify additional
+	// inflection rules. Examples:
+	//
+	//     BulletSupport.Inflector.inflect ($) ->
+	//       $.plural /^(ox)$/i, '$1en'
+	//       $.singular /^(ox)en/i, '$1'
+	//
+	//       $.irregular 'octopus', 'octopi'
+	//
+	//       $.uncountable "equipment"
+	//
+	// New rules are added at the top. So in the example above, the irregular rule for octopus will now be the first of the
+	// pluralization and singularization rules that is runs. This guarantees that your rules run before any of the rules that may
+	// already have been loaded.
+	
+	var util = __webpack_require__(248);
+	
+	var Inflections = function () {
+	  this.plurals = [];
+	  this.singulars = [];
+	  this.uncountables = [];
+	  this.humans = [];
+	  __webpack_require__(250)(this);
+	  return this;
+	};
+	
+	// Specifies a new pluralization rule and its replacement. The rule can either be a string or a regular expression.
+	// The replacement should always be a string that may include references to the matched data from the rule.
+	Inflections.prototype.plural = function (rule, replacement) {
+	  if (typeof rule == 'string') {
+	    this.uncountables = util.array.del(this.uncountables, rule);
+	  }
+	  this.uncountables = util.array.del(this.uncountables, replacement);
+	  this.plurals.unshift([rule, replacement]);
+	};
+	
+	// Specifies a new singularization rule and its replacement. The rule can either be a string or a regular expression.
+	// The replacement should always be a string that may include references to the matched data from the rule.
+	Inflections.prototype.singular = function (rule, replacement) {
+	  if (typeof rule == 'string') {
+	    this.uncountables = util.array.del(this.uncountables, rule);
+	  }
+	  this.uncountables = util.array.del(this.uncountables, replacement);
+	  this.singulars.unshift([rule, replacement]);
+	};
+	
+	// Specifies a new irregular that applies to both pluralization and singularization at the same time. This can only be used
+	// for strings, not regular expressions. You simply pass the irregular in singular and plural form.
+	//
+	//     irregular 'octopus', 'octopi'
+	//     irregular 'person', 'people'
+	Inflections.prototype.irregular =  function (singular, plural, fullMatchRequired) {
+	  this.uncountables = util.array.del(this.uncountables, singular);
+	  this.uncountables = util.array.del(this.uncountables, plural);
+	  var prefix = "";
+	  if (fullMatchRequired) {
+	    prefix = "^";
+	  }
+	  if (singular[0].toUpperCase() == plural[0].toUpperCase()) {
+	    this.plural(new RegExp("(" + prefix + singular[0] + ")" + singular.slice(1) + "$", "i"), '$1' + plural.slice(1));
+	    this.plural(new RegExp("(" + prefix + plural[0] + ")" + plural.slice(1) + "$", "i"), '$1' + plural.slice(1));
+	    this.singular(new RegExp("(" + prefix + plural[0] + ")" + plural.slice(1) + "$", "i"), '$1' + singular.slice(1));
+	  } else {
+	    this.plural(new RegExp(prefix + (singular[0].toUpperCase()) + singular.slice(1) + "$"), plural[0].toUpperCase() + plural.slice(1));
+	    this.plural(new RegExp(prefix + (singular[0].toLowerCase()) + singular.slice(1) + "$"), plural[0].toLowerCase() + plural.slice(1));
+	    this.plural(new RegExp(prefix + (plural[0].toUpperCase()) + plural.slice(1) + "$"), plural[0].toUpperCase() + plural.slice(1));
+	    this.plural(new RegExp(prefix + (plural[0].toLowerCase()) + plural.slice(1) + "$"), plural[0].toLowerCase() + plural.slice(1));
+	    this.singular(new RegExp(prefix + (plural[0].toUpperCase()) + plural.slice(1) + "$"), singular[0].toUpperCase() + singular.slice(1));
+	    this.singular(new RegExp(prefix + (plural[0].toLowerCase()) + plural.slice(1) + "$"), singular[0].toLowerCase() + singular.slice(1));
+	  }
+	};
+	
+	// Specifies a humanized form of a string by a regular expression rule or by a string mapping.
+	// When using a regular expression based replacement, the normal humanize formatting is called after the replacement.
+	// When a string is used, the human form should be specified as desired (example: 'The name', not 'the_name')
+	//
+	//     human /(.*)_cnt$/i, '$1_count'
+	//     human "legacy_col_person_name", "Name"
+	Inflections.prototype.human = function (rule, replacement) {
+	  this.humans.unshift([rule, replacement]);
+	}
+	
+	// Add uncountable words that shouldn't be attempted inflected.
+	//
+	//     uncountable "money"
+	//     uncountable ["money", "information"]
+	Inflections.prototype.uncountable = function (words) {
+	  this.uncountables = this.uncountables.concat(words);
+	}
+	
+	// Clears the loaded inflections within a given scope (default is _'all'_).
+	// Give the scope as a symbol of the inflection type, the options are: _'plurals'_,
+	// _'singulars'_, _'uncountables'_, _'humans'_.
+	//
+	//     clear 'all'
+	//     clear 'plurals'
+	Inflections.prototype.clear = function (scope) {
+	  if (scope == null) scope = 'all';
+	  switch (scope) {
+	    case 'all':
+	      this.plurals = [];
+	      this.singulars = [];
+	      this.uncountables = [];
+	      this.humans = [];
+	    default:
+	      this[scope] = [];
+	  }
+	}
+	
+	// Clears the loaded inflections and initializes them to [default](../inflections.html)
+	Inflections.prototype.default = function () {
+	  this.plurals = [];
+	  this.singulars = [];
+	  this.uncountables = [];
+	  this.humans = [];
+	  __webpack_require__(250)(this);
+	  return this;
+	};
+	
+	module.exports = new Inflections();
+
+
+/***/ },
+/* 250 */
+/***/ function(module, exports) {
+
+	// Default inflections
+	module.exports = function (inflect) {
+	
+	  inflect.plural(/$/, 's');
+	  inflect.plural(/s$/i, 's');
+	  inflect.plural(/(ax|test)is$/i, '$1es');
+	  inflect.plural(/(octop|vir)us$/i, '$1i');
+	  inflect.plural(/(octop|vir)i$/i, '$1i');
+	  inflect.plural(/(alias|status)$/i, '$1es');
+	  inflect.plural(/(bu)s$/i, '$1ses');
+	  inflect.plural(/(buffal|tomat)o$/i, '$1oes');
+	  inflect.plural(/([ti])um$/i, '$1a');
+	  inflect.plural(/([ti])a$/i, '$1a');
+	  inflect.plural(/sis$/i, 'ses');
+	  inflect.plural(/(?:([^fa])fe|(?:(oa)f)|([lr])f)$/i, '$1ves');
+	  inflect.plural(/(hive)$/i, '$1s');
+	  inflect.plural(/([^aeiouy]|qu)y$/i, '$1ies');
+	  inflect.plural(/(x|ch|ss|sh)$/i, '$1es');
+	  inflect.plural(/(matr|vert|ind)(?:ix|ex)$/i, '$1ices');
+	  inflect.plural(/([m|l])ouse$/i, '$1ice');
+	  inflect.plural(/([m|l])ice$/i, '$1ice');
+	  inflect.plural(/^(ox)$/i, '$1en');
+	  inflect.plural(/^(oxen)$/i, '$1');
+	  inflect.plural(/(quiz)$/i, '$1zes');
+	
+	  inflect.singular(/s$/i, '');
+	  inflect.singular(/(n)ews$/i, '$1ews');
+	  inflect.singular(/([ti])a$/i, '$1um');
+	  inflect.singular(/((a)naly|(b)a|(d)iagno|(p)arenthe|(p)rogno|(s)ynop|(t)he)ses$/i, '$1sis');
+	  inflect.singular(/(^analy)ses$/i, '$1sis');
+	  inflect.singular(/([^f])ves$/i, '$1fe');
+	  inflect.singular(/(hive)s$/i, '$1');
+	  inflect.singular(/(tive)s$/i, '$1');
+	  inflect.singular(/(oave)s$/i, 'oaf');
+	  inflect.singular(/([lr])ves$/i, '$1f');
+	  inflect.singular(/([^aeiouy]|qu)ies$/i, '$1y');
+	  inflect.singular(/(s)eries$/i, '$1eries');
+	  inflect.singular(/(m)ovies$/i, '$1ovie');
+	  inflect.singular(/(x|ch|ss|sh)es$/i, '$1');
+	  inflect.singular(/([m|l])ice$/i, '$1ouse');
+	  inflect.singular(/(bus)es$/i, '$1');
+	  inflect.singular(/(o)es$/i, '$1');
+	  inflect.singular(/(shoe)s$/i, '$1');
+	  inflect.singular(/(cris|ax|test)es$/i, '$1is');
+	  inflect.singular(/(octop|vir)i$/i, '$1us');
+	  inflect.singular(/(alias|status)es$/i, '$1');
+	  inflect.singular(/^(ox)en/i, '$1');
+	  inflect.singular(/(vert|ind)ices$/i, '$1ex');
+	  inflect.singular(/(matr)ices$/i, '$1ix');
+	  inflect.singular(/(quiz)zes$/i, '$1');
+	  inflect.singular(/(database)s$/i, '$1');
+	
+	  inflect.irregular('child', 'children');
+	  inflect.irregular('person', 'people');
+	  inflect.irregular('man', 'men');
+	  inflect.irregular('child', 'children');
+	  inflect.irregular('sex', 'sexes');
+	  inflect.irregular('move', 'moves');
+	  inflect.irregular('cow', 'kine');
+	  inflect.irregular('zombie', 'zombies');
+	  inflect.irregular('oaf', 'oafs', true);
+	  inflect.irregular('jefe', 'jefes');
+	  inflect.irregular('save', 'saves');
+	  inflect.irregular('safe', 'safes');
+	  inflect.irregular('fife', 'fifes');
+	
+	  inflect.uncountable(['equipment', 'information', 'rice', 'money', 'species', 'series', 'fish', 'sheep', 'jeans', 'sushi']);
+	}
+
+
+/***/ },
+/* 251 */
+/***/ function(module, exports) {
+
+	module.exports = function (obj) {
+	
+	  var addProperty = function (method, func) {
+	    String.prototype.__defineGetter__(method, func);
+	  }
+	
+	  var stringPrototypeBlacklist = [
+	    '__defineGetter__', '__defineSetter__', '__lookupGetter__', '__lookupSetter__', 'charAt', 'constructor',
+	    'hasOwnProperty', 'isPrototypeOf', 'propertyIsEnumerable', 'toLocaleString', 'toString', 'valueOf', 'charCodeAt',
+	    'indexOf', 'lastIndexof', 'length', 'localeCompare', 'match', 'replace', 'search', 'slice', 'split', 'substring',
+	    'toLocaleLowerCase', 'toLocaleUpperCase', 'toLowerCase', 'toUpperCase', 'trim', 'trimLeft', 'trimRight', 'gsub'
+	  ];
+	
+	  Object.keys(obj).forEach(function (key) {
+	    if (key != 'inflect' && key != 'inflections') {
+	      if (stringPrototypeBlacklist.indexOf(key) !== -1) {
+	        console.log('warn: You should not override String.prototype.' + key);
+	      } else {
+	        addProperty(key, function () {
+	          return obj[key](this);
+	        });
+	      }
+	    }
+	  });
+	
+	}
+
+
+/***/ },
+/* 252 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -36049,7 +36733,7 @@
 	];
 
 /***/ },
-/* 247 */
+/* 253 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36066,7 +36750,7 @@
 	
 	var _reactRouter = __webpack_require__(178);
 	
-	var _data = __webpack_require__(248);
+	var _data = __webpack_require__(254);
 	
 	var _Servant = __webpack_require__(240);
 	
@@ -36247,7 +36931,7 @@
 	}(_react.Component);
 
 /***/ },
-/* 248 */
+/* 254 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -36308,7 +36992,7 @@
 	}];
 
 /***/ },
-/* 249 */
+/* 255 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36394,7 +37078,7 @@
 	exports.default = Items;
 
 /***/ },
-/* 250 */
+/* 256 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36411,7 +37095,7 @@
 	
 	var _reactRouter = __webpack_require__(178);
 	
-	var _data = __webpack_require__(248);
+	var _data = __webpack_require__(254);
 	
 	var _Item = __webpack_require__(243);
 	
@@ -36492,7 +37176,7 @@
 	exports.default = Item;
 
 /***/ },
-/* 251 */
+/* 257 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36509,9 +37193,9 @@
 	
 	var _reactRouter = __webpack_require__(178);
 	
-	var _data = __webpack_require__(248);
+	var _data = __webpack_require__(254);
 	
-	var _Area = __webpack_require__(252);
+	var _Area = __webpack_require__(258);
 	
 	var _Area2 = _interopRequireDefault(_Area);
 	
@@ -36571,7 +37255,7 @@
 	exports.default = Areas;
 
 /***/ },
-/* 252 */
+/* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36582,9 +37266,9 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _data = __webpack_require__(248);
+	var _data = __webpack_require__(254);
 	
-	var _Quest = __webpack_require__(253);
+	var _Quest = __webpack_require__(259);
 	
 	var _Quest2 = _interopRequireDefault(_Quest);
 	
@@ -36635,7 +37319,7 @@
 	exports.default = Area;
 
 /***/ },
-/* 253 */
+/* 259 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36646,7 +37330,7 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _data = __webpack_require__(248);
+	var _data = __webpack_require__(254);
 	
 	var _Util = __webpack_require__(245);
 	
@@ -36699,7 +37383,7 @@
 	exports.default = Quest;
 
 /***/ },
-/* 254 */
+/* 260 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36716,7 +37400,7 @@
 	
 	var _reactRouter = __webpack_require__(178);
 	
-	var _Area = __webpack_require__(252);
+	var _Area = __webpack_require__(258);
 	
 	var _Area2 = _interopRequireDefault(_Area);
 	
@@ -36776,7 +37460,7 @@
 	exports.default = Area;
 
 /***/ },
-/* 255 */
+/* 261 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36793,7 +37477,7 @@
 	
 	var _reactRouter = __webpack_require__(178);
 	
-	var _Enemy = __webpack_require__(256);
+	var _Enemy = __webpack_require__(262);
 	
 	var _Enemy2 = _interopRequireDefault(_Enemy);
 	
@@ -36804,6 +37488,8 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	//import EnemyQuestModel from 'models/EnemyQuest.js';
+	
 	
 	var Enemy = function (_Component) {
 	  _inherits(Enemy, _Component);
@@ -36813,7 +37499,8 @@
 	
 	    var _this = _possibleConstructorReturn(this, (Enemy.__proto__ || Object.getPrototypeOf(Enemy)).call(this, props));
 	
-	    _this.model = Enemy.findBy(props.params.id);
+	    _this.model = _Enemy2.default.findBy(props.params.id);
+	    _this.class = _Enemy2.default;
 	    return _this;
 	  }
 	
@@ -36827,6 +37514,52 @@
 	          'h1',
 	          null,
 	          this.model.id
+	        ),
+	        _react2.default.createElement(
+	          'section',
+	          null,
+	          _react2.default.createElement(
+	            'h1',
+	            null,
+	            '\u30AF\u30E9\u30B9'
+	          ),
+	          this.model.class
+	        ),
+	        _react2.default.createElement(
+	          'ul',
+	          null,
+	          this.model.enemy_quests.map(function (e) {
+	            return _react2.default.createElement(
+	              'li',
+	              { key: e.quest_id },
+	              _react2.default.createElement(
+	                _reactRouter.Link,
+	                { to: '/quests/' + e.quest_id },
+	                e.quest_id,
+	                e.enemy.toJson()
+	              )
+	            );
+	          })
+	        ),
+	        _react2.default.createElement(
+	          'section',
+	          null,
+	          _react2.default.createElement(
+	            'h3',
+	            null,
+	            '\u30AF\u30A8\u30B9\u30C8\u3067\u4E00\u7DD2\u306B\u51FA\u73FE\u3059\u308B\u4ED6\u306E\u6575'
+	          ),
+	          _react2.default.createElement(
+	            'ul',
+	            null,
+	            this.model.enemies.map(function (e) {
+	              return _react2.default.createElement(
+	                'li',
+	                null,
+	                e.id
+	              );
+	            })
+	          )
 	        )
 	      );
 	    }
@@ -36838,7 +37571,7 @@
 	exports.default = Enemy;
 
 /***/ },
-/* 256 */
+/* 262 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36847,11 +37580,11 @@
 	  value: true
 	});
 	
-	var _ActiveObject2 = __webpack_require__(257);
+	var _ActiveObject2 = __webpack_require__(263);
 	
 	var _ActiveObject3 = _interopRequireDefault(_ActiveObject2);
 	
-	var _enemies = __webpack_require__(258);
+	var _enemies = __webpack_require__(267);
 	
 	var _enemies2 = _interopRequireDefault(_enemies);
 	
@@ -36877,34 +37610,275 @@
 	
 	exports.default = Enemy;
 	
-	Enemy.source = _enemies2.default;
+	
+	Enemy.data = _enemies2.default;
+	Enemy.has_many('enemy_quests');
+	Enemy.has_many('enemies', { through: 'enemy_quests' });
 
 /***/ },
-/* 257 */
-/***/ function(module, exports) {
+/* 263 */
+/***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
-	var ActiveObject = function ActiveObject() {
-	  _classCallCheck(this, ActiveObject);
-	};
+	var ActiveObject = function () {
+	  _createClass(ActiveObject, null, [{
+	    key: 'has_many_through',
+	    value: function has_many_through(name, through) {
+	      var option = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+	
+	      Object.defineProperty(this.prototype, name, {
+	        get: function get() {
+	          return this[through].map(function (e) {
+	            if (!(e[name.singularize()] === undefined)) {
+	              return e[name.singularize()];
+	            } else if (!(e[name.pluralize()] === undefined)) {
+	              return e[name.pluralize()];
+	            } else {
+	              return undefined;
+	            }
+	          }).flatten();
+	        }
+	      });
+	    }
+	  }, {
+	    key: 'has_many',
+	    value: function has_many(name) {
+	      var option = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+	
+	      console.log('has_many ' + name);
+	      if (option.hasOwnProperty('through')) {
+	        return this.has_many_through(name, option.through, option);
+	      }
+	
+	      var defaultOption = {
+	        foreign_key: this.name.toSnakeCase() + '_id',
+	        class_name: name.classify()
+	      };
+	      option = Object.assign(defaultOption, option);
+	      Object.defineProperty(this.prototype, name, {
+	        get: function get() {
+	          var where = {};
+	          where[option.foreign_key] = this.id;
+	          return ActiveObject.loadClass(option.class_name).where(where);
+	        }
+	      });
+	    }
+	  }, {
+	    key: 'belongs_to',
+	    value: function belongs_to(name) {
+	      var option = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+	
+	      var defaultOption = {
+	        foreign_key: name + '_id',
+	        class_name: name.classify()
+	      };
+	      option = Object.assign(defaultOption, option);
+	      Object.defineProperty(this.prototype, name, {
+	        get: function get() {
+	          return ActiveObject.loadClass(option.class_name).find(this[option.foreign_key]);
+	        }
+	      });
+	    }
+	  }, {
+	    key: 'loadClass',
+	    value: function loadClass(class_name) {
+	      if (!ActiveObject.loadedClasses.hasOwnProperty(class_name)) {
+	        __webpack_require__(264)("./" + class_name + '.js');
+	      }
+	      return ActiveObject.loadedClasses[class_name];
+	    }
+	  }, {
+	    key: 'data',
+	    set: function set(data) {
+	      var _this = this;
+	
+	      this._data = data;
+	      ActiveObject.loadedClasses[this.name] = this;
+	
+	      this.where = function () {
+	        var where = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+	
+	        return _this._data.filter(function (e) {
+	          return Object.keys(where).reduce(function (ac, c) {
+	            return ac && where[c] === e[c];
+	          }, true);
+	        }).map(function (e) {
+	          return new _this(e);
+	        });
+	      };
+	
+	      this.findBy = function () {
+	        var where = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+	
+	        return _this.where()[0] || null;
+	      };
+	
+	      this.find = function (id) {
+	        return _this.findBy({ id: id });
+	      };
+	
+	      this.all = function () {
+	        return _this.where();
+	      };
+	
+	      data.map(function (e) {
+	        return Object.keys(e);
+	      }).flatten().uniq().map(function (e) {
+	        Object.defineProperty(_this.prototype, e, {
+	          get: function get() {
+	            if (!this.value.hasOwnProperty(e)) {
+	              return null;
+	            }
+	            return this.value[e];
+	          }
+	        });
+	      });
+	    }
+	  }]);
+	
+	  function ActiveObject(value) {
+	    _classCallCheck(this, ActiveObject);
+	
+	    this.value = value;
+	  }
+	
+	  _createClass(ActiveObject, [{
+	    key: 'toJson',
+	    value: function toJson() {
+	      return JSON.stringify(this.value);
+	    }
+	  }]);
+	
+	  return ActiveObject;
+	}();
 	
 	exports.default = ActiveObject;
+	
+	ActiveObject.loadedClasses = {};
 
 /***/ },
-/* 258 */
+/* 264 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var map = {
+		"./Area.js": 258,
+		"./Enemy.js": 262,
+		"./EnemyQuest.js": 265,
+		"./EvolutionItem.js": 241,
+		"./Item.js": 243,
+		"./Quest.js": 259,
+		"./Servant.js": 240
+	};
+	function webpackContext(req) {
+		return __webpack_require__(webpackContextResolve(req));
+	};
+	function webpackContextResolve(req) {
+		return map[req] || (function() { throw new Error("Cannot find module '" + req + "'.") }());
+	};
+	webpackContext.keys = function webpackContextKeys() {
+		return Object.keys(map);
+	};
+	webpackContext.resolve = webpackContextResolve;
+	module.exports = webpackContext;
+	webpackContext.id = 264;
+
+
+/***/ },
+/* 265 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _ActiveObject2 = __webpack_require__(263);
+	
+	var _ActiveObject3 = _interopRequireDefault(_ActiveObject2);
+	
+	var _enemy_quests = __webpack_require__(266);
+	
+	var _enemy_quests2 = _interopRequireDefault(_enemy_quests);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var EnemyQuest = function (_ActiveObject) {
+	  _inherits(EnemyQuest, _ActiveObject);
+	
+	  function EnemyQuest() {
+	    _classCallCheck(this, EnemyQuest);
+	
+	    return _possibleConstructorReturn(this, (EnemyQuest.__proto__ || Object.getPrototypeOf(EnemyQuest)).apply(this, arguments));
+	  }
+	
+	  return EnemyQuest;
+	}(_ActiveObject3.default);
+	
+	exports.default = EnemyQuest;
+	
+	EnemyQuest.data = __webpack_require__(266);
+	EnemyQuest.belongs_to('enemy');
+
+/***/ },
+/* 266 */
+/***/ function(module, exports) {
+
+	module.exports = [
+		{
+			"enemy_id": "スケルトン",
+			"quest_id": "屋敷跡"
+		},
+		{
+			"enemy_id": "シャドウ・バーサーカー",
+			"quest_id": "危険地帯"
+		},
+		{
+			"enemy_id": "スケルトン(剣)",
+			"quest_id": "燃え盛る森"
+		},
+		{
+			"enemy_id": "スケルトン(槍)",
+			"quest_id": "燃え盛る森"
+		},
+		{
+			"enemy_id": "スケルトン(弓)",
+			"quest_id": "燃え盛る森"
+		},
+		{
+			"enemy_id": "フランス兵(槍)",
+			"quest_id": "ジャンヌ生誕の地"
+		},
+		{
+			"enemy_id": "フランス兵(剣)",
+			"quest_id": "ジャンヌ生誕の地"
+		}
+	];
+
+/***/ },
+/* 267 */
 /***/ function(module, exports) {
 
 	module.exports = [
 		{
 			"id": "スケルトン",
-			"class": "セイバー"
+			"class": "セイバー",
+			"gender": null
 		},
 		{
 			"id": "シャドウ・バーサーカー",
