@@ -1,0 +1,14 @@
+- enemy_id: スケルトン
+  quest_id: 屋敷跡
+- enemy_id: シャドウ・バーサーカー
+  quest_id: 危険地帯
+- enemy_id: スケルトン(剣)
+  quest_id: 燃え盛る森
+- enemy_id: スケルトン(槍)
+  quest_id: 燃え盛る森
+- enemy_id: スケルトン(弓)
+  quest_id: 燃え盛る森
+- enemy_id: フランス兵(槍)
+  quest_id: ジャンヌ生誕の地
+- enemy_id: フランス兵(剣)
+  quest_id: ジャンヌ生誕の地
