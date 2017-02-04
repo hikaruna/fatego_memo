@@ -2,30 +2,19 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { ServantData, EvolutionItemData } from 'data.jsx';
 import ServantModel from 'models/Servant.js';
+import EvolutionItemModel from 'models/EvolutionItem.js';
 
 export default class Servant extends Component {
   constructor(props) {
     super(props);
     this.model = ServantModel.findBy(props.params.id);
-    this.data = ServantData.find( (e) => e.id === props.params.id);
-    this.evolutionItems = EvolutionItemData.filter( (e) => e.servant_id === this.id );
-    for(let i=0;i<4;i++) {
-      this.evolution1Items = this.evolutionItems.filter( (e) => e.level === i );
-    }
   }
 
   get rarity() {
     return Array(this.model.rarity+1).join('☆')
   }
 
-  get evolutions() {
-    return this.model.evolutions.map((evolutionItems,i) => {
-      return new Evolution(evolutionItems, i+1).render();
-    });
-  }
-
   render() {
-    console.log(this.model.evolutions[1][0]);
     return (
       <article>
         <h1>{this.model.id}</h1>
@@ -37,22 +26,19 @@ export default class Servant extends Component {
           <h1>レアリティ</h1>
           <p>{this.rarity}</p>
         </section>
-        {this.evolutions}
+        {this.model.evolutions.map((e,i) => {
+          return <Evolution key={`evolution${i+1}`} model={e} level={i+1} />;
+        })}
       </article>
     );
   }
 }
 
-class Evolution {
-  constructor(evolutionItems, level) {
-    this.evolutionItems = evolutionItems;
-    this.level = level;
-  }
-
+class Evolution extends Component {
   render() {
     return (
-      <section key={this.level}>
-        <h1>第{this.level}段階</h1>
+      <section>
+        <h1>第{this.props.level}段階</h1>
         <table>
           <thead>
             <tr>
@@ -61,21 +47,27 @@ class Evolution {
             </tr>
           </thead>
           <tbody>
-            {this.evolutionItems.map(evolutionItem => {
-              return (
-                <tr key={evolutionItem.item.id}>
-                  <td>
-                    <Link to={`/items/${evolutionItem.item.id}`}>
-                      {evolutionItem.item.id}
-                    </Link>
-                  </td>
-                  <td>{evolutionItem.number}</td>
-                </tr>
-              );
+            {this.props.model.map(e => {
+              return <EvolutionItem key={`${e.level}-${e.item_id}`} model={e} />
             })}
           </tbody>
         </table>
       </section>
+    );
+  }
+}
+
+class EvolutionItem extends Component {
+  render() {
+    return (
+      <tr>
+        <td>
+          <Link to={`/items/${this.props.model.item_id}`}>
+            {this.props.model.item_id}
+          </Link>
+        </td>
+        <td>{this.props.model.number}</td>
+      </tr>
     );
   }
 }

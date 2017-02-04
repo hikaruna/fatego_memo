@@ -27181,6 +27181,10 @@
 	
 	var _Servant2 = _interopRequireDefault(_Servant);
 	
+	var _EvolutionItem = __webpack_require__(244);
+	
+	var _EvolutionItem2 = _interopRequireDefault(_EvolutionItem);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -27198,29 +27202,12 @@
 	    var _this = _possibleConstructorReturn(this, (Servant.__proto__ || Object.getPrototypeOf(Servant)).call(this, props));
 	
 	    _this.model = _Servant2.default.findBy(props.params.id);
-	    _this.data = _data.ServantData.find(function (e) {
-	      return e.id === props.params.id;
-	    });
-	    _this.evolutionItems = _data.EvolutionItemData.filter(function (e) {
-	      return e.servant_id === _this.id;
-	    });
-	
-	    var _loop = function _loop(i) {
-	      _this.evolution1Items = _this.evolutionItems.filter(function (e) {
-	        return e.level === i;
-	      });
-	    };
-	
-	    for (var i = 0; i < 4; i++) {
-	      _loop(i);
-	    }
 	    return _this;
 	  }
 	
 	  _createClass(Servant, [{
 	    key: 'render',
 	    value: function render() {
-	      console.log(this.model.evolutions[1][0]);
 	      return _react2.default.createElement(
 	        'article',
 	        null,
@@ -27257,20 +27244,15 @@
 	            this.rarity
 	          )
 	        ),
-	        this.evolutions
+	        this.model.evolutions.map(function (e, i) {
+	          return _react2.default.createElement(Evolution, { key: 'evolution' + (i + 1), model: e, level: i + 1 });
+	        })
 	      );
 	    }
 	  }, {
 	    key: 'rarity',
 	    get: function get() {
 	      return Array(this.model.rarity + 1).join('☆');
-	    }
-	  }, {
-	    key: 'evolutions',
-	    get: function get() {
-	      return this.model.evolutions.map(function (evolutionItems, i) {
-	        return new Evolution(evolutionItems, i + 1).render();
-	      });
 	    }
 	  }]);
 	
@@ -27279,12 +27261,13 @@
 	
 	exports.default = Servant;
 	
-	var Evolution = function () {
-	  function Evolution(evolutionItems, level) {
+	var Evolution = function (_Component2) {
+	  _inherits(Evolution, _Component2);
+	
+	  function Evolution() {
 	    _classCallCheck(this, Evolution);
 	
-	    this.evolutionItems = evolutionItems;
-	    this.level = level;
+	    return _possibleConstructorReturn(this, (Evolution.__proto__ || Object.getPrototypeOf(Evolution)).apply(this, arguments));
 	  }
 	
 	  _createClass(Evolution, [{
@@ -27292,12 +27275,12 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'section',
-	        { key: this.level },
+	        null,
 	        _react2.default.createElement(
 	          'h1',
 	          null,
 	          '\u7B2C',
-	          this.level,
+	          this.props.level,
 	          '\u6BB5\u968E'
 	        ),
 	        _react2.default.createElement(
@@ -27324,34 +27307,53 @@
 	          _react2.default.createElement(
 	            'tbody',
 	            null,
-	            this.evolutionItems.map(function (evolutionItem) {
-	              return _react2.default.createElement(
-	                'tr',
-	                { key: evolutionItem.item.id },
-	                _react2.default.createElement(
-	                  'td',
-	                  null,
-	                  _react2.default.createElement(
-	                    _reactRouter.Link,
-	                    { to: '/items/' + evolutionItem.item.id },
-	                    evolutionItem.item.id
-	                  )
-	                ),
-	                _react2.default.createElement(
-	                  'td',
-	                  null,
-	                  evolutionItem.number
-	                )
-	              );
+	            this.props.model.map(function (e) {
+	              return _react2.default.createElement(EvolutionItem, { key: e.level + '-' + e.item_id, model: e });
 	            })
 	          )
 	        )
 	      );
 	    }
 	  }]);
-
+	
 	  return Evolution;
-	}();
+	}(_react.Component);
+	
+	var EvolutionItem = function (_Component3) {
+	  _inherits(EvolutionItem, _Component3);
+	
+	  function EvolutionItem() {
+	    _classCallCheck(this, EvolutionItem);
+	
+	    return _possibleConstructorReturn(this, (EvolutionItem.__proto__ || Object.getPrototypeOf(EvolutionItem)).apply(this, arguments));
+	  }
+	
+	  _createClass(EvolutionItem, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'tr',
+	        null,
+	        _react2.default.createElement(
+	          'td',
+	          null,
+	          _react2.default.createElement(
+	            _reactRouter.Link,
+	            { to: '/items/' + this.props.model.item_id },
+	            this.props.model.item_id
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'td',
+	          null,
+	          this.props.model.number
+	        )
+	      );
+	    }
+	  }]);
+
+	  return EvolutionItem;
+	}(_react.Component);
 
 /***/ },
 /* 243 */
@@ -27472,25 +27474,24 @@
 	        return new EvolutionItem(e);
 	      });
 	    }
+	  }, {
+	    key: 'findBy',
+	    value: function findBy(where) {
+	      return EvolutionItem.where(where)[0];
+	    }
 	  }]);
 	
 	  function EvolutionItem(data) {
 	    _classCallCheck(this, EvolutionItem);
 	
 	    this.data = data;
+	    this.number = data.number;
+	    this.item_id = data.item_id;
+	    this.servant_id = data.servant_id;
+	    this.level = data.level;
 	  }
 	
 	  _createClass(EvolutionItem, [{
-	    key: 'id',
-	    get: function get() {
-	      return this.data.id;
-	    }
-	  }, {
-	    key: 'number',
-	    get: function get() {
-	      return this.data.number;
-	    }
-	  }, {
 	    key: 'servant',
 	    get: function get() {
 	      return _Servant2.default.findBy(this.data.servant_id);

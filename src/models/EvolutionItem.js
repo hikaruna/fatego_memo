@@ -9,16 +9,16 @@ export default class EvolutionItem {
     return Util.where(EvolutionItemData, where).map(e => new EvolutionItem(e));
   }
 
+  static findBy(where) {
+    return EvolutionItem.where(where)[0];
+  }
+
   constructor(data) {
     this.data = data;
-  }
-
-  get id() {
-    return this.data.id;
-  }
-
-  get number() {
-    return this.data.number;
+    this.number = data.number;
+    this.item_id = data.item_id;
+    this.servant_id = data.servant_id;
+    this.level = data.level;
   }
 
   get servant() {
