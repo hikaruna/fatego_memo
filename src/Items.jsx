@@ -1,18 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import { ItemData } from 'data.jsx';
+import ItemModel from 'models/Item.js';
 
 export default class Items extends Component {
   render() {
-    const rows = ItemData.map(e => {
-      const to = `/items/${e.id}`;
-      return(
-        <tr key={e.id}>
-          <td><Link to={to}>{e.id}</Link></td>
-        </tr>
-      );
-    });
-
     return(
       <table>
         <thead>
@@ -21,7 +12,13 @@ export default class Items extends Component {
           </tr>
         </thead>
         <tbody>
-          {rows}
+          {ItemModel.all().map(e => {
+            return (
+              <tr key={e.id}>
+                <td><Link to={`/items/${e.id}`}>{e.id}</Link></td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     );

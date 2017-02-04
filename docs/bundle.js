@@ -68,23 +68,23 @@
 	
 	var _Servants2 = _interopRequireDefault(_Servants);
 	
-	var _Servant = __webpack_require__(246);
+	var _Servant = __webpack_require__(247);
 	
 	var _Servant2 = _interopRequireDefault(_Servant);
 	
-	var _Items = __webpack_require__(247);
+	var _Items = __webpack_require__(249);
 	
 	var _Items2 = _interopRequireDefault(_Items);
 	
-	var _Item = __webpack_require__(248);
+	var _Item = __webpack_require__(250);
 	
 	var _Item2 = _interopRequireDefault(_Item);
 	
-	var _Areas = __webpack_require__(249);
+	var _Areas = __webpack_require__(251);
 	
 	var _Areas2 = _interopRequireDefault(_Areas);
 	
-	var _Area = __webpack_require__(252);
+	var _Area = __webpack_require__(254);
 	
 	var _Area2 = _interopRequireDefault(_Area);
 	
@@ -27071,11 +27071,11 @@
 	
 	var _EvolutionItem2 = _interopRequireDefault(_EvolutionItem);
 	
-	var _Util = __webpack_require__(244);
+	var _Util = __webpack_require__(245);
 	
 	var _Util2 = _interopRequireDefault(_Util);
 	
-	var _servants = __webpack_require__(245);
+	var _servants = __webpack_require__(246);
 	
 	var _servants2 = _interopRequireDefault(_servants);
 	
@@ -27168,7 +27168,9 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _data = __webpack_require__(242);
+	var _evolution_items = __webpack_require__(242);
+	
+	var _evolution_items2 = _interopRequireDefault(_evolution_items);
 	
 	var _Servant = __webpack_require__(240);
 	
@@ -27178,7 +27180,7 @@
 	
 	var _Item2 = _interopRequireDefault(_Item);
 	
-	var _Util = __webpack_require__(244);
+	var _Util = __webpack_require__(245);
 	
 	var _Util2 = _interopRequireDefault(_Util);
 	
@@ -27190,7 +27192,7 @@
 	  _createClass(EvolutionItem, null, [{
 	    key: 'where',
 	    value: function where(_where) {
-	      return _Util2.default.where(_data.EvolutionItemData, _where).map(function (e) {
+	      return _Util2.default.where(_evolution_items2.default, _where).map(function (e) {
 	        return new EvolutionItem(e);
 	      });
 	    }
@@ -27232,62 +27234,7780 @@
 /* 242 */
 /***/ function(module, exports) {
 
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	var ServantData = exports.ServantData = [{
-	  id: 'ギルガメッシュ',
-	  rarity: 5,
-	  class: 'アーチャー'
-	}, {
-	  id: 'クー・フーリン',
-	  rarity: 3,
-	  class: 'ランサー'
-	}];
-	
-	var EvolutionItemData = exports.EvolutionItemData = [{
-	  servant_id: 'ギルガメッシュ',
-	  item_id: 'アーチャーピース',
-	  level: 1,
-	  number: 2
-	}, {
-	  servant_id: 'ギルガメッシュ',
-	  item_id: 'ゴーストランタン',
-	  level: 2,
-	  number: 12
-	}, {
-	  servant_id: 'ギルガメッシュ',
-	  item_id: 'アーチャーピース',
-	  level: 2,
-	  number: 12
-	}, {
-	  servant_id: 'クー・フーリン',
-	  item_id: 'アーチャーピース',
-	  level: 1,
-	  number: 2
-	}];
-	
-	var ItemData = exports.ItemData = [{
-	  id: 'ゴーストランタン'
-	}, {
-	  id: 'アーチャーピース'
-	}];
-	
-	var AreaData = exports.AreaData = [{
-	  id: '第一特異点'
-	}];
-	
-	var QuestData = exports.QuestData = [{
-	  id: 'パリ',
-	  area_id: '第一特異点'
-	}];
-	
-	var ItemQuestData = exports.ItemQuestData = [{
-	  item_id: 'ゴーストランタン',
-	  quest_id: 'パリ'
-	}];
+	module.exports = [
+		{
+			"servant_id": "アルトリア・ペンドラゴン",
+			"item_id": "セイバーピース",
+			"level": 1,
+			"number": 5
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン",
+			"item_id": "竜の牙",
+			"level": 2,
+			"number": 18
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン",
+			"item_id": "セイバーピース",
+			"level": 2,
+			"number": 12
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン",
+			"item_id": "鳳凰の羽根",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン",
+			"item_id": "英雄の証",
+			"level": 3,
+			"number": 29
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン",
+			"item_id": "セイバーモニュメント",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン",
+			"item_id": "鳳凰の羽根",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン",
+			"item_id": "竜の逆鱗",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン",
+			"item_id": "セイバーモニュメント",
+			"level": 4,
+			"number": 12
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン(オルタ)",
+			"item_id": "セイバーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン(オルタ)",
+			"item_id": "竜の牙",
+			"level": 2,
+			"number": 15
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン(オルタ)",
+			"item_id": "セイバーピース",
+			"level": 2,
+			"number": 10
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン(オルタ)",
+			"item_id": "竜の逆鱗",
+			"level": 3,
+			"number": 2
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン(オルタ)",
+			"item_id": "混沌の爪",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン(オルタ)",
+			"item_id": "セイバーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン(オルタ)",
+			"item_id": "竜の逆鱗",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン(オルタ)",
+			"item_id": "蛮神の心臓",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン(オルタ)",
+			"item_id": "セイバーモニュメント",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン(リリィ)",
+			"item_id": "セイバーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン(リリィ)",
+			"item_id": "英雄の証",
+			"level": 2,
+			"number": 18
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン(リリィ)",
+			"item_id": "セイバーピース",
+			"level": 2,
+			"number": 10
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン(リリィ)",
+			"item_id": "世界樹の種",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン(リリィ)",
+			"item_id": "竜の牙",
+			"level": 3,
+			"number": 20
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン(リリィ)",
+			"item_id": "セイバーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン(リリィ)",
+			"item_id": "世界樹の種",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン(リリィ)",
+			"item_id": "竜の逆鱗",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン(リリィ)",
+			"item_id": "セイバーモニュメント",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "ネロ・クラウディウス",
+			"item_id": "セイバーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "ネロ・クラウディウス",
+			"item_id": "八連双晶",
+			"level": 2,
+			"number": 6
+		},
+		{
+			"servant_id": "ネロ・クラウディウス",
+			"item_id": "セイバーピース",
+			"level": 2,
+			"number": 10
+		},
+		{
+			"servant_id": "ネロ・クラウディウス",
+			"item_id": "鳳凰の羽根",
+			"level": 3,
+			"number": 7
+		},
+		{
+			"servant_id": "ネロ・クラウディウス",
+			"item_id": "ゴーストランタン",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "ネロ・クラウディウス",
+			"item_id": "セイバーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "ネロ・クラウディウス",
+			"item_id": "ゴーストランタン",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "ネロ・クラウディウス",
+			"item_id": "無間の歯車",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "ネロ・クラウディウス",
+			"item_id": "セイバーモニュメント",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "ジークフリート",
+			"item_id": "セイバーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "ジークフリート",
+			"item_id": "竜の牙",
+			"level": 2,
+			"number": 15
+		},
+		{
+			"servant_id": "ジークフリート",
+			"item_id": "セイバーピース",
+			"level": 2,
+			"number": 10
+		},
+		{
+			"servant_id": "ジークフリート",
+			"item_id": "世界樹の種",
+			"level": 3,
+			"number": 10
+		},
+		{
+			"servant_id": "ジークフリート",
+			"item_id": "英雄の証",
+			"level": 3,
+			"number": 12
+		},
+		{
+			"servant_id": "ジークフリート",
+			"item_id": "セイバーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "ジークフリート",
+			"item_id": "英雄の証",
+			"level": 4,
+			"number": 24
+		},
+		{
+			"servant_id": "ジークフリート",
+			"item_id": "竜の逆鱗",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "ジークフリート",
+			"item_id": "セイバーモニュメント",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "ガイウス・ユリウス・カエサル",
+			"item_id": "セイバーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "ガイウス・ユリウス・カエサル",
+			"item_id": "英雄の証",
+			"level": 2,
+			"number": 15
+		},
+		{
+			"servant_id": "ガイウス・ユリウス・カエサル",
+			"item_id": "セイバーピース",
+			"level": 2,
+			"number": 8
+		},
+		{
+			"servant_id": "ガイウス・ユリウス・カエサル",
+			"item_id": "無間の歯車",
+			"level": 3,
+			"number": 7
+		},
+		{
+			"servant_id": "ガイウス・ユリウス・カエサル",
+			"item_id": "禁断の頁",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "ガイウス・ユリウス・カエサル",
+			"item_id": "セイバーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "ガイウス・ユリウス・カエサル",
+			"item_id": "混沌の爪",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "ガイウス・ユリウス・カエサル",
+			"item_id": "禁断の頁",
+			"level": 4,
+			"number": 7
+		},
+		{
+			"servant_id": "ガイウス・ユリウス・カエサル",
+			"item_id": "セイバーモニュメント",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "アルテラ",
+			"item_id": "セイバーピース",
+			"level": 1,
+			"number": 5
+		},
+		{
+			"servant_id": "アルテラ",
+			"item_id": "虚影の塵",
+			"level": 2,
+			"number": 15
+		},
+		{
+			"servant_id": "アルテラ",
+			"item_id": "セイバーピース",
+			"level": 2,
+			"number": 12
+		},
+		{
+			"servant_id": "アルテラ",
+			"item_id": "混沌の爪",
+			"level": 3,
+			"number": 6
+		},
+		{
+			"servant_id": "アルテラ",
+			"item_id": "隕蹄鉄",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "アルテラ",
+			"item_id": "セイバーモニュメント",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "アルテラ",
+			"item_id": "隕蹄鉄",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "アルテラ",
+			"item_id": "蛮神の心臓",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "アルテラ",
+			"item_id": "セイバーモニュメント",
+			"level": 4,
+			"number": 12
+		},
+		{
+			"servant_id": "ジル・ド・レェ",
+			"item_id": "セイバーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "ジル・ド・レェ",
+			"item_id": "英雄の証",
+			"level": 2,
+			"number": 15
+		},
+		{
+			"servant_id": "ジル・ド・レェ",
+			"item_id": "セイバーピース",
+			"level": 2,
+			"number": 8
+		},
+		{
+			"servant_id": "ジル・ド・レェ",
+			"item_id": "虚影の塵",
+			"level": 3,
+			"number": 13
+		},
+		{
+			"servant_id": "ジル・ド・レェ",
+			"item_id": "凶骨",
+			"level": 3,
+			"number": 10
+		},
+		{
+			"servant_id": "ジル・ド・レェ",
+			"item_id": "セイバーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "ジル・ド・レェ",
+			"item_id": "凶骨",
+			"level": 4,
+			"number": 20
+		},
+		{
+			"servant_id": "ジル・ド・レェ",
+			"item_id": "蛮神の心臓",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "ジル・ド・レェ",
+			"item_id": "セイバーモニュメント",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "シュヴァリエ・デオン",
+			"item_id": "セイバーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "シュヴァリエ・デオン",
+			"item_id": "英雄の証",
+			"level": 2,
+			"number": 18
+		},
+		{
+			"servant_id": "シュヴァリエ・デオン",
+			"item_id": "セイバーピース",
+			"level": 2,
+			"number": 10
+		},
+		{
+			"servant_id": "シュヴァリエ・デオン",
+			"item_id": "鳳凰の羽根",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "シュヴァリエ・デオン",
+			"item_id": "世界樹の種",
+			"level": 3,
+			"number": 10
+		},
+		{
+			"servant_id": "シュヴァリエ・デオン",
+			"item_id": "セイバーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "シュヴァリエ・デオン",
+			"item_id": "鳳凰の羽根",
+			"level": 4,
+			"number": 7
+		},
+		{
+			"servant_id": "シュヴァリエ・デオン",
+			"item_id": "蛇の宝玉",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "シュヴァリエ・デオン",
+			"item_id": "セイバーモニュメント",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "エミヤ",
+			"item_id": "アーチャーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "エミヤ",
+			"item_id": "英雄の証",
+			"level": 2,
+			"number": 18
+		},
+		{
+			"servant_id": "エミヤ",
+			"item_id": "アーチャーピース",
+			"level": 2,
+			"number": 10
+		},
+		{
+			"servant_id": "エミヤ",
+			"item_id": "無間の歯車",
+			"level": 3,
+			"number": 8
+		},
+		{
+			"servant_id": "エミヤ",
+			"item_id": "蛮神の心臓",
+			"level": 3,
+			"number": 2
+		},
+		{
+			"servant_id": "エミヤ",
+			"item_id": "アーチャーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "エミヤ",
+			"item_id": "虚影の塵",
+			"level": 4,
+			"number": 20
+		},
+		{
+			"servant_id": "エミヤ",
+			"item_id": "蛮神の心臓",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "エミヤ",
+			"item_id": "アーチャーモニュメント",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "ギルガメッシュ",
+			"item_id": "アーチャーピース",
+			"level": 1,
+			"number": 5
+		},
+		{
+			"servant_id": "ギルガメッシュ",
+			"item_id": "蛇の宝玉",
+			"level": 2,
+			"number": 6
+		},
+		{
+			"servant_id": "ギルガメッシュ",
+			"item_id": "アーチャーピース",
+			"level": 2,
+			"number": 12
+		},
+		{
+			"servant_id": "ギルガメッシュ",
+			"item_id": "英雄の証",
+			"level": 3,
+			"number": 29
+		},
+		{
+			"servant_id": "ギルガメッシュ",
+			"item_id": "竜の逆鱗",
+			"level": 3,
+			"number": 2
+		},
+		{
+			"servant_id": "ギルガメッシュ",
+			"item_id": "アーチャーモニュメント",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "ギルガメッシュ",
+			"item_id": "竜の逆鱗",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "ギルガメッシュ",
+			"item_id": "蛮神の心臓",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "ギルガメッシュ",
+			"item_id": "アーチャーモニュメント",
+			"level": 4,
+			"number": 12
+		},
+		{
+			"servant_id": "ロビンフッド",
+			"item_id": "アーチャーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "ロビンフッド",
+			"item_id": "世界樹の種",
+			"level": 2,
+			"number": 6
+		},
+		{
+			"servant_id": "ロビンフッド",
+			"item_id": "アーチャーピース",
+			"level": 2,
+			"number": 8
+		},
+		{
+			"servant_id": "ロビンフッド",
+			"item_id": "蛇の宝玉",
+			"level": 3,
+			"number": 6
+		},
+		{
+			"servant_id": "ロビンフッド",
+			"item_id": "竜の牙",
+			"level": 3,
+			"number": 8
+		},
+		{
+			"servant_id": "ロビンフッド",
+			"item_id": "アーチャーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "ロビンフッド",
+			"item_id": "虚影の塵",
+			"level": 4,
+			"number": 16
+		},
+		{
+			"servant_id": "ロビンフッド",
+			"item_id": "竜の牙",
+			"level": 4,
+			"number": 16
+		},
+		{
+			"servant_id": "ロビンフッド",
+			"item_id": "アーチャーモニュメント",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "アタランテ",
+			"item_id": "アーチャーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "アタランテ",
+			"item_id": "鳳凰の羽根",
+			"level": 2,
+			"number": 5
+		},
+		{
+			"servant_id": "アタランテ",
+			"item_id": "アーチャーピース",
+			"level": 2,
+			"number": 10
+		},
+		{
+			"servant_id": "アタランテ",
+			"item_id": "蛇の宝玉",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "アタランテ",
+			"item_id": "竜の牙",
+			"level": 3,
+			"number": 20
+		},
+		{
+			"servant_id": "アタランテ",
+			"item_id": "アーチャーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "アタランテ",
+			"item_id": "世界樹の種",
+			"level": 4,
+			"number": 12
+		},
+		{
+			"servant_id": "アタランテ",
+			"item_id": "蛇の宝玉",
+			"level": 4,
+			"number": 7
+		},
+		{
+			"servant_id": "アタランテ",
+			"item_id": "アーチャーモニュメント",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "エウリュアレ",
+			"item_id": "アーチャーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "エウリュアレ",
+			"item_id": "蛇の宝玉",
+			"level": 2,
+			"number": 4
+		},
+		{
+			"servant_id": "エウリュアレ",
+			"item_id": "アーチャーピース",
+			"level": 2,
+			"number": 8
+		},
+		{
+			"servant_id": "エウリュアレ",
+			"item_id": "虚影の塵",
+			"level": 3,
+			"number": 7
+		},
+		{
+			"servant_id": "エウリュアレ",
+			"item_id": "竜の逆鱗",
+			"level": 3,
+			"number": 3
+		},
+		{
+			"servant_id": "エウリュアレ",
+			"item_id": "アーチャーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "エウリュアレ",
+			"item_id": "虚影の塵",
+			"level": 4,
+			"number": 13
+		},
+		{
+			"servant_id": "エウリュアレ",
+			"item_id": "蛮神の心臓",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "エウリュアレ",
+			"item_id": "アーチャーモニュメント",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "アーラシュ",
+			"item_id": "アーチャーピース",
+			"level": 1,
+			"number": 2
+		},
+		{
+			"servant_id": "アーラシュ",
+			"item_id": "世界樹の種",
+			"level": 2,
+			"number": 3
+		},
+		{
+			"servant_id": "アーラシュ",
+			"item_id": "アーチャーピース",
+			"level": 2,
+			"number": 4
+		},
+		{
+			"servant_id": "アーラシュ",
+			"item_id": "英雄の証",
+			"level": 3,
+			"number": 10
+		},
+		{
+			"servant_id": "アーラシュ",
+			"item_id": "八連双晶",
+			"level": 3,
+			"number": 2
+		},
+		{
+			"servant_id": "アーラシュ",
+			"item_id": "アーチャーモニュメント",
+			"level": 3,
+			"number": 2
+		},
+		{
+			"servant_id": "アーラシュ",
+			"item_id": "虚影の塵",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "アーラシュ",
+			"item_id": "八連双晶",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "アーラシュ",
+			"item_id": "アーチャーモニュメント",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "クー・フーリン",
+			"item_id": "ランサーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "クー・フーリン",
+			"item_id": "混沌の爪",
+			"level": 2,
+			"number": 3
+		},
+		{
+			"servant_id": "クー・フーリン",
+			"item_id": "ランサーピース",
+			"level": 2,
+			"number": 8
+		},
+		{
+			"servant_id": "クー・フーリン",
+			"item_id": "世界樹の種",
+			"level": 3,
+			"number": 8
+		},
+		{
+			"servant_id": "クー・フーリン",
+			"item_id": "八連双晶",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "クー・フーリン",
+			"item_id": "ランサーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "クー・フーリン",
+			"item_id": "鳳凰の羽根",
+			"level": 4,
+			"number": 7
+		},
+		{
+			"servant_id": "クー・フーリン",
+			"item_id": "八連双晶",
+			"level": 4,
+			"number": 7
+		},
+		{
+			"servant_id": "クー・フーリン",
+			"item_id": "ランサーモニュメント",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "エリザベート・バートリー",
+			"item_id": "ランサーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "エリザベート・バートリー",
+			"item_id": "竜の牙",
+			"level": 2,
+			"number": 15
+		},
+		{
+			"servant_id": "エリザベート・バートリー",
+			"item_id": "ランサーピース",
+			"level": 2,
+			"number": 10
+		},
+		{
+			"servant_id": "エリザベート・バートリー",
+			"item_id": "竜の逆鱗",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "エリザベート・バートリー",
+			"item_id": "混沌の爪",
+			"level": 3,
+			"number": 3
+		},
+		{
+			"servant_id": "エリザベート・バートリー",
+			"item_id": "ランサーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "エリザベート・バートリー",
+			"item_id": "鳳凰の羽根",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "エリザベート・バートリー",
+			"item_id": "混沌の爪",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "エリザベート・バートリー",
+			"item_id": "ランサーモニュメント",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "武蔵坊弁慶",
+			"item_id": "ランサーピース",
+			"level": 1,
+			"number": 3
+		},
+		{
+			"servant_id": "武蔵坊弁慶",
+			"item_id": "凶骨",
+			"level": 2,
+			"number": 11
+		},
+		{
+			"servant_id": "武蔵坊弁慶",
+			"item_id": "ランサーピース",
+			"level": 2,
+			"number": 6
+		},
+		{
+			"servant_id": "武蔵坊弁慶",
+			"item_id": "世界樹の種",
+			"level": 3,
+			"number": 6
+		},
+		{
+			"servant_id": "武蔵坊弁慶",
+			"item_id": "ホムンクルスベビー",
+			"level": 3,
+			"number": 3
+		},
+		{
+			"servant_id": "武蔵坊弁慶",
+			"item_id": "ランサーモニュメント",
+			"level": 3,
+			"number": 3
+		},
+		{
+			"servant_id": "武蔵坊弁慶",
+			"item_id": "虚影の塵",
+			"level": 4,
+			"number": 12
+		},
+		{
+			"servant_id": "武蔵坊弁慶",
+			"item_id": "ホムンクルスベビー",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "武蔵坊弁慶",
+			"item_id": "ランサーモニュメント",
+			"level": 4,
+			"number": 6
+		},
+		{
+			"servant_id": "クー・フーリン(プロトタイプ)",
+			"item_id": "ランサーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "クー・フーリン(プロトタイプ)",
+			"item_id": "虚影の塵",
+			"level": 2,
+			"number": 10
+		},
+		{
+			"servant_id": "クー・フーリン(プロトタイプ)",
+			"item_id": "ランサーピース",
+			"level": 2,
+			"number": 8
+		},
+		{
+			"servant_id": "クー・フーリン(プロトタイプ)",
+			"item_id": "世界樹の種",
+			"level": 3,
+			"number": 8
+		},
+		{
+			"servant_id": "クー・フーリン(プロトタイプ)",
+			"item_id": "混沌の爪",
+			"level": 3,
+			"number": 2
+		},
+		{
+			"servant_id": "クー・フーリン(プロトタイプ)",
+			"item_id": "ランサーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "クー・フーリン(プロトタイプ)",
+			"item_id": "混沌の爪",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "クー・フーリン(プロトタイプ)",
+			"item_id": "八連双晶",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "クー・フーリン(プロトタイプ)",
+			"item_id": "ランサーモニュメント",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "レオニダス一世",
+			"item_id": "ランサーピース",
+			"level": 1,
+			"number": 3
+		},
+		{
+			"servant_id": "レオニダス一世",
+			"item_id": "混沌の爪",
+			"level": 2,
+			"number": 3
+		},
+		{
+			"servant_id": "レオニダス一世",
+			"item_id": "ランサーピース",
+			"level": 2,
+			"number": 6
+		},
+		{
+			"servant_id": "レオニダス一世",
+			"item_id": "虚影の塵",
+			"level": 3,
+			"number": 10
+		},
+		{
+			"servant_id": "レオニダス一世",
+			"item_id": "八連双晶",
+			"level": 3,
+			"number": 3
+		},
+		{
+			"servant_id": "レオニダス一世",
+			"item_id": "ランサーモニュメント",
+			"level": 3,
+			"number": 3
+		},
+		{
+			"servant_id": "レオニダス一世",
+			"item_id": "八連双晶",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "レオニダス一世",
+			"item_id": "凶骨",
+			"level": 4,
+			"number": 18
+		},
+		{
+			"servant_id": "レオニダス一世",
+			"item_id": "ランサーモニュメント",
+			"level": 4,
+			"number": 6
+		},
+		{
+			"servant_id": "ロムルス",
+			"item_id": "ランサーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "ロムルス",
+			"item_id": "八連双晶",
+			"level": 2,
+			"number": 5
+		},
+		{
+			"servant_id": "ロムルス",
+			"item_id": "ランサーピース",
+			"level": 2,
+			"number": 8
+		},
+		{
+			"servant_id": "ロムルス",
+			"item_id": "鳳凰の羽根",
+			"level": 3,
+			"number": 6
+		},
+		{
+			"servant_id": "ロムルス",
+			"item_id": "凶骨",
+			"level": 3,
+			"number": 10
+		},
+		{
+			"servant_id": "ロムルス",
+			"item_id": "ランサーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "ロムルス",
+			"item_id": "虚影の塵",
+			"level": 4,
+			"number": 16
+		},
+		{
+			"servant_id": "ロムルス",
+			"item_id": "凶骨",
+			"level": 4,
+			"number": 20
+		},
+		{
+			"servant_id": "ロムルス",
+			"item_id": "ランサーモニュメント",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "メドゥーサ",
+			"item_id": "ライダーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "メドゥーサ",
+			"item_id": "蛇の宝玉",
+			"level": 2,
+			"number": 4
+		},
+		{
+			"servant_id": "メドゥーサ",
+			"item_id": "ライダーピース",
+			"level": 2,
+			"number": 8
+		},
+		{
+			"servant_id": "メドゥーサ",
+			"item_id": "虚影の塵",
+			"level": 3,
+			"number": 13
+		},
+		{
+			"servant_id": "メドゥーサ",
+			"item_id": "隕蹄鉄",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "メドゥーサ",
+			"item_id": "ライダーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "メドゥーサ",
+			"item_id": "鳳凰の羽根",
+			"level": 4,
+			"number": 7
+		},
+		{
+			"servant_id": "メドゥーサ",
+			"item_id": "隕蹄鉄",
+			"level": 4,
+			"number": 7
+		},
+		{
+			"servant_id": "メドゥーサ",
+			"item_id": "ライダーモニュメント",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "ゲオルギウス",
+			"item_id": "ライダーピース",
+			"level": 1,
+			"number": 3
+		},
+		{
+			"servant_id": "ゲオルギウス",
+			"item_id": "英雄の証",
+			"level": 2,
+			"number": 11
+		},
+		{
+			"servant_id": "ゲオルギウス",
+			"item_id": "ライダーピース",
+			"level": 2,
+			"number": 6
+		},
+		{
+			"servant_id": "ゲオルギウス",
+			"item_id": "鳳凰の羽根",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "ゲオルギウス",
+			"item_id": "禁断の頁",
+			"level": 3,
+			"number": 3
+		},
+		{
+			"servant_id": "ゲオルギウス",
+			"item_id": "ライダーモニュメント",
+			"level": 3,
+			"number": 3
+		},
+		{
+			"servant_id": "ゲオルギウス",
+			"item_id": "禁断の頁",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "ゲオルギウス",
+			"item_id": "隕蹄鉄",
+			"level": 4,
+			"number": 6
+		},
+		{
+			"servant_id": "ゲオルギウス",
+			"item_id": "ライダーモニュメント",
+			"level": 4,
+			"number": 6
+		},
+		{
+			"servant_id": "エドワード・ティーチ",
+			"item_id": "ライダーピース",
+			"level": 1,
+			"number": 3
+		},
+		{
+			"servant_id": "エドワード・ティーチ",
+			"item_id": "凶骨",
+			"level": 2,
+			"number": 11
+		},
+		{
+			"servant_id": "エドワード・ティーチ",
+			"item_id": "ライダーピース",
+			"level": 2,
+			"number": 6
+		},
+		{
+			"servant_id": "エドワード・ティーチ",
+			"item_id": "禁断の頁",
+			"level": 3,
+			"number": 3
+		},
+		{
+			"servant_id": "エドワード・ティーチ",
+			"item_id": "八連双晶",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "エドワード・ティーチ",
+			"item_id": "ライダーモニュメント",
+			"level": 3,
+			"number": 3
+		},
+		{
+			"servant_id": "エドワード・ティーチ",
+			"item_id": "ゴーストランタン",
+			"level": 4,
+			"number": 6
+		},
+		{
+			"servant_id": "エドワード・ティーチ",
+			"item_id": "禁断の頁",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "エドワード・ティーチ",
+			"item_id": "ライダーモニュメント",
+			"level": 4,
+			"number": 6
+		},
+		{
+			"servant_id": "ブーディカ",
+			"item_id": "ライダーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "ブーディカ",
+			"item_id": "鳳凰の羽根",
+			"level": 2,
+			"number": 4
+		},
+		{
+			"servant_id": "ブーディカ",
+			"item_id": "ライダーピース",
+			"level": 2,
+			"number": 8
+		},
+		{
+			"servant_id": "ブーディカ",
+			"item_id": "隕蹄鉄",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "ブーディカ",
+			"item_id": "凶骨",
+			"level": 3,
+			"number": 20
+		},
+		{
+			"servant_id": "ブーディカ",
+			"item_id": "ライダーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "ブーディカ",
+			"item_id": "虚影の塵",
+			"level": 4,
+			"number": 16
+		},
+		{
+			"servant_id": "ブーディカ",
+			"item_id": "隕蹄鉄",
+			"level": 4,
+			"number": 7
+		},
+		{
+			"servant_id": "ブーディカ",
+			"item_id": "ライダーモニュメント",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "牛若丸",
+			"item_id": "ライダーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "牛若丸",
+			"item_id": "英雄の証",
+			"level": 2,
+			"number": 15
+		},
+		{
+			"servant_id": "牛若丸",
+			"item_id": "ライダーピース",
+			"level": 2,
+			"number": 8
+		},
+		{
+			"servant_id": "牛若丸",
+			"item_id": "ゴーストランタン",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "牛若丸",
+			"item_id": "隕蹄鉄",
+			"level": 3,
+			"number": 7
+		},
+		{
+			"servant_id": "牛若丸",
+			"item_id": "ライダーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "牛若丸",
+			"item_id": "ゴーストランタン",
+			"level": 4,
+			"number": 7
+		},
+		{
+			"servant_id": "牛若丸",
+			"item_id": "八連双晶",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "牛若丸",
+			"item_id": "ライダーモニュメント",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "アレキサンダー",
+			"item_id": "ライダーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "アレキサンダー",
+			"item_id": "隕蹄鉄",
+			"level": 2,
+			"number": 5
+		},
+		{
+			"servant_id": "アレキサンダー",
+			"item_id": "ライダーピース",
+			"level": 2,
+			"number": 8
+		},
+		{
+			"servant_id": "アレキサンダー",
+			"item_id": "鳳凰の羽根",
+			"level": 3,
+			"number": 3
+		},
+		{
+			"servant_id": "アレキサンダー",
+			"item_id": "八連双晶",
+			"level": 3,
+			"number": 7
+		},
+		{
+			"servant_id": "アレキサンダー",
+			"item_id": "ライダーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "アレキサンダー",
+			"item_id": "鳳凰の羽根",
+			"level": 4,
+			"number": 6
+		},
+		{
+			"servant_id": "アレキサンダー",
+			"item_id": "英雄の証",
+			"level": 4,
+			"number": 24
+		},
+		{
+			"servant_id": "アレキサンダー",
+			"item_id": "ライダーモニュメント",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "マリー・アントワネット",
+			"item_id": "ライダーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "マリー・アントワネット",
+			"item_id": "鳳凰の羽根",
+			"level": 2,
+			"number": 5
+		},
+		{
+			"servant_id": "マリー・アントワネット",
+			"item_id": "ライダーピース",
+			"level": 2,
+			"number": 10
+		},
+		{
+			"servant_id": "マリー・アントワネット",
+			"item_id": "蛇の宝玉",
+			"level": 3,
+			"number": 7
+		},
+		{
+			"servant_id": "マリー・アントワネット",
+			"item_id": "隕蹄鉄",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "マリー・アントワネット",
+			"item_id": "ライダーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "マリー・アントワネット",
+			"item_id": "無間の歯車",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "マリー・アントワネット",
+			"item_id": "隕蹄鉄",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "マリー・アントワネット",
+			"item_id": "ライダーモニュメント",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "マルタ",
+			"item_id": "ライダーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "マルタ",
+			"item_id": "竜の牙",
+			"level": 2,
+			"number": 15
+		},
+		{
+			"servant_id": "マルタ",
+			"item_id": "ライダーピース",
+			"level": 2,
+			"number": 10
+		},
+		{
+			"servant_id": "マルタ",
+			"item_id": "世界樹の種",
+			"level": 3,
+			"number": 10
+		},
+		{
+			"servant_id": "マルタ",
+			"item_id": "混沌の爪",
+			"level": 3,
+			"number": 3
+		},
+		{
+			"servant_id": "マルタ",
+			"item_id": "ライダーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "マルタ",
+			"item_id": "竜の逆鱗",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "マルタ",
+			"item_id": "混沌の爪",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "マルタ",
+			"item_id": "ライダーモニュメント",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "メディア",
+			"item_id": "キャスターピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "メディア",
+			"item_id": "竜の牙",
+			"level": 2,
+			"number": 12
+		},
+		{
+			"servant_id": "メディア",
+			"item_id": "キャスターピース",
+			"level": 2,
+			"number": 8
+		},
+		{
+			"servant_id": "メディア",
+			"item_id": "虚影の塵",
+			"level": 3,
+			"number": 13
+		},
+		{
+			"servant_id": "メディア",
+			"item_id": "蛮神の心臓",
+			"level": 3,
+			"number": 2
+		},
+		{
+			"servant_id": "メディア",
+			"item_id": "キャスターモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "メディア",
+			"item_id": "禁断の頁",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "メディア",
+			"item_id": "蛮神の心臓",
+			"level": 4,
+			"number": 3
+		},
+		{
+			"servant_id": "メディア",
+			"item_id": "キャスターモニュメント",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "ジル・ド・レェ",
+			"item_id": "キャスターピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "ジル・ド・レェ",
+			"item_id": "ゴーストランタン",
+			"level": 2,
+			"number": 5
+		},
+		{
+			"servant_id": "ジル・ド・レェ",
+			"item_id": "キャスターピース",
+			"level": 2,
+			"number": 8
+		},
+		{
+			"servant_id": "ジル・ド・レェ",
+			"item_id": "禁断の頁",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "ジル・ド・レェ",
+			"item_id": "ホムンクルスベビー",
+			"level": 3,
+			"number": 7
+		},
+		{
+			"servant_id": "ジル・ド・レェ",
+			"item_id": "キャスターモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "ジル・ド・レェ",
+			"item_id": "禁断の頁",
+			"level": 4,
+			"number": 7
+		},
+		{
+			"servant_id": "ジル・ド・レェ",
+			"item_id": "蛮神の心臓",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "ジル・ド・レェ",
+			"item_id": "キャスターモニュメント",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "ハンス・クリスチャン・アンデルセン",
+			"item_id": "キャスターピース",
+			"level": 1,
+			"number": 3
+		},
+		{
+			"servant_id": "ハンス・クリスチャン・アンデルセン",
+			"item_id": "禁断の頁",
+			"level": 2,
+			"number": 4
+		},
+		{
+			"servant_id": "ハンス・クリスチャン・アンデルセン",
+			"item_id": "キャスターピース",
+			"level": 2,
+			"number": 6
+		},
+		{
+			"servant_id": "ハンス・クリスチャン・アンデルセン",
+			"item_id": "無間の歯車",
+			"level": 3,
+			"number": 3
+		},
+		{
+			"servant_id": "ハンス・クリスチャン・アンデルセン",
+			"item_id": "ホムンクルスベビー",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "ハンス・クリスチャン・アンデルセン",
+			"item_id": "キャスターモニュメント",
+			"level": 3,
+			"number": 3
+		},
+		{
+			"servant_id": "ハンス・クリスチャン・アンデルセン",
+			"item_id": "無間の歯車",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "ハンス・クリスチャン・アンデルセン",
+			"item_id": "隕蹄鉄",
+			"level": 4,
+			"number": 6
+		},
+		{
+			"servant_id": "ハンス・クリスチャン・アンデルセン",
+			"item_id": "キャスターモニュメント",
+			"level": 4,
+			"number": 6
+		},
+		{
+			"servant_id": "ウィリアム・シェイクスピア",
+			"item_id": "キャスターピース",
+			"level": 1,
+			"number": 3
+		},
+		{
+			"servant_id": "ウィリアム・シェイクスピア",
+			"item_id": "ゴーストランタン",
+			"level": 2,
+			"number": 4
+		},
+		{
+			"servant_id": "ウィリアム・シェイクスピア",
+			"item_id": "キャスターピース",
+			"level": 2,
+			"number": 6
+		},
+		{
+			"servant_id": "ウィリアム・シェイクスピア",
+			"item_id": "禁断の頁",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "ウィリアム・シェイクスピア",
+			"item_id": "ホムンクルスベビー",
+			"level": 3,
+			"number": 3
+		},
+		{
+			"servant_id": "ウィリアム・シェイクスピア",
+			"item_id": "キャスターモニュメント",
+			"level": 3,
+			"number": 3
+		},
+		{
+			"servant_id": "ウィリアム・シェイクスピア",
+			"item_id": "蛇の宝玉",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "ウィリアム・シェイクスピア",
+			"item_id": "ホムンクルスベビー",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "ウィリアム・シェイクスピア",
+			"item_id": "キャスターモニュメント",
+			"level": 4,
+			"number": 6
+		},
+		{
+			"servant_id": "メフィストフェレス",
+			"item_id": "キャスターピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "メフィストフェレス",
+			"item_id": "虚影の塵",
+			"level": 2,
+			"number": 10
+		},
+		{
+			"servant_id": "メフィストフェレス",
+			"item_id": "キャスターピース",
+			"level": 2,
+			"number": 8
+		},
+		{
+			"servant_id": "メフィストフェレス",
+			"item_id": "ホムンクルスベビー",
+			"level": 3,
+			"number": 7
+		},
+		{
+			"servant_id": "メフィストフェレス",
+			"item_id": "蛮神の心臓",
+			"level": 3,
+			"number": 2
+		},
+		{
+			"servant_id": "メフィストフェレス",
+			"item_id": "キャスターモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "メフィストフェレス",
+			"item_id": "ゴーストランタン",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "メフィストフェレス",
+			"item_id": "蛮神の心臓",
+			"level": 4,
+			"number": 3
+		},
+		{
+			"servant_id": "メフィストフェレス",
+			"item_id": "キャスターモニュメント",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "ヴォルフガング・アマデウス・モーツァルト",
+			"item_id": "キャスターピース",
+			"level": 1,
+			"number": 2
+		},
+		{
+			"servant_id": "ヴォルフガング・アマデウス・モーツァルト",
+			"item_id": "凶骨",
+			"level": 2,
+			"number": 8
+		},
+		{
+			"servant_id": "ヴォルフガング・アマデウス・モーツァルト",
+			"item_id": "キャスターピース",
+			"level": 2,
+			"number": 4
+		},
+		{
+			"servant_id": "ヴォルフガング・アマデウス・モーツァルト",
+			"item_id": "無間の歯車",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "ヴォルフガング・アマデウス・モーツァルト",
+			"item_id": "禁断の頁",
+			"level": 3,
+			"number": 2
+		},
+		{
+			"servant_id": "ヴォルフガング・アマデウス・モーツァルト",
+			"item_id": "キャスターモニュメント",
+			"level": 3,
+			"number": 2
+		},
+		{
+			"servant_id": "ヴォルフガング・アマデウス・モーツァルト",
+			"item_id": "禁断の頁",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "ヴォルフガング・アマデウス・モーツァルト",
+			"item_id": "蛮神の心臓",
+			"level": 4,
+			"number": 2
+		},
+		{
+			"servant_id": "ヴォルフガング・アマデウス・モーツァルト",
+			"item_id": "キャスターモニュメント",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "諸葛孔明(エルメロイⅡ世)",
+			"item_id": "キャスターピース",
+			"level": 1,
+			"number": 5
+		},
+		{
+			"servant_id": "諸葛孔明(エルメロイⅡ世)",
+			"item_id": "虚影の塵",
+			"level": 2,
+			"number": 15
+		},
+		{
+			"servant_id": "諸葛孔明(エルメロイⅡ世)",
+			"item_id": "キャスターピース",
+			"level": 2,
+			"number": 12
+		},
+		{
+			"servant_id": "諸葛孔明(エルメロイⅡ世)",
+			"item_id": "無間の歯車",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "諸葛孔明(エルメロイⅡ世)",
+			"item_id": "禁断の頁",
+			"level": 3,
+			"number": 10
+		},
+		{
+			"servant_id": "諸葛孔明(エルメロイⅡ世)",
+			"item_id": "キャスターモニュメント",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "諸葛孔明(エルメロイⅡ世)",
+			"item_id": "鳳凰の羽根",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "諸葛孔明(エルメロイⅡ世)",
+			"item_id": "無間の歯車",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "諸葛孔明(エルメロイⅡ世)",
+			"item_id": "キャスターモニュメント",
+			"level": 4,
+			"number": 12
+		},
+		{
+			"servant_id": "クー・フーリン",
+			"item_id": "キャスターピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "クー・フーリン",
+			"item_id": "世界樹の種",
+			"level": 2,
+			"number": 6
+		},
+		{
+			"servant_id": "クー・フーリン",
+			"item_id": "キャスターピース",
+			"level": 2,
+			"number": 8
+		},
+		{
+			"servant_id": "クー・フーリン",
+			"item_id": "混沌の爪",
+			"level": 3,
+			"number": 2
+		},
+		{
+			"servant_id": "クー・フーリン",
+			"item_id": "禁断の頁",
+			"level": 3,
+			"number": 7
+		},
+		{
+			"servant_id": "クー・フーリン",
+			"item_id": "キャスターモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "クー・フーリン",
+			"item_id": "混沌の爪",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "クー・フーリン",
+			"item_id": "無間の歯車",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "クー・フーリン",
+			"item_id": "キャスターモニュメント",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "佐々木小次郎",
+			"item_id": "アサシンピース",
+			"level": 1,
+			"number": 2
+		},
+		{
+			"servant_id": "佐々木小次郎",
+			"item_id": "英雄の証",
+			"level": 2,
+			"number": 8
+		},
+		{
+			"servant_id": "佐々木小次郎",
+			"item_id": "アサシンピース",
+			"level": 2,
+			"number": 4
+		},
+		{
+			"servant_id": "佐々木小次郎",
+			"item_id": "虚影の塵",
+			"level": 3,
+			"number": 7
+		},
+		{
+			"servant_id": "佐々木小次郎",
+			"item_id": "無間の歯車",
+			"level": 3,
+			"number": 2
+		},
+		{
+			"servant_id": "佐々木小次郎",
+			"item_id": "アサシンモニュメント",
+			"level": 3,
+			"number": 2
+		},
+		{
+			"servant_id": "佐々木小次郎",
+			"item_id": "無間の歯車",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "佐々木小次郎",
+			"item_id": "八連双晶",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "佐々木小次郎",
+			"item_id": "アサシンモニュメント",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "呪腕のハサン",
+			"item_id": "アサシンピース",
+			"level": 1,
+			"number": 3
+		},
+		{
+			"servant_id": "呪腕のハサン",
+			"item_id": "凶骨",
+			"level": 2,
+			"number": 11
+		},
+		{
+			"servant_id": "呪腕のハサン",
+			"item_id": "アサシンピース",
+			"level": 2,
+			"number": 6
+		},
+		{
+			"servant_id": "呪腕のハサン",
+			"item_id": "虚影の塵",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "呪腕のハサン",
+			"item_id": "無間の歯車",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "呪腕のハサン",
+			"item_id": "アサシンモニュメント",
+			"level": 3,
+			"number": 3
+		},
+		{
+			"servant_id": "呪腕のハサン",
+			"item_id": "虚影の塵",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "呪腕のハサン",
+			"item_id": "ホムンクルスベビー",
+			"level": 4,
+			"number": 6
+		},
+		{
+			"servant_id": "呪腕のハサン",
+			"item_id": "アサシンモニュメント",
+			"level": 4,
+			"number": 6
+		},
+		{
+			"servant_id": "ステンノ",
+			"item_id": "アサシンピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "ステンノ",
+			"item_id": "蛇の宝玉",
+			"level": 2,
+			"number": 5
+		},
+		{
+			"servant_id": "ステンノ",
+			"item_id": "アサシンピース",
+			"level": 2,
+			"number": 10
+		},
+		{
+			"servant_id": "ステンノ",
+			"item_id": "虚影の塵",
+			"level": 3,
+			"number": 8
+		},
+		{
+			"servant_id": "ステンノ",
+			"item_id": "蛮神の心臓",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "ステンノ",
+			"item_id": "アサシンモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "ステンノ",
+			"item_id": "虚影の塵",
+			"level": 4,
+			"number": 16
+		},
+		{
+			"servant_id": "ステンノ",
+			"item_id": "竜の逆鱗",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "ステンノ",
+			"item_id": "アサシンモニュメント",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "荊軻",
+			"item_id": "アサシンピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "荊軻",
+			"item_id": "凶骨",
+			"level": 2,
+			"number": 15
+		},
+		{
+			"servant_id": "荊軻",
+			"item_id": "アサシンピース",
+			"level": 2,
+			"number": 8
+		},
+		{
+			"servant_id": "荊軻",
+			"item_id": "ゴーストランタン",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "荊軻",
+			"item_id": "八連双晶",
+			"level": 3,
+			"number": 7
+		},
+		{
+			"servant_id": "荊軻",
+			"item_id": "アサシンモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "荊軻",
+			"item_id": "虚影の塵",
+			"level": 4,
+			"number": 16
+		},
+		{
+			"servant_id": "荊軻",
+			"item_id": "ゴーストランタン",
+			"level": 4,
+			"number": 7
+		},
+		{
+			"servant_id": "荊軻",
+			"item_id": "アサシンモニュメント",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "シャルル＝アンリ・サンソン",
+			"item_id": "アサシンピース",
+			"level": 1,
+			"number": 3
+		},
+		{
+			"servant_id": "シャルル＝アンリ・サンソン",
+			"item_id": "凶骨",
+			"level": 2,
+			"number": 11
+		},
+		{
+			"servant_id": "シャルル＝アンリ・サンソン",
+			"item_id": "アサシンピース",
+			"level": 2,
+			"number": 6
+		},
+		{
+			"servant_id": "シャルル＝アンリ・サンソン",
+			"item_id": "虚影の塵",
+			"level": 3,
+			"number": 10
+		},
+		{
+			"servant_id": "シャルル＝アンリ・サンソン",
+			"item_id": "蛮神の心臓",
+			"level": 3,
+			"number": 1
+		},
+		{
+			"servant_id": "シャルル＝アンリ・サンソン",
+			"item_id": "アサシンモニュメント",
+			"level": 3,
+			"number": 3
+		},
+		{
+			"servant_id": "シャルル＝アンリ・サンソン",
+			"item_id": "ホムンクルスベビー",
+			"level": 4,
+			"number": 6
+		},
+		{
+			"servant_id": "シャルル＝アンリ・サンソン",
+			"item_id": "蛮神の心臓",
+			"level": 4,
+			"number": 2
+		},
+		{
+			"servant_id": "シャルル＝アンリ・サンソン",
+			"item_id": "アサシンモニュメント",
+			"level": 4,
+			"number": 6
+		},
+		{
+			"servant_id": "ファントム・オブ・ジ・オペラ",
+			"item_id": "アサシンピース",
+			"level": 1,
+			"number": 3
+		},
+		{
+			"servant_id": "ファントム・オブ・ジ・オペラ",
+			"item_id": "ゴーストランタン",
+			"level": 2,
+			"number": 4
+		},
+		{
+			"servant_id": "ファントム・オブ・ジ・オペラ",
+			"item_id": "アサシンピース",
+			"level": 2,
+			"number": 6
+		},
+		{
+			"servant_id": "ファントム・オブ・ジ・オペラ",
+			"item_id": "虚影の塵",
+			"level": 3,
+			"number": 10
+		},
+		{
+			"servant_id": "ファントム・オブ・ジ・オペラ",
+			"item_id": "無間の歯車",
+			"level": 3,
+			"number": 3
+		},
+		{
+			"servant_id": "ファントム・オブ・ジ・オペラ",
+			"item_id": "アサシンモニュメント",
+			"level": 3,
+			"number": 3
+		},
+		{
+			"servant_id": "ファントム・オブ・ジ・オペラ",
+			"item_id": "無間の歯車",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "ファントム・オブ・ジ・オペラ",
+			"item_id": "凶骨",
+			"level": 4,
+			"number": 18
+		},
+		{
+			"servant_id": "ファントム・オブ・ジ・オペラ",
+			"item_id": "アサシンモニュメント",
+			"level": 4,
+			"number": 6
+		},
+		{
+			"servant_id": "マタ・ハリ",
+			"item_id": "アサシンピース",
+			"level": 1,
+			"number": 2
+		},
+		{
+			"servant_id": "マタ・ハリ",
+			"item_id": "鳳凰の羽根",
+			"level": 2,
+			"number": 2
+		},
+		{
+			"servant_id": "マタ・ハリ",
+			"item_id": "アサシンピース",
+			"level": 2,
+			"number": 4
+		},
+		{
+			"servant_id": "マタ・ハリ",
+			"item_id": "ゴーストランタン",
+			"level": 3,
+			"number": 2
+		},
+		{
+			"servant_id": "マタ・ハリ",
+			"item_id": "無間の歯車",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "マタ・ハリ",
+			"item_id": "アサシンモニュメント",
+			"level": 3,
+			"number": 2
+		},
+		{
+			"servant_id": "マタ・ハリ",
+			"item_id": "ゴーストランタン",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "マタ・ハリ",
+			"item_id": "蛇の宝玉",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "マタ・ハリ",
+			"item_id": "アサシンモニュメント",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "カーミラ",
+			"item_id": "アサシンピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "カーミラ",
+			"item_id": "蛇の宝玉",
+			"level": 2,
+			"number": 5
+		},
+		{
+			"servant_id": "カーミラ",
+			"item_id": "アサシンピース",
+			"level": 2,
+			"number": 10
+		},
+		{
+			"servant_id": "カーミラ",
+			"item_id": "ホムンクルスベビー",
+			"level": 3,
+			"number": 8
+		},
+		{
+			"servant_id": "カーミラ",
+			"item_id": "蛮神の心臓",
+			"level": 3,
+			"number": 2
+		},
+		{
+			"servant_id": "カーミラ",
+			"item_id": "アサシンモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "カーミラ",
+			"item_id": "混沌の爪",
+			"level": 4,
+			"number": 6
+		},
+		{
+			"servant_id": "カーミラ",
+			"item_id": "蛮神の心臓",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "カーミラ",
+			"item_id": "アサシンモニュメント",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "ヘラクレス",
+			"item_id": "バーサーカーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "ヘラクレス",
+			"item_id": "八連双晶",
+			"level": 2,
+			"number": 6
+		},
+		{
+			"servant_id": "ヘラクレス",
+			"item_id": "バーサーカーピース",
+			"level": 2,
+			"number": 10
+		},
+		{
+			"servant_id": "ヘラクレス",
+			"item_id": "混沌の爪",
+			"level": 3,
+			"number": 3
+		},
+		{
+			"servant_id": "ヘラクレス",
+			"item_id": "蛮神の心臓",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "ヘラクレス",
+			"item_id": "バーサーカーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "ヘラクレス",
+			"item_id": "竜の逆鱗",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "ヘラクレス",
+			"item_id": "混沌の爪",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "ヘラクレス",
+			"item_id": "バーサーカーモニュメント",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "ランスロット",
+			"item_id": "バーサーカーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "ランスロット",
+			"item_id": "竜の逆鱗",
+			"level": 2,
+			"number": 3
+		},
+		{
+			"servant_id": "ランスロット",
+			"item_id": "バーサーカーピース",
+			"level": 2,
+			"number": 10
+		},
+		{
+			"servant_id": "ランスロット",
+			"item_id": "虚影の塵",
+			"level": 3,
+			"number": 8
+		},
+		{
+			"servant_id": "ランスロット",
+			"item_id": "混沌の爪",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "ランスロット",
+			"item_id": "バーサーカーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "ランスロット",
+			"item_id": "虚影の塵",
+			"level": 4,
+			"number": 16
+		},
+		{
+			"servant_id": "ランスロット",
+			"item_id": "竜の牙",
+			"level": 4,
+			"number": 24
+		},
+		{
+			"servant_id": "ランスロット",
+			"item_id": "バーサーカーモニュメント",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "呂布奉先",
+			"item_id": "バーサーカーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "呂布奉先",
+			"item_id": "隕蹄鉄",
+			"level": 2,
+			"number": 5
+		},
+		{
+			"servant_id": "呂布奉先",
+			"item_id": "バーサーカーピース",
+			"level": 2,
+			"number": 8
+		},
+		{
+			"servant_id": "呂布奉先",
+			"item_id": "混沌の爪",
+			"level": 3,
+			"number": 2
+		},
+		{
+			"servant_id": "呂布奉先",
+			"item_id": "凶骨",
+			"level": 3,
+			"number": 20
+		},
+		{
+			"servant_id": "呂布奉先",
+			"item_id": "バーサーカーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "呂布奉先",
+			"item_id": "虚影の塵",
+			"level": 4,
+			"number": 16
+		},
+		{
+			"servant_id": "呂布奉先",
+			"item_id": "混沌の爪",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "呂布奉先",
+			"item_id": "バーサーカーモニュメント",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "スパルタクス",
+			"item_id": "バーサーカーピース",
+			"level": 1,
+			"number": 2
+		},
+		{
+			"servant_id": "スパルタクス",
+			"item_id": "八連双晶",
+			"level": 2,
+			"number": 3
+		},
+		{
+			"servant_id": "スパルタクス",
+			"item_id": "バーサーカーピース",
+			"level": 2,
+			"number": 4
+		},
+		{
+			"servant_id": "スパルタクス",
+			"item_id": "英雄の証",
+			"level": 3,
+			"number": 10
+		},
+		{
+			"servant_id": "スパルタクス",
+			"item_id": "ホムンクルスベビー",
+			"level": 3,
+			"number": 2
+		},
+		{
+			"servant_id": "スパルタクス",
+			"item_id": "バーサーカーモニュメント",
+			"level": 3,
+			"number": 2
+		},
+		{
+			"servant_id": "スパルタクス",
+			"item_id": "ホムンクルスベビー",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "スパルタクス",
+			"item_id": "凶骨",
+			"level": 4,
+			"number": 12
+		},
+		{
+			"servant_id": "スパルタクス",
+			"item_id": "バーサーカーモニュメント",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "坂田金時",
+			"item_id": "バーサーカーピース",
+			"level": 1,
+			"number": 5
+		},
+		{
+			"servant_id": "坂田金時",
+			"item_id": "英雄の証",
+			"level": 2,
+			"number": 22
+		},
+		{
+			"servant_id": "坂田金時",
+			"item_id": "バーサーカーピース",
+			"level": 2,
+			"number": 12
+		},
+		{
+			"servant_id": "坂田金時",
+			"item_id": "世界樹の種",
+			"level": 3,
+			"number": 6
+		},
+		{
+			"servant_id": "坂田金時",
+			"item_id": "八連双晶",
+			"level": 3,
+			"number": 10
+		},
+		{
+			"servant_id": "坂田金時",
+			"item_id": "バーサーカーモニュメント",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "坂田金時",
+			"item_id": "世界樹の種",
+			"level": 4,
+			"number": 12
+		},
+		{
+			"servant_id": "坂田金時",
+			"item_id": "蛮神の心臓",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "坂田金時",
+			"item_id": "バーサーカーモニュメント",
+			"level": 4,
+			"number": 12
+		},
+		{
+			"servant_id": "ヴラド三世",
+			"item_id": "バーサーカーピース",
+			"level": 1,
+			"number": 5
+		},
+		{
+			"servant_id": "ヴラド三世",
+			"item_id": "竜の逆鱗",
+			"level": 2,
+			"number": 3
+		},
+		{
+			"servant_id": "ヴラド三世",
+			"item_id": "バーサーカーピース",
+			"level": 2,
+			"number": 12
+		},
+		{
+			"servant_id": "ヴラド三世",
+			"item_id": "混沌の爪",
+			"level": 3,
+			"number": 6
+		},
+		{
+			"servant_id": "ヴラド三世",
+			"item_id": "禁断の頁",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "ヴラド三世",
+			"item_id": "バーサーカーモニュメント",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "ヴラド三世",
+			"item_id": "虚影の塵",
+			"level": 4,
+			"number": 24
+		},
+		{
+			"servant_id": "ヴラド三世",
+			"item_id": "禁断の頁",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "ヴラド三世",
+			"item_id": "バーサーカーモニュメント",
+			"level": 4,
+			"number": 12
+		},
+		{
+			"servant_id": "アステリオス",
+			"item_id": "バーサーカーピース",
+			"level": 1,
+			"number": 2
+		},
+		{
+			"servant_id": "アステリオス",
+			"item_id": "八連双晶",
+			"level": 2,
+			"number": 3
+		},
+		{
+			"servant_id": "アステリオス",
+			"item_id": "バーサーカーピース",
+			"level": 2,
+			"number": 4
+		},
+		{
+			"servant_id": "アステリオス",
+			"item_id": "英雄の証",
+			"level": 3,
+			"number": 10
+		},
+		{
+			"servant_id": "アステリオス",
+			"item_id": "隕蹄鉄",
+			"level": 3,
+			"number": 2
+		},
+		{
+			"servant_id": "アステリオス",
+			"item_id": "バーサーカーモニュメント",
+			"level": 3,
+			"number": 2
+		},
+		{
+			"servant_id": "アステリオス",
+			"item_id": "世界樹の種",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "アステリオス",
+			"item_id": "隕蹄鉄",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "アステリオス",
+			"item_id": "バーサーカーモニュメント",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "カリギュラ",
+			"item_id": "バーサーカーピース",
+			"level": 1,
+			"number": 3
+		},
+		{
+			"servant_id": "カリギュラ",
+			"item_id": "八連双晶",
+			"level": 2,
+			"number": 4
+		},
+		{
+			"servant_id": "カリギュラ",
+			"item_id": "バーサーカーピース",
+			"level": 2,
+			"number": 6
+		},
+		{
+			"servant_id": "カリギュラ",
+			"item_id": "ゴーストランタン",
+			"level": 3,
+			"number": 3
+		},
+		{
+			"servant_id": "カリギュラ",
+			"item_id": "蛇の宝玉",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "カリギュラ",
+			"item_id": "バーサーカーモニュメント",
+			"level": 3,
+			"number": 3
+		},
+		{
+			"servant_id": "カリギュラ",
+			"item_id": "ゴーストランタン",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "カリギュラ",
+			"item_id": "禁断の頁",
+			"level": 4,
+			"number": 6
+		},
+		{
+			"servant_id": "カリギュラ",
+			"item_id": "バーサーカーモニュメント",
+			"level": 4,
+			"number": 6
+		},
+		{
+			"servant_id": "ダレイオス三世",
+			"item_id": "バーサーカーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "ダレイオス三世",
+			"item_id": "八連双晶",
+			"level": 2,
+			"number": 5
+		},
+		{
+			"servant_id": "ダレイオス三世",
+			"item_id": "バーサーカーピース",
+			"level": 2,
+			"number": 8
+		},
+		{
+			"servant_id": "ダレイオス三世",
+			"item_id": "鳳凰の羽根",
+			"level": 3,
+			"number": 6
+		},
+		{
+			"servant_id": "ダレイオス三世",
+			"item_id": "凶骨",
+			"level": 3,
+			"number": 10
+		},
+		{
+			"servant_id": "ダレイオス三世",
+			"item_id": "バーサーカーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "ダレイオス三世",
+			"item_id": "隕蹄鉄",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "ダレイオス三世",
+			"item_id": "凶骨",
+			"level": 4,
+			"number": 20
+		},
+		{
+			"servant_id": "ダレイオス三世",
+			"item_id": "バーサーカーモニュメント",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "清姫",
+			"item_id": "バーサーカーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "清姫",
+			"item_id": "ゴーストランタン",
+			"level": 2,
+			"number": 5
+		},
+		{
+			"servant_id": "清姫",
+			"item_id": "バーサーカーピース",
+			"level": 2,
+			"number": 8
+		},
+		{
+			"servant_id": "清姫",
+			"item_id": "竜の牙",
+			"level": 3,
+			"number": 8
+		},
+		{
+			"servant_id": "清姫",
+			"item_id": "凶骨",
+			"level": 3,
+			"number": 20
+		},
+		{
+			"servant_id": "清姫",
+			"item_id": "バーサーカーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "清姫",
+			"item_id": "竜の逆鱗",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "清姫",
+			"item_id": "竜の牙",
+			"level": 4,
+			"number": 16
+		},
+		{
+			"servant_id": "清姫",
+			"item_id": "バーサーカーモニュメント",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "エイリーク・ブラッドアクス",
+			"item_id": "バーサーカーピース",
+			"level": 1,
+			"number": 3
+		},
+		{
+			"servant_id": "エイリーク・ブラッドアクス",
+			"item_id": "凶骨",
+			"level": 2,
+			"number": 11
+		},
+		{
+			"servant_id": "エイリーク・ブラッドアクス",
+			"item_id": "バーサーカーピース",
+			"level": 2,
+			"number": 6
+		},
+		{
+			"servant_id": "エイリーク・ブラッドアクス",
+			"item_id": "蛇の宝玉",
+			"level": 3,
+			"number": 2
+		},
+		{
+			"servant_id": "エイリーク・ブラッドアクス",
+			"item_id": "ホムンクルスベビー",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "エイリーク・ブラッドアクス",
+			"item_id": "バーサーカーモニュメント",
+			"level": 3,
+			"number": 3
+		},
+		{
+			"servant_id": "エイリーク・ブラッドアクス",
+			"item_id": "虚影の塵",
+			"level": 4,
+			"number": 12
+		},
+		{
+			"servant_id": "エイリーク・ブラッドアクス",
+			"item_id": "蛇の宝玉",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "エイリーク・ブラッドアクス",
+			"item_id": "バーサーカーモニュメント",
+			"level": 4,
+			"number": 6
+		},
+		{
+			"servant_id": "タマモキャット",
+			"item_id": "バーサーカーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "タマモキャット",
+			"item_id": "ゴーストランタン",
+			"level": 2,
+			"number": 6
+		},
+		{
+			"servant_id": "タマモキャット",
+			"item_id": "バーサーカーピース",
+			"level": 2,
+			"number": 10
+		},
+		{
+			"servant_id": "タマモキャット",
+			"item_id": "混沌の爪",
+			"level": 3,
+			"number": 3
+		},
+		{
+			"servant_id": "タマモキャット",
+			"item_id": "ホムンクルスベビー",
+			"level": 3,
+			"number": 8
+		},
+		{
+			"servant_id": "タマモキャット",
+			"item_id": "バーサーカーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "タマモキャット",
+			"item_id": "混沌の爪",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "タマモキャット",
+			"item_id": "蛮神の心臓",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "タマモキャット",
+			"item_id": "バーサーカーモニュメント",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク",
+			"item_id": "セイバーピース",
+			"level": 1,
+			"number": 5
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク",
+			"item_id": "アーチャーピース",
+			"level": 1,
+			"number": 5
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク",
+			"item_id": "ランサーピース",
+			"level": 1,
+			"number": 5
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク",
+			"item_id": "ライダーピース",
+			"level": 2,
+			"number": 5
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク",
+			"item_id": "キャスターピース",
+			"level": 2,
+			"number": 5
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク",
+			"item_id": "アサシンピース",
+			"level": 2,
+			"number": 5
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク",
+			"item_id": "バーサーカーピース",
+			"level": 2,
+			"number": 5
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク",
+			"item_id": "セイバーモニュメント",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク",
+			"item_id": "アーチャーモニュメント",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク",
+			"item_id": "ランサーモニュメント",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク",
+			"item_id": "ライダーモニュメント",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク",
+			"item_id": "キャスターモニュメント",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク",
+			"item_id": "アサシンモニュメント",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク",
+			"item_id": "バーサーカーモニュメント",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "オリオン",
+			"item_id": "アーチャーピース",
+			"level": 1,
+			"number": 5
+		},
+		{
+			"servant_id": "オリオン",
+			"item_id": "蛮神の心臓",
+			"level": 2,
+			"number": 3
+		},
+		{
+			"servant_id": "オリオン",
+			"item_id": "アーチャーピース",
+			"level": 2,
+			"number": 12
+		},
+		{
+			"servant_id": "オリオン",
+			"item_id": "蛇の宝玉",
+			"level": 3,
+			"number": 8
+		},
+		{
+			"servant_id": "オリオン",
+			"item_id": "混沌の爪",
+			"level": 3,
+			"number": 3
+		},
+		{
+			"servant_id": "オリオン",
+			"item_id": "アーチャーモニュメント",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "オリオン",
+			"item_id": "混沌の爪",
+			"level": 4,
+			"number": 6
+		},
+		{
+			"servant_id": "オリオン",
+			"item_id": "鳳凰の羽根",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "オリオン",
+			"item_id": "アーチャーモニュメント",
+			"level": 4,
+			"number": 12
+		},
+		{
+			"servant_id": "エリザベート・バートリー(ハロウィン)",
+			"item_id": "ティンクルキャンディ",
+			"level": 1
+		},
+		{
+			"servant_id": "エリザベート・バートリー(ハロウィン)",
+			"item_id": "ティンクルキャンディ",
+			"level": 2
+		},
+		{
+			"servant_id": "エリザベート・バートリー(ハロウィン)",
+			"item_id": "ティンクルキャンディ",
+			"level": 3
+		},
+		{
+			"servant_id": "エリザベート・バートリー(ハロウィン)",
+			"item_id": "ティンクルキャンディ",
+			"level": 4
+		},
+		{
+			"servant_id": "玉藻の前",
+			"item_id": "キャスターピース",
+			"level": 1,
+			"number": 5
+		},
+		{
+			"servant_id": "玉藻の前",
+			"item_id": "ゴーストランタン",
+			"level": 2,
+			"number": 8
+		},
+		{
+			"servant_id": "玉藻の前",
+			"item_id": "キャスターピース",
+			"level": 2,
+			"number": 12
+		},
+		{
+			"servant_id": "玉藻の前",
+			"item_id": "凶骨",
+			"level": 3,
+			"number": 29
+		},
+		{
+			"servant_id": "玉藻の前",
+			"item_id": "蛮神の心臓",
+			"level": 3,
+			"number": 2
+		},
+		{
+			"servant_id": "玉藻の前",
+			"item_id": "キャスターモニュメント",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "玉藻の前",
+			"item_id": "禁断の頁",
+			"level": 4,
+			"number": 12
+		},
+		{
+			"servant_id": "玉藻の前",
+			"item_id": "蛮神の心臓",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "玉藻の前",
+			"item_id": "キャスターモニュメント",
+			"level": 4,
+			"number": 12
+		},
+		{
+			"servant_id": "ダビデ",
+			"item_id": "アーチャーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "ダビデ",
+			"item_id": "虚影の塵",
+			"level": 2,
+			"number": 10
+		},
+		{
+			"servant_id": "ダビデ",
+			"item_id": "アーチャーピース",
+			"level": 2,
+			"number": 8
+		},
+		{
+			"servant_id": "ダビデ",
+			"item_id": "蛮神の心臓",
+			"level": 3,
+			"number": 2
+		},
+		{
+			"servant_id": "ダビデ",
+			"item_id": "ホムンクルスベビー",
+			"level": 3,
+			"number": 7
+		},
+		{
+			"servant_id": "ダビデ",
+			"item_id": "アーチャーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "ダビデ",
+			"item_id": "蛮神の心臓",
+			"level": 4,
+			"number": 3
+		},
+		{
+			"servant_id": "ダビデ",
+			"item_id": "八連双晶",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "ダビデ",
+			"item_id": "アーチャーモニュメント",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "ヘクトール",
+			"item_id": "ランサーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "ヘクトール",
+			"item_id": "隕蹄鉄",
+			"level": 2,
+			"number": 5
+		},
+		{
+			"servant_id": "ヘクトール",
+			"item_id": "ランサーピース",
+			"level": 2,
+			"number": 8
+		},
+		{
+			"servant_id": "ヘクトール",
+			"item_id": "英雄の証",
+			"level": 3,
+			"number": 20
+		},
+		{
+			"servant_id": "ヘクトール",
+			"item_id": "世界樹の種",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "ヘクトール",
+			"item_id": "ランサーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "ヘクトール",
+			"item_id": "鳳凰の羽根",
+			"level": 4,
+			"number": 7
+		},
+		{
+			"servant_id": "ヘクトール",
+			"item_id": "世界樹の種",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "ヘクトール",
+			"item_id": "ランサーモニュメント",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "フランシス・ドレイク",
+			"item_id": "ライダーピース",
+			"level": 1,
+			"number": 5
+		},
+		{
+			"servant_id": "フランシス・ドレイク",
+			"item_id": "凶骨",
+			"level": 2,
+			"number": 22
+		},
+		{
+			"servant_id": "フランシス・ドレイク",
+			"item_id": "ライダーピース",
+			"level": 2,
+			"number": 12
+		},
+		{
+			"servant_id": "フランシス・ドレイク",
+			"item_id": "竜の逆鱗",
+			"level": 3,
+			"number": 2
+		},
+		{
+			"servant_id": "フランシス・ドレイク",
+			"item_id": "竜の牙",
+			"level": 3,
+			"number": 24
+		},
+		{
+			"servant_id": "フランシス・ドレイク",
+			"item_id": "ライダーモニュメント",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "フランシス・ドレイク",
+			"item_id": "竜の逆鱗",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "フランシス・ドレイク",
+			"item_id": "蛮神の心臓",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "フランシス・ドレイク",
+			"item_id": "ライダーモニュメント",
+			"level": 4,
+			"number": 12
+		},
+		{
+			"servant_id": "アン・ボニー＆メアリー・リード",
+			"item_id": "ライダーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "アン・ボニー＆メアリー・リード",
+			"item_id": "ホムンクルスベビー",
+			"level": 2,
+			"number": 6
+		},
+		{
+			"servant_id": "アン・ボニー＆メアリー・リード",
+			"item_id": "ライダーピース",
+			"level": 2,
+			"number": 10
+		},
+		{
+			"servant_id": "アン・ボニー＆メアリー・リード",
+			"item_id": "凶骨",
+			"level": 3,
+			"number": 12
+		},
+		{
+			"servant_id": "アン・ボニー＆メアリー・リード",
+			"item_id": "ゴーストランタン",
+			"level": 3,
+			"number": 8
+		},
+		{
+			"servant_id": "アン・ボニー＆メアリー・リード",
+			"item_id": "ライダーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "アン・ボニー＆メアリー・リード",
+			"item_id": "凶骨",
+			"level": 4,
+			"number": 24
+		},
+		{
+			"servant_id": "アン・ボニー＆メアリー・リード",
+			"item_id": "混沌の爪",
+			"level": 4,
+			"number": 6
+		},
+		{
+			"servant_id": "アン・ボニー＆メアリー・リード",
+			"item_id": "ライダーモニュメント",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "メディア(リリィ)",
+			"item_id": "キャスターピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "メディア(リリィ)",
+			"item_id": "虚影の塵",
+			"level": 2,
+			"number": 12
+		},
+		{
+			"servant_id": "メディア(リリィ)",
+			"item_id": "キャスターピース",
+			"level": 2,
+			"number": 10
+		},
+		{
+			"servant_id": "メディア(リリィ)",
+			"item_id": "鳳凰の羽根",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "メディア(リリィ)",
+			"item_id": "ゴーストランタン",
+			"level": 3,
+			"number": 8
+		},
+		{
+			"servant_id": "メディア(リリィ)",
+			"item_id": "キャスターモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "メディア(リリィ)",
+			"item_id": "鳳凰の羽根",
+			"level": 4,
+			"number": 7
+		},
+		{
+			"servant_id": "メディア(リリィ)",
+			"item_id": "禁断の頁",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "メディア(リリィ)",
+			"item_id": "キャスターモニュメント",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "沖田総司",
+			"item_id": "セイバーピース",
+			"level": 1,
+			"number": 5
+		},
+		{
+			"servant_id": "沖田総司",
+			"item_id": "虚影の塵",
+			"level": 2,
+			"number": 15
+		},
+		{
+			"servant_id": "沖田総司",
+			"item_id": "セイバーピース",
+			"level": 2,
+			"number": 12
+		},
+		{
+			"servant_id": "沖田総司",
+			"item_id": "無間の歯車",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "沖田総司",
+			"item_id": "竜の牙",
+			"level": 3,
+			"number": 24
+		},
+		{
+			"servant_id": "沖田総司",
+			"item_id": "セイバーモニュメント",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "沖田総司",
+			"item_id": "無間の歯車",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "沖田総司",
+			"item_id": "鳳凰の羽根",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "沖田総司",
+			"item_id": "セイバーモニュメント",
+			"level": 4,
+			"number": 12
+		},
+		{
+			"servant_id": "織田信長",
+			"item_id": "黄金髑髏",
+			"level": 1
+		},
+		{
+			"servant_id": "織田信長",
+			"item_id": "黄金髑髏",
+			"level": 2
+		},
+		{
+			"servant_id": "織田信長",
+			"item_id": "黄金髑髏",
+			"level": 3
+		},
+		{
+			"servant_id": "織田信長",
+			"item_id": "黄金髑髏",
+			"level": 4
+		},
+		{
+			"servant_id": "スカサハ",
+			"item_id": "ランサーピース",
+			"level": 1,
+			"number": 5
+		},
+		{
+			"servant_id": "スカサハ",
+			"item_id": "凶骨",
+			"level": 2,
+			"number": 22
+		},
+		{
+			"servant_id": "スカサハ",
+			"item_id": "ランサーピース",
+			"level": 2,
+			"number": 12
+		},
+		{
+			"servant_id": "スカサハ",
+			"item_id": "虚影の塵",
+			"level": 3,
+			"number": 20
+		},
+		{
+			"servant_id": "スカサハ",
+			"item_id": "混沌の爪",
+			"level": 3,
+			"number": 3
+		},
+		{
+			"servant_id": "スカサハ",
+			"item_id": "ランサーモニュメント",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "スカサハ",
+			"item_id": "混沌の爪",
+			"level": 4,
+			"number": 6
+		},
+		{
+			"servant_id": "スカサハ",
+			"item_id": "蛮神の心臓",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "スカサハ",
+			"item_id": "ランサーモニュメント",
+			"level": 4,
+			"number": 12
+		},
+		{
+			"servant_id": "ディルムッド・オディナ",
+			"item_id": "ランサーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "ディルムッド・オディナ",
+			"item_id": "世界樹の種",
+			"level": 2,
+			"number": 6
+		},
+		{
+			"servant_id": "ディルムッド・オディナ",
+			"item_id": "ランサーピース",
+			"level": 2,
+			"number": 8
+		},
+		{
+			"servant_id": "ディルムッド・オディナ",
+			"item_id": "鳳凰の羽根",
+			"level": 3,
+			"number": 6
+		},
+		{
+			"servant_id": "ディルムッド・オディナ",
+			"item_id": "蛇の宝玉",
+			"level": 3,
+			"number": 3
+		},
+		{
+			"servant_id": "ディルムッド・オディナ",
+			"item_id": "ランサーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "ディルムッド・オディナ",
+			"item_id": "蛇の宝玉",
+			"level": 4,
+			"number": 6
+		},
+		{
+			"servant_id": "ディルムッド・オディナ",
+			"item_id": "虚影の塵",
+			"level": 4,
+			"number": 16
+		},
+		{
+			"servant_id": "ディルムッド・オディナ",
+			"item_id": "ランサーモニュメント",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "フェルグス・マック・ロイ",
+			"item_id": "セイバーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "フェルグス・マック・ロイ",
+			"item_id": "英雄の証",
+			"level": 2,
+			"number": 15
+		},
+		{
+			"servant_id": "フェルグス・マック・ロイ",
+			"item_id": "セイバーピース",
+			"level": 2,
+			"number": 8
+		},
+		{
+			"servant_id": "フェルグス・マック・ロイ",
+			"item_id": "八連双晶",
+			"level": 3,
+			"number": 7
+		},
+		{
+			"servant_id": "フェルグス・マック・ロイ",
+			"item_id": "蛮神の心臓",
+			"level": 3,
+			"number": 2
+		},
+		{
+			"servant_id": "フェルグス・マック・ロイ",
+			"item_id": "セイバーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "フェルグス・マック・ロイ",
+			"item_id": "蛮神の心臓",
+			"level": 4,
+			"number": 3
+		},
+		{
+			"servant_id": "フェルグス・マック・ロイ",
+			"item_id": "隕蹄鉄",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "フェルグス・マック・ロイ",
+			"item_id": "セイバーモニュメント",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン(サンタオルタ)",
+			"item_id": "樽入りチキン",
+			"level": 1
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン(サンタオルタ)",
+			"item_id": "樽入りチキン",
+			"level": 2
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン(サンタオルタ)",
+			"item_id": "樽入りチキン",
+			"level": 3
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン(サンタオルタ)",
+			"item_id": "樽入りチキン",
+			"level": 4
+		},
+		{
+			"servant_id": "ナーサリー・ライム",
+			"item_id": "キャスターピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "ナーサリー・ライム",
+			"item_id": "世界樹の種",
+			"level": 2,
+			"number": 8
+		},
+		{
+			"servant_id": "ナーサリー・ライム",
+			"item_id": "キャスターピース",
+			"level": 2,
+			"number": 10
+		},
+		{
+			"servant_id": "ナーサリー・ライム",
+			"item_id": "ゴーストランタン",
+			"level": 3,
+			"number": 8
+		},
+		{
+			"servant_id": "ナーサリー・ライム",
+			"item_id": "禁断の頁",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "ナーサリー・ライム",
+			"item_id": "キャスターモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "ナーサリー・ライム",
+			"item_id": "禁断の頁",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "ナーサリー・ライム",
+			"item_id": "鳳凰の羽根",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "ナーサリー・ライム",
+			"item_id": "キャスターモニュメント",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "ジャック・ザ・リッパー",
+			"item_id": "アサシンピース",
+			"level": 1,
+			"number": 5
+		},
+		{
+			"servant_id": "ジャック・ザ・リッパー",
+			"item_id": "凶骨",
+			"level": 2,
+			"number": 22
+		},
+		{
+			"servant_id": "ジャック・ザ・リッパー",
+			"item_id": "アサシンピース",
+			"level": 2,
+			"number": 12
+		},
+		{
+			"servant_id": "ジャック・ザ・リッパー",
+			"item_id": "虚影の塵",
+			"level": 3,
+			"number": 20
+		},
+		{
+			"servant_id": "ジャック・ザ・リッパー",
+			"item_id": "無間の歯車",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "ジャック・ザ・リッパー",
+			"item_id": "アサシンモニュメント",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "ジャック・ザ・リッパー",
+			"item_id": "無間の歯車",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "ジャック・ザ・リッパー",
+			"item_id": "混沌の爪",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "ジャック・ザ・リッパー",
+			"item_id": "アサシンモニュメント",
+			"level": 4,
+			"number": 12
+		},
+		{
+			"servant_id": "モードレッド",
+			"item_id": "セイバーピース",
+			"level": 1,
+			"number": 5
+		},
+		{
+			"servant_id": "モードレッド",
+			"item_id": "竜の牙",
+			"level": 2,
+			"number": 18
+		},
+		{
+			"servant_id": "モードレッド",
+			"item_id": "セイバーピース",
+			"level": 2,
+			"number": 12
+		},
+		{
+			"servant_id": "モードレッド",
+			"item_id": "八連双晶",
+			"level": 3,
+			"number": 10
+		},
+		{
+			"servant_id": "モードレッド",
+			"item_id": "蛮神の心臓",
+			"level": 3,
+			"number": 2
+		},
+		{
+			"servant_id": "モードレッド",
+			"item_id": "セイバーモニュメント",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "モードレッド",
+			"item_id": "蛮神の心臓",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "モードレッド",
+			"item_id": "竜の逆鱗",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "モードレッド",
+			"item_id": "セイバーモニュメント",
+			"level": 4,
+			"number": 12
+		},
+		{
+			"servant_id": "ニコラ・テスラ",
+			"item_id": "アーチャーピース",
+			"level": 1,
+			"number": 5
+		},
+		{
+			"servant_id": "ニコラ・テスラ",
+			"item_id": "虚影の塵",
+			"level": 2,
+			"number": 15
+		},
+		{
+			"servant_id": "ニコラ・テスラ",
+			"item_id": "アーチャーピース",
+			"level": 2,
+			"number": 12
+		},
+		{
+			"servant_id": "ニコラ・テスラ",
+			"item_id": "禁断の頁",
+			"level": 3,
+			"number": 10
+		},
+		{
+			"servant_id": "ニコラ・テスラ",
+			"item_id": "無間の歯車",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "ニコラ・テスラ",
+			"item_id": "アーチャーモニュメント",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "ニコラ・テスラ",
+			"item_id": "無間の歯車",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "ニコラ・テスラ",
+			"item_id": "ゴーストランタン",
+			"level": 4,
+			"number": 12
+		},
+		{
+			"servant_id": "ニコラ・テスラ",
+			"item_id": "アーチャーモニュメント",
+			"level": 4,
+			"number": 12
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン(オルタ)",
+			"item_id": "ランサーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン(オルタ)",
+			"item_id": "隕蹄鉄",
+			"level": 2,
+			"number": 6
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン(オルタ)",
+			"item_id": "ランサーピース",
+			"level": 2,
+			"number": 10
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン(オルタ)",
+			"item_id": "鳳凰の羽根",
+			"level": 3,
+			"number": 7
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン(オルタ)",
+			"item_id": "竜の逆鱗",
+			"level": 3,
+			"number": 2
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン(オルタ)",
+			"item_id": "ランサーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン(オルタ)",
+			"item_id": "竜の逆鱗",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン(オルタ)",
+			"item_id": "蛮神の心臓",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン(オルタ)",
+			"item_id": "ランサーモニュメント",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "ヴァン・ホーエンハイム・パラケルスス",
+			"item_id": "キャスターピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "ヴァン・ホーエンハイム・パラケルスス",
+			"item_id": "禁断の頁",
+			"level": 2,
+			"number": 5
+		},
+		{
+			"servant_id": "ヴァン・ホーエンハイム・パラケルスス",
+			"item_id": "キャスターピース",
+			"level": 2,
+			"number": 8
+		},
+		{
+			"servant_id": "ヴァン・ホーエンハイム・パラケルスス",
+			"item_id": "無間の歯車",
+			"level": 3,
+			"number": 7
+		},
+		{
+			"servant_id": "ヴァン・ホーエンハイム・パラケルスス",
+			"item_id": "ホムンクルスベビー",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "ヴァン・ホーエンハイム・パラケルスス",
+			"item_id": "キャスターモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "ヴァン・ホーエンハイム・パラケルスス",
+			"item_id": "ホムンクルスベビー",
+			"level": 4,
+			"number": 7
+		},
+		{
+			"servant_id": "ヴァン・ホーエンハイム・パラケルスス",
+			"item_id": "凶骨",
+			"level": 4,
+			"number": 24
+		},
+		{
+			"servant_id": "ヴァン・ホーエンハイム・パラケルスス",
+			"item_id": "キャスターモニュメント",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "チャールズ・バベッジ",
+			"item_id": "キャスターピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "チャールズ・バベッジ",
+			"item_id": "無間の歯車",
+			"level": 2,
+			"number": 5
+		},
+		{
+			"servant_id": "チャールズ・バベッジ",
+			"item_id": "キャスターピース",
+			"level": 2,
+			"number": 8
+		},
+		{
+			"servant_id": "チャールズ・バベッジ",
+			"item_id": "八連双晶",
+			"level": 3,
+			"number": 7
+		},
+		{
+			"servant_id": "チャールズ・バベッジ",
+			"item_id": "禁断の頁",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "チャールズ・バベッジ",
+			"item_id": "キャスターモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "チャールズ・バベッジ",
+			"item_id": "禁断の頁",
+			"level": 4,
+			"number": 7
+		},
+		{
+			"servant_id": "チャールズ・バベッジ",
+			"item_id": "虚影の塵",
+			"level": 4,
+			"number": 16
+		},
+		{
+			"servant_id": "チャールズ・バベッジ",
+			"item_id": "キャスターモニュメント",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "ヘンリー・ジキル＆ハイド",
+			"item_id": "アサシンピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "ヘンリー・ジキル＆ハイド",
+			"item_id": "凶骨",
+			"level": 2,
+			"number": 15
+		},
+		{
+			"servant_id": "ヘンリー・ジキル＆ハイド",
+			"item_id": "アサシンピース",
+			"level": 2,
+			"number": 8
+		},
+		{
+			"servant_id": "ヘンリー・ジキル＆ハイド",
+			"item_id": "虚影の塵",
+			"level": 3,
+			"number": 13
+		},
+		{
+			"servant_id": "ヘンリー・ジキル＆ハイド",
+			"item_id": "八連双晶",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "ヘンリー・ジキル＆ハイド",
+			"item_id": "アサシンモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "ヘンリー・ジキル＆ハイド",
+			"item_id": "八連双晶",
+			"level": 4,
+			"number": 7
+		},
+		{
+			"servant_id": "ヘンリー・ジキル＆ハイド",
+			"item_id": "ホムンクルスベビー",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "ヘンリー・ジキル＆ハイド",
+			"item_id": "アサシンモニュメント",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "フランケンシュタイン",
+			"item_id": "バーサーカーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "フランケンシュタイン",
+			"item_id": "ホムンクルスベビー",
+			"level": 2,
+			"number": 6
+		},
+		{
+			"servant_id": "フランケンシュタイン",
+			"item_id": "バーサーカーピース",
+			"level": 2,
+			"number": 10
+		},
+		{
+			"servant_id": "フランケンシュタイン",
+			"item_id": "凶骨",
+			"level": 3,
+			"number": 24
+		},
+		{
+			"servant_id": "フランケンシュタイン",
+			"item_id": "ゴーストランタン",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "フランケンシュタイン",
+			"item_id": "バーサーカーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "フランケンシュタイン",
+			"item_id": "ゴーストランタン",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "フランケンシュタイン",
+			"item_id": "無間の歯車",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "フランケンシュタイン",
+			"item_id": "バーサーカーモニュメント",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "アルジュナ",
+			"item_id": "アーチャーピース",
+			"level": 1,
+			"number": 5
+		},
+		{
+			"servant_id": "アルジュナ",
+			"item_id": "英雄の証",
+			"level": 2,
+			"number": 22
+		},
+		{
+			"servant_id": "アルジュナ",
+			"item_id": "アーチャーピース",
+			"level": 2,
+			"number": 12
+		},
+		{
+			"servant_id": "アルジュナ",
+			"item_id": "鳳凰の羽根",
+			"level": 3,
+			"number": 8
+		},
+		{
+			"servant_id": "アルジュナ",
+			"item_id": "蛇の宝玉",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "アルジュナ",
+			"item_id": "アーチャーモニュメント",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "アルジュナ",
+			"item_id": "蛇の宝玉",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "アルジュナ",
+			"item_id": "蛮神の心臓",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "アルジュナ",
+			"item_id": "アーチャーモニュメント",
+			"level": 4,
+			"number": 12
+		},
+		{
+			"servant_id": "カルナ",
+			"item_id": "ランサーピース",
+			"level": 1,
+			"number": 5
+		},
+		{
+			"servant_id": "カルナ",
+			"item_id": "八連双晶",
+			"level": 2,
+			"number": 8
+		},
+		{
+			"servant_id": "カルナ",
+			"item_id": "ランサーピース",
+			"level": 2,
+			"number": 12
+		},
+		{
+			"servant_id": "カルナ",
+			"item_id": "無間の歯車",
+			"level": 3,
+			"number": 10
+		},
+		{
+			"servant_id": "カルナ",
+			"item_id": "鳳凰の羽根",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "カルナ",
+			"item_id": "ランサーモニュメント",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "カルナ",
+			"item_id": "鳳凰の羽根",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "カルナ",
+			"item_id": "蛮神の心臓",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "カルナ",
+			"item_id": "ランサーモニュメント",
+			"level": 4,
+			"number": 12
+		},
+		{
+			"servant_id": "謎のヒロインX",
+			"item_id": "アサシンピース",
+			"level": 1,
+			"number": 5
+		},
+		{
+			"servant_id": "謎のヒロインX",
+			"item_id": "竜の牙",
+			"level": 2,
+			"number": 18
+		},
+		{
+			"servant_id": "謎のヒロインX",
+			"item_id": "アサシンピース",
+			"level": 2,
+			"number": 12
+		},
+		{
+			"servant_id": "謎のヒロインX",
+			"item_id": "鳳凰の羽根",
+			"level": 3,
+			"number": 8
+		},
+		{
+			"servant_id": "謎のヒロインX",
+			"item_id": "竜の逆鱗",
+			"level": 3,
+			"number": 2
+		},
+		{
+			"servant_id": "謎のヒロインX",
+			"item_id": "アサシンモニュメント",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "謎のヒロインX",
+			"item_id": "竜の逆鱗",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "謎のヒロインX",
+			"item_id": "英雄の証",
+			"level": 4,
+			"number": 36
+		},
+		{
+			"servant_id": "謎のヒロインX",
+			"item_id": "アサシンモニュメント",
+			"level": 4,
+			"number": 12
+		},
+		{
+			"servant_id": "フィン・マックール",
+			"item_id": "ランサーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "フィン・マックール",
+			"item_id": "鳳凰の羽根",
+			"level": 2,
+			"number": 5
+		},
+		{
+			"servant_id": "フィン・マックール",
+			"item_id": "ランサーピース",
+			"level": 2,
+			"number": 10
+		},
+		{
+			"servant_id": "フィン・マックール",
+			"item_id": "凶骨",
+			"level": 3,
+			"number": 24
+		},
+		{
+			"servant_id": "フィン・マックール",
+			"item_id": "混沌の爪",
+			"level": 3,
+			"number": 3
+		},
+		{
+			"servant_id": "フィン・マックール",
+			"item_id": "ランサーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "フィン・マックール",
+			"item_id": "混沌の爪",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "フィン・マックール",
+			"item_id": "虚影の塵",
+			"level": 4,
+			"number": 20
+		},
+		{
+			"servant_id": "フィン・マックール",
+			"item_id": "ランサーモニュメント",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "ブリュンヒルデ",
+			"item_id": "ランサーピース",
+			"level": 1,
+			"number": 5
+		},
+		{
+			"servant_id": "ブリュンヒルデ",
+			"item_id": "蛮神の心臓",
+			"level": 2,
+			"number": 3
+		},
+		{
+			"servant_id": "ブリュンヒルデ",
+			"item_id": "ランサーピース",
+			"level": 2,
+			"number": 12
+		},
+		{
+			"servant_id": "ブリュンヒルデ",
+			"item_id": "世界樹の種",
+			"level": 3,
+			"number": 12
+		},
+		{
+			"servant_id": "ブリュンヒルデ",
+			"item_id": "英雄の証",
+			"level": 3,
+			"number": 15
+		},
+		{
+			"servant_id": "ブリュンヒルデ",
+			"item_id": "ランサーモニュメント",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "ブリュンヒルデ",
+			"item_id": "英雄の証",
+			"level": 4,
+			"number": 29
+		},
+		{
+			"servant_id": "ブリュンヒルデ",
+			"item_id": "ゴーストランタン",
+			"level": 4,
+			"number": 12
+		},
+		{
+			"servant_id": "ブリュンヒルデ",
+			"item_id": "ランサーモニュメント",
+			"level": 4,
+			"number": 12
+		},
+		{
+			"servant_id": "ベオウルフ",
+			"item_id": "バーサーカーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "ベオウルフ",
+			"item_id": "英雄の証",
+			"level": 2,
+			"number": 18
+		},
+		{
+			"servant_id": "ベオウルフ",
+			"item_id": "バーサーカーピース",
+			"level": 2,
+			"number": 10
+		},
+		{
+			"servant_id": "ベオウルフ",
+			"item_id": "八連双晶",
+			"level": 3,
+			"number": 8
+		},
+		{
+			"servant_id": "ベオウルフ",
+			"item_id": "竜の逆鱗",
+			"level": 3,
+			"number": 2
+		},
+		{
+			"servant_id": "ベオウルフ",
+			"item_id": "バーサーカーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "ベオウルフ",
+			"item_id": "竜の逆鱗",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "ベオウルフ",
+			"item_id": "凶骨",
+			"level": 4,
+			"number": 30
+		},
+		{
+			"servant_id": "ベオウルフ",
+			"item_id": "バーサーカーモニュメント",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "ネロ・クラウディウス(ブライド)",
+			"item_id": "セイバーピース",
+			"level": 1,
+			"number": 5
+		},
+		{
+			"servant_id": "ネロ・クラウディウス(ブライド)",
+			"item_id": "八連双晶",
+			"level": 2,
+			"number": 8
+		},
+		{
+			"servant_id": "ネロ・クラウディウス(ブライド)",
+			"item_id": "セイバーピース",
+			"level": 2,
+			"number": 12
+		},
+		{
+			"servant_id": "ネロ・クラウディウス(ブライド)",
+			"item_id": "ゴーストランタン",
+			"level": 3,
+			"number": 10
+		},
+		{
+			"servant_id": "ネロ・クラウディウス(ブライド)",
+			"item_id": "鳳凰の羽根",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "ネロ・クラウディウス(ブライド)",
+			"item_id": "セイバーモニュメント",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "ネロ・クラウディウス(ブライド)",
+			"item_id": "鳳凰の羽根",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "ネロ・クラウディウス(ブライド)",
+			"item_id": "世界樹の種",
+			"level": 4,
+			"number": 15
+		},
+		{
+			"servant_id": "ネロ・クラウディウス(ブライド)",
+			"item_id": "セイバーモニュメント",
+			"level": 4,
+			"number": 12
+		},
+		{
+			"servant_id": "両儀式(セイバー)",
+			"item_id": "セイバーピース",
+			"level": 1,
+			"number": 5
+		},
+		{
+			"servant_id": "両儀式(セイバー)",
+			"item_id": "虚影の塵",
+			"level": 2,
+			"number": 15
+		},
+		{
+			"servant_id": "両儀式(セイバー)",
+			"item_id": "セイバーピース",
+			"level": 2,
+			"number": 12
+		},
+		{
+			"servant_id": "両儀式(セイバー)",
+			"item_id": "鳳凰の羽根",
+			"level": 3,
+			"number": 8
+		},
+		{
+			"servant_id": "両儀式(セイバー)",
+			"item_id": "混沌の爪",
+			"level": 3,
+			"number": 3
+		},
+		{
+			"servant_id": "両儀式(セイバー)",
+			"item_id": "セイバーモニュメント",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "両儀式(セイバー)",
+			"item_id": "混沌の爪",
+			"level": 4,
+			"number": 6
+		},
+		{
+			"servant_id": "両儀式(セイバー)",
+			"item_id": "蛮神の心臓",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "両儀式(セイバー)",
+			"item_id": "セイバーモニュメント",
+			"level": 4,
+			"number": 12
+		},
+		{
+			"servant_id": "両儀式(アサシン)",
+			"item_id": "業物ナイフ",
+			"level": 1
+		},
+		{
+			"servant_id": "両儀式(アサシン)",
+			"item_id": "業物ナイフ",
+			"level": 2
+		},
+		{
+			"servant_id": "両儀式(アサシン)",
+			"item_id": "業物ナイフ",
+			"level": 3
+		},
+		{
+			"servant_id": "両儀式(アサシン)",
+			"item_id": "業物ナイフ",
+			"level": 4
+		},
+		{
+			"servant_id": "天草四郎",
+			"item_id": "ランサーピース",
+			"level": 1,
+			"number": 5
+		},
+		{
+			"servant_id": "天草四郎",
+			"item_id": "キャスターピース",
+			"level": 1,
+			"number": 5
+		},
+		{
+			"servant_id": "天草四郎",
+			"item_id": "アサシンピース",
+			"level": 1,
+			"number": 5
+		},
+		{
+			"servant_id": "天草四郎",
+			"item_id": "セイバーピース",
+			"level": 2,
+			"number": 5
+		},
+		{
+			"servant_id": "天草四郎",
+			"item_id": "アーチャーピース",
+			"level": 2,
+			"number": 5
+		},
+		{
+			"servant_id": "天草四郎",
+			"item_id": "ライダーピース",
+			"level": 2,
+			"number": 5
+		},
+		{
+			"servant_id": "天草四郎",
+			"item_id": "バーサーカーピース",
+			"level": 2,
+			"number": 5
+		},
+		{
+			"servant_id": "天草四郎",
+			"item_id": "ライダーモニュメント",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "天草四郎",
+			"item_id": "キャスターモニュメント",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "天草四郎",
+			"item_id": "アサシンモニュメント",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "天草四郎",
+			"item_id": "セイバーモニュメント",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "天草四郎",
+			"item_id": "アーチャーモニュメント",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "天草四郎",
+			"item_id": "ランサーモニュメント",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "天草四郎",
+			"item_id": "バーサーカーモニュメント",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "アストルフォ",
+			"item_id": "ライダーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "アストルフォ",
+			"item_id": "隕蹄鉄",
+			"level": 2,
+			"number": 6
+		},
+		{
+			"servant_id": "アストルフォ",
+			"item_id": "ライダーピース",
+			"level": 2,
+			"number": 10
+		},
+		{
+			"servant_id": "アストルフォ",
+			"item_id": "八連双晶",
+			"level": 3,
+			"number": 8
+		},
+		{
+			"servant_id": "アストルフォ",
+			"item_id": "鳳凰の羽根",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "アストルフォ",
+			"item_id": "ライダーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "アストルフォ",
+			"item_id": "鳳凰の羽根",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "アストルフォ",
+			"item_id": "混沌の爪",
+			"level": 4,
+			"number": 6
+		},
+		{
+			"servant_id": "アストルフォ",
+			"item_id": "ライダーモニュメント",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "子ギル",
+			"item_id": "アーチャーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "子ギル",
+			"item_id": "世界樹の種",
+			"level": 2,
+			"number": 6
+		},
+		{
+			"servant_id": "子ギル",
+			"item_id": "アーチャーピース",
+			"level": 2,
+			"number": 8
+		},
+		{
+			"servant_id": "子ギル",
+			"item_id": "蛇の宝玉",
+			"level": 3,
+			"number": 6
+		},
+		{
+			"servant_id": "子ギル",
+			"item_id": "竜の逆鱗",
+			"level": 3,
+			"number": 2
+		},
+		{
+			"servant_id": "子ギル",
+			"item_id": "アーチャーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "子ギル",
+			"item_id": "竜の逆鱗",
+			"level": 4,
+			"number": 3
+		},
+		{
+			"servant_id": "子ギル",
+			"item_id": "英雄の証",
+			"level": 4,
+			"number": 24
+		},
+		{
+			"servant_id": "子ギル",
+			"item_id": "アーチャーモニュメント",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "巌窟王 エドモン・ダンテス",
+			"item_id": "凶骨",
+			"level": 1,
+			"number": 10
+		},
+		{
+			"servant_id": "巌窟王 エドモン・ダンテス",
+			"item_id": "八連双晶",
+			"level": 1,
+			"number": 10
+		},
+		{
+			"servant_id": "巌窟王 エドモン・ダンテス",
+			"item_id": "蛇の宝玉",
+			"level": 2,
+			"number": 10
+		},
+		{
+			"servant_id": "巌窟王 エドモン・ダンテス",
+			"item_id": "禁断の頁",
+			"level": 2,
+			"number": 10
+		},
+		{
+			"servant_id": "巌窟王 エドモン・ダンテス",
+			"item_id": "虚影の塵",
+			"level": 3,
+			"number": 10
+		},
+		{
+			"servant_id": "巌窟王 エドモン・ダンテス",
+			"item_id": "無間の歯車",
+			"level": 3,
+			"number": 10
+		},
+		{
+			"servant_id": "巌窟王 エドモン・ダンテス",
+			"item_id": "鳳凰の羽根",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "巌窟王 エドモン・ダンテス",
+			"item_id": "蛮神の心臓",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "ナイチンゲール",
+			"item_id": "バーサーカーピース",
+			"level": 1,
+			"number": 5
+		},
+		{
+			"servant_id": "ナイチンゲール",
+			"item_id": "鳳凰の羽根",
+			"level": 2,
+			"number": 6
+		},
+		{
+			"servant_id": "ナイチンゲール",
+			"item_id": "バーサーカーピース",
+			"level": 2,
+			"number": 12
+		},
+		{
+			"servant_id": "ナイチンゲール",
+			"item_id": "世界樹の種",
+			"level": 3,
+			"number": 12
+		},
+		{
+			"servant_id": "ナイチンゲール",
+			"item_id": "混沌の爪",
+			"level": 3,
+			"number": 3
+		},
+		{
+			"servant_id": "ナイチンゲール",
+			"item_id": "バーサーカーモニュメント",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "ナイチンゲール",
+			"item_id": "混沌の爪",
+			"level": 4,
+			"number": 6
+		},
+		{
+			"servant_id": "ナイチンゲール",
+			"item_id": "ホムンクルスベビー",
+			"level": 4,
+			"number": 12
+		},
+		{
+			"servant_id": "ナイチンゲール",
+			"item_id": "バーサーカーモニュメント",
+			"level": 4,
+			"number": 12
+		},
+		{
+			"servant_id": "クー・フーリン(オルタ)",
+			"item_id": "バーサーカーピース",
+			"level": 1,
+			"number": 5
+		},
+		{
+			"servant_id": "クー・フーリン(オルタ)",
+			"item_id": "凶骨",
+			"level": 2,
+			"number": 22
+		},
+		{
+			"servant_id": "クー・フーリン(オルタ)",
+			"item_id": "バーサーカーピース",
+			"level": 2,
+			"number": 12
+		},
+		{
+			"servant_id": "クー・フーリン(オルタ)",
+			"item_id": "混沌の爪",
+			"level": 3,
+			"number": 6
+		},
+		{
+			"servant_id": "クー・フーリン(オルタ)",
+			"item_id": "蛮神の心臓",
+			"level": 3,
+			"number": 2
+		},
+		{
+			"servant_id": "クー・フーリン(オルタ)",
+			"item_id": "バーサーカーモニュメント",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "クー・フーリン(オルタ)",
+			"item_id": "蛮神の心臓",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "クー・フーリン(オルタ)",
+			"item_id": "血の涙石",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "クー・フーリン(オルタ)",
+			"item_id": "バーサーカーモニュメント",
+			"level": 4,
+			"number": 12
+		},
+		{
+			"servant_id": "女王メイヴ",
+			"item_id": "ライダーピース",
+			"level": 1,
+			"number": 5
+		},
+		{
+			"servant_id": "女王メイヴ",
+			"item_id": "蛇の宝玉",
+			"level": 2,
+			"number": 6
+		},
+		{
+			"servant_id": "女王メイヴ",
+			"item_id": "ライダーピース",
+			"level": 2,
+			"number": 12
+		},
+		{
+			"servant_id": "女王メイヴ",
+			"item_id": "鳳凰の羽根",
+			"level": 3,
+			"number": 8
+		},
+		{
+			"servant_id": "女王メイヴ",
+			"item_id": "隕蹄鉄",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "女王メイヴ",
+			"item_id": "ライダーモニュメント",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "女王メイヴ",
+			"item_id": "隕蹄鉄",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "女王メイヴ",
+			"item_id": "戦馬の幼角",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "女王メイヴ",
+			"item_id": "ライダーモニュメント",
+			"level": 4,
+			"number": 12
+		},
+		{
+			"servant_id": "エレナ・ブラヴァツキー",
+			"item_id": "キャスターピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "エレナ・ブラヴァツキー",
+			"item_id": "虚影の塵",
+			"level": 2,
+			"number": 12
+		},
+		{
+			"servant_id": "エレナ・ブラヴァツキー",
+			"item_id": "キャスターピース",
+			"level": 2,
+			"number": 10
+		},
+		{
+			"servant_id": "エレナ・ブラヴァツキー",
+			"item_id": "ゴーストランタン",
+			"level": 3,
+			"number": 8
+		},
+		{
+			"servant_id": "エレナ・ブラヴァツキー",
+			"item_id": "ホムンクルスベビー",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "エレナ・ブラヴァツキー",
+			"item_id": "キャスターモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "エレナ・ブラヴァツキー",
+			"item_id": "ホムンクルスベビー",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "エレナ・ブラヴァツキー",
+			"item_id": "禁断の頁",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "エレナ・ブラヴァツキー",
+			"item_id": "キャスターモニュメント",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "ラーマ",
+			"item_id": "セイバーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "ラーマ",
+			"item_id": "世界樹の種",
+			"level": 2,
+			"number": 8
+		},
+		{
+			"servant_id": "ラーマ",
+			"item_id": "セイバーピース",
+			"level": 2,
+			"number": 10
+		},
+		{
+			"servant_id": "ラーマ",
+			"item_id": "蛮神の心臓",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "ラーマ",
+			"item_id": "八連双晶",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "ラーマ",
+			"item_id": "セイバーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "ラーマ",
+			"item_id": "八連双晶",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "ラーマ",
+			"item_id": "精霊根",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "ラーマ",
+			"item_id": "セイバーモニュメント",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "神槍 李書文",
+			"item_id": "ランサーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "神槍 李書文",
+			"item_id": "竜の牙",
+			"level": 2,
+			"number": 15
+		},
+		{
+			"servant_id": "神槍 李書文",
+			"item_id": "ランサーピース",
+			"level": 2,
+			"number": 10
+		},
+		{
+			"servant_id": "神槍 李書文",
+			"item_id": "八連双晶",
+			"level": 3,
+			"number": 8
+		},
+		{
+			"servant_id": "神槍 李書文",
+			"item_id": "混沌の爪",
+			"level": 3,
+			"number": 3
+		},
+		{
+			"servant_id": "神槍 李書文",
+			"item_id": "ランサーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "神槍 李書文",
+			"item_id": "混沌の爪",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "神槍 李書文",
+			"item_id": "竜の逆鱗",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "神槍 李書文",
+			"item_id": "ランサーモニュメント",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "トーマス・エジソン",
+			"item_id": "キャスターピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "トーマス・エジソン",
+			"item_id": "禁断の頁",
+			"level": 2,
+			"number": 6
+		},
+		{
+			"servant_id": "トーマス・エジソン",
+			"item_id": "キャスターピース",
+			"level": 2,
+			"number": 10
+		},
+		{
+			"servant_id": "トーマス・エジソン",
+			"item_id": "英雄の証",
+			"level": 3,
+			"number": 24
+		},
+		{
+			"servant_id": "トーマス・エジソン",
+			"item_id": "無間の歯車",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "トーマス・エジソン",
+			"item_id": "キャスターモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "トーマス・エジソン",
+			"item_id": "無間の歯車",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "トーマス・エジソン",
+			"item_id": "黒獣脂",
+			"level": 4,
+			"number": 6
+		},
+		{
+			"servant_id": "トーマス・エジソン",
+			"item_id": "キャスターモニュメント",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "ジェロニモ",
+			"item_id": "キャスターピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "ジェロニモ",
+			"item_id": "英雄の証",
+			"level": 2,
+			"number": 15
+		},
+		{
+			"servant_id": "ジェロニモ",
+			"item_id": "キャスターピース",
+			"level": 2,
+			"number": 8
+		},
+		{
+			"servant_id": "ジェロニモ",
+			"item_id": "世界樹の種",
+			"level": 3,
+			"number": 8
+		},
+		{
+			"servant_id": "ジェロニモ",
+			"item_id": "ゴーストランタン",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "ジェロニモ",
+			"item_id": "キャスターモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "ジェロニモ",
+			"item_id": "ゴーストランタン",
+			"level": 4,
+			"number": 7
+		},
+		{
+			"servant_id": "ジェロニモ",
+			"item_id": "八連双晶",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "ジェロニモ",
+			"item_id": "キャスターモニュメント",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "ビリー・ザ・キッド",
+			"item_id": "アーチャーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "ビリー・ザ・キッド",
+			"item_id": "隕蹄鉄",
+			"level": 2,
+			"number": 5
+		},
+		{
+			"servant_id": "ビリー・ザ・キッド",
+			"item_id": "アーチャーピース",
+			"level": 2,
+			"number": 8
+		},
+		{
+			"servant_id": "ビリー・ザ・キッド",
+			"item_id": "凶骨",
+			"level": 3,
+			"number": 20
+		},
+		{
+			"servant_id": "ビリー・ザ・キッド",
+			"item_id": "鳳凰の羽根",
+			"level": 3,
+			"number": 3
+		},
+		{
+			"servant_id": "ビリー・ザ・キッド",
+			"item_id": "アーチャーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "ビリー・ザ・キッド",
+			"item_id": "鳳凰の羽根",
+			"level": 4,
+			"number": 6
+		},
+		{
+			"servant_id": "ビリー・ザ・キッド",
+			"item_id": "混沌の爪",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "ビリー・ザ・キッド",
+			"item_id": "アーチャーモニュメント",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク(オルタ)",
+			"item_id": "英雄の証",
+			"level": 1,
+			"number": 10
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク(オルタ)",
+			"item_id": "虚影の塵",
+			"level": 1,
+			"number": 10
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク(オルタ)",
+			"item_id": "八連双晶",
+			"level": 2,
+			"number": 10
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク(オルタ)",
+			"item_id": "無間の歯車",
+			"level": 2,
+			"number": 10
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク(オルタ)",
+			"item_id": "鳳凰の羽根",
+			"level": 3,
+			"number": 10
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク(オルタ)",
+			"item_id": "混沌の爪",
+			"level": 3,
+			"number": 10
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク(オルタ)",
+			"item_id": "血の涙石",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク(オルタ)",
+			"item_id": "蛮神の心臓",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "アンリマユ",
+			"item_id": "英雄の証",
+			"level": 1,
+			"number": 10
+		},
+		{
+			"servant_id": "アンリマユ",
+			"item_id": "凶骨",
+			"level": 1,
+			"number": 10
+		},
+		{
+			"servant_id": "アンリマユ",
+			"item_id": "虚影の塵",
+			"level": 2,
+			"number": 10
+		},
+		{
+			"servant_id": "アンリマユ",
+			"item_id": "黒獣脂",
+			"level": 2,
+			"number": 10
+		},
+		{
+			"servant_id": "アンリマユ",
+			"item_id": "無間の歯車",
+			"level": 3,
+			"number": 10
+		},
+		{
+			"servant_id": "アンリマユ",
+			"item_id": "血の涙石",
+			"level": 3,
+			"number": 10
+		},
+		{
+			"servant_id": "アンリマユ",
+			"item_id": "精霊根",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "アンリマユ",
+			"item_id": "竜の逆鱗",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "イスカンダル",
+			"item_id": "ライダーピース",
+			"level": 1,
+			"number": 5
+		},
+		{
+			"servant_id": "イスカンダル",
+			"item_id": "隕蹄鉄",
+			"level": 2,
+			"number": 8
+		},
+		{
+			"servant_id": "イスカンダル",
+			"item_id": "ライダーピース",
+			"level": 2,
+			"number": 12
+		},
+		{
+			"servant_id": "イスカンダル",
+			"item_id": "八連双晶",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "イスカンダル",
+			"item_id": "英雄の証",
+			"level": 3,
+			"number": 29
+		},
+		{
+			"servant_id": "イスカンダル",
+			"item_id": "ライダーモニュメント",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "イスカンダル",
+			"item_id": "八連双晶",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "イスカンダル",
+			"item_id": "戦馬の幼角",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "イスカンダル",
+			"item_id": "ライダーモニュメント",
+			"level": 4,
+			"number": 12
+		},
+		{
+			"servant_id": "エミヤ(アサシン)",
+			"item_id": "アサシンピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "エミヤ(アサシン)",
+			"item_id": "英雄の証",
+			"level": 2,
+			"number": 18
+		},
+		{
+			"servant_id": "エミヤ(アサシン)",
+			"item_id": "アサシンピース",
+			"level": 2,
+			"number": 10
+		},
+		{
+			"servant_id": "エミヤ(アサシン)",
+			"item_id": "虚影の塵",
+			"level": 3,
+			"number": 8
+		},
+		{
+			"servant_id": "エミヤ(アサシン)",
+			"item_id": "凶骨",
+			"level": 3,
+			"number": 24
+		},
+		{
+			"servant_id": "エミヤ(アサシン)",
+			"item_id": "アサシンモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "エミヤ(アサシン)",
+			"item_id": "虚影の塵",
+			"level": 4,
+			"number": 16
+		},
+		{
+			"servant_id": "エミヤ(アサシン)",
+			"item_id": "血の涙石",
+			"level": 4,
+			"number": 6
+		},
+		{
+			"servant_id": "エミヤ(アサシン)",
+			"item_id": "アサシンモニュメント",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "百貌のハサン",
+			"item_id": "アサシンピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "百貌のハサン",
+			"item_id": "虚影の塵",
+			"level": 2,
+			"number": 10
+		},
+		{
+			"servant_id": "百貌のハサン",
+			"item_id": "アサシンピース",
+			"level": 2,
+			"number": 8
+		},
+		{
+			"servant_id": "百貌のハサン",
+			"item_id": "蛇の宝玉",
+			"level": 3,
+			"number": 3
+		},
+		{
+			"servant_id": "百貌のハサン",
+			"item_id": "八連双晶",
+			"level": 3,
+			"number": 7
+		},
+		{
+			"servant_id": "百貌のハサン",
+			"item_id": "アサシンモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "百貌のハサン",
+			"item_id": "蛇の宝玉",
+			"level": 4,
+			"number": 6
+		},
+		{
+			"servant_id": "百貌のハサン",
+			"item_id": "黒獣脂",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "百貌のハサン",
+			"item_id": "アサシンモニュメント",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "アイリスフィール(天の衣)",
+			"item_id": "水晶球",
+			"level": 1
+		},
+		{
+			"servant_id": "アイリスフィール(天の衣)",
+			"item_id": "水晶球",
+			"level": 2
+		},
+		{
+			"servant_id": "アイリスフィール(天の衣)",
+			"item_id": "水晶球",
+			"level": 3
+		},
+		{
+			"servant_id": "アイリスフィール(天の衣)",
+			"item_id": "水晶球",
+			"level": 4
+		},
+		{
+			"servant_id": "酒呑童子",
+			"item_id": "アサシンピース",
+			"level": 1,
+			"number": 5
+		},
+		{
+			"servant_id": "酒呑童子",
+			"item_id": "凶骨",
+			"level": 2,
+			"number": 22
+		},
+		{
+			"servant_id": "酒呑童子",
+			"item_id": "アサシンピース",
+			"level": 2,
+			"number": 12
+		},
+		{
+			"servant_id": "酒呑童子",
+			"item_id": "蛇の宝玉",
+			"level": 3,
+			"number": 8
+		},
+		{
+			"servant_id": "酒呑童子",
+			"item_id": "ゴーストランタン",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "酒呑童子",
+			"item_id": "アサシンモニュメント",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "酒呑童子",
+			"item_id": "ゴーストランタン",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "酒呑童子",
+			"item_id": "蛮神の心臓",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "酒呑童子",
+			"item_id": "アサシンモニュメント",
+			"level": 4,
+			"number": 12
+		},
+		{
+			"servant_id": "玄奘三蔵",
+			"item_id": "キャスターピース",
+			"level": 1,
+			"number": 5
+		},
+		{
+			"servant_id": "玄奘三蔵",
+			"item_id": "世界樹の種",
+			"level": 2,
+			"number": 9
+		},
+		{
+			"servant_id": "玄奘三蔵",
+			"item_id": "キャスターピース",
+			"level": 2,
+			"number": 12
+		},
+		{
+			"servant_id": "玄奘三蔵",
+			"item_id": "八連双晶",
+			"level": 3,
+			"number": 10
+		},
+		{
+			"servant_id": "玄奘三蔵",
+			"item_id": "鳳凰の羽根",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "玄奘三蔵",
+			"item_id": "キャスターモニュメント",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "玄奘三蔵",
+			"item_id": "鳳凰の羽根",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "玄奘三蔵",
+			"item_id": "精霊根",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "玄奘三蔵",
+			"item_id": "キャスターモニュメント",
+			"level": 4,
+			"number": 12
+		},
+		{
+			"servant_id": "源頼光",
+			"item_id": "バーサーカーピース",
+			"level": 1,
+			"number": 5
+		},
+		{
+			"servant_id": "源頼光",
+			"item_id": "混沌の爪",
+			"level": 2,
+			"number": 5
+		},
+		{
+			"servant_id": "源頼光",
+			"item_id": "バーサーカーピース",
+			"level": 2,
+			"number": 12
+		},
+		{
+			"servant_id": "源頼光",
+			"item_id": "凶骨",
+			"level": 3,
+			"number": 29
+		},
+		{
+			"servant_id": "源頼光",
+			"item_id": "血の涙石",
+			"level": 3,
+			"number": 3
+		},
+		{
+			"servant_id": "源頼光",
+			"item_id": "バーサーカーモニュメント",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "源頼光",
+			"item_id": "竜の逆鱗",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "源頼光",
+			"item_id": "血の涙石",
+			"level": 4,
+			"number": 6
+		},
+		{
+			"servant_id": "源頼光",
+			"item_id": "バーサーカーモニュメント",
+			"level": 4,
+			"number": 12
+		},
+		{
+			"servant_id": "坂田金時(ライダー)",
+			"item_id": "ゴールデンベアライター",
+			"level": 1
+		},
+		{
+			"servant_id": "坂田金時(ライダー)",
+			"item_id": "ゴールデンベアライター",
+			"level": 2
+		},
+		{
+			"servant_id": "坂田金時(ライダー)",
+			"item_id": "ゴールデンベアライター",
+			"level": 3
+		},
+		{
+			"servant_id": "坂田金時(ライダー)",
+			"item_id": "ゴールデンベアライター",
+			"level": 4
+		},
+		{
+			"servant_id": "茨木童子",
+			"item_id": "バーサーカーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "茨木童子",
+			"item_id": "八連双晶",
+			"level": 2,
+			"number": 6
+		},
+		{
+			"servant_id": "茨木童子",
+			"item_id": "バーサーカーピース",
+			"level": 2,
+			"number": 10
+		},
+		{
+			"servant_id": "茨木童子",
+			"item_id": "鳳凰の羽根",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "茨木童子",
+			"item_id": "混沌の爪",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "茨木童子",
+			"item_id": "バーサーカーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "茨木童子",
+			"item_id": "鳳凰の羽根",
+			"level": 4,
+			"number": 7
+		},
+		{
+			"servant_id": "茨木童子",
+			"item_id": "蛮神の心臓",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "茨木童子",
+			"item_id": "バーサーカーモニュメント",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "風魔小太郎",
+			"item_id": "アサシンピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "風魔小太郎",
+			"item_id": "凶骨",
+			"level": 2,
+			"number": 15
+		},
+		{
+			"servant_id": "風魔小太郎",
+			"item_id": "アサシンピース",
+			"level": 2,
+			"number": 8
+		},
+		{
+			"servant_id": "風魔小太郎",
+			"item_id": "虚影の塵",
+			"level": 3,
+			"number": 13
+		},
+		{
+			"servant_id": "風魔小太郎",
+			"item_id": "八連双晶",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "風魔小太郎",
+			"item_id": "アサシンモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "風魔小太郎",
+			"item_id": "八連双晶",
+			"level": 4,
+			"number": 7
+		},
+		{
+			"servant_id": "風魔小太郎",
+			"item_id": "黒獣脂",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "風魔小太郎",
+			"item_id": "アサシンモニュメント",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "オジマンディアス",
+			"item_id": "ライダーピース",
+			"level": 1,
+			"number": 5
+		},
+		{
+			"servant_id": "オジマンディアス",
+			"item_id": "愚者の鎖",
+			"level": 2,
+			"number": 22
+		},
+		{
+			"servant_id": "オジマンディアス",
+			"item_id": "ライダーピース",
+			"level": 2,
+			"number": 12
+		},
+		{
+			"servant_id": "オジマンディアス",
+			"item_id": "蛇の宝玉",
+			"level": 3,
+			"number": 8
+		},
+		{
+			"servant_id": "オジマンディアス",
+			"item_id": "蛮神の心臓",
+			"level": 3,
+			"number": 2
+		},
+		{
+			"servant_id": "オジマンディアス",
+			"item_id": "ライダーモニュメント",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "オジマンディアス",
+			"item_id": "蛮神の心臓",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "オジマンディアス",
+			"item_id": "智慧のスカラベ",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "オジマンディアス",
+			"item_id": "ライダーモニュメント",
+			"level": 4,
+			"number": 12
+		},
+		{
+			"servant_id": "アルトリア(槍)",
+			"item_id": "ランサーピース",
+			"level": 1,
+			"number": 5
+		},
+		{
+			"servant_id": "アルトリア(槍)",
+			"item_id": "竜の牙",
+			"level": 2,
+			"number": 18
+		},
+		{
+			"servant_id": "アルトリア(槍)",
+			"item_id": "ランサーピース",
+			"level": 2,
+			"number": 12
+		},
+		{
+			"servant_id": "アルトリア(槍)",
+			"item_id": "大騎士勲章",
+			"level": 3,
+			"number": 20
+		},
+		{
+			"servant_id": "アルトリア(槍)",
+			"item_id": "戦馬の幼角",
+			"level": 3,
+			"number": 3
+		},
+		{
+			"servant_id": "アルトリア(槍)",
+			"item_id": "ランサーモニュメント",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "アルトリア(槍)",
+			"item_id": "戦馬の幼角",
+			"level": 4,
+			"number": 6
+		},
+		{
+			"servant_id": "アルトリア(槍)",
+			"item_id": "竜の逆鱗",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "アルトリア(槍)",
+			"item_id": "ランサーモニュメント",
+			"level": 4,
+			"number": 12
+		},
+		{
+			"servant_id": "ニトクリス",
+			"item_id": "キャスターピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "ニトクリス",
+			"item_id": "禁断の頁",
+			"level": 2,
+			"number": 6
+		},
+		{
+			"servant_id": "ニトクリス",
+			"item_id": "キャスターピース",
+			"level": 2,
+			"number": 10
+		},
+		{
+			"servant_id": "ニトクリス",
+			"item_id": "愚者の鎖",
+			"level": 3,
+			"number": 24
+		},
+		{
+			"servant_id": "ニトクリス",
+			"item_id": "智慧のスカラベ",
+			"level": 3,
+			"number": 2
+		},
+		{
+			"servant_id": "ニトクリス",
+			"item_id": "キャスターモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "ニトクリス",
+			"item_id": "智慧のスカラベ",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "ニトクリス",
+			"item_id": "封魔のランプ",
+			"level": 4,
+			"number": 6
+		},
+		{
+			"servant_id": "ニトクリス",
+			"item_id": "キャスターモニュメント",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "ランスロット",
+			"item_id": "セイバーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "ランスロット",
+			"item_id": "無間の歯車",
+			"level": 2,
+			"number": 6
+		},
+		{
+			"servant_id": "ランスロット",
+			"item_id": "セイバーピース",
+			"level": 2,
+			"number": 10
+		},
+		{
+			"servant_id": "ランスロット",
+			"item_id": "大騎士勲章",
+			"level": 3,
+			"number": 16
+		},
+		{
+			"servant_id": "ランスロット",
+			"item_id": "竜の牙",
+			"level": 3,
+			"number": 10
+		},
+		{
+			"servant_id": "ランスロット",
+			"item_id": "セイバーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "ランスロット",
+			"item_id": "竜の牙",
+			"level": 4,
+			"number": 20
+		},
+		{
+			"servant_id": "ランスロット",
+			"item_id": "竜の逆鱗",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "ランスロット",
+			"item_id": "セイバーモニュメント",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "トリスタン",
+			"item_id": "アーチャーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "トリスタン",
+			"item_id": "大騎士勲章",
+			"level": 2,
+			"number": 12
+		},
+		{
+			"servant_id": "トリスタン",
+			"item_id": "アーチャーピース",
+			"level": 2,
+			"number": 10
+		},
+		{
+			"servant_id": "トリスタン",
+			"item_id": "鳳凰の羽根",
+			"level": 3,
+			"number": 7
+		},
+		{
+			"servant_id": "トリスタン",
+			"item_id": "禁断の頁",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "トリスタン",
+			"item_id": "アーチャーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "トリスタン",
+			"item_id": "禁断の頁",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "トリスタン",
+			"item_id": "血の涙石",
+			"level": 4,
+			"number": 6
+		},
+		{
+			"servant_id": "トリスタン",
+			"item_id": "アーチャーモニュメント",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "ガウェイン",
+			"item_id": "セイバーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "ガウェイン",
+			"item_id": "八連双晶",
+			"level": 2,
+			"number": 6
+		},
+		{
+			"servant_id": "ガウェイン",
+			"item_id": "セイバーピース",
+			"level": 2,
+			"number": 10
+		},
+		{
+			"servant_id": "ガウェイン",
+			"item_id": "大騎士勲章",
+			"level": 3,
+			"number": 8
+		},
+		{
+			"servant_id": "ガウェイン",
+			"item_id": "竜の逆鱗",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "ガウェイン",
+			"item_id": "セイバーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "ガウェイン",
+			"item_id": "大騎士勲章",
+			"level": 4,
+			"number": 16
+		},
+		{
+			"servant_id": "ガウェイン",
+			"item_id": "英雄の証",
+			"level": 4,
+			"number": 30
+		},
+		{
+			"servant_id": "ガウェイン",
+			"item_id": "セイバーモニュメント",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "静謐のハサン",
+			"item_id": "アサシンピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "静謐のハサン",
+			"item_id": "凶骨",
+			"level": 2,
+			"number": 15
+		},
+		{
+			"servant_id": "静謐のハサン",
+			"item_id": "アサシンピース",
+			"level": 2,
+			"number": 8
+		},
+		{
+			"servant_id": "静謐のハサン",
+			"item_id": "愚者の鎖",
+			"level": 3,
+			"number": 20
+		},
+		{
+			"servant_id": "静謐のハサン",
+			"item_id": "血の涙石",
+			"level": 3,
+			"number": 2
+		},
+		{
+			"servant_id": "静謐のハサン",
+			"item_id": "アサシンモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "静謐のハサン",
+			"item_id": "血の涙石",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "静謐のハサン",
+			"item_id": "黒獣脂",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "静謐のハサン",
+			"item_id": "アサシンモニュメント",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "俵藤太",
+			"item_id": "アーチャーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "俵藤太",
+			"item_id": "世界樹の種",
+			"level": 2,
+			"number": 6
+		},
+		{
+			"servant_id": "俵藤太",
+			"item_id": "アーチャーピース",
+			"level": 2,
+			"number": 8
+		},
+		{
+			"servant_id": "俵藤太",
+			"item_id": "英雄の証",
+			"level": 3,
+			"number": 20
+		},
+		{
+			"servant_id": "俵藤太",
+			"item_id": "鳳凰の羽根",
+			"level": 3,
+			"number": "3P"
+		},
+		{
+			"servant_id": "俵藤太",
+			"item_id": "アーチャーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "俵藤太",
+			"item_id": "鳳凰の羽根",
+			"level": 4,
+			"number": 6
+		},
+		{
+			"servant_id": "俵藤太",
+			"item_id": "精霊根",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "俵藤太",
+			"item_id": "アーチャーモニュメント",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "ベディヴィエール",
+			"item_id": "セイバーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "ベディヴィエール",
+			"item_id": "英雄の証",
+			"level": 2,
+			"number": 15
+		},
+		{
+			"servant_id": "ベディヴィエール",
+			"item_id": "セイバーピース",
+			"level": 2,
+			"number": 8
+		},
+		{
+			"servant_id": "ベディヴィエール",
+			"item_id": "虚影の塵",
+			"level": 3,
+			"number": 13
+		},
+		{
+			"servant_id": "ベディヴィエール",
+			"item_id": "無間の歯車",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "ベディヴィエール",
+			"item_id": "セイバーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "ベディヴィエール",
+			"item_id": "無間の歯車",
+			"level": 4,
+			"number": 7
+		},
+		{
+			"servant_id": "ベディヴィエール",
+			"item_id": "大騎士勲章",
+			"level": 4,
+			"number": 16
+		},
+		{
+			"servant_id": "ベディヴィエール",
+			"item_id": "セイバーモニュメント",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "レオナルド・ダ・ヴィンチ",
+			"item_id": "キャスターピース",
+			"level": 1,
+			"number": 5
+		},
+		{
+			"servant_id": "レオナルド・ダ・ヴィンチ",
+			"item_id": "無間の歯車",
+			"level": 2,
+			"number": 8
+		},
+		{
+			"servant_id": "レオナルド・ダ・ヴィンチ",
+			"item_id": "キャスターピース",
+			"level": 2,
+			"number": 12
+		},
+		{
+			"servant_id": "レオナルド・ダ・ヴィンチ",
+			"item_id": "鳳凰の羽根",
+			"level": 3,
+			"number": 8
+		},
+		{
+			"servant_id": "レオナルド・ダ・ヴィンチ",
+			"item_id": "精霊根",
+			"level": 3,
+			"number": 2
+		},
+		{
+			"servant_id": "レオナルド・ダ・ヴィンチ",
+			"item_id": "キャスターモニュメント",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "レオナルド・ダ・ヴィンチ",
+			"item_id": "精霊根",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "レオナルド・ダ・ヴィンチ",
+			"item_id": "智慧のスカラベ",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "レオナルド・ダ・ヴィンチ",
+			"item_id": "キャスターモニュメント",
+			"level": 4,
+			"number": 12
+		},
+		{
+			"servant_id": "玉藻の前(ランサー)",
+			"item_id": "ランサーピース",
+			"level": 1,
+			"number": 5
+		},
+		{
+			"servant_id": "玉藻の前(ランサー)",
+			"item_id": "鳳凰の羽根",
+			"level": 2,
+			"number": 6
+		},
+		{
+			"servant_id": "玉藻の前(ランサー)",
+			"item_id": "ランサーピース",
+			"level": 2,
+			"number": 12
+		},
+		{
+			"servant_id": "玉藻の前(ランサー)",
+			"item_id": "世界樹の種",
+			"level": 3,
+			"number": 12
+		},
+		{
+			"servant_id": "玉藻の前(ランサー)",
+			"item_id": "戦馬の幼角",
+			"level": 3,
+			"number": 3
+		},
+		{
+			"servant_id": "玉藻の前(ランサー)",
+			"item_id": "ランサーモニュメント",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "玉藻の前(ランサー)",
+			"item_id": "戦馬の幼角",
+			"level": 4,
+			"number": 6
+		},
+		{
+			"servant_id": "玉藻の前(ランサー)",
+			"item_id": "追憶の貝殻",
+			"level": 4,
+			"number": 12
+		},
+		{
+			"servant_id": "玉藻の前(ランサー)",
+			"item_id": "ランサーモニュメント",
+			"level": 4,
+			"number": 12
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン(アーチャー)",
+			"item_id": "アーチャーピース",
+			"level": 1,
+			"number": 5
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン(アーチャー)",
+			"item_id": "追憶の貝殻",
+			"level": 2,
+			"number": 8
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン(アーチャー)",
+			"item_id": "アーチャーピース",
+			"level": 2,
+			"number": 12
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン(アーチャー)",
+			"item_id": "竜の牙",
+			"level": 3,
+			"number": 24
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン(アーチャー)",
+			"item_id": "大騎士勲章",
+			"level": 3,
+			"number": 10
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン(アーチャー)",
+			"item_id": "アーチャーモニュメント",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン(アーチャー)",
+			"item_id": "大騎士勲章",
+			"level": 4,
+			"number": 20
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン(アーチャー)",
+			"item_id": "竜の逆鱗",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン(アーチャー)",
+			"item_id": "アーチャーモニュメント",
+			"level": 4,
+			"number": 12
+		},
+		{
+			"servant_id": "マリー・アントワネット(キャスター)",
+			"item_id": "キャスターピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "マリー・アントワネット(キャスター)",
+			"item_id": "世界樹の種",
+			"level": 2,
+			"number": 8
+		},
+		{
+			"servant_id": "マリー・アントワネット(キャスター)",
+			"item_id": "キャスターピース",
+			"level": 2,
+			"number": 10
+		},
+		{
+			"servant_id": "マリー・アントワネット(キャスター)",
+			"item_id": "追憶の貝殻",
+			"level": 3,
+			"number": 8
+		},
+		{
+			"servant_id": "マリー・アントワネット(キャスター)",
+			"item_id": "鳳凰の羽根",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "マリー・アントワネット(キャスター)",
+			"item_id": "キャスターモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "マリー・アントワネット(キャスター)",
+			"item_id": "鳳凰の羽根",
+			"level": 4,
+			"number": 7
+		},
+		{
+			"servant_id": "マリー・アントワネット(キャスター)",
+			"item_id": "智慧のスカラベ",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "マリー・アントワネット(キャスター)",
+			"item_id": "キャスターモニュメント",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "アン・ボニー＆メアリー・リード(アーチャー)",
+			"item_id": "アーチャーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "アン・ボニー＆メアリー・リード(アーチャー)",
+			"item_id": "蛇の宝玉",
+			"level": 2,
+			"number": 5
+		},
+		{
+			"servant_id": "アン・ボニー＆メアリー・リード(アーチャー)",
+			"item_id": "アーチャーピース",
+			"level": 2,
+			"number": 10
+		},
+		{
+			"servant_id": "アン・ボニー＆メアリー・リード(アーチャー)",
+			"item_id": "八連双晶",
+			"level": 3,
+			"number": 8
+		},
+		{
+			"servant_id": "アン・ボニー＆メアリー・リード(アーチャー)",
+			"item_id": "追憶の貝殻",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "アン・ボニー＆メアリー・リード(アーチャー)",
+			"item_id": "アーチャーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "アン・ボニー＆メアリー・リード(アーチャー)",
+			"item_id": "追憶の貝殻",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "アン・ボニー＆メアリー・リード(アーチャー)",
+			"item_id": "混沌の爪",
+			"level": 4,
+			"number": 6
+		},
+		{
+			"servant_id": "アン・ボニー＆メアリー・リード(アーチャー)",
+			"item_id": "アーチャーモニュメント",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "モードレッド(ライダー)",
+			"item_id": "ライダーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "モードレッド(ライダー)",
+			"item_id": "追憶の貝殻",
+			"level": 2,
+			"number": 6
+		},
+		{
+			"servant_id": "モードレッド(ライダー)",
+			"item_id": "ライダーピース",
+			"level": 2,
+			"number": 10
+		},
+		{
+			"servant_id": "モードレッド(ライダー)",
+			"item_id": "大騎士勲章",
+			"level": 3,
+			"number": 16
+		},
+		{
+			"servant_id": "モードレッド(ライダー)",
+			"item_id": "竜の牙",
+			"level": 3,
+			"number": 10
+		},
+		{
+			"servant_id": "モードレッド(ライダー)",
+			"item_id": "ライダーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "モードレッド(ライダー)",
+			"item_id": "竜の牙",
+			"level": 4,
+			"number": 20
+		},
+		{
+			"servant_id": "モードレッド(ライダー)",
+			"item_id": "竜の逆鱗",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "モードレッド(ライダー)",
+			"item_id": "ライダーモニュメント",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "スカサハ(アサシン)",
+			"item_id": "鈴鳴りの枝",
+			"level": 1
+		},
+		{
+			"servant_id": "スカサハ(アサシン)",
+			"item_id": "鈴鳴りの枝",
+			"level": 2
+		},
+		{
+			"servant_id": "スカサハ(アサシン)",
+			"item_id": "鈴鳴りの枝",
+			"level": 3
+		},
+		{
+			"servant_id": "スカサハ(アサシン)",
+			"item_id": "鈴鳴りの枝",
+			"level": 4
+		},
+		{
+			"servant_id": "清姫(ランサー)",
+			"item_id": "ランサーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "清姫(ランサー)",
+			"item_id": "八連双晶",
+			"level": 2,
+			"number": 4
+		},
+		{
+			"servant_id": "清姫(ランサー)",
+			"item_id": "ランサーピース",
+			"level": 2,
+			"number": 8
+		},
+		{
+			"servant_id": "清姫(ランサー)",
+			"item_id": "追憶の貝殻",
+			"level": 3,
+			"number": 8
+		},
+		{
+			"servant_id": "清姫(ランサー)",
+			"item_id": "黒獣脂",
+			"level": 3,
+			"number": 3
+		},
+		{
+			"servant_id": "清姫(ランサー)",
+			"item_id": "ランサーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "清姫(ランサー)",
+			"item_id": "黒獣脂",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "清姫(ランサー)",
+			"item_id": "封魔のランプ",
+			"level": 4,
+			"number": 6
+		},
+		{
+			"servant_id": "清姫(ランサー)",
+			"item_id": "ランサーモニュメント",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "マルタ(ルーラー)",
+			"item_id": "セイバーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "マルタ(ルーラー)",
+			"item_id": "ライダーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "マルタ(ルーラー)",
+			"item_id": "バーサーカーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "マルタ(ルーラー)",
+			"item_id": "アーチャーピース",
+			"level": 2,
+			"number": 4
+		},
+		{
+			"servant_id": "マルタ(ルーラー)",
+			"item_id": "ランサーピース",
+			"level": 2,
+			"number": 4
+		},
+		{
+			"servant_id": "マルタ(ルーラー)",
+			"item_id": "キャスターピース",
+			"level": 2,
+			"number": 4
+		},
+		{
+			"servant_id": "マルタ(ルーラー)",
+			"item_id": "アサシンピース",
+			"level": 2,
+			"number": 4
+		},
+		{
+			"servant_id": "マルタ(ルーラー)",
+			"item_id": "セイバーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "マルタ(ルーラー)",
+			"item_id": "ライダーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "マルタ(ルーラー)",
+			"item_id": "バーサーカーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "マルタ(ルーラー)",
+			"item_id": "アーチャーモニュメント",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "マルタ(ルーラー)",
+			"item_id": "ランサーモニュメント",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "マルタ(ルーラー)",
+			"item_id": "キャスターモニュメント",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "マルタ(ルーラー)",
+			"item_id": "アサシンモニュメント",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "イリヤスフィール・フォン・アインツベルン",
+			"item_id": "キャスターピース",
+			"level": 1,
+			"number": 5
+		},
+		{
+			"servant_id": "イリヤスフィール・フォン・アインツベルン",
+			"item_id": "世界樹の種",
+			"level": 2,
+			"number": 9
+		},
+		{
+			"servant_id": "イリヤスフィール・フォン・アインツベルン",
+			"item_id": "キャスターピース",
+			"level": 2,
+			"number": 12
+		},
+		{
+			"servant_id": "イリヤスフィール・フォン・アインツベルン",
+			"item_id": "禁断の頁",
+			"level": 3,
+			"number": 10
+		},
+		{
+			"servant_id": "イリヤスフィール・フォン・アインツベルン",
+			"item_id": "鳳凰の羽根",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "イリヤスフィール・フォン・アインツベルン",
+			"item_id": "キャスターモニュメント",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "イリヤスフィール・フォン・アインツベルン",
+			"item_id": "鳳凰の羽根",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "イリヤスフィール・フォン・アインツベルン",
+			"item_id": "智慧のスカラベ",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "イリヤスフィール・フォン・アインツベルン",
+			"item_id": "キャスターモニュメント",
+			"level": 4,
+			"number": 12
+		},
+		{
+			"servant_id": "クロエ・フォン・アインツベルン",
+			"item_id": "ハートのブレスレット",
+			"level": 1
+		},
+		{
+			"servant_id": "クロエ・フォン・アインツベルン",
+			"item_id": "ハートのブレスレット",
+			"level": 2
+		},
+		{
+			"servant_id": "クロエ・フォン・アインツベルン",
+			"item_id": "ハートのブレスレット",
+			"level": 3
+		},
+		{
+			"servant_id": "クロエ・フォン・アインツベルン",
+			"item_id": "ハートのブレスレット",
+			"level": 4
+		},
+		{
+			"servant_id": "エリザベート・バートリー(ブレイブ)",
+			"item_id": "竜のオーブ",
+			"level": 1
+		},
+		{
+			"servant_id": "エリザベート・バートリー(ブレイブ)",
+			"item_id": "竜のオーブ",
+			"level": 2
+		},
+		{
+			"servant_id": "エリザベート・バートリー(ブレイブ)",
+			"item_id": "竜のオーブ",
+			"level": 3
+		},
+		{
+			"servant_id": "エリザベート・バートリー(ブレイブ)",
+			"item_id": "竜のオーブ",
+			"level": 4
+		},
+		{
+			"servant_id": "クレオパトラ",
+			"item_id": "アサシンピース",
+			"level": 1,
+			"number": 5
+		},
+		{
+			"servant_id": "クレオパトラ",
+			"item_id": "鳳凰の羽根",
+			"level": 2,
+			"number": 6
+		},
+		{
+			"servant_id": "クレオパトラ",
+			"item_id": "アサシンピース",
+			"level": 2,
+			"number": 12
+		},
+		{
+			"servant_id": "クレオパトラ",
+			"item_id": "封魔のランプ",
+			"level": 3,
+			"number": 6
+		},
+		{
+			"servant_id": "クレオパトラ",
+			"item_id": "血の涙石",
+			"level": 3,
+			"number": 3
+		},
+		{
+			"servant_id": "クレオパトラ",
+			"item_id": "アサシンモニュメント",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "クレオパトラ",
+			"item_id": "血の涙石",
+			"level": 4,
+			"number": 6
+		},
+		{
+			"servant_id": "クレオパトラ",
+			"item_id": "蛇の宝玉",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "クレオパトラ",
+			"item_id": "アサシンモニュメント",
+			"level": 4,
+			"number": 12
+		},
+		{
+			"servant_id": "ヴラド三世(EXTRA)",
+			"item_id": "ランサーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "ヴラド三世(EXTRA)",
+			"item_id": "英雄の証",
+			"level": 2,
+			"number": 18
+		},
+		{
+			"servant_id": "ヴラド三世(EXTRA)",
+			"item_id": "ランサーピース",
+			"level": 2,
+			"number": 10
+		},
+		{
+			"servant_id": "ヴラド三世(EXTRA)",
+			"item_id": "愚者の鎖",
+			"level": 3,
+			"number": 24
+		},
+		{
+			"servant_id": "ヴラド三世(EXTRA)",
+			"item_id": "黒獣脂",
+			"level": 3,
+			"number": 3
+		},
+		{
+			"servant_id": "ヴラド三世(EXTRA)",
+			"item_id": "ランサーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "ヴラド三世(EXTRA)",
+			"item_id": "黒獣脂",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "ヴラド三世(EXTRA)",
+			"item_id": "竜の逆鱗",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "ヴラド三世(EXTRA)",
+			"item_id": "ランサーモニュメント",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク・オルタ・サンタ・リリィ",
+			"item_id": "ジル・ド・レェ人形",
+			"level": 1
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク・オルタ・サンタ・リリィ",
+			"item_id": "ジル・ド・レェ人形",
+			"level": 2
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク・オルタ・サンタ・リリィ",
+			"item_id": "ジル・ド・レェ人形",
+			"level": 3
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク・オルタ・サンタ・リリィ",
+			"item_id": "ジル・ド・レェ人形",
+			"level": 4
+		},
+		{
+			"servant_id": "イシュタル",
+			"item_id": "アーチャーピース",
+			"level": 1,
+			"number": 5
+		},
+		{
+			"servant_id": "イシュタル",
+			"item_id": "八連双晶",
+			"level": 2,
+			"number": 8
+		},
+		{
+			"servant_id": "イシュタル",
+			"item_id": "アーチャーピース",
+			"level": 2,
+			"number": 12
+		},
+		{
+			"servant_id": "イシュタル",
+			"item_id": "鳳凰の羽根",
+			"level": 3,
+			"number": 8
+		},
+		{
+			"servant_id": "イシュタル",
+			"item_id": "智慧のスカラベ",
+			"level": 3,
+			"number": 2
+		},
+		{
+			"servant_id": "イシュタル",
+			"item_id": "アーチャーモニュメント",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "イシュタル",
+			"item_id": "智慧のスカラベ",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "イシュタル",
+			"item_id": "血の涙石",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "イシュタル",
+			"item_id": "アーチャーモニュメント",
+			"level": 4,
+			"number": 12
+		},
+		{
+			"servant_id": "エルキドゥ",
+			"item_id": "ランサーピース",
+			"level": 1,
+			"number": 5
+		},
+		{
+			"servant_id": "エルキドゥ",
+			"item_id": "愚者の鎖",
+			"level": 2,
+			"number": 22
+		},
+		{
+			"servant_id": "エルキドゥ",
+			"item_id": "ランサーピース",
+			"level": 2,
+			"number": 12
+		},
+		{
+			"servant_id": "エルキドゥ",
+			"item_id": "八連双晶",
+			"level": 3,
+			"number": 10
+		},
+		{
+			"servant_id": "エルキドゥ",
+			"item_id": "精霊根",
+			"level": 3,
+			"number": 2
+		},
+		{
+			"servant_id": "エルキドゥ",
+			"item_id": "ランサーモニュメント",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "エルキドゥ",
+			"item_id": "精霊根",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "エルキドゥ",
+			"item_id": "蛮神の心臓",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "エルキドゥ",
+			"item_id": "ランサーモニュメント",
+			"level": 4,
+			"number": 12
+		},
+		{
+			"servant_id": "ケツァル・コアトル",
+			"item_id": "ライダーピース",
+			"level": 1,
+			"number": 5
+		},
+		{
+			"servant_id": "ケツァル・コアトル",
+			"item_id": "竜の牙",
+			"level": 2,
+			"number": 18
+		},
+		{
+			"servant_id": "ケツァル・コアトル",
+			"item_id": "ライダーピース",
+			"level": 2,
+			"number": 12
+		},
+		{
+			"servant_id": "ケツァル・コアトル",
+			"item_id": "蛇の宝玉",
+			"level": 3,
+			"number": 8
+		},
+		{
+			"servant_id": "ケツァル・コアトル",
+			"item_id": "竜の逆鱗",
+			"level": 3,
+			"number": 2
+		},
+		{
+			"servant_id": "ケツァル・コアトル",
+			"item_id": "ライダーモニュメント",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "ケツァル・コアトル",
+			"item_id": "竜の逆鱗",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "ケツァル・コアトル",
+			"item_id": "鳳凰の羽根",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "ケツァル・コアトル",
+			"item_id": "ライダーモニュメント",
+			"level": 4,
+			"number": 12
+		},
+		{
+			"servant_id": "ギルガメッシュ(キャスター)",
+			"item_id": "キャスターピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "ギルガメッシュ(キャスター)",
+			"item_id": "英雄の証",
+			"level": 2,
+			"number": 18
+		},
+		{
+			"servant_id": "ギルガメッシュ(キャスター)",
+			"item_id": "キャスターピース",
+			"level": 2,
+			"number": 8
+		},
+		{
+			"servant_id": "ギルガメッシュ(キャスター)",
+			"item_id": "禁断の頁",
+			"level": 3,
+			"number": 8
+		},
+		{
+			"servant_id": "ギルガメッシュ(キャスター)",
+			"item_id": "原初の産毛",
+			"level": 3,
+			"number": 3
+		},
+		{
+			"servant_id": "ギルガメッシュ(キャスター)",
+			"item_id": "キャスターモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "ギルガメッシュ(キャスター)",
+			"item_id": "原初の産毛",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "ギルガメッシュ(キャスター)",
+			"item_id": "智慧のスカラベ",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "ギルガメッシュ(キャスター)",
+			"item_id": "キャスターモニュメント",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "メドゥーサ(ランサー)",
+			"item_id": "ランサーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "メドゥーサ(ランサー)",
+			"item_id": "追憶の貝殻",
+			"level": 2,
+			"number": 6
+		},
+		{
+			"servant_id": "メドゥーサ(ランサー)",
+			"item_id": "ランサーピース",
+			"level": 2,
+			"number": 10
+		},
+		{
+			"servant_id": "メドゥーサ(ランサー)",
+			"item_id": "世界樹の種",
+			"level": 3,
+			"number": 10
+		},
+		{
+			"servant_id": "メドゥーサ(ランサー)",
+			"item_id": "鳳凰の羽根",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "メドゥーサ(ランサー)",
+			"item_id": "ランサーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "メドゥーサ(ランサー)",
+			"item_id": "鳳凰の羽根",
+			"level": 4,
+			"number": 7
+		},
+		{
+			"servant_id": "メドゥーサ(ランサー)",
+			"item_id": "万死の毒針",
+			"level": 4,
+			"number": 24
+		},
+		{
+			"servant_id": "メドゥーサ(ランサー)",
+			"item_id": "ランサーモニュメント",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "ゴルゴーン",
+			"item_id": "蛇の宝玉",
+			"level": 1,
+			"number": 8
+		},
+		{
+			"servant_id": "ゴルゴーン",
+			"item_id": "凶骨",
+			"level": 1,
+			"number": 8
+		},
+		{
+			"servant_id": "ゴルゴーン",
+			"item_id": "万死の毒針",
+			"level": 2,
+			"number": 8
+		},
+		{
+			"servant_id": "ゴルゴーン",
+			"item_id": "愚者の鎖",
+			"level": 2,
+			"number": 8
+		},
+		{
+			"servant_id": "ゴルゴーン",
+			"item_id": "原初の産毛",
+			"level": 3,
+			"number": 8
+		},
+		{
+			"servant_id": "ゴルゴーン",
+			"item_id": "虚影の塵",
+			"level": 3,
+			"number": 8
+		},
+		{
+			"servant_id": "ゴルゴーン",
+			"item_id": "呪獣胆石",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "ゴルゴーン",
+			"item_id": "混沌の爪",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "ジャガーマン",
+			"item_id": "ランサーピース",
+			"level": 1,
+			"number": 4
+		},
+		{
+			"servant_id": "ジャガーマン",
+			"item_id": "世界樹の種",
+			"level": 2,
+			"number": 6
+		},
+		{
+			"servant_id": "ジャガーマン",
+			"item_id": "ランサーピース",
+			"level": 2,
+			"number": 8
+		},
+		{
+			"servant_id": "ジャガーマン",
+			"item_id": "混沌の爪",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "ジャガーマン",
+			"item_id": "黒獣脂",
+			"level": 3,
+			"number": 2
+		},
+		{
+			"servant_id": "ジャガーマン",
+			"item_id": "ランサーモニュメント",
+			"level": 3,
+			"number": 4
+		},
+		{
+			"servant_id": "ジャガーマン",
+			"item_id": "黒獣脂",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "ジャガーマン",
+			"item_id": "原初の産毛",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "ジャガーマン",
+			"item_id": "ランサーモニュメント",
+			"level": 4,
+			"number": 8
+		},
+		{
+			"servant_id": "マーリン",
+			"item_id": "キャスターピース",
+			"level": 1,
+			"number": 5
+		},
+		{
+			"servant_id": "マーリン",
+			"item_id": "無間の歯車",
+			"level": 2,
+			"number": 8
+		},
+		{
+			"servant_id": "マーリン",
+			"item_id": "キャスターピース",
+			"level": 2,
+			"number": 12
+		},
+		{
+			"servant_id": "マーリン",
+			"item_id": "禁断の頁",
+			"level": 3,
+			"number": 10
+		},
+		{
+			"servant_id": "マーリン",
+			"item_id": "智慧のスカラベ",
+			"level": 3,
+			"number": 2
+		},
+		{
+			"servant_id": "マーリン",
+			"item_id": "キャスターモニュメント",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "マーリン",
+			"item_id": "智慧のスカラベ",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "マーリン",
+			"item_id": "竜の逆鱗",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "マーリン",
+			"item_id": "キャスターモニュメント",
+			"level": 4,
+			"number": 12
+		},
+		{
+			"servant_id": "宮本武蔵",
+			"item_id": "セイバーピース",
+			"level": 1,
+			"number": 5
+		},
+		{
+			"servant_id": "宮本武蔵",
+			"item_id": "英雄の証",
+			"level": 2,
+			"number": 22
+		},
+		{
+			"servant_id": "宮本武蔵",
+			"item_id": "セイバーピース",
+			"level": 2,
+			"number": 12
+		},
+		{
+			"servant_id": "宮本武蔵",
+			"item_id": "八連双晶",
+			"level": 3,
+			"number": 10
+		},
+		{
+			"servant_id": "宮本武蔵",
+			"item_id": "無間の歯車",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "宮本武蔵",
+			"item_id": "セイバーモニュメント",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "宮本武蔵",
+			"item_id": "無間の歯車",
+			"level": 4,
+			"number": 10
+		},
+		{
+			"servant_id": "宮本武蔵",
+			"item_id": "蛮神の心臓",
+			"level": 4,
+			"number": 5
+		},
+		{
+			"servant_id": "宮本武蔵",
+			"item_id": "セイバーモニュメント",
+			"level": 4,
+			"number": 12
+		},
+		{
+			"servant_id": "“山の翁”",
+			"item_id": "アサシンピース",
+			"level": 1,
+			"number": 5
+		},
+		{
+			"servant_id": "“山の翁”",
+			"item_id": "凶骨",
+			"level": 2,
+			"number": 22
+		},
+		{
+			"servant_id": "“山の翁”",
+			"item_id": "アサシンピース",
+			"level": 2,
+			"number": 12
+		},
+		{
+			"servant_id": "“山の翁”",
+			"item_id": "愚者の鎖",
+			"level": 3,
+			"number": 29
+		},
+		{
+			"servant_id": "“山の翁”",
+			"item_id": "呪獣胆石",
+			"level": 3,
+			"number": 2
+		},
+		{
+			"servant_id": "“山の翁”",
+			"item_id": "アサシンモニュメント",
+			"level": 3,
+			"number": 5
+		},
+		{
+			"servant_id": "“山の翁”",
+			"item_id": "呪獣胆石",
+			"level": 4,
+			"number": 4
+		},
+		{
+			"servant_id": "“山の翁”",
+			"item_id": "虚影の塵",
+			"level": 4,
+			"number": 24
+		},
+		{
+			"servant_id": "“山の翁”",
+			"item_id": "アサシンモニュメント",
+			"level": 4,
+			"number": 12
+		}
+	];
 
 /***/ },
 /* 243 */
@@ -27301,17 +35021,41 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _data = __webpack_require__(242);
+	var _items = __webpack_require__(244);
+	
+	var _items2 = _interopRequireDefault(_items);
+	
+	var _EvolutionItem = __webpack_require__(241);
+	
+	var _EvolutionItem2 = _interopRequireDefault(_EvolutionItem);
+	
+	var _Util = __webpack_require__(245);
+	
+	var _Util2 = _interopRequireDefault(_Util);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
 	var Item = function () {
 	  _createClass(Item, null, [{
+	    key: 'where',
+	    value: function where() {
+	      var _where = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+	
+	      return _Util2.default.where(_items2.default, _where).map(function (e) {
+	        return new Item(e);
+	      });
+	    }
+	  }, {
+	    key: 'all',
+	    value: function all() {
+	      return Item.where();
+	    }
+	  }, {
 	    key: 'findBy',
 	    value: function findBy(id) {
-	      return new Item(_data.ItemData.find(function (e) {
-	        return e.id === id;
-	      }));
+	      return Item.where({ id: id })[0];
 	    }
 	  }]);
 	
@@ -27329,11 +35073,7 @@
 	  }, {
 	    key: 'evolutionItems',
 	    get: function get() {
-	      var _this = this;
-	
-	      return _data.EvolutionItemData.filter(function (e) {
-	        return e.item_id === _this.id;
-	      });
+	      return _EvolutionItem2.default.where({ item_id: this.id });
 	    }
 	  }, {
 	    key: 'servants',
@@ -27351,6 +35091,169 @@
 
 /***/ },
 /* 244 */
+/***/ function(module, exports) {
+
+	module.exports = [
+		{
+			"id": "アサシンピース"
+		},
+		{
+			"id": "アサシンモニュメント"
+		},
+		{
+			"id": "アーチャーピース"
+		},
+		{
+			"id": "アーチャーモニュメント"
+		},
+		{
+			"id": "キャスターピース"
+		},
+		{
+			"id": "キャスターモニュメント"
+		},
+		{
+			"id": "ゴーストランタン"
+		},
+		{
+			"id": "ゴールデンベアライター"
+		},
+		{
+			"id": "ジル・ド・レェ人形"
+		},
+		{
+			"id": "セイバーピース"
+		},
+		{
+			"id": "セイバーモニュメント"
+		},
+		{
+			"id": "ティンクルキャンディ"
+		},
+		{
+			"id": "ハートのブレスレット"
+		},
+		{
+			"id": "バーサーカーピース"
+		},
+		{
+			"id": "バーサーカーモニュメント"
+		},
+		{
+			"id": "ホムンクルスベビー"
+		},
+		{
+			"id": "ライダーピース"
+		},
+		{
+			"id": "ライダーモニュメント"
+		},
+		{
+			"id": "ランサーピース"
+		},
+		{
+			"id": "ランサーモニュメント"
+		},
+		{
+			"id": "万死の毒針"
+		},
+		{
+			"id": "世界樹の種"
+		},
+		{
+			"id": "八連双晶"
+		},
+		{
+			"id": "凶骨"
+		},
+		{
+			"id": "原初の産毛"
+		},
+		{
+			"id": "呪獣胆石"
+		},
+		{
+			"id": "大騎士勲章"
+		},
+		{
+			"id": "封魔のランプ"
+		},
+		{
+			"id": "愚者の鎖"
+		},
+		{
+			"id": "戦馬の幼角"
+		},
+		{
+			"id": "智慧のスカラベ"
+		},
+		{
+			"id": "業物ナイフ"
+		},
+		{
+			"id": "樽入りチキン"
+		},
+		{
+			"id": "水晶球"
+		},
+		{
+			"id": "混沌の爪"
+		},
+		{
+			"id": "無間の歯車"
+		},
+		{
+			"id": "禁断の頁"
+		},
+		{
+			"id": "竜のオーブ"
+		},
+		{
+			"id": "竜の牙"
+		},
+		{
+			"id": "竜の逆鱗"
+		},
+		{
+			"id": "精霊根"
+		},
+		{
+			"id": "英雄の証"
+		},
+		{
+			"id": "虚影の塵"
+		},
+		{
+			"id": "蛇の宝玉"
+		},
+		{
+			"id": "蛮神の心臓"
+		},
+		{
+			"id": "血の涙石"
+		},
+		{
+			"id": "追憶の貝殻"
+		},
+		{
+			"id": "鈴鳴りの枝"
+		},
+		{
+			"id": "隕蹄鉄"
+		},
+		{
+			"id": "鳳凰の羽根"
+		},
+		{
+			"id": "黄金髑髏"
+		},
+		{
+			"id": "黒獣脂"
+		}
+	];
+
+/***/ },
+/* 245 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -27385,7 +35288,7 @@
 	exports.default = Util;
 
 /***/ },
-/* 245 */
+/* 246 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -28137,7 +36040,7 @@
 	];
 
 /***/ },
-/* 246 */
+/* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28154,7 +36057,7 @@
 	
 	var _reactRouter = __webpack_require__(178);
 	
-	var _data = __webpack_require__(242);
+	var _data = __webpack_require__(248);
 	
 	var _Servant = __webpack_require__(240);
 	
@@ -28335,7 +36238,68 @@
 	}(_react.Component);
 
 /***/ },
-/* 247 */
+/* 248 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var ServantData = exports.ServantData = [{
+	  id: 'ギルガメッシュ',
+	  rarity: 5,
+	  class: 'アーチャー'
+	}, {
+	  id: 'クー・フーリン',
+	  rarity: 3,
+	  class: 'ランサー'
+	}];
+	
+	var EvolutionItemData = exports.EvolutionItemData = [{
+	  servant_id: 'ギルガメッシュ',
+	  item_id: 'アーチャーピース',
+	  level: 1,
+	  number: 2
+	}, {
+	  servant_id: 'ギルガメッシュ',
+	  item_id: 'ゴーストランタン',
+	  level: 2,
+	  number: 12
+	}, {
+	  servant_id: 'ギルガメッシュ',
+	  item_id: 'アーチャーピース',
+	  level: 2,
+	  number: 12
+	}, {
+	  servant_id: 'クー・フーリン',
+	  item_id: 'アーチャーピース',
+	  level: 1,
+	  number: 2
+	}];
+	
+	var ItemData = exports.ItemData = [{
+	  id: 'ゴーストランタン'
+	}, {
+	  id: 'アーチャーピース'
+	}];
+	
+	var AreaData = exports.AreaData = [{
+	  id: '第一特異点'
+	}];
+	
+	var QuestData = exports.QuestData = [{
+	  id: 'パリ',
+	  area_id: '第一特異点'
+	}];
+	
+	var ItemQuestData = exports.ItemQuestData = [{
+	  item_id: 'ゴーストランタン',
+	  quest_id: 'パリ'
+	}];
+
+/***/ },
+/* 249 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28352,7 +36316,9 @@
 	
 	var _reactRouter = __webpack_require__(178);
 	
-	var _data = __webpack_require__(242);
+	var _Item = __webpack_require__(243);
+	
+	var _Item2 = _interopRequireDefault(_Item);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -28374,23 +36340,6 @@
 	  _createClass(Items, [{
 	    key: 'render',
 	    value: function render() {
-	      var rows = _data.ItemData.map(function (e) {
-	        var to = '/items/' + e.id;
-	        return _react2.default.createElement(
-	          'tr',
-	          { key: e.id },
-	          _react2.default.createElement(
-	            'td',
-	            null,
-	            _react2.default.createElement(
-	              _reactRouter.Link,
-	              { to: to },
-	              e.id
-	            )
-	          )
-	        );
-	      });
-	
 	      return _react2.default.createElement(
 	        'table',
 	        null,
@@ -28410,7 +36359,21 @@
 	        _react2.default.createElement(
 	          'tbody',
 	          null,
-	          rows
+	          _Item2.default.all().map(function (e) {
+	            return _react2.default.createElement(
+	              'tr',
+	              { key: e.id },
+	              _react2.default.createElement(
+	                'td',
+	                null,
+	                _react2.default.createElement(
+	                  _reactRouter.Link,
+	                  { to: '/items/' + e.id },
+	                  e.id
+	                )
+	              )
+	            );
+	          })
 	        )
 	      );
 	    }
@@ -28422,7 +36385,7 @@
 	exports.default = Items;
 
 /***/ },
-/* 248 */
+/* 250 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28439,7 +36402,7 @@
 	
 	var _reactRouter = __webpack_require__(178);
 	
-	var _data = __webpack_require__(242);
+	var _data = __webpack_require__(248);
 	
 	var _Item = __webpack_require__(243);
 	
@@ -28520,7 +36483,7 @@
 	exports.default = Item;
 
 /***/ },
-/* 249 */
+/* 251 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28537,9 +36500,9 @@
 	
 	var _reactRouter = __webpack_require__(178);
 	
-	var _data = __webpack_require__(242);
+	var _data = __webpack_require__(248);
 	
-	var _Area = __webpack_require__(250);
+	var _Area = __webpack_require__(252);
 	
 	var _Area2 = _interopRequireDefault(_Area);
 	
@@ -28599,7 +36562,7 @@
 	exports.default = Areas;
 
 /***/ },
-/* 250 */
+/* 252 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28610,9 +36573,9 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _data = __webpack_require__(242);
+	var _data = __webpack_require__(248);
 	
-	var _Quest = __webpack_require__(251);
+	var _Quest = __webpack_require__(253);
 	
 	var _Quest2 = _interopRequireDefault(_Quest);
 	
@@ -28663,7 +36626,7 @@
 	exports.default = Area;
 
 /***/ },
-/* 251 */
+/* 253 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28674,9 +36637,9 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _data = __webpack_require__(242);
+	var _data = __webpack_require__(248);
 	
-	var _Util = __webpack_require__(244);
+	var _Util = __webpack_require__(245);
 	
 	var _Util2 = _interopRequireDefault(_Util);
 	
@@ -28727,7 +36690,7 @@
 	exports.default = Quest;
 
 /***/ },
-/* 252 */
+/* 254 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28744,7 +36707,7 @@
 	
 	var _reactRouter = __webpack_require__(178);
 	
-	var _Area = __webpack_require__(250);
+	var _Area = __webpack_require__(252);
 	
 	var _Area2 = _interopRequireDefault(_Area);
 	

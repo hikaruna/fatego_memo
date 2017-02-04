@@ -1,4 +1,4 @@
-import { EvolutionItemData } from 'data.jsx';
+import EvolutionItemData from 'data/evolution_items.yml';
 import Servant from 'models/Servant.js';
 import Item from 'models/Item.js';
 import Util from 'Util.js';

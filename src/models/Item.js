@@ -1,8 +1,19 @@
-import { ItemData, EvolutionItemData } from 'data.jsx';
+import ItemData from 'data/items.yml';
+import EvolutionItem from 'models/EvolutionItem.js';
+import Util from 'Util.js';
+
 export default class Item {
 
+  static where(where = {}) {
+    return Util.where(ItemData, where).map(e => new Item(e));
+  }
+
+  static all() {
+    return Item.where();
+  }
+
   static findBy(id) {
-    return new Item(ItemData.find(e => e.id === id));
+    return Item.where({id: id})[0];
   }
 
   constructor(data) {
@@ -14,7 +25,7 @@ export default class Item {
   }
 
   get evolutionItems() {
-    return EvolutionItemData.filter(e => e.item_id === this.id);
+    return EvolutionItem.where({item_id: this.id});
   }
 
   get servants() {
