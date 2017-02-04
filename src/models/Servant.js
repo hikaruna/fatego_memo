@@ -1,7 +1,16 @@
-import { ServantData } from 'data.jsx';
 import EvolutionItem from 'models/EvolutionItem.js';
+import Util from 'Util.js';
+import ServantData from 'data/servants.yml';
 
 export default class Servant {
+
+  static all() {
+    return Servant.where();
+  }
+
+  static where(where = {}) {
+    return Util.where(ServantData, where).map(e => new Servant(e));
+  }
 
   static findBy(id) {
     return new Servant(ServantData.find(e => e.id === id));

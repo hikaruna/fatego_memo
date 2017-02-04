@@ -36,6 +36,10 @@ module.exports = {
         query:{
           presets: ['react', 'es2015']
         }
+      },
+      {
+        test: /\.yml$/,
+        loader: 'yml'
       }
     ]
   },

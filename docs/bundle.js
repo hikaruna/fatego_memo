@@ -68,7 +68,7 @@
 	
 	var _Servants2 = _interopRequireDefault(_Servants);
 	
-	var _Servant = __webpack_require__(242);
+	var _Servant = __webpack_require__(246);
 	
 	var _Servant2 = _interopRequireDefault(_Servant);
 	
@@ -26943,11 +26943,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _ServantSummary = __webpack_require__(240);
+	var _reactRouter = __webpack_require__(178);
 	
-	var _ServantSummary2 = _interopRequireDefault(_ServantSummary);
+	var _Servant = __webpack_require__(240);
 	
-	var _data = __webpack_require__(241);
+	var _Servant2 = _interopRequireDefault(_Servant);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -26965,19 +26965,13 @@
 	
 	    var _this = _possibleConstructorReturn(this, (Servants.__proto__ || Object.getPrototypeOf(Servants)).call(this, props));
 	
-	    _this.data = _data.ServantData;
+	    _this.servants = _Servant2.default.all();
 	    return _this;
 	  }
 	
 	  _createClass(Servants, [{
 	    key: 'render',
 	    value: function render() {
-	      var rows = [];
-	      for (var i = 0; i < this.data.length; i++) {
-	        var row = this.data[i];
-	        rows.push(_react2.default.createElement(_ServantSummary2.default, { key: row.id, id: row.id }));
-	      }
-	
 	      return _react2.default.createElement(
 	        'table',
 	        null,
@@ -27007,8 +27001,9 @@
 	        _react2.default.createElement(
 	          'tbody',
 	          null,
-	          _react2.default.createElement(_ServantSummary2.default, { id: this.data[0].id }),
-	          _react2.default.createElement(_ServantSummary2.default, { id: this.data[1].id })
+	          this.servants.map(function (e) {
+	            return _react2.default.createElement(Servant, { key: 'servants_' + e.id, servant: e });
+	          })
 	        )
 	      );
 	    }
@@ -27018,6 +27013,47 @@
 	}(_react.Component);
 	
 	exports.default = Servants;
+	
+	var Servant = function (_Component2) {
+	  _inherits(Servant, _Component2);
+	
+	  function Servant() {
+	    _classCallCheck(this, Servant);
+	
+	    return _possibleConstructorReturn(this, (Servant.__proto__ || Object.getPrototypeOf(Servant)).apply(this, arguments));
+	  }
+	
+	  _createClass(Servant, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'tr',
+	        null,
+	        _react2.default.createElement(
+	          'td',
+	          null,
+	          _react2.default.createElement(
+	            _reactRouter.Link,
+	            { to: '/servants/' + this.props.servant.id },
+	            this.props.servant.id
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'td',
+	          null,
+	          this.props.servant.rarity
+	        ),
+	        _react2.default.createElement(
+	          'td',
+	          null,
+	          this.props.servant.class
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Servant;
+	}(_react.Component);
 
 /***/ },
 /* 240 */
@@ -27031,73 +27067,169 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _react = __webpack_require__(1);
+	var _EvolutionItem = __webpack_require__(241);
 	
-	var _react2 = _interopRequireDefault(_react);
+	var _EvolutionItem2 = _interopRequireDefault(_EvolutionItem);
 	
-	var _reactRouter = __webpack_require__(178);
+	var _Util = __webpack_require__(244);
 	
-	var _data = __webpack_require__(241);
+	var _Util2 = _interopRequireDefault(_Util);
+	
+	var _servants = __webpack_require__(245);
+	
+	var _servants2 = _interopRequireDefault(_servants);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	var Servant = function () {
+	  _createClass(Servant, null, [{
+	    key: 'all',
+	    value: function all() {
+	      return Servant.where();
+	    }
+	  }, {
+	    key: 'where',
+	    value: function where() {
+	      var _where = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var ServantSummary = function (_Component) {
-	  _inherits(ServantSummary, _Component);
-	
-	  function ServantSummary(props) {
-	    _classCallCheck(this, ServantSummary);
-	
-	    var _this = _possibleConstructorReturn(this, (ServantSummary.__proto__ || Object.getPrototypeOf(ServantSummary)).call(this, props));
-	
-	    _this.data = _data.ServantData.find(function (e, i) {
-	      return e.id === props.id;
-	    });
-	    return _this;
-	  }
-	
-	  _createClass(ServantSummary, [{
-	    key: 'render',
-	    value: function render() {
-	      var a = '/servants/' + this.data.id;
-	      return _react2.default.createElement(
-	        'tr',
-	        null,
-	        _react2.default.createElement(
-	          'td',
-	          null,
-	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: a },
-	            this.data.id
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'td',
-	          null,
-	          this.data.rarity
-	        ),
-	        _react2.default.createElement(
-	          'td',
-	          null,
-	          this.data.class
-	        )
-	      );
+	      return _Util2.default.where(_servants2.default, _where).map(function (e) {
+	        return new Servant(e);
+	      });
+	    }
+	  }, {
+	    key: 'findBy',
+	    value: function findBy(id) {
+	      return new Servant(_servants2.default.find(function (e) {
+	        return e.id === id;
+	      }));
 	    }
 	  }]);
 	
-	  return ServantSummary;
-	}(_react.Component);
+	  function Servant(data) {
+	    _classCallCheck(this, Servant);
 	
-	exports.default = ServantSummary;
+	    this.data = data;
+	  }
+	
+	  _createClass(Servant, [{
+	    key: 'id',
+	    get: function get() {
+	      return this.data.id;
+	    }
+	  }, {
+	    key: 'class',
+	    get: function get() {
+	      return this.data.class;
+	    }
+	  }, {
+	    key: 'rarity',
+	    get: function get() {
+	      return this.data.rarity;
+	    }
+	  }, {
+	    key: 'evolutionItems',
+	    get: function get() {
+	      return _EvolutionItem2.default.where({ servant_id: this.id });
+	    }
+	  }, {
+	    key: 'items',
+	    get: function get() {
+	      return Array.from(new Set(this.evolutionItems.map(function (e) {
+	        return e.item;
+	      })));
+	    }
+	  }, {
+	    key: 'evolutions',
+	    get: function get() {
+	      var _this = this;
+	
+	      return [1, 2, 3, 4].map(function (e) {
+	        return _EvolutionItem2.default.where({ servant_id: _this.id, level: e });
+	      });
+	    }
+	  }]);
+	
+	  return Servant;
+	}();
+	
+	exports.default = Servant;
 
 /***/ },
 /* 241 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _data = __webpack_require__(242);
+	
+	var _Servant = __webpack_require__(240);
+	
+	var _Servant2 = _interopRequireDefault(_Servant);
+	
+	var _Item = __webpack_require__(243);
+	
+	var _Item2 = _interopRequireDefault(_Item);
+	
+	var _Util = __webpack_require__(244);
+	
+	var _Util2 = _interopRequireDefault(_Util);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var EvolutionItem = function () {
+	  _createClass(EvolutionItem, null, [{
+	    key: 'where',
+	    value: function where(_where) {
+	      return _Util2.default.where(_data.EvolutionItemData, _where).map(function (e) {
+	        return new EvolutionItem(e);
+	      });
+	    }
+	  }, {
+	    key: 'findBy',
+	    value: function findBy(where) {
+	      return EvolutionItem.where(where)[0];
+	    }
+	  }]);
+	
+	  function EvolutionItem(data) {
+	    _classCallCheck(this, EvolutionItem);
+	
+	    this.data = data;
+	    this.number = data.number;
+	    this.item_id = data.item_id;
+	    this.servant_id = data.servant_id;
+	    this.level = data.level;
+	  }
+	
+	  _createClass(EvolutionItem, [{
+	    key: 'servant',
+	    get: function get() {
+	      return _Servant2.default.findBy(this.data.servant_id);
+	    }
+	  }, {
+	    key: 'item',
+	    get: function get() {
+	      return _Item2.default.findBy(this.data.item_id);
+	    }
+	  }]);
+	
+	  return EvolutionItem;
+	}();
+	
+	exports.default = EvolutionItem;
+
+/***/ },
+/* 242 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -27158,7 +27290,854 @@
 	}];
 
 /***/ },
-/* 242 */
+/* 243 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _data = __webpack_require__(242);
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var Item = function () {
+	  _createClass(Item, null, [{
+	    key: 'findBy',
+	    value: function findBy(id) {
+	      return new Item(_data.ItemData.find(function (e) {
+	        return e.id === id;
+	      }));
+	    }
+	  }]);
+	
+	  function Item(data) {
+	    _classCallCheck(this, Item);
+	
+	    this.data = data;
+	  }
+	
+	  _createClass(Item, [{
+	    key: 'id',
+	    get: function get() {
+	      return this.data.id;
+	    }
+	  }, {
+	    key: 'evolutionItems',
+	    get: function get() {
+	      var _this = this;
+	
+	      return _data.EvolutionItemData.filter(function (e) {
+	        return e.item_id === _this.id;
+	      });
+	    }
+	  }, {
+	    key: 'servants',
+	    get: function get() {
+	      return Array.from(new Set(this.evolutionItems.map(function (e) {
+	        return e.servant_id;
+	      })));
+	    }
+	  }]);
+	
+	  return Item;
+	}();
+	
+	exports.default = Item;
+
+/***/ },
+/* 244 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var Util = function () {
+	  function Util() {
+	    _classCallCheck(this, Util);
+	  }
+	
+	  _createClass(Util, null, [{
+	    key: "where",
+	    value: function where(from, by) {
+	      return from.filter(function (e) {
+	        return Object.keys(by).reduce(function (ac, c) {
+	          return ac && by[c] === e[c];
+	        }, true);
+	      });
+	    }
+	  }]);
+	
+	  return Util;
+	}();
+	
+	exports.default = Util;
+
+/***/ },
+/* 245 */
+/***/ function(module, exports) {
+
+	module.exports = [
+		{
+			"id": "アルトリア・ペンドラゴン",
+			"rarity": 5,
+			"class": "セイバー"
+		},
+		{
+			"id": "アルトリア・ペンドラゴン(オルタ)",
+			"rarity": 4,
+			"class": "セイバー"
+		},
+		{
+			"id": "アルトリア・ペンドラゴン(リリィ)",
+			"rarity": 4,
+			"class": "セイバー"
+		},
+		{
+			"id": "ネロ・クラウディウス",
+			"rarity": 4,
+			"class": "セイバー"
+		},
+		{
+			"id": "ジークフリート",
+			"rarity": 4,
+			"class": "セイバー"
+		},
+		{
+			"id": "ガイウス・ユリウス・カエサル",
+			"rarity": 3,
+			"class": "セイバー"
+		},
+		{
+			"id": "アルテラ",
+			"rarity": 5,
+			"class": "セイバー"
+		},
+		{
+			"id": "ジル・ド・レェ(セイバー)",
+			"rarity": 3,
+			"class": "セイバー"
+		},
+		{
+			"id": "シュヴァリエ・デオン",
+			"rarity": 4,
+			"class": "セイバー"
+		},
+		{
+			"id": "エミヤ",
+			"rarity": 4,
+			"class": "アーチャー"
+		},
+		{
+			"id": "ギルガメッシュ",
+			"rarity": 5,
+			"class": "アーチャー"
+		},
+		{
+			"id": "ロビンフッド",
+			"rarity": 3,
+			"class": "アーチャー"
+		},
+		{
+			"id": "アタランテ",
+			"rarity": 4,
+			"class": "アーチャー"
+		},
+		{
+			"id": "エウリュアレ",
+			"rarity": 3,
+			"class": "アーチャー"
+		},
+		{
+			"id": "アーラシュ",
+			"rarity": 1,
+			"class": "アーチャー"
+		},
+		{
+			"id": "クー・フーリン",
+			"rarity": 3,
+			"class": "ランサー"
+		},
+		{
+			"id": "エリザベート・バートリー",
+			"rarity": 4,
+			"class": "ランサー"
+		},
+		{
+			"id": "武蔵坊弁慶",
+			"rarity": 2,
+			"class": "ランサー"
+		},
+		{
+			"id": "クー・フーリン(プロトタイプ)",
+			"rarity": 3,
+			"class": "ランサー"
+		},
+		{
+			"id": "レオニダス一世",
+			"rarity": 2,
+			"class": "ランサー"
+		},
+		{
+			"id": "ロムルス",
+			"rarity": 3,
+			"class": "ランサー"
+		},
+		{
+			"id": "メドゥーサ",
+			"rarity": 3,
+			"class": "ライダー"
+		},
+		{
+			"id": "ゲオルギウス",
+			"rarity": 2,
+			"class": "ライダー"
+		},
+		{
+			"id": "エドワード・ティーチ",
+			"rarity": 2,
+			"class": "ライダー"
+		},
+		{
+			"id": "ブーディカ",
+			"rarity": 3,
+			"class": "ライダー"
+		},
+		{
+			"id": "牛若丸",
+			"rarity": 3,
+			"class": "ライダー"
+		},
+		{
+			"id": "アレキサンダー",
+			"rarity": 3,
+			"class": "ライダー"
+		},
+		{
+			"id": "マリー・アントワネット",
+			"rarity": 4,
+			"class": "ライダー"
+		},
+		{
+			"id": "マルタ",
+			"rarity": 4,
+			"class": "ライダー"
+		},
+		{
+			"id": "メディア",
+			"rarity": 3,
+			"class": "キャスター"
+		},
+		{
+			"id": "ジル・ド・レェ",
+			"rarity": 3,
+			"class": "キャスター"
+		},
+		{
+			"id": "ハンス・クリスチャン・アンデルセン",
+			"rarity": 2,
+			"class": "キャスター"
+		},
+		{
+			"id": "ウィリアム・シェイクスピア",
+			"rarity": 2,
+			"class": "キャスター"
+		},
+		{
+			"id": "メフィストフェレス",
+			"rarity": 3,
+			"class": "キャスター"
+		},
+		{
+			"id": "ヴォルフガング・アマデウス・モーツァルト",
+			"rarity": 1,
+			"class": "キャスター"
+		},
+		{
+			"id": "諸葛孔明(エルメロイⅡ世)",
+			"rarity": 5,
+			"class": "キャスター"
+		},
+		{
+			"id": "クー・フーリン(キャスター)",
+			"rarity": 3,
+			"class": "キャスター"
+		},
+		{
+			"id": "佐々木小次郎",
+			"rarity": 1,
+			"class": "アサシン"
+		},
+		{
+			"id": "呪腕のハサン",
+			"rarity": 2,
+			"class": "アサシン"
+		},
+		{
+			"id": "ステンノ",
+			"rarity": 4,
+			"class": "アサシン"
+		},
+		{
+			"id": "荊軻",
+			"rarity": 3,
+			"class": "アサシン"
+		},
+		{
+			"id": "シャルル＝アンリ・サンソン",
+			"rarity": 2,
+			"class": "アサシン"
+		},
+		{
+			"id": "ファントム・オブ・ジ・オペラ",
+			"rarity": 2,
+			"class": "アサシン"
+		},
+		{
+			"id": "マタ・ハリ",
+			"rarity": 1,
+			"class": "アサシン"
+		},
+		{
+			"id": "カーミラ",
+			"rarity": 4,
+			"class": "アサシン"
+		},
+		{
+			"id": "ヘラクレス",
+			"rarity": 4,
+			"class": "狂"
+		},
+		{
+			"id": "ランスロット",
+			"rarity": 4,
+			"class": "狂"
+		},
+		{
+			"id": "呂布奉先",
+			"rarity": 3,
+			"class": "狂"
+		},
+		{
+			"id": "スパルタクス",
+			"rarity": 1,
+			"class": "狂"
+		},
+		{
+			"id": "坂田金時",
+			"rarity": 5,
+			"class": "狂"
+		},
+		{
+			"id": "ヴラド三世",
+			"rarity": 5,
+			"class": "狂"
+		},
+		{
+			"id": "アステリオス",
+			"rarity": 1,
+			"class": "狂"
+		},
+		{
+			"id": "カリギュラ",
+			"rarity": 2,
+			"class": "狂"
+		},
+		{
+			"id": "ダレイオス三世",
+			"rarity": 3,
+			"class": "狂"
+		},
+		{
+			"id": "清姫",
+			"rarity": 3,
+			"class": "狂"
+		},
+		{
+			"id": "エイリーク・ブラッドアクス",
+			"rarity": 2,
+			"class": "狂"
+		},
+		{
+			"id": "タマモキャット",
+			"rarity": 4,
+			"class": "狂"
+		},
+		{
+			"id": "ジャンヌ・ダルク",
+			"rarity": 5,
+			"class": "ルーラー"
+		},
+		{
+			"id": "オリオン",
+			"rarity": 5,
+			"class": "アーチャー"
+		},
+		{
+			"id": "エリザベート・バートリー(ハロウィン)",
+			"rarity": 4,
+			"class": "キャスター"
+		},
+		{
+			"id": "玉藻の前",
+			"rarity": 5,
+			"class": "キャスター"
+		},
+		{
+			"id": "ダビデ",
+			"rarity": 3,
+			"class": "アーチャー"
+		},
+		{
+			"id": "ヘクトール",
+			"rarity": 3,
+			"class": "ランサー"
+		},
+		{
+			"id": "フランシス・ドレイク",
+			"rarity": 5,
+			"class": "ライダー"
+		},
+		{
+			"id": "アン・ボニー＆メアリー・リード",
+			"rarity": 4,
+			"class": "ライダー"
+		},
+		{
+			"id": "メディア(リリィ)",
+			"rarity": 4,
+			"class": "キャスター"
+		},
+		{
+			"id": "沖田総司",
+			"rarity": 5,
+			"class": "セイバー"
+		},
+		{
+			"id": "織田信長",
+			"rarity": 4,
+			"class": "アーチャー"
+		},
+		{
+			"id": "スカサハ",
+			"rarity": 5,
+			"class": "ランサー"
+		},
+		{
+			"id": "ディルムッド・オディナ",
+			"rarity": 3,
+			"class": "ランサー"
+		},
+		{
+			"id": "フェルグス・マック・ロイ",
+			"rarity": 3,
+			"class": "セイバー"
+		},
+		{
+			"id": "アルトリア・ペンドラゴン(サンタオルタ)",
+			"rarity": 4,
+			"class": "ライダー"
+		},
+		{
+			"id": "ナーサリー・ライム",
+			"rarity": 4,
+			"class": "キャスター"
+		},
+		{
+			"id": "ジャック・ザ・リッパー",
+			"rarity": 5,
+			"class": "アサシン"
+		},
+		{
+			"id": "モードレッド",
+			"rarity": 5,
+			"class": "セイバー"
+		},
+		{
+			"id": "ニコラ・テスラ",
+			"rarity": 5,
+			"class": "アーチャー"
+		},
+		{
+			"id": "アルトリア・ペンドラゴン(オルタ)(ランサー)",
+			"rarity": 4,
+			"class": "ランサー"
+		},
+		{
+			"id": "ヴァン・ホーエンハイム・パラケルスス",
+			"rarity": 3,
+			"class": "キャスター"
+		},
+		{
+			"id": "チャールズ・バベッジ",
+			"rarity": 3,
+			"class": "キャスター"
+		},
+		{
+			"id": "ヘンリー・ジキル＆ハイド",
+			"rarity": 3,
+			"class": "アサシン"
+		},
+		{
+			"id": "フランケンシュタイン",
+			"rarity": 4,
+			"class": "狂"
+		},
+		{
+			"id": "アルジュナ",
+			"rarity": 5,
+			"class": "アーチャー"
+		},
+		{
+			"id": "カルナ",
+			"rarity": 5,
+			"class": "ランサー"
+		},
+		{
+			"id": "謎のヒロインX",
+			"rarity": 5,
+			"class": "アサシン"
+		},
+		{
+			"id": "フィン・マックール",
+			"rarity": 4,
+			"class": "ランサー"
+		},
+		{
+			"id": "ブリュンヒルデ",
+			"rarity": 5,
+			"class": "ランサー"
+		},
+		{
+			"id": "ベオウルフ",
+			"rarity": 4,
+			"class": "狂"
+		},
+		{
+			"id": "ネロ・クラウディウス(ブライド)",
+			"rarity": 5,
+			"class": "セイバー"
+		},
+		{
+			"id": "両儀式(セイバー)",
+			"rarity": 5,
+			"class": "セイバー"
+		},
+		{
+			"id": "両儀式(アサシン)",
+			"rarity": 4,
+			"class": "アサシン"
+		},
+		{
+			"id": "天草四郎",
+			"rarity": 5,
+			"class": "ルーラー"
+		},
+		{
+			"id": "アストルフォ",
+			"rarity": 4,
+			"class": "ライダー"
+		},
+		{
+			"id": "子ギル",
+			"rarity": 3,
+			"class": "アーチャー"
+		},
+		{
+			"id": "巌窟王 エドモン・ダンテス",
+			"rarity": 5,
+			"class": "アヴェンジャー"
+		},
+		{
+			"id": "ナイチンゲール",
+			"rarity": 5,
+			"class": "狂"
+		},
+		{
+			"id": "クー・フーリン(オルタ)",
+			"rarity": 5,
+			"class": "狂"
+		},
+		{
+			"id": "女王メイヴ",
+			"rarity": 5,
+			"class": "ライダー"
+		},
+		{
+			"id": "エレナ・ブラヴァツキー",
+			"rarity": 4,
+			"class": "キャスター"
+		},
+		{
+			"id": "ラーマ",
+			"rarity": 4,
+			"class": "セイバー"
+		},
+		{
+			"id": "神ランサー 李書文",
+			"rarity": 4,
+			"class": "ランサー"
+		},
+		{
+			"id": "トーマス・エジソン",
+			"rarity": 4,
+			"class": "キャスター"
+		},
+		{
+			"id": "ジェロニモ",
+			"rarity": 3,
+			"class": "キャスター"
+		},
+		{
+			"id": "ビリー・ザ・キッド",
+			"rarity": 3,
+			"class": "アーチャー"
+		},
+		{
+			"id": "ジャンヌ・ダルク(オルタ)",
+			"rarity": 5,
+			"class": "アヴェンジャー"
+		},
+		{
+			"id": "アンリマユ",
+			"rarity": 0,
+			"class": "アヴェンジャー"
+		},
+		{
+			"id": "イスカンダル",
+			"rarity": 5,
+			"class": "ライダー"
+		},
+		{
+			"id": "エミヤ(アサシン)",
+			"rarity": 4,
+			"class": "アサシン"
+		},
+		{
+			"id": "百貌のハサン",
+			"rarity": 3,
+			"class": "アサシン"
+		},
+		{
+			"id": "アイリスフィール(天の衣)",
+			"rarity": 4,
+			"class": "キャスター"
+		},
+		{
+			"id": "酒呑童子",
+			"rarity": 5,
+			"class": "アサシン"
+		},
+		{
+			"id": "玄奘三蔵",
+			"rarity": 5,
+			"class": "キャスター"
+		},
+		{
+			"id": "源頼光",
+			"rarity": 5,
+			"class": "狂"
+		},
+		{
+			"id": "坂田金時(ライダー)",
+			"rarity": 4,
+			"class": "ライダー"
+		},
+		{
+			"id": "茨木童子",
+			"rarity": 4,
+			"class": "狂"
+		},
+		{
+			"id": "風魔小太郎",
+			"rarity": 3,
+			"class": "アサシン"
+		},
+		{
+			"id": "オジマンディアス",
+			"rarity": 5,
+			"class": "ライダー"
+		},
+		{
+			"id": "アルトリア(ランサー)",
+			"rarity": 5,
+			"class": "ランサー"
+		},
+		{
+			"id": "ニトクリス",
+			"rarity": 4,
+			"class": "キャスター"
+		},
+		{
+			"id": "ランスロット(セイバー)",
+			"rarity": 4,
+			"class": "セイバー"
+		},
+		{
+			"id": "トリスタン",
+			"rarity": 4,
+			"class": "アーチャー"
+		},
+		{
+			"id": "ガウェイン",
+			"rarity": 4,
+			"class": "セイバー"
+		},
+		{
+			"id": "静謐のハサン",
+			"rarity": 3,
+			"class": "アサシン"
+		},
+		{
+			"id": "俵藤太",
+			"rarity": 3,
+			"class": "アーチャー"
+		},
+		{
+			"id": "ベディヴィエール",
+			"rarity": 3,
+			"class": "セイバー"
+		},
+		{
+			"id": "レオナルド・ダ・ヴィンチ",
+			"rarity": 5,
+			"class": "キャスター"
+		},
+		{
+			"id": "玉藻の前(ランサー)",
+			"rarity": 5,
+			"class": "ランサー"
+		},
+		{
+			"id": "アルトリア・ペンドラゴン(アーチャー)",
+			"rarity": 5,
+			"class": "アーチャー"
+		},
+		{
+			"id": "マリー・アントワネット(キャスター)",
+			"rarity": 4,
+			"class": "キャスター"
+		},
+		{
+			"id": "アン・ボニー＆メアリー・リード(アーチャー)",
+			"rarity": 4,
+			"class": "アーチャー"
+		},
+		{
+			"id": "モードレッド(ライダー)",
+			"rarity": 4,
+			"class": "ライダー"
+		},
+		{
+			"id": "スカサハ(アサシン)",
+			"rarity": 4,
+			"class": "アサシン"
+		},
+		{
+			"id": "清姫(ランサー)",
+			"rarity": 4,
+			"class": "ランサー"
+		},
+		{
+			"id": "マルタ(ルーラー)",
+			"rarity": 4,
+			"class": "ルーラー"
+		},
+		{
+			"id": "イリヤスフィール・フォン・アインツベルン",
+			"rarity": 5,
+			"class": "キャスター"
+		},
+		{
+			"id": "クロエ・フォン・アインツベルン",
+			"rarity": 4,
+			"class": "アーチャー"
+		},
+		{
+			"id": "エリザベート・バートリー(ブレイブ)",
+			"rarity": 4,
+			"class": "セイバー"
+		},
+		{
+			"id": "クレオパトラ",
+			"rarity": 5,
+			"class": "アサシン"
+		},
+		{
+			"id": "ヴラド三世(EXTRA)",
+			"rarity": 4,
+			"class": "ランサー"
+		},
+		{
+			"id": "ジャンヌ・ダルク・オルタ・サンタ・リリィ",
+			"rarity": 4,
+			"class": "ランサー"
+		},
+		{
+			"id": "イシュタル",
+			"rarity": 5,
+			"class": "アーチャー"
+		},
+		{
+			"id": "エルキドゥ",
+			"rarity": 5,
+			"class": "ランサー"
+		},
+		{
+			"id": "ケツァル・コアトル",
+			"rarity": 5,
+			"class": "ライダー"
+		},
+		{
+			"id": "ギルガメッシュ(キャスター)",
+			"rarity": 4,
+			"class": "キャスター"
+		},
+		{
+			"id": "メドゥーサ(ランサー)",
+			"rarity": 4,
+			"class": "ランサー"
+		},
+		{
+			"id": "ゴルゴーン",
+			"rarity": 4,
+			"class": "アヴェンジャー"
+		},
+		{
+			"id": "ジャガーマン",
+			"rarity": 3,
+			"class": "ランサー"
+		},
+		{
+			"id": "マーリン",
+			"rarity": 5,
+			"class": "キャスター"
+		},
+		{
+			"id": "宮本武蔵",
+			"rarity": 5,
+			"class": "セイバー"
+		},
+		{
+			"id": "“山の翁”",
+			"rarity": 5,
+			"class": "アサシン"
+		}
+	];
+
+/***/ },
+/* 246 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27175,13 +28154,13 @@
 	
 	var _reactRouter = __webpack_require__(178);
 	
-	var _data = __webpack_require__(241);
+	var _data = __webpack_require__(242);
 	
-	var _Servant = __webpack_require__(243);
+	var _Servant = __webpack_require__(240);
 	
 	var _Servant2 = _interopRequireDefault(_Servant);
 	
-	var _EvolutionItem = __webpack_require__(244);
+	var _EvolutionItem = __webpack_require__(241);
 	
 	var _EvolutionItem2 = _interopRequireDefault(_EvolutionItem);
 	
@@ -27356,254 +28335,6 @@
 	}(_react.Component);
 
 /***/ },
-/* 243 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _data = __webpack_require__(241);
-	
-	var _EvolutionItem = __webpack_require__(244);
-	
-	var _EvolutionItem2 = _interopRequireDefault(_EvolutionItem);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	var Servant = function () {
-	  _createClass(Servant, null, [{
-	    key: 'findBy',
-	    value: function findBy(id) {
-	      return new Servant(_data.ServantData.find(function (e) {
-	        return e.id === id;
-	      }));
-	    }
-	  }]);
-	
-	  function Servant(data) {
-	    _classCallCheck(this, Servant);
-	
-	    this.data = data;
-	  }
-	
-	  _createClass(Servant, [{
-	    key: 'id',
-	    get: function get() {
-	      return this.data.id;
-	    }
-	  }, {
-	    key: 'class',
-	    get: function get() {
-	      return this.data.class;
-	    }
-	  }, {
-	    key: 'rarity',
-	    get: function get() {
-	      return this.data.rarity;
-	    }
-	  }, {
-	    key: 'evolutionItems',
-	    get: function get() {
-	      return _EvolutionItem2.default.where({ servant_id: this.id });
-	    }
-	  }, {
-	    key: 'items',
-	    get: function get() {
-	      return Array.from(new Set(this.evolutionItems.map(function (e) {
-	        return e.item;
-	      })));
-	    }
-	  }, {
-	    key: 'evolutions',
-	    get: function get() {
-	      var _this = this;
-	
-	      return [1, 2, 3, 4].map(function (e) {
-	        return _EvolutionItem2.default.where({ servant_id: _this.id, level: e });
-	      });
-	    }
-	  }]);
-	
-	  return Servant;
-	}();
-	
-	exports.default = Servant;
-
-/***/ },
-/* 244 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _data = __webpack_require__(241);
-	
-	var _Servant = __webpack_require__(243);
-	
-	var _Servant2 = _interopRequireDefault(_Servant);
-	
-	var _Item = __webpack_require__(245);
-	
-	var _Item2 = _interopRequireDefault(_Item);
-	
-	var _Util = __webpack_require__(246);
-	
-	var _Util2 = _interopRequireDefault(_Util);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	var EvolutionItem = function () {
-	  _createClass(EvolutionItem, null, [{
-	    key: 'where',
-	    value: function where(_where) {
-	      return _Util2.default.where(_data.EvolutionItemData, _where).map(function (e) {
-	        return new EvolutionItem(e);
-	      });
-	    }
-	  }, {
-	    key: 'findBy',
-	    value: function findBy(where) {
-	      return EvolutionItem.where(where)[0];
-	    }
-	  }]);
-	
-	  function EvolutionItem(data) {
-	    _classCallCheck(this, EvolutionItem);
-	
-	    this.data = data;
-	    this.number = data.number;
-	    this.item_id = data.item_id;
-	    this.servant_id = data.servant_id;
-	    this.level = data.level;
-	  }
-	
-	  _createClass(EvolutionItem, [{
-	    key: 'servant',
-	    get: function get() {
-	      return _Servant2.default.findBy(this.data.servant_id);
-	    }
-	  }, {
-	    key: 'item',
-	    get: function get() {
-	      return _Item2.default.findBy(this.data.item_id);
-	    }
-	  }]);
-	
-	  return EvolutionItem;
-	}();
-	
-	exports.default = EvolutionItem;
-
-/***/ },
-/* 245 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _data = __webpack_require__(241);
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	var Item = function () {
-	  _createClass(Item, null, [{
-	    key: 'findBy',
-	    value: function findBy(id) {
-	      return new Item(_data.ItemData.find(function (e) {
-	        return e.id === id;
-	      }));
-	    }
-	  }]);
-	
-	  function Item(data) {
-	    _classCallCheck(this, Item);
-	
-	    this.data = data;
-	  }
-	
-	  _createClass(Item, [{
-	    key: 'id',
-	    get: function get() {
-	      return this.data.id;
-	    }
-	  }, {
-	    key: 'evolutionItems',
-	    get: function get() {
-	      var _this = this;
-	
-	      return _data.EvolutionItemData.filter(function (e) {
-	        return e.item_id === _this.id;
-	      });
-	    }
-	  }, {
-	    key: 'servants',
-	    get: function get() {
-	      return Array.from(new Set(this.evolutionItems.map(function (e) {
-	        return e.servant_id;
-	      })));
-	    }
-	  }]);
-	
-	  return Item;
-	}();
-	
-	exports.default = Item;
-
-/***/ },
-/* 246 */
-/***/ function(module, exports) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	var Util = function () {
-	  function Util() {
-	    _classCallCheck(this, Util);
-	  }
-	
-	  _createClass(Util, null, [{
-	    key: "where",
-	    value: function where(from, by) {
-	      return from.filter(function (e) {
-	        return Object.keys(by).reduce(function (ac, c) {
-	          return ac && by[c] === e[c];
-	        }, true);
-	      });
-	    }
-	  }]);
-	
-	  return Util;
-	}();
-	
-	exports.default = Util;
-
-/***/ },
 /* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -27621,7 +28352,7 @@
 	
 	var _reactRouter = __webpack_require__(178);
 	
-	var _data = __webpack_require__(241);
+	var _data = __webpack_require__(242);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -27708,9 +28439,9 @@
 	
 	var _reactRouter = __webpack_require__(178);
 	
-	var _data = __webpack_require__(241);
+	var _data = __webpack_require__(242);
 	
-	var _Item = __webpack_require__(245);
+	var _Item = __webpack_require__(243);
 	
 	var _Item2 = _interopRequireDefault(_Item);
 	
@@ -27806,7 +28537,7 @@
 	
 	var _reactRouter = __webpack_require__(178);
 	
-	var _data = __webpack_require__(241);
+	var _data = __webpack_require__(242);
 	
 	var _Area = __webpack_require__(250);
 	
@@ -27879,7 +28610,7 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _data = __webpack_require__(241);
+	var _data = __webpack_require__(242);
 	
 	var _Quest = __webpack_require__(251);
 	
@@ -27943,9 +28674,9 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _data = __webpack_require__(241);
+	var _data = __webpack_require__(242);
 	
-	var _Util = __webpack_require__(246);
+	var _Util = __webpack_require__(244);
 	
 	var _Util2 = _interopRequireDefault(_Util);
 	

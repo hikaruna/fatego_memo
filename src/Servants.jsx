@@ -1,21 +1,15 @@
 import React, { Component } from 'react';
-import ServantSummary from 'ServantSummary.jsx';
-import { ServantData } from 'data.jsx';
+import { Link } from 'react-router';
+import ServantModel from 'models/Servant.js';
 
 export default class Servants extends Component {
 
   constructor(props) {
     super(props);
-    this.data = ServantData;
+    this.servants = ServantModel.all();
   }
 
   render() {
-    var rows = [];
-    for (var i=0; i < this.data.length; i++) {
-      let row = this.data[i];
-      rows.push(<ServantSummary key={row.id} id={row.id} />);
-    }
-
     return (
       <table>
         <thead>
@@ -26,10 +20,23 @@ export default class Servants extends Component {
           </tr>
         </thead>
         <tbody>
-          <ServantSummary id={this.data[0].id} />
-          <ServantSummary id={this.data[1].id} />
+          {this.servants.map(e => {
+            return <Servant key={`servants_${ e.id }`} servant={e} />;
+          })}
         </tbody>
       </table>
+    );
+  }
+}
+
+class Servant extends Component {
+  render() {
+    return (
+      <tr>
+        <td><Link to={`/servants/${this.props.servant.id}`}>{this.props.servant.id}</Link></td>
+        <td>{this.props.servant.rarity}</td>
+        <td>{this.props.servant.class}</td>
+      </tr>
     );
   }
 }

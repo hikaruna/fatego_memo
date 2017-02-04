@@ -38,10 +38,12 @@
     ]
   },
   "dependencies": {
+    "js-yaml": "^3.7.0",
     "react": "^15.4.2",
     "react-breadcrumbs": "^1.5.2",
     "react-dom": "^15.4.2",
     "react-router": "^3.0.2",
-    "react-router-relative-link": "^1.0.2"
+    "react-router-relative-link": "^1.0.2",
+    "yml-loader": "^1.1.0"
   }
 }
