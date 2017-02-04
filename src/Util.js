@@ -8,3 +8,24 @@ export default class Util {
   }
 }
 
+Number.prototype.times = function(func) {
+  return Array(this).fill().map((e,i) => i);
+}
+
+Array.prototype.flatten = function() {
+  return Array.prototype.concat.apply([], this);
+};
+
+Array.prototype.uniq = function() {
+  return Array.from(new Set(this));
+};
+
+String.prototype.toSnakeCase = function() {
+  return this.split(".").map(e => e.replace(/^./, (a)=> a.toLowerCase()).split(/(?=[A-Z])/).join("_").replace(/_([A-Z])/, (a,b)=> "_" + b.toLowerCase())).join(".");
+};
+
+String.prototype.toCamelCase = function() {
+  return this.replace(/_./g, function(s) {
+    return s.charAt(1).toUpperCase();
+  });
+};

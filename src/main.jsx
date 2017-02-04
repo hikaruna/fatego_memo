@@ -11,6 +11,7 @@ import Items from 'Items.jsx';
 import Item from 'Item.jsx';
 import Areas from 'Areas.jsx';
 import Area from 'Area.jsx';
+import Enemy from 'Enemy.jsx';
 
 const history = useBasename(createHistory) ({
   basename: BASE_PATH
@@ -31,6 +32,9 @@ render((
       <Route name="Area一覧" path="areas">
         <IndexRoute component={Areas}/>
         <Route path=":id" component={Area}/>
+      </Route>
+      <Route name="Enemy一覧" path="enemies">
+        <Route path=":id" component={Enemy}/>
       </Route>
     </Route>
   </Router>

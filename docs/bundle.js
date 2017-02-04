@@ -88,6 +88,10 @@
 	
 	var _Area2 = _interopRequireDefault(_Area);
 	
+	var _Enemy = __webpack_require__(255);
+	
+	var _Enemy2 = _interopRequireDefault(_Enemy);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var history = (0, _history.useBasename)(_history.createHistory)({
@@ -118,6 +122,11 @@
 	      { name: 'Area\u4E00\u89A7', path: 'areas' },
 	      _react2.default.createElement(_reactRouter.IndexRoute, { component: _Areas2.default }),
 	      _react2.default.createElement(_reactRouter.Route, { path: ':id', component: _Area2.default })
+	    ),
+	    _react2.default.createElement(
+	      _reactRouter.Route,
+	      { name: 'Enemy\u4E00\u89A7', path: 'enemies' },
+	      _react2.default.createElement(_reactRouter.Route, { path: ':id', component: _Enemy2.default })
 	    )
 	  )
 	), document.getElementById('app'));
@@ -36765,6 +36774,158 @@
 	}(_react.Component);
 	
 	exports.default = Area;
+
+/***/ },
+/* 255 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(178);
+	
+	var _Enemy = __webpack_require__(256);
+	
+	var _Enemy2 = _interopRequireDefault(_Enemy);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Enemy = function (_Component) {
+	  _inherits(Enemy, _Component);
+	
+	  function Enemy(props) {
+	    _classCallCheck(this, Enemy);
+	
+	    var _this = _possibleConstructorReturn(this, (Enemy.__proto__ || Object.getPrototypeOf(Enemy)).call(this, props));
+	
+	    _this.model = Enemy.findBy(props.params.id);
+	    return _this;
+	  }
+	
+	  _createClass(Enemy, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'article',
+	        null,
+	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          this.model.id
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return Enemy;
+	}(_react.Component);
+	
+	exports.default = Enemy;
+
+/***/ },
+/* 256 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _ActiveObject2 = __webpack_require__(257);
+	
+	var _ActiveObject3 = _interopRequireDefault(_ActiveObject2);
+	
+	var _enemies = __webpack_require__(258);
+	
+	var _enemies2 = _interopRequireDefault(_enemies);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Enemy = function (_ActiveObject) {
+	  _inherits(Enemy, _ActiveObject);
+	
+	  function Enemy() {
+	    _classCallCheck(this, Enemy);
+	
+	    return _possibleConstructorReturn(this, (Enemy.__proto__ || Object.getPrototypeOf(Enemy)).apply(this, arguments));
+	  }
+	
+	  return Enemy;
+	}(_ActiveObject3.default);
+	
+	exports.default = Enemy;
+	
+	Enemy.source = _enemies2.default;
+
+/***/ },
+/* 257 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var ActiveObject = function ActiveObject() {
+	  _classCallCheck(this, ActiveObject);
+	};
+	
+	exports.default = ActiveObject;
+
+/***/ },
+/* 258 */
+/***/ function(module, exports) {
+
+	module.exports = [
+		{
+			"id": "スケルトン",
+			"class": "セイバー"
+		},
+		{
+			"id": "シャドウ・バーサーカー",
+			"class": "バーサーカー"
+		},
+		{
+			"id": "フランス兵(剣)",
+			"class": "セイバー",
+			"gender": "男"
+		},
+		{
+			"id": "フランス兵(槍)",
+			"class": "ランサー",
+			"gender": "男"
+		},
+		{
+			"id": "フランス兵(弓)",
+			"class": "アーチャー",
+			"gender": "男"
+		}
+	];
 
 /***/ }
 /******/ ]);

@@ -1,5 +1,6 @@
 - id: スケルトン
   class: セイバー
+  gender: null
 - id: シャドウ・バーサーカー
   class: バーサーカー
 - id: フランス兵(剣)
