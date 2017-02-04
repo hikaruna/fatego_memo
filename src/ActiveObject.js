@@ -1,3 +1,5 @@
+import Util from 'Util.js';
+
 export default class ActiveObject {
   static set data(data) {
     this._data = data;
@@ -12,7 +14,7 @@ export default class ActiveObject {
     };
 
     this.findBy = (where = {}) => {
-      return this.where()[0] || null;
+      return this.where(where)[0] || null;
     };
 
     this.find = (id) => {
@@ -46,7 +48,12 @@ export default class ActiveObject {
           }else {
             return undefined;
           }
-        }).flatten();
+        }).flatten().uniq();
+      }
+    });
+    Object.defineProperty(this.prototype, `${name.singularize()}_ids`, {
+      get: function() {
+        return this[name].map(e => e.id);
       }
     });
   }
@@ -67,6 +74,11 @@ export default class ActiveObject {
         let where = {};
         where[option.foreign_key] = this.id;
         return ActiveObject.loadClass(option.class_name).where(where);
+      }
+    });
+    Object.defineProperty(this.prototype, `${name.singularize()}_ids`, {
+      get: function() {
+        return this[name].map(e => e.id);
       }
     });
   }

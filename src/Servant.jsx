@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import { ServantData, EvolutionItemData } from 'data.jsx';
 import ServantModel from 'models/Servant.js';
-import EvolutionItemModel from 'models/EvolutionItem.js';
 
 export default class Servant extends Component {
   constructor(props) {
     super(props);
-    this.model = ServantModel.findBy(props.params.id);
+    this.model = ServantModel.find(props.params.id);
   }
 
   get rarity() {

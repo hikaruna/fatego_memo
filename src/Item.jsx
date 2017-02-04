@@ -6,18 +6,10 @@ import Model from 'models/Item.js';
 export default class Item extends Component {
   constructor(props) {
     super(props);
-    this.model = Model.findBy(props.params.id);
+    this.model = Model.find(props.params.id);
   }
 
   render() {
-    const servants = this.model.servants.map(e => {
-      const to = `/servants/${e}`;
-      return(
-        <tr key={e}>
-          <td><Link to={to}>{e}</Link></td>
-        </tr>
-      );
-    });
     return (
       <article>
         <h1>{this.props.params.id}</h1>
@@ -25,11 +17,27 @@ export default class Item extends Component {
           <h1>必要なサーヴァント</h1>
           <table>
             <tbody>
-              {servants}
+              {this.model.servants.map((e,i) => {
+                return <Servant key={e.id} servant={e}/>;
+              })}
             </tbody>
           </table>
         </section>
       </article>
+    );
+  }
+}
+
+class Servant extends Component {
+  render() {
+    return (
+      <tr>
+        <td>
+          <Link to={`/servants/${this.props.servant.id}`}>
+            {this.props.servant.id}
+          </Link>
+        </td>
+      </tr>
     );
   }
 }

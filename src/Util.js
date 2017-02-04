@@ -18,8 +18,21 @@ Array.prototype.flatten = function() {
   return Array.prototype.concat.apply([], this);
 };
 
-Array.prototype.uniq = function() {
+Array.prototype.uniq = function(predicate = null) {
+  if(predicate === null) {
+    return Array.from(new Set(this));
+  }
   return Array.from(new Set(this));
+  /* うごかによ
+  for(let i=0;i<this.length;i++) {
+    for(let j=0;(i+j)<this.length;j++) {
+      if(predicate(this[i], this[j])) {
+        this[j] = null;
+      }
+    }
+  }
+  return this.filter(e => !(e === null));
+  */
 };
 
 String.prototype.toSnakeCase = function() {
