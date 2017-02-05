@@ -68,27 +68,47 @@
 	
 	var _Servants2 = _interopRequireDefault(_Servants);
 	
-	var _Servant = __webpack_require__(262);
+	var _Servant = __webpack_require__(265);
 	
 	var _Servant2 = _interopRequireDefault(_Servant);
 	
-	var _Items = __webpack_require__(263);
+	var _Items = __webpack_require__(266);
 	
 	var _Items2 = _interopRequireDefault(_Items);
 	
-	var _Item = __webpack_require__(264);
+	var _Item = __webpack_require__(267);
 	
 	var _Item2 = _interopRequireDefault(_Item);
 	
-	var _Areas = __webpack_require__(265);
+	var _Areas = __webpack_require__(269);
 	
 	var _Areas2 = _interopRequireDefault(_Areas);
 	
-	var _Area = __webpack_require__(266);
+	var _Area = __webpack_require__(270);
 	
 	var _Area2 = _interopRequireDefault(_Area);
 	
-	var _Enemy = __webpack_require__(267);
+	var _Points = __webpack_require__(271);
+	
+	var _Points2 = _interopRequireDefault(_Points);
+	
+	var _Point = __webpack_require__(272);
+	
+	var _Point2 = _interopRequireDefault(_Point);
+	
+	var _Quests = __webpack_require__(273);
+	
+	var _Quests2 = _interopRequireDefault(_Quests);
+	
+	var _Quest = __webpack_require__(274);
+	
+	var _Quest2 = _interopRequireDefault(_Quest);
+	
+	var _Enemies = __webpack_require__(275);
+	
+	var _Enemies2 = _interopRequireDefault(_Enemies);
+	
+	var _Enemy = __webpack_require__(276);
 	
 	var _Enemy2 = _interopRequireDefault(_Enemy);
 	
@@ -121,11 +141,39 @@
 	      _reactRouter.Route,
 	      { name: 'Area\u4E00\u89A7', path: 'areas' },
 	      _react2.default.createElement(_reactRouter.IndexRoute, { component: _Areas2.default }),
-	      _react2.default.createElement(_reactRouter.Route, { path: ':id', component: _Area2.default })
+	      _react2.default.createElement(_reactRouter.Route, { path: ':id', component: _Area2.default }),
+	      _react2.default.createElement(
+	        _reactRouter.Route,
+	        { path: ':area_id' },
+	        _react2.default.createElement(_reactRouter.Route, { path: 'points/:id', component: _Point2.default }),
+	        _react2.default.createElement(
+	          _reactRouter.Route,
+	          { path: 'points/:point_id' },
+	          _react2.default.createElement(_reactRouter.Route, { path: 'quests/:id', component: _Quest2.default })
+	        )
+	      )
+	    ),
+	    _react2.default.createElement(
+	      _reactRouter.Route,
+	      { name: 'Points\u4E00\u89A7', path: 'points' },
+	      _react2.default.createElement(_reactRouter.IndexRoute, { component: _Points2.default }),
+	      _react2.default.createElement(_reactRouter.Route, { path: ':id', component: _Point2.default }),
+	      _react2.default.createElement(
+	        _reactRouter.Route,
+	        { path: ':point_id' },
+	        _react2.default.createElement(_reactRouter.Route, { path: 'quests/:id', component: _Quest2.default })
+	      )
+	    ),
+	    _react2.default.createElement(
+	      _reactRouter.Route,
+	      { name: 'Quests\u4E00\u89A7', path: 'quests' },
+	      _react2.default.createElement(_reactRouter.IndexRoute, { component: _Quests2.default }),
+	      _react2.default.createElement(_reactRouter.Route, { path: ':id', component: _Quest2.default })
 	    ),
 	    _react2.default.createElement(
 	      _reactRouter.Route,
 	      { name: 'Enemy\u4E00\u89A7', path: 'enemies' },
+	      _react2.default.createElement(_reactRouter.IndexRoute, { component: _Enemies2.default }),
 	      _react2.default.createElement(_reactRouter.Route, { path: ':id', component: _Enemy2.default })
 	    )
 	  )
@@ -26925,6 +26973,33 @@
 	              { to: '/areas' },
 	              '\u30A8\u30EA\u30A2\u4E00\u89A7'
 	            )
+	          ),
+	          _react2.default.createElement(
+	            'li',
+	            null,
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: '/points' },
+	              '\u5EA7\u6A19\u4E00\u89A7'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'li',
+	            null,
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: '/quests' },
+	              '\u30AF\u30A8\u30B9\u30C8\u4E00\u89A7'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'li',
+	            null,
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: '/enemies' },
+	              '\u30A8\u30CD\u30DF\u30FC\u4E00\u89A7'
+	            )
 	          )
 	        )
 	      );
@@ -27080,7 +27155,7 @@
 	
 	var _ActiveObject3 = _interopRequireDefault(_ActiveObject2);
 	
-	var _servants = __webpack_require__(261);
+	var _servants = __webpack_require__(264);
 	
 	var _servants2 = _interopRequireDefault(_servants);
 	
@@ -27150,14 +27225,18 @@
 	      Object.defineProperty(this.prototype, name, {
 	        get: function get() {
 	          return this[through].map(function (e) {
-	            if (!(e[name.singularize()] === undefined)) {
+	            if (option.hasOwnProperty('source')) {
+	              return e[option.source];
+	            } else if (!(e[name.singularize()] === undefined)) {
 	              return e[name.singularize()];
-	            } else if (!(e[name.pluralize()] === undefined)) {
-	              return e[name.pluralize()];
+	            } else if (!(e[name] === undefined)) {
+	              return e[name];
 	            } else {
 	              return undefined;
 	            }
-	          }).flatten().uniq();
+	          }).flatten().uniq(function (a, b) {
+	            return a.id === b.id;
+	          });
 	        }
 	      });
 	      Object.defineProperty(this.prototype, name.singularize() + '_ids', {
@@ -27173,7 +27252,6 @@
 	    value: function has_many(name) {
 	      var option = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 	
-	      console.log('has_many ' + name);
 	      if (option.hasOwnProperty('through')) {
 	        return this.has_many_through(name, option.through, option);
 	      }
@@ -27343,23 +27421,37 @@
 	  return Array.prototype.concat.apply([], this);
 	};
 	
+	Array.prototype.contains = function () {
+	  var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+	
+	  if (predicate == null) {
+	    return this.includes(predicate);
+	  }
+	
+	  for (var i = 0; i < this.length; i++) {
+	    if (predicate(this[i])) {
+	      return true;
+	    }
+	  }
+	  return false;
+	};
+	
 	Array.prototype.uniq = function () {
 	  var predicate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 	
 	  if (predicate === null) {
 	    return Array.from(new Set(this));
 	  }
-	  return Array.from(new Set(this));
-	  /* うごかによ
-	  for(let i=0;i<this.length;i++) {
-	    for(let j=0;(i+j)<this.length;j++) {
-	      if(predicate(this[i], this[j])) {
-	        this[j] = null;
-	      }
+	
+	  var result = [];
+	  this.forEach(function (a) {
+	    if (!result.contains(function (e) {
+	      return predicate(e, a);
+	    })) {
+	      result.push(a);
 	    }
-	  }
-	  return this.filter(e => !(e === null));
-	  */
+	  });
+	  return result;
 	};
 	
 	String.prototype.toSnakeCase = function () {
@@ -28031,11 +28123,12 @@
 
 	var map = {
 		"./Area.js": 250,
-		"./Enemy.js": 253,
-		"./EnemyQuest.js": 255,
-		"./EvolutionItem.js": 257,
-		"./Item.js": 259,
-		"./Quest.js": 252,
+		"./Enemy.js": 252,
+		"./EnemyQuest.js": 254,
+		"./EvolutionItem.js": 256,
+		"./Item.js": 258,
+		"./Point.js": 260,
+		"./Quest.js": 262,
 		"./Servant.js": 240
 	};
 	function webpackContext(req) {
@@ -28066,11 +28159,9 @@
 	
 	var _ActiveObject3 = _interopRequireDefault(_ActiveObject2);
 	
-	var _data = __webpack_require__(251);
+	var _areas = __webpack_require__(251);
 	
-	var _Quest = __webpack_require__(252);
-	
-	var _Quest2 = _interopRequireDefault(_Quest);
+	var _areas2 = _interopRequireDefault(_areas);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -28094,69 +28185,39 @@
 	
 	exports.default = Area;
 	
-	Area.data = _data.AreaData;
-	Area.has_many('quests');
+	Area.data = _areas2.default;
+	Area.has_many('points');
 
 /***/ },
 /* 251 */
 /***/ function(module, exports) {
 
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	var ServantData = exports.ServantData = [{
-	  id: 'ギルガメッシュ',
-	  rarity: 5,
-	  class: 'アーチャー'
-	}, {
-	  id: 'クー・フーリン',
-	  rarity: 3,
-	  class: 'ランサー'
-	}];
-	
-	var EvolutionItemData = exports.EvolutionItemData = [{
-	  servant_id: 'ギルガメッシュ',
-	  item_id: 'アーチャーピース',
-	  level: 1,
-	  number: 2
-	}, {
-	  servant_id: 'ギルガメッシュ',
-	  item_id: 'ゴーストランタン',
-	  level: 2,
-	  number: 12
-	}, {
-	  servant_id: 'ギルガメッシュ',
-	  item_id: 'アーチャーピース',
-	  level: 2,
-	  number: 12
-	}, {
-	  servant_id: 'クー・フーリン',
-	  item_id: 'アーチャーピース',
-	  level: 1,
-	  number: 2
-	}];
-	
-	var ItemData = exports.ItemData = [{
-	  id: 'ゴーストランタン'
-	}, {
-	  id: 'アーチャーピース'
-	}];
-	
-	var AreaData = exports.AreaData = [{
-	  id: '第一特異点'
-	}];
-	
-	var QuestData = exports.QuestData = [{
-	  id: 'パリ',
-	  area_id: '第一特異点'
-	}];
-	
-	var ItemQuestData = exports.ItemQuestData = [{
-	  item_id: 'ゴーストランタン',
-	  quest_id: 'パリ'
-	}];
+	module.exports = [
+		{
+			"id": "特異点Ｆ"
+		},
+		{
+			"id": "第一特異点"
+		},
+		{
+			"id": "第二特異点"
+		},
+		{
+			"id": "第三特異点"
+		},
+		{
+			"id": "第四特異点"
+		},
+		{
+			"id": "第五特異点"
+		},
+		{
+			"id": "第六特異点"
+		},
+		{
+			"id": "第七特異点"
+		}
+	];
 
 /***/ },
 /* 252 */
@@ -28172,51 +28233,7 @@
 	
 	var _ActiveObject3 = _interopRequireDefault(_ActiveObject2);
 	
-	var _data = __webpack_require__(251);
-	
-	var _Util = __webpack_require__(242);
-	
-	var _Util2 = _interopRequireDefault(_Util);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var Quest = function (_ActiveObject) {
-	  _inherits(Quest, _ActiveObject);
-	
-	  function Quest() {
-	    _classCallCheck(this, Quest);
-	
-	    return _possibleConstructorReturn(this, (Quest.__proto__ || Object.getPrototypeOf(Quest)).apply(this, arguments));
-	  }
-	
-	  return Quest;
-	}(_ActiveObject3.default);
-	
-	exports.default = Quest;
-	
-	Quest.data = _data.QuestData;
-
-/***/ },
-/* 253 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _ActiveObject2 = __webpack_require__(241);
-	
-	var _ActiveObject3 = _interopRequireDefault(_ActiveObject2);
-	
-	var _enemies = __webpack_require__(254);
+	var _enemies = __webpack_require__(253);
 	
 	var _enemies2 = _interopRequireDefault(_enemies);
 	
@@ -28245,10 +28262,11 @@
 	
 	Enemy.data = _enemies2.default;
 	Enemy.has_many('enemy_quests');
+	Enemy.has_many('quests', { through: 'enemy_quests' });
 	Enemy.has_many('enemies', { through: 'enemy_quests' });
 
 /***/ },
-/* 254 */
+/* 253 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -28279,7 +28297,7 @@
 	];
 
 /***/ },
-/* 255 */
+/* 254 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28292,7 +28310,7 @@
 	
 	var _ActiveObject3 = _interopRequireDefault(_ActiveObject2);
 	
-	var _enemy_quests = __webpack_require__(256);
+	var _enemy_quests = __webpack_require__(255);
 	
 	var _enemy_quests2 = _interopRequireDefault(_enemy_quests);
 	
@@ -28318,11 +28336,12 @@
 	
 	exports.default = EnemyQuest;
 	
-	EnemyQuest.data = __webpack_require__(256);
+	EnemyQuest.data = __webpack_require__(255);
 	EnemyQuest.belongs_to('enemy');
+	EnemyQuest.belongs_to('quest');
 
 /***/ },
-/* 256 */
+/* 255 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -28357,7 +28376,7 @@
 	];
 
 /***/ },
-/* 257 */
+/* 256 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28370,7 +28389,7 @@
 	
 	var _ActiveObject3 = _interopRequireDefault(_ActiveObject2);
 	
-	var _evolution_items = __webpack_require__(258);
+	var _evolution_items = __webpack_require__(257);
 	
 	var _evolution_items2 = _interopRequireDefault(_evolution_items);
 	
@@ -28401,7 +28420,7 @@
 	EvolutionItem.belongs_to('item');
 
 /***/ },
-/* 258 */
+/* 257 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -36180,7 +36199,7 @@
 	];
 
 /***/ },
-/* 259 */
+/* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36193,7 +36212,7 @@
 	
 	var _ActiveObject3 = _interopRequireDefault(_ActiveObject2);
 	
-	var _items = __webpack_require__(260);
+	var _items = __webpack_require__(259);
 	
 	var _items2 = _interopRequireDefault(_items);
 	
@@ -36228,7 +36247,7 @@
 	Item.has_many('servants', { through: 'evolutionItems' });
 
 /***/ },
-/* 260 */
+/* 259 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -36391,7 +36410,168 @@
 	];
 
 /***/ },
+/* 260 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _ActiveObject2 = __webpack_require__(241);
+	
+	var _ActiveObject3 = _interopRequireDefault(_ActiveObject2);
+	
+	var _points = __webpack_require__(261);
+	
+	var _points2 = _interopRequireDefault(_points);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Point = function (_ActiveObject) {
+	  _inherits(Point, _ActiveObject);
+	
+	  function Point() {
+	    _classCallCheck(this, Point);
+	
+	    return _possibleConstructorReturn(this, (Point.__proto__ || Object.getPrototypeOf(Point)).apply(this, arguments));
+	  }
+	
+	  return Point;
+	}(_ActiveObject3.default);
+	
+	exports.default = Point;
+	
+	Point.data = _points2.default;
+	Point.belongs_to('area');
+	Point.has_many('quests');
+
+/***/ },
 /* 261 */
+/***/ function(module, exports) {
+
+	module.exports = [
+		{
+			"id": "未確認座標X-A",
+			"area_id": "特異点Ｆ"
+		},
+		{
+			"id": "未確認座標X-G",
+			"area_id": "特異点Ｆ"
+		},
+		{
+			"id": "ドンレミ",
+			"area_id": "第一特異点"
+		},
+		{
+			"id": "パリ",
+			"area_id": "第一特異点"
+		}
+	];
+
+/***/ },
+/* 262 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _ActiveObject2 = __webpack_require__(241);
+	
+	var _ActiveObject3 = _interopRequireDefault(_ActiveObject2);
+	
+	var _quests = __webpack_require__(263);
+	
+	var _quests2 = _interopRequireDefault(_quests);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Quest = function (_ActiveObject) {
+	  _inherits(Quest, _ActiveObject);
+	
+	  function Quest() {
+	    _classCallCheck(this, Quest);
+	
+	    return _possibleConstructorReturn(this, (Quest.__proto__ || Object.getPrototypeOf(Quest)).apply(this, arguments));
+	  }
+	
+	  return Quest;
+	}(_ActiveObject3.default);
+	
+	exports.default = Quest;
+	
+	Quest.data = _quests2.default;
+	Quest.belongs_to('point');
+	Quest.has_many('enemy_quests');
+	Quest.has_many('enemies', { through: 'enemy_quests' });
+
+/***/ },
+/* 263 */
+/***/ function(module, exports) {
+
+	module.exports = [
+		{
+			"id": "屋敷跡",
+			"point_id": "未確認座標X-A",
+			"level": 1,
+			"ap": 3
+		},
+		{
+			"id": "危険地帯",
+			"point_id": "未確認座標X-G",
+			"level": 40,
+			"ap": 15
+		},
+		{
+			"id": "燃え盛る森",
+			"point_id": "未確認座標X-G",
+			"level": 40,
+			"ap": 15
+		},
+		{
+			"id": "ジャンヌ生誕の地",
+			"point_id": "ドンレミ",
+			"level": 10,
+			"ap": 7
+		},
+		{
+			"id": "宝物庫の扉を開け(超級)",
+			"point_id": null,
+			"level": 50,
+			"ap": 40
+		},
+		{
+			"id": "弓の修練場(超級)",
+			"point_id": null,
+			"level": 60,
+			"ap": 40
+		},
+		{
+			"id": "種火集め(槍・殺編)(超級)",
+			"point_id": null,
+			"level": 60,
+			"ap": 40
+		}
+	];
+
+/***/ },
+/* 264 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -37143,7 +37323,7 @@
 	];
 
 /***/ },
-/* 262 */
+/* 265 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37335,7 +37515,7 @@
 	}(_react.Component);
 
 /***/ },
-/* 263 */
+/* 266 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37352,7 +37532,7 @@
 	
 	var _reactRouter = __webpack_require__(178);
 	
-	var _Item = __webpack_require__(259);
+	var _Item = __webpack_require__(258);
 	
 	var _Item2 = _interopRequireDefault(_Item);
 	
@@ -37421,7 +37601,7 @@
 	exports.default = Items;
 
 /***/ },
-/* 264 */
+/* 267 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37438,9 +37618,9 @@
 	
 	var _reactRouter = __webpack_require__(178);
 	
-	var _data = __webpack_require__(251);
+	var _data = __webpack_require__(268);
 	
-	var _Item = __webpack_require__(259);
+	var _Item = __webpack_require__(258);
 	
 	var _Item2 = _interopRequireDefault(_Item);
 	
@@ -37490,7 +37670,7 @@
 	              'tbody',
 	              null,
 	              this.model.servants.map(function (e, i) {
-	                return _react2.default.createElement(Servant, { key: e.id, servant: e });
+	                return _react2.default.createElement(Servant, { key: i + '_' + e.id, servant: e });
 	              })
 	            )
 	          )
@@ -37536,7 +37716,68 @@
 	}(_react.Component);
 
 /***/ },
-/* 265 */
+/* 268 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var ServantData = exports.ServantData = [{
+	  id: 'ギルガメッシュ',
+	  rarity: 5,
+	  class: 'アーチャー'
+	}, {
+	  id: 'クー・フーリン',
+	  rarity: 3,
+	  class: 'ランサー'
+	}];
+	
+	var EvolutionItemData = exports.EvolutionItemData = [{
+	  servant_id: 'ギルガメッシュ',
+	  item_id: 'アーチャーピース',
+	  level: 1,
+	  number: 2
+	}, {
+	  servant_id: 'ギルガメッシュ',
+	  item_id: 'ゴーストランタン',
+	  level: 2,
+	  number: 12
+	}, {
+	  servant_id: 'ギルガメッシュ',
+	  item_id: 'アーチャーピース',
+	  level: 2,
+	  number: 12
+	}, {
+	  servant_id: 'クー・フーリン',
+	  item_id: 'アーチャーピース',
+	  level: 1,
+	  number: 2
+	}];
+	
+	var ItemData = exports.ItemData = [{
+	  id: 'ゴーストランタン'
+	}, {
+	  id: 'アーチャーピース'
+	}];
+	
+	var AreaData = exports.AreaData = [{
+	  id: '第一特異点'
+	}];
+	
+	var QuestData = exports.QuestData = [{
+	  id: 'パリ',
+	  area_id: '第一特異点'
+	}];
+	
+	var ItemQuestData = exports.ItemQuestData = [{
+	  item_id: 'ゴーストランタン',
+	  quest_id: 'パリ'
+	}];
+
+/***/ },
+/* 269 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37553,7 +37794,7 @@
 	
 	var _reactRouter = __webpack_require__(178);
 	
-	var _data = __webpack_require__(251);
+	var _data = __webpack_require__(268);
 	
 	var _Area = __webpack_require__(250);
 	
@@ -37575,7 +37816,7 @@
 	
 	    var _this = _possibleConstructorReturn(this, (Areas.__proto__ || Object.getPrototypeOf(Areas)).call(this, props));
 	
-	    _this.model = _Area2.default.all;
+	    _this.model = _Area2.default.all();
 	    return _this;
 	  }
 	
@@ -37615,7 +37856,7 @@
 	exports.default = Areas;
 
 /***/ },
-/* 266 */
+/* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37652,13 +37893,15 @@
 	
 	    var _this = _possibleConstructorReturn(this, (Area.__proto__ || Object.getPrototypeOf(Area)).call(this, props));
 	
-	    _this.model = _Area2.default.findBy(props.params.id);
+	    _this.model = _Area2.default.find(props.params.id);
 	    return _this;
 	  }
 	
 	  _createClass(Area, [{
 	    key: 'render',
 	    value: function render() {
+	      var _this2 = this;
+	
 	      return _react2.default.createElement(
 	        'article',
 	        null,
@@ -37673,11 +37916,15 @@
 	          _react2.default.createElement(
 	            'ul',
 	            null,
-	            this.model.quest_ids.map(function (e) {
+	            this.model.point_ids.map(function (e) {
 	              return _react2.default.createElement(
 	                'li',
 	                { key: e },
-	                e
+	                _react2.default.createElement(
+	                  _reactRouter.Link,
+	                  { to: '/areas/' + _this2.model.id + '/points/' + e },
+	                  e
+	                )
 	              );
 	            })
 	          )
@@ -37692,7 +37939,7 @@
 	exports.default = Area;
 
 /***/ },
-/* 267 */
+/* 271 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37709,9 +37956,9 @@
 	
 	var _reactRouter = __webpack_require__(178);
 	
-	var _Enemy = __webpack_require__(253);
+	var _Point = __webpack_require__(260);
 	
-	var _Enemy2 = _interopRequireDefault(_Enemy);
+	var _Point2 = _interopRequireDefault(_Point);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -37720,23 +37967,263 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	//import EnemyQuestModel from 'models/EnemyQuest.js';
 	
+	var Points = function (_Component) {
+	  _inherits(Points, _Component);
 	
-	var Enemy = function (_Component) {
-	  _inherits(Enemy, _Component);
+	  function Points(props) {
+	    _classCallCheck(this, Points);
 	
-	  function Enemy(props) {
-	    _classCallCheck(this, Enemy);
+	    var _this = _possibleConstructorReturn(this, (Points.__proto__ || Object.getPrototypeOf(Points)).call(this, props));
 	
-	    var _this = _possibleConstructorReturn(this, (Enemy.__proto__ || Object.getPrototypeOf(Enemy)).call(this, props));
-	
-	    _this.model = _Enemy2.default.findBy(props.params.id);
-	    _this.class = _Enemy2.default;
+	    _this.model = _Point2.default.all();
 	    return _this;
 	  }
 	
-	  _createClass(Enemy, [{
+	  _createClass(Points, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'article',
+	        null,
+	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          this.model.id
+	        ),
+	        _react2.default.createElement(
+	          'ul',
+	          null,
+	          this.model.map(function (e) {
+	            return _react2.default.createElement(
+	              'li',
+	              { key: e.id },
+	              _react2.default.createElement(
+	                _reactRouter.Link,
+	                { to: '/points/' + e.id },
+	                e.id
+	              )
+	            );
+	          })
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return Points;
+	}(_react.Component);
+	
+	exports.default = Points;
+
+/***/ },
+/* 272 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(178);
+	
+	var _Point = __webpack_require__(260);
+	
+	var _Point2 = _interopRequireDefault(_Point);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Point = function (_Component) {
+	  _inherits(Point, _Component);
+	
+	  function Point(props) {
+	    _classCallCheck(this, Point);
+	
+	    var _this = _possibleConstructorReturn(this, (Point.__proto__ || Object.getPrototypeOf(Point)).call(this, props));
+	
+	    _this.model = _Point2.default.find(props.params.id);
+	    return _this;
+	  }
+	
+	  _createClass(Point, [{
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
+	
+	      return _react2.default.createElement(
+	        'article',
+	        null,
+	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          this.model.id
+	        ),
+	        _react2.default.createElement(
+	          'ul',
+	          null,
+	          this.model.quest_ids.map(function (e) {
+	            return _react2.default.createElement(
+	              'li',
+	              { key: e },
+	              _react2.default.createElement(
+	                _reactRouter.Link,
+	                { to: _this2.parent + '/quests/' + e },
+	                e
+	              )
+	            );
+	          })
+	        )
+	      );
+	    }
+	  }, {
+	    key: 'parent',
+	    get: function get() {
+	      var a = "";
+	      if (this.props.params.hasOwnProperty('area_id')) {
+	        a += '/areas/' + this.props.params.area_id;
+	      }
+	      a += '/points/' + this.props.params.id;
+	      return a;
+	    }
+	  }]);
+	
+	  return Point;
+	}(_react.Component);
+	
+	exports.default = Point;
+
+/***/ },
+/* 273 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(178);
+	
+	var _Quest = __webpack_require__(262);
+	
+	var _Quest2 = _interopRequireDefault(_Quest);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Quests = function (_Component) {
+	  _inherits(Quests, _Component);
+	
+	  function Quests(props) {
+	    _classCallCheck(this, Quests);
+	
+	    var _this = _possibleConstructorReturn(this, (Quests.__proto__ || Object.getPrototypeOf(Quests)).call(this, props));
+	
+	    _this.model = _Quest2.default.all();
+	    return _this;
+	  }
+	
+	  _createClass(Quests, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'article',
+	        null,
+	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          '\u30AF\u30A8\u30B9\u30C8\u4E00\u89A7'
+	        ),
+	        _react2.default.createElement(
+	          'ul',
+	          null,
+	          this.model.map(function (e) {
+	            return _react2.default.createElement(
+	              'li',
+	              { key: e.id },
+	              _react2.default.createElement(
+	                _reactRouter.Link,
+	                { to: '/quests/' + e.id },
+	                e.id
+	              )
+	            );
+	          })
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return Quests;
+	}(_react.Component);
+	
+	exports.default = Quests;
+
+/***/ },
+/* 274 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(178);
+	
+	var _Quest = __webpack_require__(262);
+	
+	var _Quest2 = _interopRequireDefault(_Quest);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Quest = function (_Component) {
+	  _inherits(Quest, _Component);
+	
+	  function Quest(props) {
+	    _classCallCheck(this, Quest);
+	
+	    var _this = _possibleConstructorReturn(this, (Quest.__proto__ || Object.getPrototypeOf(Quest)).call(this, props));
+	
+	    _this.model = _Quest2.default.find(props.params.id);
+	    return _this;
+	  }
+	
+	  _createClass(Quest, [{
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -37751,27 +38238,200 @@
 	          'section',
 	          null,
 	          _react2.default.createElement(
-	            'h1',
+	            'h2',
+	            null,
+	            '\u51FA\u73FE\u3059\u308B\u6575'
+	          ),
+	          _react2.default.createElement(
+	            'ul',
+	            null,
+	            this.model.enemies.map(function (e) {
+	              return _react2.default.createElement(
+	                'li',
+	                { key: e.id },
+	                _react2.default.createElement(
+	                  _reactRouter.Link,
+	                  { to: '/enemies/' + e.id },
+	                  e.id
+	                )
+	              );
+	            })
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return Quest;
+	}(_react.Component);
+	
+	exports.default = Quest;
+
+/***/ },
+/* 275 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(178);
+	
+	var _Enemy = __webpack_require__(252);
+	
+	var _Enemy2 = _interopRequireDefault(_Enemy);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Enemys = function (_Component) {
+	  _inherits(Enemys, _Component);
+	
+	  function Enemys(props) {
+	    _classCallCheck(this, Enemys);
+	
+	    var _this = _possibleConstructorReturn(this, (Enemys.__proto__ || Object.getPrototypeOf(Enemys)).call(this, props));
+	
+	    _this.model = _Enemy2.default.all();
+	    return _this;
+	  }
+	
+	  _createClass(Enemys, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'article',
+	        null,
+	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          this.model.id
+	        ),
+	        _react2.default.createElement(
+	          'ul',
+	          null,
+	          this.model.map(function (e) {
+	            return _react2.default.createElement(
+	              'li',
+	              { key: e.id },
+	              _react2.default.createElement(
+	                _reactRouter.Link,
+	                { to: '/enemies/' + e.id },
+	                e.id
+	              )
+	            );
+	          })
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return Enemys;
+	}(_react.Component);
+	
+	exports.default = Enemys;
+
+/***/ },
+/* 276 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(178);
+	
+	var _Enemy = __webpack_require__(252);
+	
+	var _Enemy2 = _interopRequireDefault(_Enemy);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Enemy = function (_Component) {
+	  _inherits(Enemy, _Component);
+	
+	  function Enemy(props) {
+	    _classCallCheck(this, Enemy);
+	
+	    var _this = _possibleConstructorReturn(this, (Enemy.__proto__ || Object.getPrototypeOf(Enemy)).call(this, props));
+	
+	    _this.model = _Enemy2.default.find(props.params.id);
+	    return _this;
+	  }
+	
+	  _createClass(Enemy, [{
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
+	
+	      return _react2.default.createElement(
+	        'article',
+	        null,
+	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          this.model.id
+	        ),
+	        _react2.default.createElement(
+	          'section',
+	          null,
+	          _react2.default.createElement(
+	            'h2',
 	            null,
 	            '\u30AF\u30E9\u30B9'
 	          ),
 	          this.model.class
 	        ),
 	        _react2.default.createElement(
-	          'ul',
+	          'section',
 	          null,
-	          this.model.enemy_quests.map(function (e) {
-	            return _react2.default.createElement(
-	              'li',
-	              { key: e.quest_id },
-	              _react2.default.createElement(
-	                _reactRouter.Link,
-	                { to: '/quests/' + e.quest_id },
-	                e.quest_id,
-	                e.enemy.toJson()
-	              )
-	            );
-	          })
+	          _react2.default.createElement(
+	            'h2',
+	            null,
+	            '\u51FA\u73FE\u3059\u308B\u30AF\u30A8\u30B9\u30C8'
+	          ),
+	          _react2.default.createElement(
+	            'ul',
+	            null,
+	            this.model.quests.map(function (e) {
+	              return _react2.default.createElement(
+	                'li',
+	                { key: e.id },
+	                _react2.default.createElement(
+	                  _reactRouter.Link,
+	                  { to: '/quests/' + e.id },
+	                  e.id
+	                )
+	              );
+	            })
+	          )
 	        ),
 	        _react2.default.createElement(
 	          'section',
@@ -37784,11 +38444,17 @@
 	          _react2.default.createElement(
 	            'ul',
 	            null,
-	            this.model.enemies.map(function (e) {
+	            this.model.enemies.filter(function (e) {
+	              return e.id != _this2.model.id;
+	            }).map(function (e) {
 	              return _react2.default.createElement(
 	                'li',
-	                null,
-	                e.id
+	                { key: e.id },
+	                _react2.default.createElement(
+	                  _reactRouter.Link,
+	                  { to: '/enemies/' + e.id },
+	                  e.id
+	                )
 	              );
 	            })
 	          )

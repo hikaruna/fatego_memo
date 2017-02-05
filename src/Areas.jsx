@@ -6,7 +6,7 @@ import AreaModel from 'models/Area.js';
 export default class Areas extends Component {
   constructor(props) {
     super(props);
-    this.model = AreaModel.all;
+    this.model = AreaModel.all();
   }
 
   render() {

@@ -1,8 +1,7 @@
 import ActiveObject from 'ActiveObject.js';
-import { AreaData } from 'data.jsx';
-import Quest from 'models/Quest.js';
+import data from 'data/areas.yml';
 
 export default class Area extends ActiveObject {
 }
-Area.data = AreaData;
-Area.has_many('quests');
+Area.data = data;
+Area.has_many('points');

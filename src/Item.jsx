@@ -18,7 +18,7 @@ export default class Item extends Component {
           <table>
             <tbody>
               {this.model.servants.map((e,i) => {
-                return <Servant key={e.id} servant={e}/>;
+                return <Servant key={`${i}_${e.id}`} servant={e}/>;
               })}
             </tbody>
           </table>

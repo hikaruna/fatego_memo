@@ -5,3 +5,4 @@ export default class EnemyQuest extends ActiveObject {
 }
 EnemyQuest.data = require('data/enemy_quests.yml');
 EnemyQuest.belongs_to('enemy');
+EnemyQuest.belongs_to('quest');

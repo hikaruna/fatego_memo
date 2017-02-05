@@ -11,6 +11,11 @@ import Items from 'Items.jsx';
 import Item from 'Item.jsx';
 import Areas from 'Areas.jsx';
 import Area from 'Area.jsx';
+import Points from 'Points.jsx';
+import Point from 'Point.jsx';
+import Quests from 'Quests.jsx';
+import Quest from 'Quest.jsx';
+import Enemies from 'Enemies.jsx';
 import Enemy from 'Enemy.jsx';
 
 const history = useBasename(createHistory) ({
@@ -32,8 +37,26 @@ render((
       <Route name="Area一覧" path="areas">
         <IndexRoute component={Areas}/>
         <Route path=":id" component={Area}/>
+        <Route path=":area_id">
+          <Route path="points/:id" component={Point}/>
+          <Route path="points/:point_id">
+            <Route path="quests/:id" component={Quest}/>
+          </Route>
+        </Route>
+      </Route>
+      <Route name="Points一覧" path="points">
+        <IndexRoute component={Points}/>
+        <Route path=":id" component={Point}/>
+        <Route path=":point_id">
+          <Route path="quests/:id" component={Quest}/>
+        </Route>
+      </Route>
+      <Route name="Quests一覧" path="quests">
+        <IndexRoute component={Quests}/>
+        <Route path=":id" component={Quest}/>
       </Route>
       <Route name="Enemy一覧" path="enemies">
+        <IndexRoute component={Enemies}/>
         <Route path=":id" component={Enemy}/>
       </Route>
     </Route>

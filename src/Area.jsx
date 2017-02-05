@@ -5,7 +5,7 @@ import AreaModel from 'models/Area.js';
 export default class Area extends Component {
   constructor(props) {
     super(props);
-    this.model = AreaModel.findBy(props.params.id);
+    this.model = AreaModel.find(props.params.id);
   }
 
   render() {
@@ -14,8 +14,8 @@ export default class Area extends Component {
         <h1>{this.props.params.id}</h1>
         <section>
           <ul>
-            {this.model.quest_ids.map(e => {
-              return <li key={e}>{e}</li>;
+            {this.model.point_ids.map(e => {
+              return <li key={e}><Link to={`/areas/${this.model.id}/points/${e}`}>{e}</Link></li>;
             })}
           </ul>
         </section>
