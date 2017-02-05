@@ -41,14 +41,16 @@ export default class ActiveObject {
     Object.defineProperty(this.prototype, name, {
       get: function() {
         return this[through].map(e => {
-          if(!(e[name.singularize()] === undefined)) {
+          if(option.hasOwnProperty('source')) {
+            return e[option.source];
+          }else if(!(e[name.singularize()] === undefined)) {
             return e[name.singularize()];
-          }else if(!(e[name.pluralize()] === undefined)) {
-            return e[name.pluralize()];
+          }else if(!(e[name] === undefined)) {
+            return e[name];
           }else {
             return undefined;
           }
-        }).flatten().uniq();
+        }).flatten().uniq((a,b) => a.id === b.id);
       }
     });
     Object.defineProperty(this.prototype, `${name.singularize()}_ids`, {
@@ -59,7 +61,6 @@ export default class ActiveObject {
   }
 
   static has_many(name, option = {}) {
-    console.log(`has_many ${name}`);
     if(option.hasOwnProperty('through')) {
       return this.has_many_through(name, option.through, option);
     }

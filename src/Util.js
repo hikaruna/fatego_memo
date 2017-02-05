@@ -18,21 +18,31 @@ Array.prototype.flatten = function() {
   return Array.prototype.concat.apply([], this);
 };
 
+Array.prototype.contains = function(predicate = null) {
+  if(predicate == null) {
+    return this.includes(predicate);
+  }
+
+  for(let i=0;i<this.length;i++) {
+    if(predicate(this[i])) {
+      return true;
+    }
+  }
+  return false;
+};
+
 Array.prototype.uniq = function(predicate = null) {
   if(predicate === null) {
     return Array.from(new Set(this));
   }
-  return Array.from(new Set(this));
-  /* うごかによ
-  for(let i=0;i<this.length;i++) {
-    for(let j=0;(i+j)<this.length;j++) {
-      if(predicate(this[i], this[j])) {
-        this[j] = null;
-      }
+
+  let result = [];
+  this.forEach(a => {
+    if(!result.contains(e => predicate(e,a))) {
+      result.push(a);
     }
-  }
-  return this.filter(e => !(e === null));
-  */
+  });
+  return result;
 };
 
 String.prototype.toSnakeCase = function() {
