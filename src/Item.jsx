@@ -14,6 +14,18 @@ export default class Item extends Component {
       <article>
         <h1>{this.props.params.id}</h1>
         <section>
+          <h2>入手可能クエスト</h2>
+          <ul>
+            {this.model.quests.map(e => {
+              return (
+                <li>
+                  <Link to={`/quests/${e.id}`}>{e.id}</Link>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+        <section>
           <h1>必要なサーヴァント</h1>
           <table>
             <tbody>

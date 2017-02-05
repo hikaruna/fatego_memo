@@ -68,47 +68,47 @@
 	
 	var _Servants2 = _interopRequireDefault(_Servants);
 	
-	var _Servant = __webpack_require__(265);
+	var _Servant = __webpack_require__(269);
 	
 	var _Servant2 = _interopRequireDefault(_Servant);
 	
-	var _Items = __webpack_require__(266);
+	var _Items = __webpack_require__(270);
 	
 	var _Items2 = _interopRequireDefault(_Items);
 	
-	var _Item = __webpack_require__(267);
+	var _Item = __webpack_require__(271);
 	
 	var _Item2 = _interopRequireDefault(_Item);
 	
-	var _Areas = __webpack_require__(269);
+	var _Areas = __webpack_require__(273);
 	
 	var _Areas2 = _interopRequireDefault(_Areas);
 	
-	var _Area = __webpack_require__(270);
+	var _Area = __webpack_require__(274);
 	
 	var _Area2 = _interopRequireDefault(_Area);
 	
-	var _Points = __webpack_require__(271);
+	var _Points = __webpack_require__(275);
 	
 	var _Points2 = _interopRequireDefault(_Points);
 	
-	var _Point = __webpack_require__(272);
+	var _Point = __webpack_require__(276);
 	
 	var _Point2 = _interopRequireDefault(_Point);
 	
-	var _Quests = __webpack_require__(273);
+	var _Quests = __webpack_require__(277);
 	
 	var _Quests2 = _interopRequireDefault(_Quests);
 	
-	var _Quest = __webpack_require__(274);
+	var _Quest = __webpack_require__(278);
 	
 	var _Quest2 = _interopRequireDefault(_Quest);
 	
-	var _Enemies = __webpack_require__(275);
+	var _Enemies = __webpack_require__(279);
 	
 	var _Enemies2 = _interopRequireDefault(_Enemies);
 	
-	var _Enemy = __webpack_require__(276);
+	var _Enemy = __webpack_require__(280);
 	
 	var _Enemy2 = _interopRequireDefault(_Enemy);
 	
@@ -27155,7 +27155,7 @@
 	
 	var _ActiveObject3 = _interopRequireDefault(_ActiveObject2);
 	
-	var _servants = __webpack_require__(264);
+	var _servants = __webpack_require__(268);
 	
 	var _servants2 = _interopRequireDefault(_servants);
 	
@@ -28124,11 +28124,13 @@
 	var map = {
 		"./Area.js": 250,
 		"./Enemy.js": 252,
-		"./EnemyQuest.js": 254,
-		"./EvolutionItem.js": 256,
-		"./Item.js": 258,
-		"./Point.js": 260,
-		"./Quest.js": 262,
+		"./EnemyItem.js": 254,
+		"./EnemyQuest.js": 256,
+		"./EvolutionItem.js": 258,
+		"./Item.js": 260,
+		"./ItemQuest.js": 262,
+		"./Point.js": 264,
+		"./Quest.js": 266,
 		"./Servant.js": 240
 	};
 	function webpackContext(req) {
@@ -28264,6 +28266,8 @@
 	Enemy.has_many('enemy_quests');
 	Enemy.has_many('quests', { through: 'enemy_quests' });
 	Enemy.has_many('enemies', { through: 'enemy_quests' });
+	Enemy.has_many('enemyItems');
+	Enemy.has_many('items', { through: 'enemyItems' });
 
 /***/ },
 /* 253 */
@@ -28310,7 +28314,62 @@
 	
 	var _ActiveObject3 = _interopRequireDefault(_ActiveObject2);
 	
-	var _enemy_quests = __webpack_require__(255);
+	var _enemy_items = __webpack_require__(255);
+	
+	var _enemy_items2 = _interopRequireDefault(_enemy_items);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var EnemyItem = function (_ActiveObject) {
+	  _inherits(EnemyItem, _ActiveObject);
+	
+	  function EnemyItem() {
+	    _classCallCheck(this, EnemyItem);
+	
+	    return _possibleConstructorReturn(this, (EnemyItem.__proto__ || Object.getPrototypeOf(EnemyItem)).apply(this, arguments));
+	  }
+	
+	  return EnemyItem;
+	}(_ActiveObject3.default);
+	
+	exports.default = EnemyItem;
+	
+	EnemyItem.data = _enemy_items2.default;
+	EnemyItem.belongs_to('enemy');
+	EnemyItem.belongs_to('item');
+
+/***/ },
+/* 255 */
+/***/ function(module, exports) {
+
+	module.exports = [
+		{
+			"enemy_id": "スケルトン",
+			"item_id": "凶骨"
+		}
+	];
+
+/***/ },
+/* 256 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _ActiveObject2 = __webpack_require__(241);
+	
+	var _ActiveObject3 = _interopRequireDefault(_ActiveObject2);
+	
+	var _enemy_quests = __webpack_require__(257);
 	
 	var _enemy_quests2 = _interopRequireDefault(_enemy_quests);
 	
@@ -28336,12 +28395,12 @@
 	
 	exports.default = EnemyQuest;
 	
-	EnemyQuest.data = __webpack_require__(255);
+	EnemyQuest.data = __webpack_require__(257);
 	EnemyQuest.belongs_to('enemy');
 	EnemyQuest.belongs_to('quest');
 
 /***/ },
-/* 255 */
+/* 257 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -28376,7 +28435,7 @@
 	];
 
 /***/ },
-/* 256 */
+/* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28389,7 +28448,7 @@
 	
 	var _ActiveObject3 = _interopRequireDefault(_ActiveObject2);
 	
-	var _evolution_items = __webpack_require__(257);
+	var _evolution_items = __webpack_require__(259);
 	
 	var _evolution_items2 = _interopRequireDefault(_evolution_items);
 	
@@ -28420,7 +28479,7 @@
 	EvolutionItem.belongs_to('item');
 
 /***/ },
-/* 257 */
+/* 259 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -36199,7 +36258,7 @@
 	];
 
 /***/ },
-/* 258 */
+/* 260 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36212,7 +36271,7 @@
 	
 	var _ActiveObject3 = _interopRequireDefault(_ActiveObject2);
 	
-	var _items = __webpack_require__(259);
+	var _items = __webpack_require__(261);
 	
 	var _items2 = _interopRequireDefault(_items);
 	
@@ -36245,9 +36304,11 @@
 	Item.data = _items2.default;
 	Item.has_many('evolutionItems');
 	Item.has_many('servants', { through: 'evolutionItems' });
+	Item.has_many('itemQuests');
+	Item.has_many('quests', { through: 'itemQuests' });
 
 /***/ },
-/* 259 */
+/* 261 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -36410,7 +36471,7 @@
 	];
 
 /***/ },
-/* 260 */
+/* 262 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36423,7 +36484,78 @@
 	
 	var _ActiveObject3 = _interopRequireDefault(_ActiveObject2);
 	
-	var _points = __webpack_require__(261);
+	var _item_quests = __webpack_require__(263);
+	
+	var _item_quests2 = _interopRequireDefault(_item_quests);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var ItemQuest = function (_ActiveObject) {
+	  _inherits(ItemQuest, _ActiveObject);
+	
+	  function ItemQuest() {
+	    _classCallCheck(this, ItemQuest);
+	
+	    return _possibleConstructorReturn(this, (ItemQuest.__proto__ || Object.getPrototypeOf(ItemQuest)).apply(this, arguments));
+	  }
+	
+	  return ItemQuest;
+	}(_ActiveObject3.default);
+	
+	exports.default = ItemQuest;
+	
+	ItemQuest.data = __webpack_require__(263);
+	ItemQuest.belongs_to('item');
+	ItemQuest.belongs_to('quest');
+
+/***/ },
+/* 263 */
+/***/ function(module, exports) {
+
+	module.exports = [
+		{
+			"item_id": "凶骨",
+			"quest_id": "屋敷跡",
+			"number": 3
+		},
+		{
+			"item_id": "虚影の塵",
+			"quest_id": "危険地帯",
+			"number": 1
+		},
+		{
+			"item_id": "アサシンピース",
+			"quest_id": "危険地帯",
+			"number": 1
+		},
+		{
+			"item_id": "英雄の証",
+			"quest_id": "ジャンヌ生誕の地",
+			"number": 7
+		}
+	];
+
+/***/ },
+/* 264 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _ActiveObject2 = __webpack_require__(241);
+	
+	var _ActiveObject3 = _interopRequireDefault(_ActiveObject2);
+	
+	var _points = __webpack_require__(265);
 	
 	var _points2 = _interopRequireDefault(_points);
 	
@@ -36454,7 +36586,7 @@
 	Point.has_many('quests');
 
 /***/ },
-/* 261 */
+/* 265 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -36477,7 +36609,7 @@
 	];
 
 /***/ },
-/* 262 */
+/* 266 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36490,7 +36622,7 @@
 	
 	var _ActiveObject3 = _interopRequireDefault(_ActiveObject2);
 	
-	var _quests = __webpack_require__(263);
+	var _quests = __webpack_require__(267);
 	
 	var _quests2 = _interopRequireDefault(_quests);
 	
@@ -36520,9 +36652,11 @@
 	Quest.belongs_to('point');
 	Quest.has_many('enemy_quests');
 	Quest.has_many('enemies', { through: 'enemy_quests' });
+	Quest.has_many('item_quests');
+	Quest.has_many('items', { through: 'item_quests' });
 
 /***/ },
-/* 263 */
+/* 267 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -36571,7 +36705,7 @@
 	];
 
 /***/ },
-/* 264 */
+/* 268 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -37323,7 +37457,7 @@
 	];
 
 /***/ },
-/* 265 */
+/* 269 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37515,7 +37649,7 @@
 	}(_react.Component);
 
 /***/ },
-/* 266 */
+/* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37532,7 +37666,7 @@
 	
 	var _reactRouter = __webpack_require__(178);
 	
-	var _Item = __webpack_require__(258);
+	var _Item = __webpack_require__(260);
 	
 	var _Item2 = _interopRequireDefault(_Item);
 	
@@ -37601,7 +37735,7 @@
 	exports.default = Items;
 
 /***/ },
-/* 267 */
+/* 271 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37618,9 +37752,9 @@
 	
 	var _reactRouter = __webpack_require__(178);
 	
-	var _data = __webpack_require__(268);
+	var _data = __webpack_require__(272);
 	
-	var _Item = __webpack_require__(258);
+	var _Item = __webpack_require__(260);
 	
 	var _Item2 = _interopRequireDefault(_Item);
 	
@@ -37654,6 +37788,30 @@
 	          'h1',
 	          null,
 	          this.props.params.id
+	        ),
+	        _react2.default.createElement(
+	          'section',
+	          null,
+	          _react2.default.createElement(
+	            'h2',
+	            null,
+	            '\u5165\u624B\u53EF\u80FD\u30AF\u30A8\u30B9\u30C8'
+	          ),
+	          _react2.default.createElement(
+	            'ul',
+	            null,
+	            this.model.quests.map(function (e) {
+	              return _react2.default.createElement(
+	                'li',
+	                null,
+	                _react2.default.createElement(
+	                  _reactRouter.Link,
+	                  { to: '/quests/' + e.id },
+	                  e.id
+	                )
+	              );
+	            })
+	          )
 	        ),
 	        _react2.default.createElement(
 	          'section',
@@ -37716,7 +37874,7 @@
 	}(_react.Component);
 
 /***/ },
-/* 268 */
+/* 272 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -37777,7 +37935,7 @@
 	}];
 
 /***/ },
-/* 269 */
+/* 273 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37794,7 +37952,7 @@
 	
 	var _reactRouter = __webpack_require__(178);
 	
-	var _data = __webpack_require__(268);
+	var _data = __webpack_require__(272);
 	
 	var _Area = __webpack_require__(250);
 	
@@ -37856,7 +38014,7 @@
 	exports.default = Areas;
 
 /***/ },
-/* 270 */
+/* 274 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37939,7 +38097,7 @@
 	exports.default = Area;
 
 /***/ },
-/* 271 */
+/* 275 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37956,7 +38114,7 @@
 	
 	var _reactRouter = __webpack_require__(178);
 	
-	var _Point = __webpack_require__(260);
+	var _Point = __webpack_require__(264);
 	
 	var _Point2 = _interopRequireDefault(_Point);
 	
@@ -38016,7 +38174,7 @@
 	exports.default = Points;
 
 /***/ },
-/* 272 */
+/* 276 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38033,7 +38191,7 @@
 	
 	var _reactRouter = __webpack_require__(178);
 	
-	var _Point = __webpack_require__(260);
+	var _Point = __webpack_require__(264);
 	
 	var _Point2 = _interopRequireDefault(_Point);
 	
@@ -38105,7 +38263,7 @@
 	exports.default = Point;
 
 /***/ },
-/* 273 */
+/* 277 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38122,7 +38280,7 @@
 	
 	var _reactRouter = __webpack_require__(178);
 	
-	var _Quest = __webpack_require__(262);
+	var _Quest = __webpack_require__(266);
 	
 	var _Quest2 = _interopRequireDefault(_Quest);
 	
@@ -38182,7 +38340,7 @@
 	exports.default = Quests;
 
 /***/ },
-/* 274 */
+/* 278 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38199,7 +38357,7 @@
 	
 	var _reactRouter = __webpack_require__(178);
 	
-	var _Quest = __webpack_require__(262);
+	var _Quest = __webpack_require__(266);
 	
 	var _Quest2 = _interopRequireDefault(_Quest);
 	
@@ -38240,6 +38398,30 @@
 	          _react2.default.createElement(
 	            'h2',
 	            null,
+	            '\u5165\u624B\u30A2\u30A4\u30C6\u30E0'
+	          ),
+	          _react2.default.createElement(
+	            'ul',
+	            null,
+	            this.model.items.map(function (e) {
+	              return _react2.default.createElement(
+	                'li',
+	                { key: e.id },
+	                _react2.default.createElement(
+	                  _reactRouter.Link,
+	                  { to: '/items/' + e.id },
+	                  e.id
+	                )
+	              );
+	            })
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'section',
+	          null,
+	          _react2.default.createElement(
+	            'h2',
+	            null,
 	            '\u51FA\u73FE\u3059\u308B\u6575'
 	          ),
 	          _react2.default.createElement(
@@ -38268,7 +38450,7 @@
 	exports.default = Quest;
 
 /***/ },
-/* 275 */
+/* 279 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38345,7 +38527,7 @@
 	exports.default = Enemys;
 
 /***/ },
-/* 276 */
+/* 280 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38408,6 +38590,30 @@
 	            '\u30AF\u30E9\u30B9'
 	          ),
 	          this.model.class
+	        ),
+	        _react2.default.createElement(
+	          'section',
+	          null,
+	          _react2.default.createElement(
+	            'h2',
+	            null,
+	            '\u30C9\u30ED\u30C3\u30D7\u30A2\u30A4\u30C6\u30E0'
+	          ),
+	          _react2.default.createElement(
+	            'ul',
+	            null,
+	            this.model.items.map(function (e) {
+	              return _react2.default.createElement(
+	                'li',
+	                { key: e.id },
+	                _react2.default.createElement(
+	                  _reactRouter.Link,
+	                  { to: '/items/' + e.id },
+	                  e.id
+	                )
+	              );
+	            })
+	          )
 	        ),
 	        _react2.default.createElement(
 	          'section',

@@ -17,6 +17,18 @@ export default class Enemy extends Component {
           {this.model.class}
         </section>
         <section>
+          <h2>ドロップアイテム</h2>
+          <ul>
+            {this.model.items.map(e => {
+              return (
+                <li key={e.id}>
+                  <Link to={`/items/${e.id}`}>{e.id}</Link>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+        <section>
           <h2>出現するクエスト</h2>
           <ul>
             {this.model.quests.map(e => {

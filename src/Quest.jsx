@@ -13,6 +13,18 @@ export default class Quest extends Component {
       <article>
         <h1>{this.model.id}</h1>
         <section>
+          <h2>入手アイテム</h2>
+          <ul>
+            {this.model.items.map(e => {
+              return (
+                <li key={e.id}>
+                  <Link to={`/items/${e.id}`}>{e.id}</Link>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+        <section>
           <h2>出現する敵</h2>
           <ul>
             {this.model.enemies.map(e => {
