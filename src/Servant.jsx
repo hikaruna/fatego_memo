@@ -16,17 +16,20 @@ export default class Servant extends Component {
     return (
       <article>
         <h1>{this.model.id}</h1>
-        <section>
-          <h1>クラス</h1>
+        <section className="container">
+          <h2>クラス</h2>
           <p>{this.model.class}</p>
         </section>
-        <section>
-          <h1>レアリティ</h1>
+        <section className="container">
+          <h2>レアリティ</h2>
           <p>{this.rarity}</p>
         </section>
-        {this.model.evolutions.map((e,i) => {
-          return <Evolution key={`evolution${i+1}`} model={e} level={i+1} />;
-        })}
+        <section className="container">
+          <h2>再臨アイテム</h2>
+          {this.model.evolutions.map((e,i) => {
+            return <Evolution key={`evolution${i+1}`} model={e} level={i+1} />;
+          })}
+        </section>
       </article>
     );
   }
@@ -35,9 +38,9 @@ export default class Servant extends Component {
 class Evolution extends Component {
   render() {
     return (
-      <section>
-        <h1>第{this.props.level}段階</h1>
-        <table>
+      <section className="container">
+        <h3>第{this.props.level}段階</h3>
+        <table className="table table-bordered table-condensed">
           <thead>
             <tr>
               <th>素材</th>

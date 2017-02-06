@@ -26,7 +26,7 @@ export default class Item extends Component {
           </ul>
         </section>
         <section>
-          <h1>必要なサーヴァント</h1>
+          <h2>必要なサーヴァント</h2>
           <table>
             <tbody>
               {this.model.servants.map((e,i) => {
