@@ -18,31 +18,13 @@ Array.prototype.flatten = function() {
   return Array.prototype.concat.apply([], this);
 };
 
-Array.prototype.contains = function(predicate = null) {
-  if(predicate == null) {
-    return this.includes(predicate);
-  }
-
-  for(let i=0;i<this.length;i++) {
-    if(predicate(this[i])) {
-      return true;
-    }
-  }
-  return false;
-};
-
 Array.prototype.uniq = function(predicate = null) {
   if(predicate === null) {
     return Array.from(new Set(this));
   }
-
-  let result = [];
-  this.forEach(a => {
-    if(!result.contains(e => predicate(e,a))) {
-      result.push(a);
-    }
-  });
-  return result;
+  return this.filter((e,i,array) => {
+    return this.findIndex(e2 => predicate(e, e2)) === i;
+  })
 };
 
 String.prototype.toSnakeCase = function() {
