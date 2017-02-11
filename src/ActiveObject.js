@@ -6,15 +6,12 @@ export default class ActiveObject {
     ActiveObject.loadedClasses[this.name] = this;
 
     this.where = (where = {}) => {
-      return this._data.filter(e => {
-        return Object.keys(where).reduce((ac,c)=> {
-          return ac && (where[c] === e[c]);
-        }, true);
-      }).map(e => new this(e));
+      return this.all().where(where);
     };
 
+
     this.findBy = (where = {}) => {
-      return this.where(where)[0] || null;
+      return this.all().findBy(where);
     };
 
     this.find = (id) => {
@@ -22,7 +19,7 @@ export default class ActiveObject {
     };
 
     this.all = () => {
-      return this.where();
+      return new ActiveCollection(this._data, this);
     };
 
     data.map(e => Object.keys(e)).flatten().uniq().map(e => {
@@ -113,3 +110,71 @@ export default class ActiveObject {
   }
 }
 ActiveObject.loadedClasses = {};
+
+export class ActiveCollection {
+  constructor(data, type) {
+    this.data = data;
+    this.type = type;
+  }
+
+  where(option = {}) {
+    return new ActiveCollection(
+      this.data.filter(e => {
+        return Object.keys(option).reduce((ac,c)=> {
+          return ac && (option[c] === e[c]);
+        }, true);
+      }),
+      this.type
+    );
+  }
+
+  order(...args) {
+    return new ActiveCollection(
+      args.reverse().reduce((result, arg) => {
+        if(typeof arg === 'string') {
+          return result.sort(this.generateDictionaryCompare(arg));
+        }else if(arg[Object.keys(arg)[0]] === 'desc') {
+          // case { "key": "desc" }
+          const key = Object.keys(arg)[0];
+          return result.sort(this.generateDescDictionaryCompare(key));
+        }else {
+          return result;
+        }
+      }, this.data.slice()),
+      this.type
+    );
+  }
+
+  findBy(option) {
+    return this.where(option).first;
+  }
+
+  map(...args) {
+    return this.data.map((e) => new this.type(e)).map(...args);
+  }
+
+  get first() {
+    if(this.data.length == 0) {
+      return null;
+    }
+    return new this.type(this.data[0]);
+  }
+
+  toJson() {
+    return JSON.stringify(this.data);
+  }
+
+  // private
+  generateDictionaryCompare(key) {
+    return (a,b) => a[key].charCodeAt(0) - b[key].charCodeAt(0);
+  }
+  generateDescDictionaryCompare(key) {
+    return (a,b) => b[key].charCodeAt(0) - a[key].charCodeAt(0);
+  }
+}
+
+class A extends ActiveObject {
+}
+A.data = [{"id":1},{"id":2}];
+const result = A.where();
+console.log(result);

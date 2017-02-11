@@ -11,7 +11,7 @@ export default class Servants extends Component {
 
   render() {
     return (
-      <table>
+      <table className="table table-bordered">
         <thead>
           <tr>
             <th>名前</th>

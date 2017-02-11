@@ -27442,7 +27442,7 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'table',
-	        null,
+	        { className: 'table table-bordered' },
 	        _react2.default.createElement(
 	          'thead',
 	          null,
@@ -27589,6 +27589,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	exports.ActiveCollection = undefined;
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
@@ -27597,6 +27598,10 @@
 	var _Util2 = _interopRequireDefault(_Util);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -27695,19 +27700,13 @@
 	      this.where = function () {
 	        var where = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 	
-	        return _this._data.filter(function (e) {
-	          return Object.keys(where).reduce(function (ac, c) {
-	            return ac && where[c] === e[c];
-	          }, true);
-	        }).map(function (e) {
-	          return new _this(e);
-	        });
+	        return _this.all().where(where);
 	      };
 	
 	      this.findBy = function () {
 	        var where = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 	
-	        return _this.where(where)[0] || null;
+	        return _this.all().findBy(where);
 	      };
 	
 	      this.find = function (id) {
@@ -27715,7 +27714,7 @@
 	      };
 	
 	      this.all = function () {
-	        return _this.where();
+	        return new ActiveCollection(_this._data, _this);
 	      };
 	
 	      data.map(function (e) {
@@ -27752,6 +27751,112 @@
 	exports.default = ActiveObject;
 	
 	ActiveObject.loadedClasses = {};
+	
+	var ActiveCollection = exports.ActiveCollection = function () {
+	  function ActiveCollection(data, type) {
+	    _classCallCheck(this, ActiveCollection);
+	
+	    this.data = data;
+	    this.type = type;
+	  }
+	
+	  _createClass(ActiveCollection, [{
+	    key: 'where',
+	    value: function where() {
+	      var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+	
+	      return new ActiveCollection(this.data.filter(function (e) {
+	        return Object.keys(option).reduce(function (ac, c) {
+	          return ac && option[c] === e[c];
+	        }, true);
+	      }), this.type);
+	    }
+	  }, {
+	    key: 'order',
+	    value: function order() {
+	      var _this2 = this;
+	
+	      for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	        args[_key] = arguments[_key];
+	      }
+	
+	      return new ActiveCollection(args.reverse().reduce(function (result, arg) {
+	        if (typeof arg === 'string') {
+	          return result.sort(_this2.generateDictionaryCompare(arg));
+	        } else if (arg[Object.keys(arg)[0]] === 'desc') {
+	          // case { "key": "desc" }
+	          var key = Object.keys(arg)[0];
+	          return result.sort(_this2.generateDescDictionaryCompare(key));
+	        } else {
+	          return result;
+	        }
+	      }, this.data.slice()), this.type);
+	    }
+	  }, {
+	    key: 'findBy',
+	    value: function findBy(option) {
+	      return this.where(option).first;
+	    }
+	  }, {
+	    key: 'map',
+	    value: function map() {
+	      var _data$map,
+	          _this3 = this;
+	
+	      return (_data$map = this.data.map(function (e) {
+	        return new _this3.type(e);
+	      })).map.apply(_data$map, arguments);
+	    }
+	  }, {
+	    key: 'toJson',
+	    value: function toJson() {
+	      return JSON.stringify(this.data);
+	    }
+	
+	    // private
+	
+	  }, {
+	    key: 'generateDictionaryCompare',
+	    value: function generateDictionaryCompare(key) {
+	      return function (a, b) {
+	        return a[key].charCodeAt(0) - b[key].charCodeAt(0);
+	      };
+	    }
+	  }, {
+	    key: 'generateDescDictionaryCompare',
+	    value: function generateDescDictionaryCompare(key) {
+	      return function (a, b) {
+	        return b[key].charCodeAt(0) - a[key].charCodeAt(0);
+	      };
+	    }
+	  }, {
+	    key: 'first',
+	    get: function get() {
+	      if (this.data.length == 0) {
+	        return null;
+	      }
+	      return new this.type(this.data[0]);
+	    }
+	  }]);
+	
+	  return ActiveCollection;
+	}();
+	
+	var A = function (_ActiveObject) {
+	  _inherits(A, _ActiveObject);
+	
+	  function A() {
+	    _classCallCheck(this, A);
+	
+	    return _possibleConstructorReturn(this, (A.__proto__ || Object.getPrototypeOf(A)).apply(this, arguments));
+	  }
+	
+	  return A;
+	}(ActiveObject);
+	
+	A.data = [{ "id": 1 }, { "id": 2 }];
+	var result = A.where();
+	console.log(result);
 
 /***/ },
 /* 251 */
@@ -28663,6 +28768,18 @@
 			"id": "フランス兵(弓)",
 			"class": "アーチャー",
 			"gender": "男"
+		},
+		{
+			"id": "スケルトン(剣)",
+			"class": "セイバー"
+		},
+		{
+			"id": "スケルトン(槍)",
+			"class": "ランサー"
+		},
+		{
+			"id": "スケルトン(弓)",
+			"class": "アーチャー"
 		}
 	];
 
