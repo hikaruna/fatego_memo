@@ -131,15 +131,24 @@ export class ActiveCollection {
   order(...args) {
     return new ActiveCollection(
       args.reverse().reduce((result, arg) => {
+        let key;
+        let order;
         if(typeof arg === 'string') {
-          return result.sort(this.generateDictionaryCompare(arg));
-        }else if(arg[Object.keys(arg)[0]] === 'desc') {
-          // case { "key": "desc" }
-          const key = Object.keys(arg)[0];
-          return result.sort(this.generateDescDictionaryCompare(key));
+          // case "key asc|desc"
+          const matched = arg.match(/(.*) (asc|desc)$/);
+          if(matched == null) {
+            key = arg;
+            order = 'asc';
+          }else {
+            key = matched[1];
+            order = matched[2];
+          }
         }else {
-          return result;
+          // case { "key": "asc|desc" }
+          key = Object.keys(arg)[0];
+          order = arg[Object.keys(arg)[0]];
         }
+        return result.sort(this.generateDictionaryCompare(key, order));
       }, this.data.slice()),
       this.type
     );
@@ -165,11 +174,19 @@ export class ActiveCollection {
   }
 
   // private
-  generateDictionaryCompare(key) {
-    return (a,b) => a[key].charCodeAt(0) - b[key].charCodeAt(0);
-  }
-  generateDescDictionaryCompare(key) {
-    return (a,b) => b[key].charCodeAt(0) - a[key].charCodeAt(0);
+  generateDictionaryCompare(key, order='asc') {
+    const o = {asc: 1, desc: -1}[order];
+    return (a,b) => {
+      a = a[key];
+      if(typeof a === 'string') {
+        a = a.charCodeAt(0);
+      }
+      b = b[key];
+      if(typeof b === 'string') {
+        b = b.charCodeAt(0);
+      }
+      return (a - b) * o ;
+    };
   }
 }
 

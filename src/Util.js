@@ -8,6 +8,27 @@ export default class Util {
       }, true);
     });
   }
+
+  // param urlQery: ex "?a=b&c=d"
+  static parseUrlQuery(urlQuery) {
+    return urlQuery
+      .replace(/^\?/, '')
+      .split('&')
+      .reduce((result, e) => {
+        if(e.length === 0) {
+          return result;
+        }
+        const [k, v] = e.split('=').map(e => decodeURI(e));
+        if(typeof v === 'undefined') {
+          return result;
+        }
+        if(!result.hasOwnProperty(k)) {
+          result[k] = [];
+        }
+        result[k].push(v);
+        return result;
+      }, {});
+  }
 }
 
 Number.prototype.times = function(func) {

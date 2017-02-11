@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import ServantModel from 'models/Servant.js';
+import Util from 'Util.js';
 
 export default class Servants extends Component {
 
   constructor(props) {
     super(props);
-    this.servants = ServantModel.all();
+    const query = Util.parseUrlQuery(props.location.search);
+    let where = Object.assign({}, props.params.where);
+    this.servants = ServantModel.where(where).order(...(query.order || []));
   }
 
   render() {
