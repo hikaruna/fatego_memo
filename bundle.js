@@ -27417,7 +27417,13 @@
 	
 	var _Servant2 = _interopRequireDefault(_Servant);
 	
+	var _Util = __webpack_require__(251);
+	
+	var _Util2 = _interopRequireDefault(_Util);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -27429,11 +27435,16 @@
 	  _inherits(Servants, _Component);
 	
 	  function Servants(props) {
+	    var _ServantModel$where;
+	
 	    _classCallCheck(this, Servants);
 	
 	    var _this = _possibleConstructorReturn(this, (Servants.__proto__ || Object.getPrototypeOf(Servants)).call(this, props));
 	
-	    _this.servants = _Servant2.default.all();
+	    var query = _Util2.default.parseUrlQuery(props.location.search);
+	    var where = Object.assign({}, props.params.where);
+	    var order = [].concat(query.order);
+	    _this.servants = (_ServantModel$where = _Servant2.default.where(where)).order.apply(_ServantModel$where, _toConsumableArray(order));
 	    return _this;
 	  }
 	
@@ -27781,15 +27792,19 @@
 	      }
 	
 	      return new ActiveCollection(args.reverse().reduce(function (result, arg) {
+	        var key = void 0;
+	        var order = 'asc';
 	        if (typeof arg === 'string') {
-	          return result.sort(_this2.generateDictionaryCompare(arg));
-	        } else if (arg[Object.keys(arg)[0]] === 'desc') {
-	          // case { "key": "desc" }
-	          var key = Object.keys(arg)[0];
-	          return result.sort(_this2.generateDescDictionaryCompare(key));
+	          key = arg;
+	          if (arg.match(/ desc$/) != null) {
+	            order = 'desc';
+	          }
 	        } else {
-	          return result;
+	          // case { "key": "asc|desc" }
+	          key = Object.keys(arg)[0];
+	          order = arg[Object.keys(arg)[0]];
 	        }
+	        return result.sort(_this2.generateDictionaryCompare(key, order));
 	      }, this.data.slice()), this.type);
 	    }
 	  }, {
@@ -27818,15 +27833,11 @@
 	  }, {
 	    key: 'generateDictionaryCompare',
 	    value: function generateDictionaryCompare(key) {
+	      var order = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'asc';
+	
+	      var o = { asc: 1, desc: -1 }[order];
 	      return function (a, b) {
-	        return a[key].charCodeAt(0) - b[key].charCodeAt(0);
-	      };
-	    }
-	  }, {
-	    key: 'generateDescDictionaryCompare',
-	    value: function generateDescDictionaryCompare(key) {
-	      return function (a, b) {
-	        return b[key].charCodeAt(0) - a[key].charCodeAt(0);
+	        return (a[key].charCodeAt(0) - b[key].charCodeAt(0)) * o;
 	      };
 	    }
 	  }, {
@@ -27862,17 +27873,19 @@
 /* 251 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 	
+	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _i = __webpack_require__(252);
+	var _i2 = __webpack_require__(252);
 	
-	var _i2 = _interopRequireDefault(_i);
+	var _i3 = _interopRequireDefault(_i2);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -27884,13 +27897,34 @@
 	  }
 	
 	  _createClass(Util, null, [{
-	    key: "where",
+	    key: 'where',
 	    value: function where(from, by) {
 	      return from.filter(function (e) {
 	        return Object.keys(by).reduce(function (ac, c) {
 	          return ac && by[c] === e[c];
 	        }, true);
 	      });
+	    }
+	
+	    // param urlQery: ex "?a=b&c=d"
+	
+	  }, {
+	    key: 'parseUrlQuery',
+	    value: function parseUrlQuery(urlQuery) {
+	      return urlQuery.replace(/^\?/, '').split('&').reduce(function (result, e) {
+	        var _e$split$map = e.split('=').map(function (e) {
+	          return decodeURI(e);
+	        }),
+	            _e$split$map2 = _slicedToArray(_e$split$map, 2),
+	            k = _e$split$map2[0],
+	            v = _e$split$map2[1];
+	
+	        if (!result.hasOwnProperty(k)) {
+	          result[k] = [];
+	        }
+	        result[k].push(v);
+	        return result;
+	      }, {});
 	    }
 	  }]);
 	
@@ -27952,11 +27986,11 @@
 	};
 	
 	String.prototype.pluralize = function () {
-	  return new _i2.default().pluralize(this);
+	  return new _i3.default().pluralize(this);
 	};
 	
 	String.prototype.singularize = function () {
-	  return new _i2.default().singularize(this);
+	  return new _i3.default().singularize(this);
 	};
 
 /***/ },
