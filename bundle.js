@@ -27443,8 +27443,7 @@
 	
 	    var query = _Util2.default.parseUrlQuery(props.location.search);
 	    var where = Object.assign({}, props.params.where);
-	    var order = [].concat(query.order);
-	    _this.servants = (_ServantModel$where = _Servant2.default.where(where)).order.apply(_ServantModel$where, _toConsumableArray(order));
+	    _this.servants = (_ServantModel$where = _Servant2.default.where(where)).order.apply(_ServantModel$where, _toConsumableArray(query.order || []));
 	    return _this;
 	  }
 	
@@ -27793,11 +27792,16 @@
 	
 	      return new ActiveCollection(args.reverse().reduce(function (result, arg) {
 	        var key = void 0;
-	        var order = 'asc';
+	        var order = void 0;
 	        if (typeof arg === 'string') {
-	          key = arg;
-	          if (arg.match(/ desc$/) != null) {
-	            order = 'desc';
+	          // case "key asc|desc"
+	          var matched = arg.match(/(.*) (asc|desc)$/);
+	          if (matched == null) {
+	            key = arg;
+	            order = 'asc';
+	          } else {
+	            key = matched[1];
+	            order = matched[2];
 	          }
 	        } else {
 	          // case { "key": "asc|desc" }
@@ -27837,7 +27841,15 @@
 	
 	      var o = { asc: 1, desc: -1 }[order];
 	      return function (a, b) {
-	        return (a[key].charCodeAt(0) - b[key].charCodeAt(0)) * o;
+	        a = a[key];
+	        if (typeof a === 'string') {
+	          a = a.charCodeAt(0);
+	        }
+	        b = b[key];
+	        if (typeof b === 'string') {
+	          b = b.charCodeAt(0);
+	        }
+	        return (a - b) * o;
 	      };
 	    }
 	  }, {
@@ -27912,6 +27924,10 @@
 	    key: 'parseUrlQuery',
 	    value: function parseUrlQuery(urlQuery) {
 	      return urlQuery.replace(/^\?/, '').split('&').reduce(function (result, e) {
+	        if (e.length === 0) {
+	          return result;
+	        }
+	
 	        var _e$split$map = e.split('=').map(function (e) {
 	          return decodeURI(e);
 	        }),
@@ -27919,6 +27935,9 @@
 	            k = _e$split$map2[0],
 	            v = _e$split$map2[1];
 	
+	        if (typeof v === 'undefined') {
+	          return result;
+	        }
 	        if (!result.hasOwnProperty(k)) {
 	          result[k] = [];
 	        }
