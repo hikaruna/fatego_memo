@@ -22,7 +22,9 @@ export default class ActiveObject {
       return new ActiveCollection(this._data, this);
     };
 
-    data.map(e => Object.keys(e)).flatten().uniq().map(e => {
+    this.columns = data.map(e => Object.keys(e)).flatten().uniq();
+
+    this.columns.map(e => {
       Object.defineProperty(this.prototype, e, {
         get: function() {
           if(!this.value.hasOwnProperty(e)) {
