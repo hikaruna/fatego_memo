@@ -68,47 +68,47 @@
 	
 	var _Servants2 = _interopRequireDefault(_Servants);
 	
-	var _Servant = __webpack_require__(278);
+	var _Servant = __webpack_require__(279);
 	
 	var _Servant2 = _interopRequireDefault(_Servant);
 	
-	var _Items = __webpack_require__(279);
+	var _Items = __webpack_require__(280);
 	
 	var _Items2 = _interopRequireDefault(_Items);
 	
-	var _Item = __webpack_require__(280);
+	var _Item = __webpack_require__(281);
 	
 	var _Item2 = _interopRequireDefault(_Item);
 	
-	var _Areas = __webpack_require__(282);
+	var _Areas = __webpack_require__(283);
 	
 	var _Areas2 = _interopRequireDefault(_Areas);
 	
-	var _Area = __webpack_require__(283);
+	var _Area = __webpack_require__(284);
 	
 	var _Area2 = _interopRequireDefault(_Area);
 	
-	var _Points = __webpack_require__(284);
+	var _Points = __webpack_require__(285);
 	
 	var _Points2 = _interopRequireDefault(_Points);
 	
-	var _Point = __webpack_require__(285);
+	var _Point = __webpack_require__(286);
 	
 	var _Point2 = _interopRequireDefault(_Point);
 	
-	var _Quests = __webpack_require__(286);
+	var _Quests = __webpack_require__(287);
 	
 	var _Quests2 = _interopRequireDefault(_Quests);
 	
-	var _Quest = __webpack_require__(287);
+	var _Quest = __webpack_require__(288);
 	
 	var _Quest2 = _interopRequireDefault(_Quest);
 	
-	var _Enemies = __webpack_require__(288);
+	var _Enemies = __webpack_require__(289);
 	
 	var _Enemies2 = _interopRequireDefault(_Enemies);
 	
-	var _Enemy = __webpack_require__(289);
+	var _Enemy = __webpack_require__(290);
 	
 	var _Enemy2 = _interopRequireDefault(_Enemy);
 	
@@ -27421,6 +27421,10 @@
 	
 	var _Util2 = _interopRequireDefault(_Util);
 	
+	var _ModelsTable = __webpack_require__(278);
+	
+	var _ModelsTable2 = _interopRequireDefault(_ModelsTable);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -27450,40 +27454,11 @@
 	  _createClass(Servants, [{
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement(
-	        'table',
-	        { className: 'table table-bordered' },
-	        _react2.default.createElement(
-	          'thead',
-	          null,
-	          _react2.default.createElement(
-	            'tr',
-	            null,
-	            _react2.default.createElement(
-	              'th',
-	              null,
-	              '\u540D\u524D'
-	            ),
-	            _react2.default.createElement(
-	              'th',
-	              null,
-	              '\u2605'
-	            ),
-	            _react2.default.createElement(
-	              'th',
-	              null,
-	              '\u30AF\u30E9\u30B9'
-	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'tbody',
-	          null,
-	          this.servants.map(function (e) {
-	            return _react2.default.createElement(Servant, { key: 'servants_' + e.id, servant: e });
-	          })
-	        )
-	      );
+	      // columns={['id', 'name', { items: [ 'id', 'name' ] }]}
+	      return _react2.default.createElement(_ModelsTable2.default, { models: this.servants,
+	        columns: _Servant2.default.columns,
+	        component: Servant
+	      });
 	    }
 	  }]);
 	
@@ -27504,28 +27479,18 @@
 	  _createClass(Servant, [{
 	    key: 'render',
 	    value: function render() {
+	      var text = this.props.value;
+	      if (this.props.column === 'id') {
+	        text = _react2.default.createElement(
+	          _reactRouter.Link,
+	          { to: '/servants/' + this.props.value },
+	          this.props.value
+	        );
+	      }
 	      return _react2.default.createElement(
-	        'tr',
-	        null,
-	        _react2.default.createElement(
-	          'td',
-	          null,
-	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: '/servants/' + this.props.servant.id },
-	            this.props.servant.id
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'td',
-	          null,
-	          this.props.servant.rarity
-	        ),
-	        _react2.default.createElement(
-	          'td',
-	          null,
-	          this.props.servant.class
-	        )
+	        'td',
+	        { key: 'body_' + this.props.model.id + '_' + this.props.column },
+	        text
 	      );
 	    }
 	  }]);
@@ -27727,9 +27692,11 @@
 	        return new ActiveCollection(_this._data, _this);
 	      };
 	
-	      data.map(function (e) {
+	      this.columns = data.map(function (e) {
 	        return Object.keys(e);
-	      }).flatten().uniq().map(function (e) {
+	      }).flatten().uniq();
+	
+	      this.columns.map(function (e) {
 	        Object.defineProperty(_this.prototype, e, {
 	          get: function get() {
 	            if (!this.value.hasOwnProperty(e)) {
@@ -27945,6 +27912,13 @@
 	        return result;
 	      }, {});
 	    }
+	  }, {
+	    key: 'getTimes',
+	    value: function getTimes(length) {
+	      return Array(length).fill().map(function (e, i) {
+	        return i;
+	      });
+	    }
 	  }]);
 	
 	  return Util;
@@ -27957,6 +27931,15 @@
 	  return Array(this).fill().map(function (e, i) {
 	    return i;
 	  });
+	};
+	
+	Array.prototype.max = function () {
+	  var func = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+	
+	  if (func === null) {
+	    return Math.max.apply(null, this);
+	  }
+	  return Math.max.apply(null, this.map(func));
 	};
 	
 	Array.prototype.flatten = function () {
@@ -38002,6 +37985,179 @@
 	  value: true
 	});
 	
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(178);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var ModelsTable = function (_Component) {
+	  _inherits(ModelsTable, _Component);
+	
+	  function ModelsTable(props) {
+	    _classCallCheck(this, ModelsTable);
+	
+	    var _this = _possibleConstructorReturn(this, (ModelsTable.__proto__ || Object.getPrototypeOf(ModelsTable)).call(this, props));
+	
+	    _this.models = props.models;
+	    _this.columns = props.columns;
+	    return _this;
+	  }
+	
+	  _createClass(ModelsTable, [{
+	    key: 'getStringOrKey',
+	    value: function getStringOrKey(ary) {
+	      return ary.map(function (e) {});
+	    }
+	  }, {
+	    key: 'getDeepsCount',
+	    value: function getDeepsCount(ary) {
+	      var _this2 = this;
+	
+	      var a = ary.map(function (e) {
+	        if ((typeof e === 'undefined' ? 'undefined' : _typeof(e)) === 'object' && !Array.isArray(e)) {
+	          return 1 + _this2.getDeepsCount(e[Object.keys(e)[0]]);
+	        } else {
+	          return 1;
+	        }
+	      });
+	      return Math.max.apply(null, [0].concat(a));
+	    }
+	  }, {
+	    key: 'getNodeCount',
+	    value: function getNodeCount(ary) {
+	      var _this3 = this;
+	
+	      return ary.reduce(function (r, e) {
+	        if (e.constructor == String) {
+	          return r + 1;
+	        }
+	        return r + _this3.getNodeCount(e[Object.keys(e)[0]]);
+	      }, 0);
+	    }
+	
+	    // unwrapする
+	    // [ a, b, { c: [ d, e] }, { f: [ g, { h: [ j, k]}]}] =>
+	    // [d, e, g, {h: [ j, k]}]
+	
+	  }, {
+	    key: 'unwrap',
+	    value: function unwrap(ary) {
+	      return ary.filter(function (e) {
+	        return e.constructor == Object;
+	      }).reduce(function (r, e) {
+	        return r.concat(e[Object.keys(e)[0]]);
+	      }, []);
+	    }
+	
+	    // 指定した回数分unwrapを行う
+	    // param c: unwrapを行う回数
+	
+	  }, {
+	    key: 'unwrapWithCount',
+	    value: function unwrapWithCount(ary, c) {
+	      if (c === 0) {
+	        return ary;
+	      } else if (c === 1) {
+	        return this.unwrap(ary);
+	      } else {
+	        return this.hoge(this.unwrap(ary), c - 1);
+	      }
+	    }
+	  }, {
+	    key: 'renderComponent',
+	    value: function renderComponent(key, model) {
+	      if (new this.props.component({}) instanceof _react.Component) {
+	        return new this.props.component({ value: model[key], model: model, column: key }).render();
+	      }
+	      if (this.props.component.constructor == Object) {
+	        return new this.props.component[key]({ value: model[key], model: model, column: key }).render();
+	      }
+	      return _react2.default.createElement(
+	        'td',
+	        null,
+	        model[key]
+	      );
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this4 = this;
+	
+	      return _react2.default.createElement(
+	        'table',
+	        { className: 'table table-bordered' },
+	        _react2.default.createElement(
+	          'thead',
+	          null,
+	          Array(this.getDeepsCount(this.columns)).fill().map(function (_, i) {
+	            return _react2.default.createElement(
+	              'tr',
+	              { key: i },
+	              _this4.unwrapWithCount(_this4.props.columns, i).map(function (e, i, ary) {
+	                if (e.constructor == Object) {
+	                  var k = Object.keys(e)[0];
+	                  var v = e[k];
+	                  return _react2.default.createElement(
+	                    'th',
+	                    { key: 'head_' + i + '_' + k, colSpan: _this4.getNodeCount(v) },
+	                    k
+	                  );
+	                } else if (e.constructor == String) {
+	                  return _react2.default.createElement(
+	                    'th',
+	                    { key: 'head_' + i + '_' + e, rowSpan: _this4.getDeepsCount(ary) },
+	                    e
+	                  );
+	                }
+	              })
+	            );
+	          })
+	        ),
+	        _react2.default.createElement(
+	          'tbody',
+	          null,
+	          this.models.map(function (model) {
+	            return _react2.default.createElement(
+	              'tr',
+	              { key: 'body_' + model.id },
+	              _this4.columns.map(function (column) {
+	                return _this4.renderComponent(column, model);
+	              })
+	            );
+	          })
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return ModelsTable;
+	}(_react.Component);
+	
+	exports.default = ModelsTable;
+
+/***/ },
+/* 279 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	var _react = __webpack_require__(1);
@@ -38194,7 +38350,7 @@
 	}(_react.Component);
 
 /***/ },
-/* 279 */
+/* 280 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38280,7 +38436,7 @@
 	exports.default = Items;
 
 /***/ },
-/* 280 */
+/* 281 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38297,7 +38453,7 @@
 	
 	var _reactRouter = __webpack_require__(178);
 	
-	var _data = __webpack_require__(281);
+	var _data = __webpack_require__(282);
 	
 	var _Item = __webpack_require__(269);
 	
@@ -38419,7 +38575,7 @@
 	}(_react.Component);
 
 /***/ },
-/* 281 */
+/* 282 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -38480,7 +38636,7 @@
 	}];
 
 /***/ },
-/* 282 */
+/* 283 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38497,7 +38653,7 @@
 	
 	var _reactRouter = __webpack_require__(178);
 	
-	var _data = __webpack_require__(281);
+	var _data = __webpack_require__(282);
 	
 	var _Area = __webpack_require__(259);
 	
@@ -38559,7 +38715,7 @@
 	exports.default = Areas;
 
 /***/ },
-/* 283 */
+/* 284 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38642,7 +38798,7 @@
 	exports.default = Area;
 
 /***/ },
-/* 284 */
+/* 285 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38719,7 +38875,7 @@
 	exports.default = Points;
 
 /***/ },
-/* 285 */
+/* 286 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38808,7 +38964,7 @@
 	exports.default = Point;
 
 /***/ },
-/* 286 */
+/* 287 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38885,7 +39041,7 @@
 	exports.default = Quests;
 
 /***/ },
-/* 287 */
+/* 288 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38995,7 +39151,7 @@
 	exports.default = Quest;
 
 /***/ },
-/* 288 */
+/* 289 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39072,7 +39228,7 @@
 	exports.default = Enemys;
 
 /***/ },
-/* 289 */
+/* 290 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
