@@ -12,6 +12,7 @@
     "prebuild": "npm run clean",
     "build": "webpack",
     "lint": "eslint src",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d docs"
   },
   "devDependencies": {
