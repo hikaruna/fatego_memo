@@ -29,11 +29,23 @@ export default class Util {
         return result;
       }, {});
   }
+
+  static getTimes(length) {
+    return Array(length).fill().map((e,i) => i);
+  }
 }
 
 Number.prototype.times = function(func) {
   return Array(this).fill().map((e,i) => i);
 }
+
+Array.prototype.max = function(func = null) {
+  if(func === null) {
+    return Math.max.apply(null, this);
+  }
+  return Math.max.apply(null, this.map(func));
+};
+
 
 Array.prototype.flatten = function() {
   return Array.prototype.concat.apply([], this);
