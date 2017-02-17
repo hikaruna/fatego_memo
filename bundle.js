@@ -27456,7 +27456,7 @@
 	    value: function render() {
 	      // columns={['id', 'name', { items: [ 'id', 'name' ] }]}
 	      return _react2.default.createElement(_ModelsTable2.default, { models: this.servants,
-	        columns: _Servant2.default.columns,
+	        columns: ['id', 'rarity', 'class', { items: ['id', { quests: ['id'] }] }],
 	        component: Servant
 	      });
 	    }
@@ -27786,12 +27786,19 @@
 	  }, {
 	    key: 'map',
 	    value: function map() {
-	      var _data$map,
-	          _this3 = this;
+	      var _values;
 	
-	      return (_data$map = this.data.map(function (e) {
-	        return new _this3.type(e);
-	      })).map.apply(_data$map, arguments);
+	      return (_values = this.values).map.apply(_values, arguments);
+	    }
+	  }, {
+	    key: Symbol.iterator,
+	    value: function value() {
+	      return this.values;
+	    }
+	  }, {
+	    key: 'get',
+	    value: function get(index) {
+	      return this.values[index];
 	    }
 	  }, {
 	    key: 'toJson',
@@ -27826,6 +27833,23 @@
 	        return null;
 	      }
 	      return new this.type(this.data[0]);
+	    }
+	  }, {
+	    key: 'values',
+	    get: function get() {
+	      var _this3 = this;
+	
+	      if (typeof this._values === 'undefined') {
+	        this._values = this.data.map(function (e) {
+	          return new _this3.type(e);
+	        });
+	      }
+	      return this._values;
+	    }
+	  }, {
+	    key: 'length',
+	    get: function get() {
+	      return this.values.length;
 	    }
 	  }]);
 	
@@ -27940,6 +27964,15 @@
 	    return Math.max.apply(null, this);
 	  }
 	  return Math.max.apply(null, this.map(func));
+	};
+	
+	Array.prototype.contains = function () {
+	  var func = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+	
+	  if (func.constructor !== Function) {
+	    return this.includes(func);
+	  }
+	  return this.filter(func).length > 0;
 	};
 	
 	Array.prototype.flatten = function () {
@@ -37057,6 +37090,11 @@
 			"item_id": "英雄の証",
 			"quest_id": "ジャンヌ生誕の地",
 			"number": 7
+		},
+		{
+			"item_id": "英雄の証",
+			"quest_id": "危険地帯",
+			"number": 7
 		}
 	];
 
@@ -37997,6 +38035,8 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -38017,11 +38057,6 @@
 	  }
 	
 	  _createClass(ModelsTable, [{
-	    key: 'getStringOrKey',
-	    value: function getStringOrKey(ary) {
-	      return ary.map(function (e) {});
-	    }
-	  }, {
 	    key: 'getDeepsCount',
 	    value: function getDeepsCount(ary) {
 	      var _this2 = this;
@@ -38073,7 +38108,7 @@
 	      } else if (c === 1) {
 	        return this.unwrap(ary);
 	      } else {
-	        return this.hoge(this.unwrap(ary), c - 1);
+	        return this.unwrap(this.unwrap(ary), c - 1);
 	      }
 	    }
 	  }, {
@@ -38091,10 +38126,87 @@
 	        model[key]
 	      );
 	    }
+	
+	    // 非破壊のinsert
+	    // returns insertされたあとのarray
+	
+	  }, {
+	    key: 'arrayInserted',
+	    value: function arrayInserted(array, toIndex) {
+	      var clone = array.concat([]);
+	
+	      for (var _len = arguments.length, elements = Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+	        elements[_key - 2] = arguments[_key];
+	      }
+	
+	      clone.splice.apply(clone, [toIndex, 0].concat(elements));
+	      return clone;
+	    }
+	  }, {
+	    key: 'buildTRecordsForOneModel',
+	    value: function buildTRecordsForOneModel(columns, model) {
+	      var _this4 = this;
+	
+	      var attrs = columns.filter(function (e) {
+	        return e.constructor == String;
+	      }).map(function (e) {
+	        return { value: model[e] };
+	      });
+	      var hasManyAssoc = columns.filter(function (e) {
+	        return e.constructor == Object;
+	      })[0] || null;
+	
+	      var hasManyModels = void 0;
+	      var recordsForOneModel = void 0;
+	      if (hasManyAssoc != null) {
+	        var assocName = Object.keys(hasManyAssoc)[0];
+	        var subColumns = hasManyAssoc[assocName];
+	        hasManyModels = this.buildTRecordsForManyModels(subColumns, model[assocName]);
+	        recordsForOneModel = hasManyModels.map(function (record, index) {
+	          if (index === 0) {
+	            attrs.forEach(function (attr) {
+	              attr.rowSpan = hasManyModels.length;
+	            });
+	            return _this4.arrayInserted.apply(_this4, [attrs, columns.indexOf(hasManyAssoc)].concat(_toConsumableArray(record)));
+	          } else {
+	            return record;
+	          }
+	        });
+	        //console.log(`recordsForOneModel: ${JSON.stringify(recordsForOneModel)}`);
+	        if (recordsForOneModel.length === 0) {
+	          attrs.forEach(function (attr) {
+	            return attr.rowSpan = 1;
+	          });
+	          recordsForOneModel = [this.arrayInserted(attrs, columns.indexOf(hasManyAssoc), { value: null, rowSpan: 1 })];
+	        }
+	      } else {
+	        attrs.forEach(function (attr) {
+	          return attr.rowSpan = 1;
+	        });
+	        recordsForOneModel = [attrs];
+	      }
+	      //console.log(`model: ${JSON.stringify(model)}`);
+	      //console.log(`cols: ${JSON.stringify(columns)}`);
+	      //console.log(`attrs: ${JSON.stringify(attrs)}`);
+	      //console.log(`hasManyModels: ${JSON.stringify(hasManyModels)}`);
+	      //console.log(`recordsForOneModel: ${JSON.stringify(recordsForOneModel)}`);
+	      return recordsForOneModel;
+	    }
+	  }, {
+	    key: 'buildTRecordsForManyModels',
+	    value: function buildTRecordsForManyModels(columns, models) {
+	      var _this5 = this;
+	
+	      var recordsForManyModels = [];
+	      models.map(function (model) {
+	        recordsForManyModels = recordsForManyModels.concat(_this5.buildTRecordsForOneModel(columns, model));
+	      });
+	      return recordsForManyModels;
+	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _this4 = this;
+	      var _this6 = this;
 	
 	      return _react2.default.createElement(
 	        'table',
@@ -38106,19 +38218,19 @@
 	            return _react2.default.createElement(
 	              'tr',
 	              { key: i },
-	              _this4.unwrapWithCount(_this4.props.columns, i).map(function (e, i, ary) {
+	              _this6.unwrapWithCount(_this6.props.columns, i).map(function (e, i, ary) {
 	                if (e.constructor == Object) {
 	                  var k = Object.keys(e)[0];
 	                  var v = e[k];
 	                  return _react2.default.createElement(
 	                    'th',
-	                    { key: 'head_' + i + '_' + k, colSpan: _this4.getNodeCount(v) },
+	                    { key: 'head_' + i + '_' + k, colSpan: _this6.getNodeCount(v) },
 	                    k
 	                  );
 	                } else if (e.constructor == String) {
 	                  return _react2.default.createElement(
 	                    'th',
-	                    { key: 'head_' + i + '_' + e, rowSpan: _this4.getDeepsCount(ary) },
+	                    { key: 'head_' + i + '_' + e, rowSpan: _this6.getDeepsCount(ary) },
 	                    e
 	                  );
 	                }
@@ -38129,12 +38241,16 @@
 	        _react2.default.createElement(
 	          'tbody',
 	          null,
-	          this.models.map(function (model) {
+	          this.buildTRecordsForManyModels(this.columns, this.models).map(function (tr, i) {
 	            return _react2.default.createElement(
 	              'tr',
-	              { key: 'body_' + model.id },
-	              _this4.columns.map(function (column) {
-	                return _this4.renderComponent(column, model);
+	              { key: 'table_' + i },
+	              tr.map(function (td, j) {
+	                return _react2.default.createElement(
+	                  'td',
+	                  { key: 'table_' + i + '_' + j, rowSpan: td.rowSpan },
+	                  td.value
+	                );
 	              })
 	            );
 	          })
