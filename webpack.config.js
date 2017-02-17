@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const publicPath = '/fatego_memo';
 
 module.exports = {
@@ -41,12 +42,15 @@ module.exports = {
         test: /\.yml$/,
         loader: 'yml'
       },
-      { test: /\.css$/, loader: 'style-loader!css-loader' },
-      { test: /\.svg$/, loader: 'url-loader?mimetype=image/svg+xml' },
-      { test: /\.woff$/, loader: 'url-loader?mimetype=application/font-woff' },
-      { test: /\.woff2$/, loader: 'url-loader?mimetype=application/font-woff' },
-      { test: /\.eot$/, loader: 'url-loader?mimetype=application/font-woff' },
-      { test: /\.ttf$/, loader: 'url-loader?mimetype=application/font-woff' }
+      {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
+        //loader: 'style-loader!css-loader'
+      },
+      { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url-loader?mimetype=application/font-woff' },
+      { test: /\.svg(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url-loader?mimetype=image/svg+xml' },
+      { test: /\.eot(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url-loader?mimetype=application/font-woff' },
+      { test: /\.ttf(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url-loader?mimetype=application/font-woff' }
     ]
   },
   plugins: [
@@ -60,6 +64,7 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       'BASE_PATH': JSON.stringify(publicPath)
-    })
+    }),
+    new ExtractTextPlugin('bundle.css')
   ]
 };

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import { Icon } from 'react-fa';
 
 export default class ModelsTable extends Component {
 
@@ -130,7 +131,12 @@ export default class ModelsTable extends Component {
                     const v = e[k];
                     return ( <th key={`head_${i}_${k}`} colSpan={this.getNodeCount(v)}>{k}</th>);
                   }else if(e.constructor == String) {
-                    return ( <th key={`head_${i}_${e}`} rowSpan={this.getDeepsCount(ary)}>{e}</th>);
+                    return (
+                      <th key={`head_${i}_${e}`} rowSpan={this.getDeepsCount(ary)}>
+                        {e}
+                        <Icon name="sort" />
+                      </th>
+                    );
                   }
                 })}
               </tr>
