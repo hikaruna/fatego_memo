@@ -198,15 +198,15 @@ export class ActiveCollection {
   generateDictionaryCompare(key, order='asc') {
     const o = {asc: 1, desc: -1}[order];
     return (a,b) => {
-      a = a[key];
-      if(typeof a === 'string') {
-        a = a.charCodeAt(0);
+      a = `${a[key]}`;
+      b = `${b[key]}`;
+      if(order === 'asc') {
+        return a < b ? -1 : 1;
+      }else if(order === 'desc') {
+        return a > b ? -1 : 1;
+      }else {
+        throw new Error();
       }
-      b = b[key];
-      if(typeof b === 'string') {
-        b = b.charCodeAt(0);
-      }
-      return (a - b) * o ;
     };
   }
 }

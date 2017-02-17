@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { Icon } from 'react-fa';
+import QueryLink from 'QueryLink.jsx';
 
 export default class ModelsTable extends Component {
 
   constructor(props) {
     super(props);
-    this.models = props.models;
+    this.state = {};
+    this.state.models = this.props.models.order(...this.props.order);
+    this.state.orders = this.props.order;
     this.columns = props.columns;
   }
 
@@ -118,25 +121,74 @@ export default class ModelsTable extends Component {
     return recordsForManyModels;
   }
 
+  renderSortIcon(column) {
+    if(!this.columns.includes(column)) {
+      return
+    }
+
+    let orders = this.state.orders
+    orders = orders.map(order => this.parseOrderString(order));
+
+    const order = orders.filter(e => e.by === column)[0] || null;
+    if(order === null) {
+      return <Icon name="sort" />;
+    }
+    if(order.direction === 'asc') {
+      return <Icon name="sort-asc" />;
+    }else if(order.direction === 'desc') {
+      return <Icon name="sort-desc" />;
+    }else {
+      throw new Error(`Illegal order direction ${orderDirection}`);
+    }
+  }
+
+  // 'attr desc' -> {by: 'attr', direction: 'desc'}
+  parseOrderString(orderString) {
+    const matched = orderString.match(/(.*) (asc|desc)$/);
+    if(matched == null) {
+      return {by: orderString, direction: 'asc'};
+    }else {
+      return {by: matched[1], direction: matched[2]};
+    }
+  }
+
+  onSort(column) {
+    let order = this.state.orders
+      .map(order => this.parseOrderString(order))
+      .filter(order => order.by === column)[0] || null;
+    if(order === null || order.direction === 'desc') {
+      this.state.orders = [`${column} asc`];
+    }else {
+      this.state.orders = [`${column} desc`];
+    }
+    this.state.models = this.state.models.order(...this.state.orders);
+    this.forceUpdate();
+  }
+
   render() {
     return (
       <table className="table table-bordered">
         <thead>
-          {Array(this.getDeepsCount(this.columns)).fill().map((_,i) => {
+          {Array(this.getDeepsCount(this.columns)).fill().map((_,trIndex) => {
             return (
-              <tr key={i}>
-                {this.unwrapWithCount(this.props.columns, i).map((e,i,ary) => {
+              <tr key={trIndex}>
+                {this.unwrapWithCount(this.props.columns, trIndex).map((e,i,ary) => {
                   if(e.constructor == Object) {
                     const k = Object.keys(e)[0];
                     const v = e[k];
                     return ( <th key={`head_${i}_${k}`} colSpan={this.getNodeCount(v)}>{k}</th>);
                   }else if(e.constructor == String) {
-                    return (
-                      <th key={`head_${i}_${e}`} rowSpan={this.getDeepsCount(ary)}>
-                        {e}
-                        <Icon name="sort" />
-                      </th>
-                    );
+                    const deepsCount = this.getDeepsCount(ary);
+                    const k = `head_${i}_${e}`;
+                    if(trIndex === 0) {
+                      return (
+                        <th key={k} rowSpan={deepsCount} onClick={() => this.onSort(e)}>
+                          {e} {this.renderSortIcon(e)} 
+                        </th>
+                      );
+                    }else {
+                      return <th key={k} rowSpan={deepsCount}>{e}</th>;
+                    }
                   }
                 })}
               </tr>
@@ -144,7 +196,7 @@ export default class ModelsTable extends Component {
           })}
         </thead>
         <tbody>
-          {this.buildTRecordsForManyModels(this.columns, this.models).map((tr,i) => {
+          {this.buildTRecordsForManyModels(this.columns, this.state.models).map((tr,i) => {
             return (
               <tr key={`table_${i}`}>
                 {tr.map((td,j) => {
