@@ -46,6 +46,12 @@ Array.prototype.max = function(func = null) {
   return Math.max.apply(null, this.map(func));
 };
 
+Array.prototype.contains = function(func = null) {
+  if(func.constructor !== Function) {
+    return this.includes(func);
+  }
+  return this.filter(func).length > 0;
+}
 
 Array.prototype.flatten = function() {
   return Array.prototype.concat.apply([], this);

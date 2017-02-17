@@ -161,7 +161,7 @@ export class ActiveCollection {
   }
 
   map(...args) {
-    return this.data.map((e) => new this.type(e)).map(...args);
+    return this.values.map(...args);
   }
 
   get first() {
@@ -169,6 +169,25 @@ export class ActiveCollection {
       return null;
     }
     return new this.type(this.data[0]);
+  }
+
+  get values() {
+    if(typeof this._values === 'undefined') {
+      this._values = this.data.map((e) => new this.type(e));
+    }
+    return this._values;
+  }
+
+  [Symbol.iterator]() {
+    return this.values;
+  }
+
+  get length() {
+    return this.values.length;
+  }
+
+  get(index) {
+    return this.values[index];
   }
 
   toJson() {

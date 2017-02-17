@@ -9,11 +9,6 @@ export default class ModelsTable extends Component {
     this.columns = props.columns;
   }
 
-  getStringOrKey(ary) {
-    return ary.map(e => {
-    });
-  }
-
   getDeepsCount(ary) {
     let a = ary.map(e => {
       if(typeof e === 'object' && !Array.isArray(e)) {
@@ -24,7 +19,6 @@ export default class ModelsTable extends Component {
     });
     return Math.max.apply(null, [0].concat(a));
   }
-
 
   getNodeCount(ary) {
     return ary.reduce((r,e) => {
@@ -52,7 +46,7 @@ export default class ModelsTable extends Component {
     }else if(c === 1) {
       return this.unwrap(ary);
     }else {
-      return this.hoge(this.unwrap(ary), c -1);
+      return this.unwrap(this.unwrap(ary), c -1);
     }
   }
 
@@ -64,6 +58,63 @@ export default class ModelsTable extends Component {
       return new this.props.component[key]({ value: model[key], model: model, column: key }).render();
     }
     return <td>{model[key]}</td>;
+  }
+
+  // 非破壊のinsert
+  // returns insertされたあとのarray
+  arrayInserted(array, toIndex, ...elements) {
+    let clone = array.concat([]);
+    clone.splice(toIndex, 0, ...elements);
+    return clone;
+  }
+
+  buildTRecordsForOneModel(columns, model) {
+    let attrs = columns.filter(e => e.constructor == String).map(e => {
+      return {value: model[e]};
+    });
+    let hasManyAssoc = columns.filter(e => e.constructor == Object)[0] || null;
+
+    let hasManyModels;
+    let recordsForOneModel;
+    if(hasManyAssoc != null) {
+      let assocName = Object.keys(hasManyAssoc)[0];
+      let subColumns = hasManyAssoc[assocName];
+      hasManyModels = this.buildTRecordsForManyModels(subColumns, model[assocName]);
+      recordsForOneModel = hasManyModels.map((record, index) => {
+        if(index === 0) {
+          attrs.forEach(attr => {
+            attr.rowSpan = hasManyModels.length
+          });
+          return this.arrayInserted(attrs, columns.indexOf(hasManyAssoc), ...record);
+        }else {
+          return record;
+        }
+      });
+      //console.log(`recordsForOneModel: ${JSON.stringify(recordsForOneModel)}`);
+      if(recordsForOneModel.length === 0) {
+        attrs.forEach(attr => attr.rowSpan = 1);
+        recordsForOneModel = [this.arrayInserted(attrs, columns.indexOf(hasManyAssoc), {value: null, rowSpan: 1})];
+      }
+    }else {
+      attrs.forEach(attr => attr.rowSpan = 1);
+      recordsForOneModel = [attrs];
+    }
+    //console.log(`model: ${JSON.stringify(model)}`);
+    //console.log(`cols: ${JSON.stringify(columns)}`);
+    //console.log(`attrs: ${JSON.stringify(attrs)}`);
+    //console.log(`hasManyModels: ${JSON.stringify(hasManyModels)}`);
+    //console.log(`recordsForOneModel: ${JSON.stringify(recordsForOneModel)}`);
+    return recordsForOneModel;
+  }
+
+  buildTRecordsForManyModels(columns, models) {
+    let recordsForManyModels = [];
+    models.map(model => {
+      recordsForManyModels = recordsForManyModels.concat(
+        this.buildTRecordsForOneModel(columns, model)
+      );
+    });
+    return recordsForManyModels;
   }
 
   render() {
@@ -87,11 +138,15 @@ export default class ModelsTable extends Component {
           })}
         </thead>
         <tbody>
-          {this.models.map(model => {
+          {this.buildTRecordsForManyModels(this.columns, this.models).map((tr,i) => {
             return (
-              <tr key={`body_${model.id}`}>
-                {this.columns.map(column => {
-                  return this.renderComponent(column, model);
+              <tr key={`table_${i}`}>
+                {tr.map((td,j) => {
+                  return (
+                    <td key={`table_${i}_${j}`} rowSpan={td.rowSpan}>
+                      {td.value}
+                    </td>
+                  );
                 })}
               </tr>
             );

@@ -17,7 +17,7 @@ export default class Servants extends Component {
     // columns={['id', 'name', { items: [ 'id', 'name' ] }]}
     return (
       <ModelsTable models={this.servants}
-        columns={ServantModel.columns}
+        columns={ [ 'id', 'rarity', 'class', {items: ['id', {quests: ['id']}]}]}
         component={Servant}
       />
     );
