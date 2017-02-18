@@ -15,10 +15,10 @@ export default class Servants extends Component {
   }
 
   render() {
-    // columns={['id', 'name', { items: [ 'id', 'name' ] }]}
     return (
-      <ModelsTable models={this.servants}
-        columns={ [ 'id', 'rarity', 'class', {items: ['id', {quests: ['id']}]}]}
+      <ModelsTable
+        models={this.servants}
+        columns={ServantModel.columns}
         order={this.order}
         component={Servant}
       />

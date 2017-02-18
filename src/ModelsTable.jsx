@@ -10,7 +10,8 @@ export default class ModelsTable extends Component {
     this.state = {};
     this.state.models = this.props.models.order(...this.props.order);
     this.state.orders = this.props.order;
-    this.columns = props.columns;
+    this.component = this.props.component || DefaultTdComponent;
+    this.columns = this.props.columns;
   }
 
   getDeepsCount(ary) {
@@ -74,7 +75,11 @@ export default class ModelsTable extends Component {
 
   buildTRecordsForOneModel(columns, model) {
     let attrs = columns.filter(e => e.constructor == String).map(e => {
-      return {value: model[e]};
+      return {
+        column: e,
+        model: model,
+        value: model[e]
+      };
     });
     let hasManyAssoc = columns.filter(e => e.constructor == Object)[0] || null;
 
@@ -200,11 +205,13 @@ export default class ModelsTable extends Component {
             return (
               <tr key={`table_${i}`}>
                 {tr.map((td,j) => {
-                  return (
-                    <td key={`table_${i}_${j}`} rowSpan={td.rowSpan}>
-                      {td.value}
-                    </td>
-                  );
+                  return new this.component({
+                    column: td.column,
+                    model: td.model,
+                    key: `table_${i}_${j}`,
+                    rowSpan: td.rowSpan,
+                    value: td.value,
+                  }).render();
                 })}
               </tr>
             );
@@ -212,5 +219,11 @@ export default class ModelsTable extends Component {
         </tbody>
       </table>
     );
+  }
+}
+
+class DefaultTdComponent extends Component {
+  retnder() {
+    return <td key={this.props.key} rowSpan={this.props.rowSpan}>{this.props.value}</td>;
   }
 }

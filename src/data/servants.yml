@@ -135,40 +135,40 @@
   class: アサシン
 - id: ヘラクレス
   rarity: 4
-  class: 狂
+  class: バーサーカー
 - id: ランスロット
   rarity: 4
-  class: 狂
+  class: バーサーカー
 - id: 呂布奉先
   rarity: 3
-  class: 狂
+  class: バーサーカー
 - id: スパルタクス
   rarity: 1
-  class: 狂
+  class: バーサーカー
 - id: 坂田金時
   rarity: 5
-  class: 狂
+  class: バーサーカー
 - id: ヴラド三世
   rarity: 5
-  class: 狂
+  class: バーサーカー
 - id: アステリオス
   rarity: 1
-  class: 狂
+  class: バーサーカー
 - id: カリギュラ
   rarity: 2
-  class: 狂
+  class: バーサーカー
 - id: ダレイオス三世
   rarity: 3
-  class: 狂
+  class: バーサーカー
 - id: 清姫
   rarity: 3
-  class: 狂
+  class: バーサーカー
 - id: エイリーク・ブラッドアクス
   rarity: 2
-  class: 狂
+  class: バーサーカー
 - id: タマモキャット
   rarity: 4
-  class: 狂
+  class: バーサーカー
 - id: ジャンヌ・ダルク
   rarity: 5
   class: ルーラー
@@ -240,7 +240,7 @@
   class: アサシン
 - id: フランケンシュタイン
   rarity: 4
-  class: 狂
+  class: バーサーカー
 - id: アルジュナ
   rarity: 5
   class: アーチャー
@@ -258,7 +258,7 @@
   class: ランサー
 - id: ベオウルフ
   rarity: 4
-  class: 狂
+  class: バーサーカー
 - id: ネロ・クラウディウス(ブライド)
   rarity: 5
   class: セイバー
@@ -282,10 +282,10 @@
   class: アヴェンジャー
 - id: ナイチンゲール
   rarity: 5
-  class: 狂
+  class: バーサーカー
 - id: クー・フーリン(オルタ)
   rarity: 5
-  class: 狂
+  class: バーサーカー
 - id: 女王メイヴ
   rarity: 5
   class: ライダー
@@ -333,13 +333,13 @@
   class: キャスター
 - id: 源頼光
   rarity: 5
-  class: 狂
+  class: バーサーカー
 - id: 坂田金時(ライダー)
   rarity: 4
   class: ライダー
 - id: 茨木童子
   rarity: 4
-  class: 狂
+  class: バーサーカー
 - id: 風魔小太郎
   rarity: 3
   class: アサシン
