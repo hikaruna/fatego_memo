@@ -68,47 +68,47 @@
 	
 	var _Servants2 = _interopRequireDefault(_Servants);
 	
-	var _Servant = __webpack_require__(293);
+	var _Servant = __webpack_require__(295);
 	
 	var _Servant2 = _interopRequireDefault(_Servant);
 	
-	var _Items = __webpack_require__(294);
+	var _Items = __webpack_require__(296);
 	
 	var _Items2 = _interopRequireDefault(_Items);
 	
-	var _Item = __webpack_require__(295);
+	var _Item = __webpack_require__(297);
 	
 	var _Item2 = _interopRequireDefault(_Item);
 	
-	var _Areas = __webpack_require__(297);
+	var _Areas = __webpack_require__(299);
 	
 	var _Areas2 = _interopRequireDefault(_Areas);
 	
-	var _Area = __webpack_require__(298);
+	var _Area = __webpack_require__(300);
 	
 	var _Area2 = _interopRequireDefault(_Area);
 	
-	var _Points = __webpack_require__(299);
+	var _Points = __webpack_require__(301);
 	
 	var _Points2 = _interopRequireDefault(_Points);
 	
-	var _Point = __webpack_require__(300);
+	var _Point = __webpack_require__(302);
 	
 	var _Point2 = _interopRequireDefault(_Point);
 	
-	var _Quests = __webpack_require__(301);
+	var _Quests = __webpack_require__(303);
 	
 	var _Quests2 = _interopRequireDefault(_Quests);
 	
-	var _Quest = __webpack_require__(302);
+	var _Quest = __webpack_require__(304);
 	
 	var _Quest2 = _interopRequireDefault(_Quest);
 	
-	var _Enemies = __webpack_require__(303);
+	var _Enemies = __webpack_require__(305);
 	
 	var _Enemies2 = _interopRequireDefault(_Enemies);
 	
-	var _Enemy = __webpack_require__(304);
+	var _Enemy = __webpack_require__(306);
 	
 	var _Enemy2 = _interopRequireDefault(_Enemy);
 	
@@ -27057,7 +27057,7 @@
 	
 	var _Util2 = _interopRequireDefault(_Util);
 	
-	var _ModelsTable = __webpack_require__(278);
+	var _ModelsTable = __webpack_require__(280);
 	
 	var _ModelsTable2 = _interopRequireDefault(_ModelsTable);
 	
@@ -27087,9 +27087,9 @@
 	  _createClass(Servants, [{
 	    key: 'render',
 	    value: function render() {
-	      // columns={['id', 'name', { items: [ 'id', 'name' ] }]}
-	      return _react2.default.createElement(_ModelsTable2.default, { models: this.servants,
-	        columns: ['id', 'rarity', 'class', { items: ['id', { quests: ['id'] }] }],
+	      return _react2.default.createElement(_ModelsTable2.default, {
+	        models: this.servants,
+	        columns: _Servant2.default.columns,
 	        order: this.order,
 	        component: Servant
 	      });
@@ -27148,7 +27148,7 @@
 	
 	var _ActiveObject3 = _interopRequireDefault(_ActiveObject2);
 	
-	var _servants = __webpack_require__(277);
+	var _servants = __webpack_require__(279);
 	
 	var _servants2 = _interopRequireDefault(_servants);
 	
@@ -27170,6 +27170,14 @@
 	  }
 	
 	  _createClass(Servant, [{
+	    key: 'buildSkillEvolution',
+	    value: function buildSkillEvolution(level) {
+	      return _ActiveObject3.default.loadClass('SkillEvolutionItem').where({
+	        servant_id: this.id,
+	        level: level
+	      });
+	    }
+	  }, {
 	    key: 'evolutions',
 	    get: function get() {
 	      var _this2 = this;
@@ -27177,6 +27185,60 @@
 	      return [1, 2, 3, 4].map(function (e) {
 	        return _ActiveObject3.default.loadClass('EvolutionItem').where({ servant_id: _this2.id, level: e });
 	      });
+	    }
+	  }, {
+	    key: 'skillEvolutions',
+	    get: function get() {
+	      var _this3 = this;
+	
+	      return [1, 2, 3, 4, 5, 6, 7, 8, 9].map(function (e) {
+	        return _this3.buildSkillEvolution(e);
+	      });
+	    }
+	  }, {
+	    key: 'skillEvolution1',
+	    get: function get() {
+	      return this.buildSkillEvolution(1);
+	    }
+	  }, {
+	    key: 'skillEvolution2',
+	    get: function get() {
+	      return this.buildSkillEvolution(2);
+	    }
+	  }, {
+	    key: 'skillEvolution3',
+	    get: function get() {
+	      return this.buildSkillEvolution(3);
+	    }
+	  }, {
+	    key: 'skillEvolution4',
+	    get: function get() {
+	      return this.buildSkillEvolution(4);
+	    }
+	  }, {
+	    key: 'skillEvolution5',
+	    get: function get() {
+	      return this.buildSkillEvolution(5);
+	    }
+	  }, {
+	    key: 'skillEvolution6',
+	    get: function get() {
+	      return this.buildSkillEvolution(6);
+	    }
+	  }, {
+	    key: 'skillEvolution7',
+	    get: function get() {
+	      return this.buildSkillEvolution(7);
+	    }
+	  }, {
+	    key: 'skillEvolution8',
+	    get: function get() {
+	      return this.buildSkillEvolution(8);
+	    }
+	  }, {
+	    key: 'skillEvolution9',
+	    get: function get() {
+	      return this.buildSkillEvolution(9);
 	    }
 	  }]);
 	
@@ -27188,6 +27250,7 @@
 	Servant.data = _servants2.default;
 	Servant.has_many('evolutionItems');
 	Servant.has_many('items', { through: 'evolutionItems' });
+	Servant.has_many('skillEvolutionItems');
 
 /***/ },
 /* 250 */
@@ -27484,6 +27547,13 @@
 	    key: 'length',
 	    get: function get() {
 	      return this.values.length;
+	    }
+	  }], [{
+	    key: 'fromArray',
+	    value: function fromArray(models) {
+	      return new ActiveCollection(models.map(function (model) {
+	        return model.value;
+	      }), models[0].constructor);
 	    }
 	  }]);
 	
@@ -28305,7 +28375,8 @@
 		"./ItemQuest.js": 271,
 		"./Point.js": 273,
 		"./Quest.js": 275,
-		"./Servant.js": 249
+		"./Servant.js": 249,
+		"./SkillEvolutionItem.js": 277
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -36488,6 +36559,7 @@
 	exports.default = Item;
 	
 	Item.data = _items2.default;
+	Item.has_many('skillEvolutionItems');
 	Item.has_many('evolutionItems');
 	Item.has_many('servants', { through: 'evolutionItems' });
 	Item.has_many('itemQuests');
@@ -36897,6 +36969,12681 @@
 
 /***/ },
 /* 277 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _ActiveObject2 = __webpack_require__(250);
+	
+	var _ActiveObject3 = _interopRequireDefault(_ActiveObject2);
+	
+	var _skill_evolution_items = __webpack_require__(278);
+	
+	var _skill_evolution_items2 = _interopRequireDefault(_skill_evolution_items);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var SkillEvolutionItem = function (_ActiveObject) {
+	  _inherits(SkillEvolutionItem, _ActiveObject);
+	
+	  function SkillEvolutionItem() {
+	    _classCallCheck(this, SkillEvolutionItem);
+	
+	    return _possibleConstructorReturn(this, (SkillEvolutionItem.__proto__ || Object.getPrototypeOf(SkillEvolutionItem)).apply(this, arguments));
+	  }
+	
+	  return SkillEvolutionItem;
+	}(_ActiveObject3.default);
+	
+	exports.default = SkillEvolutionItem;
+	
+	SkillEvolutionItem.data = _skill_evolution_items2.default;
+	SkillEvolutionItem.belongs_to('servant');
+	SkillEvolutionItem.belongs_to('item');
+
+/***/ },
+/* 278 */
+/***/ function(module, exports) {
+
+	module.exports = [
+		{
+			"servant_id": "マシュ・キリエライト",
+			"level": 1,
+			"item_id": "英雄の証",
+			"number": 5
+		},
+		{
+			"servant_id": "マシュ・キリエライト",
+			"level": 2,
+			"item_id": "竜の牙",
+			"number": 5
+		},
+		{
+			"servant_id": "マシュ・キリエライト",
+			"level": 3,
+			"item_id": "世界樹の種",
+			"number": 5
+		},
+		{
+			"servant_id": "マシュ・キリエライト",
+			"level": 4,
+			"item_id": "八連双晶",
+			"number": 5
+		},
+		{
+			"servant_id": "マシュ・キリエライト",
+			"level": 5,
+			"item_id": "虚影の塵",
+			"number": 5
+		},
+		{
+			"servant_id": "マシュ・キリエライト",
+			"level": 6,
+			"item_id": "無間の歯車",
+			"number": 5
+		},
+		{
+			"servant_id": "マシュ・キリエライト",
+			"level": 7,
+			"item_id": "鳳凰の羽根",
+			"number": 5
+		},
+		{
+			"servant_id": "マシュ・キリエライト",
+			"level": 8,
+			"item_id": "竜の逆鱗",
+			"number": 5
+		},
+		{
+			"servant_id": "マシュ・キリエライト",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン",
+			"level": 1,
+			"item_id": "剣の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン",
+			"level": 2,
+			"item_id": "剣の輝石",
+			"number": 12
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン",
+			"level": 3,
+			"item_id": "剣の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン",
+			"level": 4,
+			"item_id": "剣の魔石",
+			"number": 12
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン",
+			"level": 4,
+			"item_id": "英雄の証",
+			"number": 15
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン",
+			"level": 5,
+			"item_id": "剣の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン",
+			"level": 5,
+			"item_id": "英雄の証",
+			"number": 29
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン",
+			"level": 6,
+			"item_id": "剣の秘石",
+			"number": 12
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン",
+			"level": 6,
+			"item_id": "竜の牙",
+			"number": 12
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン",
+			"level": 7,
+			"item_id": "竜の牙",
+			"number": 24
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン",
+			"level": 7,
+			"item_id": "混沌の爪",
+			"number": 4
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン",
+			"level": 8,
+			"item_id": "混沌の爪",
+			"number": 11
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン",
+			"level": 8,
+			"item_id": "竜の逆鱗",
+			"number": 10
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔剣オルタ〕",
+			"level": 1,
+			"item_id": "剣の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔剣オルタ〕",
+			"level": 2,
+			"item_id": "剣の輝石",
+			"number": 10
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔剣オルタ〕",
+			"level": 3,
+			"item_id": "剣の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔剣オルタ〕",
+			"level": 4,
+			"item_id": "剣の魔石",
+			"number": 10
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔剣オルタ〕",
+			"level": 4,
+			"item_id": "混沌の爪",
+			"number": 3
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔剣オルタ〕",
+			"level": 5,
+			"item_id": "剣の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔剣オルタ〕",
+			"level": 5,
+			"item_id": "混沌の爪",
+			"number": 5
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔剣オルタ〕",
+			"level": 6,
+			"item_id": "剣の秘石",
+			"number": 10
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔剣オルタ〕",
+			"level": 6,
+			"item_id": "竜の牙",
+			"number": 10
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔剣オルタ〕",
+			"level": 7,
+			"item_id": "竜の牙",
+			"number": 20
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔剣オルタ〕",
+			"level": 7,
+			"item_id": "虚影の塵",
+			"number": 10
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔剣オルタ〕",
+			"level": 8,
+			"item_id": "虚影の塵",
+			"number": 30
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔剣オルタ〕",
+			"level": 8,
+			"item_id": "蛮神の心臓",
+			"number": 8
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔剣オルタ〕",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔リリィ〕",
+			"level": 1,
+			"item_id": "剣の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔リリィ〕",
+			"level": 2,
+			"item_id": "剣の輝石",
+			"number": 10
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔リリィ〕",
+			"level": 3,
+			"item_id": "剣の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔リリィ〕",
+			"level": 4,
+			"item_id": "剣の魔石",
+			"number": 10
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔リリィ〕",
+			"level": 4,
+			"item_id": "竜の牙",
+			"number": 10
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔リリィ〕",
+			"level": 5,
+			"item_id": "剣の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔リリィ〕",
+			"level": 5,
+			"item_id": "竜の牙",
+			"number": 20
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔リリィ〕",
+			"level": 6,
+			"item_id": "剣の秘石",
+			"number": 10
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔リリィ〕",
+			"level": 6,
+			"item_id": "英雄の証",
+			"number": 12
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔リリィ〕",
+			"level": 7,
+			"item_id": "英雄の証",
+			"number": 24
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔リリィ〕",
+			"level": 7,
+			"item_id": "混沌の爪",
+			"number": 3
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔リリィ〕",
+			"level": 8,
+			"item_id": "混沌の爪",
+			"number": 9
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔リリィ〕",
+			"level": 8,
+			"item_id": "竜の逆鱗",
+			"number": 8
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔リリィ〕",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "ネロ・クラウディウス",
+			"level": 1,
+			"item_id": "剣の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "ネロ・クラウディウス",
+			"level": 2,
+			"item_id": "剣の輝石",
+			"number": 10
+		},
+		{
+			"servant_id": "ネロ・クラウディウス",
+			"level": 3,
+			"item_id": "剣の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "ネロ・クラウディウス",
+			"level": 4,
+			"item_id": "剣の魔石",
+			"number": 10
+		},
+		{
+			"servant_id": "ネロ・クラウディウス",
+			"level": 4,
+			"item_id": "鳳凰の羽根",
+			"number": 4
+		},
+		{
+			"servant_id": "ネロ・クラウディウス",
+			"level": 5,
+			"item_id": "剣の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "ネロ・クラウディウス",
+			"level": 5,
+			"item_id": "鳳凰の羽根",
+			"number": 7
+		},
+		{
+			"servant_id": "ネロ・クラウディウス",
+			"level": 6,
+			"item_id": "剣の秘石",
+			"number": 10
+		},
+		{
+			"servant_id": "ネロ・クラウディウス",
+			"level": 6,
+			"item_id": "八連双晶",
+			"number": 4
+		},
+		{
+			"servant_id": "ネロ・クラウディウス",
+			"level": 7,
+			"item_id": "八連双晶",
+			"number": 8
+		},
+		{
+			"servant_id": "ネロ・クラウディウス",
+			"level": 7,
+			"item_id": "竜の牙",
+			"number": 12
+		},
+		{
+			"servant_id": "ネロ・クラウディウス",
+			"level": 8,
+			"item_id": "竜の牙",
+			"number": 36
+		},
+		{
+			"servant_id": "ネロ・クラウディウス",
+			"level": 8,
+			"item_id": "無間の歯車",
+			"number": 20
+		},
+		{
+			"servant_id": "ネロ・クラウディウス",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "ジークフリート",
+			"level": 1,
+			"item_id": "剣の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "ジークフリート",
+			"level": 2,
+			"item_id": "剣の輝石",
+			"number": 10
+		},
+		{
+			"servant_id": "ジークフリート",
+			"level": 3,
+			"item_id": "剣の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "ジークフリート",
+			"level": 4,
+			"item_id": "剣の魔石",
+			"number": 10
+		},
+		{
+			"servant_id": "ジークフリート",
+			"level": 4,
+			"item_id": "世界樹の種",
+			"number": 5
+		},
+		{
+			"servant_id": "ジークフリート",
+			"level": 5,
+			"item_id": "剣の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "ジークフリート",
+			"level": 5,
+			"item_id": "世界樹の種",
+			"number": 10
+		},
+		{
+			"servant_id": "ジークフリート",
+			"level": 6,
+			"item_id": "剣の秘石",
+			"number": 10
+		},
+		{
+			"servant_id": "ジークフリート",
+			"level": 6,
+			"item_id": "竜の牙",
+			"number": 10
+		},
+		{
+			"servant_id": "ジークフリート",
+			"level": 7,
+			"item_id": "竜の牙",
+			"number": 20
+		},
+		{
+			"servant_id": "ジークフリート",
+			"level": 7,
+			"item_id": "蛮神の心臓",
+			"number": 2
+		},
+		{
+			"servant_id": "ジークフリート",
+			"level": 8,
+			"item_id": "蛮神の心臓",
+			"number": 6
+		},
+		{
+			"servant_id": "ジークフリート",
+			"level": 8,
+			"item_id": "竜の逆鱗",
+			"number": 8
+		},
+		{
+			"servant_id": "ジークフリート",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "ガイウス・ユリウス・カエサル",
+			"level": 1,
+			"item_id": "剣の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "ガイウス・ユリウス・カエサル",
+			"level": 2,
+			"item_id": "剣の輝石",
+			"number": 8
+		},
+		{
+			"servant_id": "ガイウス・ユリウス・カエサル",
+			"level": 3,
+			"item_id": "剣の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "ガイウス・ユリウス・カエサル",
+			"level": 4,
+			"item_id": "剣の魔石",
+			"number": 8
+		},
+		{
+			"servant_id": "ガイウス・ユリウス・カエサル",
+			"level": 4,
+			"item_id": "無間の歯車",
+			"number": 4
+		},
+		{
+			"servant_id": "ガイウス・ユリウス・カエサル",
+			"level": 5,
+			"item_id": "剣の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "ガイウス・ユリウス・カエサル",
+			"level": 5,
+			"item_id": "無間の歯車",
+			"number": 7
+		},
+		{
+			"servant_id": "ガイウス・ユリウス・カエサル",
+			"level": 6,
+			"item_id": "剣の秘石",
+			"number": 8
+		},
+		{
+			"servant_id": "ガイウス・ユリウス・カエサル",
+			"level": 6,
+			"item_id": "英雄の証",
+			"number": 10
+		},
+		{
+			"servant_id": "ガイウス・ユリウス・カエサル",
+			"level": 7,
+			"item_id": "英雄の証",
+			"number": 20
+		},
+		{
+			"servant_id": "ガイウス・ユリウス・カエサル",
+			"level": 7,
+			"item_id": "隕蹄鉄",
+			"number": 4
+		},
+		{
+			"servant_id": "ガイウス・ユリウス・カエサル",
+			"level": 8,
+			"item_id": "隕蹄鉄",
+			"number": 12
+		},
+		{
+			"servant_id": "ガイウス・ユリウス・カエサル",
+			"level": 8,
+			"item_id": "混沌の爪",
+			"number": 10
+		},
+		{
+			"servant_id": "ガイウス・ユリウス・カエサル",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "アルテラ",
+			"level": 1,
+			"item_id": "剣の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "アルテラ",
+			"level": 2,
+			"item_id": "剣の輝石",
+			"number": 12
+		},
+		{
+			"servant_id": "アルテラ",
+			"level": 3,
+			"item_id": "剣の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "アルテラ",
+			"level": 4,
+			"item_id": "剣の魔石",
+			"number": 12
+		},
+		{
+			"servant_id": "アルテラ",
+			"level": 4,
+			"item_id": "混沌の爪",
+			"number": 3
+		},
+		{
+			"servant_id": "アルテラ",
+			"level": 5,
+			"item_id": "剣の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "アルテラ",
+			"level": 5,
+			"item_id": "混沌の爪",
+			"number": 6
+		},
+		{
+			"servant_id": "アルテラ",
+			"level": 6,
+			"item_id": "剣の秘石",
+			"number": 12
+		},
+		{
+			"servant_id": "アルテラ",
+			"level": 6,
+			"item_id": "虚影の塵",
+			"number": 10
+		},
+		{
+			"servant_id": "アルテラ",
+			"level": 7,
+			"item_id": "虚影の塵",
+			"number": 20
+		},
+		{
+			"servant_id": "アルテラ",
+			"level": 7,
+			"item_id": "凶骨",
+			"number": 18
+		},
+		{
+			"servant_id": "アルテラ",
+			"level": 8,
+			"item_id": "凶骨",
+			"number": 54
+		},
+		{
+			"servant_id": "アルテラ",
+			"level": 8,
+			"item_id": "蛮神の心臓",
+			"number": 10
+		},
+		{
+			"servant_id": "アルテラ",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "ジル・ド・レェ(剣)",
+			"level": 1,
+			"item_id": "剣の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "ジル・ド・レェ(剣)",
+			"level": 2,
+			"item_id": "剣の輝石",
+			"number": 8
+		},
+		{
+			"servant_id": "ジル・ド・レェ(剣)",
+			"level": 3,
+			"item_id": "剣の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "ジル・ド・レェ(剣)",
+			"level": 4,
+			"item_id": "剣の魔石",
+			"number": 8
+		},
+		{
+			"servant_id": "ジル・ド・レェ(剣)",
+			"level": 4,
+			"item_id": "虚影の塵",
+			"number": 7
+		},
+		{
+			"servant_id": "ジル・ド・レェ(剣)",
+			"level": 5,
+			"item_id": "剣の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "ジル・ド・レェ(剣)",
+			"level": 5,
+			"item_id": "虚影の塵",
+			"number": 13
+		},
+		{
+			"servant_id": "ジル・ド・レェ(剣)",
+			"level": 6,
+			"item_id": "剣の秘石",
+			"number": 8
+		},
+		{
+			"servant_id": "ジル・ド・レェ(剣)",
+			"level": 6,
+			"item_id": "英雄の証",
+			"number": 10
+		},
+		{
+			"servant_id": "ジル・ド・レェ(剣)",
+			"level": 7,
+			"item_id": "英雄の証",
+			"number": 20
+		},
+		{
+			"servant_id": "ジル・ド・レェ(剣)",
+			"level": 7,
+			"item_id": "ｺﾞｰｽﾄﾗﾝﾀﾝ",
+			"number": 4
+		},
+		{
+			"servant_id": "ジル・ド・レェ(剣)",
+			"level": 8,
+			"item_id": "ｺﾞｰｽﾄﾗﾝﾀﾝ",
+			"number": 12
+		},
+		{
+			"servant_id": "ジル・ド・レェ(剣)",
+			"level": 8,
+			"item_id": "蛮神の心臓",
+			"number": 7
+		},
+		{
+			"servant_id": "ジル・ド・レェ(剣)",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "シュヴァリエ・デオン",
+			"level": 1,
+			"item_id": "剣の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "シュヴァリエ・デオン",
+			"level": 2,
+			"item_id": "剣の輝石",
+			"number": 10
+		},
+		{
+			"servant_id": "シュヴァリエ・デオン",
+			"level": 3,
+			"item_id": "剣の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "シュヴァリエ・デオン",
+			"level": 4,
+			"item_id": "剣の魔石",
+			"number": 10
+		},
+		{
+			"servant_id": "シュヴァリエ・デオン",
+			"level": 4,
+			"item_id": "世界樹の種",
+			"number": 5
+		},
+		{
+			"servant_id": "シュヴァリエ・デオン",
+			"level": 5,
+			"item_id": "剣の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "シュヴァリエ・デオン",
+			"level": 5,
+			"item_id": "世界樹の種",
+			"number": 10
+		},
+		{
+			"servant_id": "シュヴァリエ・デオン",
+			"level": 6,
+			"item_id": "剣の秘石",
+			"number": 10
+		},
+		{
+			"servant_id": "シュヴァリエ・デオン",
+			"level": 6,
+			"item_id": "英雄の証",
+			"number": 12
+		},
+		{
+			"servant_id": "シュヴァリエ・デオン",
+			"level": 7,
+			"item_id": "英雄の証",
+			"number": 24
+		},
+		{
+			"servant_id": "シュヴァリエ・デオン",
+			"level": 7,
+			"item_id": "禁断の頁",
+			"number": 5
+		},
+		{
+			"servant_id": "シュヴァリエ・デオン",
+			"level": 8,
+			"item_id": "禁断の頁",
+			"number": 15
+		},
+		{
+			"servant_id": "シュヴァリエ・デオン",
+			"level": 8,
+			"item_id": "蛇の宝玉",
+			"number": 16
+		},
+		{
+			"servant_id": "シュヴァリエ・デオン",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "エミヤ",
+			"level": 1,
+			"item_id": "弓の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "エミヤ",
+			"level": 2,
+			"item_id": "弓の輝石",
+			"number": 10
+		},
+		{
+			"servant_id": "エミヤ",
+			"level": 3,
+			"item_id": "弓の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "エミヤ",
+			"level": 4,
+			"item_id": "弓の魔石",
+			"number": 10
+		},
+		{
+			"servant_id": "エミヤ",
+			"level": 4,
+			"item_id": "無間の歯車",
+			"number": 4
+		},
+		{
+			"servant_id": "エミヤ",
+			"level": 5,
+			"item_id": "弓の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "エミヤ",
+			"level": 5,
+			"item_id": "無間の歯車",
+			"number": 8
+		},
+		{
+			"servant_id": "エミヤ",
+			"level": 6,
+			"item_id": "弓の秘石",
+			"number": 10
+		},
+		{
+			"servant_id": "エミヤ",
+			"level": 6,
+			"item_id": "英雄の証",
+			"number": 12
+		},
+		{
+			"servant_id": "エミヤ",
+			"level": 7,
+			"item_id": "英雄の証",
+			"number": 24
+		},
+		{
+			"servant_id": "エミヤ",
+			"level": 7,
+			"item_id": "鳳凰の羽根",
+			"number": 4
+		},
+		{
+			"servant_id": "エミヤ",
+			"level": 8,
+			"item_id": "鳳凰の羽根",
+			"number": 12
+		},
+		{
+			"servant_id": "エミヤ",
+			"level": 8,
+			"item_id": "虚影の塵",
+			"number": 40
+		},
+		{
+			"servant_id": "エミヤ",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "ギルガメッシュ",
+			"level": 1,
+			"item_id": "弓の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "ギルガメッシュ",
+			"level": 2,
+			"item_id": "弓の輝石",
+			"number": 12
+		},
+		{
+			"servant_id": "ギルガメッシュ",
+			"level": 3,
+			"item_id": "弓の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "ギルガメッシュ",
+			"level": 4,
+			"item_id": "弓の魔石",
+			"number": 12
+		},
+		{
+			"servant_id": "ギルガメッシュ",
+			"level": 4,
+			"item_id": "英雄の証",
+			"number": 15
+		},
+		{
+			"servant_id": "ギルガメッシュ",
+			"level": 5,
+			"item_id": "弓の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "ギルガメッシュ",
+			"level": 5,
+			"item_id": "英雄の証",
+			"number": 29
+		},
+		{
+			"servant_id": "ギルガメッシュ",
+			"level": 6,
+			"item_id": "弓の秘石",
+			"number": 12
+		},
+		{
+			"servant_id": "ギルガメッシュ",
+			"level": 6,
+			"item_id": "蛇の宝玉",
+			"number": 4
+		},
+		{
+			"servant_id": "ギルガメッシュ",
+			"level": 7,
+			"item_id": "蛇の宝玉",
+			"number": 8
+		},
+		{
+			"servant_id": "ギルガメッシュ",
+			"level": 7,
+			"item_id": "虚影の塵",
+			"number": 12
+		},
+		{
+			"servant_id": "ギルガメッシュ",
+			"level": 8,
+			"item_id": "虚影の塵",
+			"number": 36
+		},
+		{
+			"servant_id": "ギルガメッシュ",
+			"level": 8,
+			"item_id": "蛮神の心臓",
+			"number": 10
+		},
+		{
+			"servant_id": "ギルガメッシュ",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "ロビンフッド",
+			"level": 1,
+			"item_id": "弓の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "ロビンフッド",
+			"level": 2,
+			"item_id": "弓の輝石",
+			"number": 8
+		},
+		{
+			"servant_id": "ロビンフッド",
+			"level": 3,
+			"item_id": "弓の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "ロビンフッド",
+			"level": 4,
+			"item_id": "弓の魔石",
+			"number": 8
+		},
+		{
+			"servant_id": "ロビンフッド",
+			"level": 4,
+			"item_id": "蛇の宝玉",
+			"number": 3
+		},
+		{
+			"servant_id": "ロビンフッド",
+			"level": 5,
+			"item_id": "弓の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "ロビンフッド",
+			"level": 5,
+			"item_id": "蛇の宝玉",
+			"number": 6
+		},
+		{
+			"servant_id": "ロビンフッド",
+			"level": 6,
+			"item_id": "弓の秘石",
+			"number": 8
+		},
+		{
+			"servant_id": "ロビンフッド",
+			"level": 6,
+			"item_id": "世界樹の種",
+			"number": 4
+		},
+		{
+			"servant_id": "ロビンフッド",
+			"level": 7,
+			"item_id": "世界樹の種",
+			"number": 8
+		},
+		{
+			"servant_id": "ロビンフッド",
+			"level": 7,
+			"item_id": "鳳凰の羽根",
+			"number": 4
+		},
+		{
+			"servant_id": "ロビンフッド",
+			"level": 8,
+			"item_id": "鳳凰の羽根",
+			"number": 10
+		},
+		{
+			"servant_id": "ロビンフッド",
+			"level": 8,
+			"item_id": "虚影の塵",
+			"number": 32
+		},
+		{
+			"servant_id": "ロビンフッド",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "アタランテ",
+			"level": 1,
+			"item_id": "弓の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "アタランテ",
+			"level": 2,
+			"item_id": "弓の輝石",
+			"number": 10
+		},
+		{
+			"servant_id": "アタランテ",
+			"level": 3,
+			"item_id": "弓の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "アタランテ",
+			"level": 4,
+			"item_id": "弓の魔石",
+			"number": 10
+		},
+		{
+			"servant_id": "アタランテ",
+			"level": 4,
+			"item_id": "竜の牙",
+			"number": 10
+		},
+		{
+			"servant_id": "アタランテ",
+			"level": 5,
+			"item_id": "弓の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "アタランテ",
+			"level": 5,
+			"item_id": "竜の牙",
+			"number": 20
+		},
+		{
+			"servant_id": "アタランテ",
+			"level": 6,
+			"item_id": "弓の秘石",
+			"number": 10
+		},
+		{
+			"servant_id": "アタランテ",
+			"level": 6,
+			"item_id": "鳳凰の羽根",
+			"number": 4
+		},
+		{
+			"servant_id": "アタランテ",
+			"level": 7,
+			"item_id": "鳳凰の羽根",
+			"number": 7
+		},
+		{
+			"servant_id": "アタランテ",
+			"level": 7,
+			"item_id": "虚影の塵",
+			"number": 10
+		},
+		{
+			"servant_id": "アタランテ",
+			"level": 8,
+			"item_id": "虚影の塵",
+			"number": 30
+		},
+		{
+			"servant_id": "アタランテ",
+			"level": 8,
+			"item_id": "世界樹の種",
+			"number": 24
+		},
+		{
+			"servant_id": "アタランテ",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "エウリュアレ",
+			"level": 1,
+			"item_id": "弓の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "エウリュアレ",
+			"level": 2,
+			"item_id": "弓の輝石",
+			"number": 8
+		},
+		{
+			"servant_id": "エウリュアレ",
+			"level": 3,
+			"item_id": "弓の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "エウリュアレ",
+			"level": 4,
+			"item_id": "弓の魔石",
+			"number": 8
+		},
+		{
+			"servant_id": "エウリュアレ",
+			"level": 4,
+			"item_id": "竜の逆鱗",
+			"number": 2
+		},
+		{
+			"servant_id": "エウリュアレ",
+			"level": 5,
+			"item_id": "弓の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "エウリュアレ",
+			"level": 5,
+			"item_id": "竜の逆鱗",
+			"number": 3
+		},
+		{
+			"servant_id": "エウリュアレ",
+			"level": 6,
+			"item_id": "弓の秘石",
+			"number": 8
+		},
+		{
+			"servant_id": "エウリュアレ",
+			"level": 6,
+			"item_id": "蛇の宝玉",
+			"number": 3
+		},
+		{
+			"servant_id": "エウリュアレ",
+			"level": 7,
+			"item_id": "蛇の宝玉",
+			"number": 6
+		},
+		{
+			"servant_id": "エウリュアレ",
+			"level": 7,
+			"item_id": "混沌の爪",
+			"number": 3
+		},
+		{
+			"servant_id": "エウリュアレ",
+			"level": 8,
+			"item_id": "混沌の爪",
+			"number": 8
+		},
+		{
+			"servant_id": "エウリュアレ",
+			"level": 8,
+			"item_id": "蛮神の心臓",
+			"number": 7
+		},
+		{
+			"servant_id": "エウリュアレ",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "アーラシュ",
+			"level": 1,
+			"item_id": "弓の輝石",
+			"number": 2
+		},
+		{
+			"servant_id": "アーラシュ",
+			"level": 2,
+			"item_id": "弓の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "アーラシュ",
+			"level": 3,
+			"item_id": "弓の魔石",
+			"number": 2
+		},
+		{
+			"servant_id": "アーラシュ",
+			"level": 4,
+			"item_id": "弓の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "アーラシュ",
+			"level": 4,
+			"item_id": "英雄の証",
+			"number": 5
+		},
+		{
+			"servant_id": "アーラシュ",
+			"level": 5,
+			"item_id": "弓の秘石",
+			"number": 2
+		},
+		{
+			"servant_id": "アーラシュ",
+			"level": 5,
+			"item_id": "英雄の証",
+			"number": 10
+		},
+		{
+			"servant_id": "アーラシュ",
+			"level": 6,
+			"item_id": "弓の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "アーラシュ",
+			"level": 6,
+			"item_id": "世界樹の種",
+			"number": 2
+		},
+		{
+			"servant_id": "アーラシュ",
+			"level": 7,
+			"item_id": "世界樹の種",
+			"number": 4
+		},
+		{
+			"servant_id": "アーラシュ",
+			"level": 7,
+			"item_id": "ﾎﾑﾝｸﾙｽﾍﾞﾋﾞｰ",
+			"number": 2
+		},
+		{
+			"servant_id": "アーラシュ",
+			"level": 8,
+			"item_id": "ﾎﾑﾝｸﾙｽﾍﾞﾋﾞｰ",
+			"number": 6
+		},
+		{
+			"servant_id": "アーラシュ",
+			"level": 8,
+			"item_id": "虚影の塵",
+			"number": 16
+		},
+		{
+			"servant_id": "アーラシュ",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "クー・フーリン(槍)",
+			"level": 1,
+			"item_id": "槍の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "クー・フーリン(槍)",
+			"level": 2,
+			"item_id": "槍の輝石",
+			"number": 8
+		},
+		{
+			"servant_id": "クー・フーリン(槍)",
+			"level": 3,
+			"item_id": "槍の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "クー・フーリン(槍)",
+			"level": 4,
+			"item_id": "槍の魔石",
+			"number": 8
+		},
+		{
+			"servant_id": "クー・フーリン(槍)",
+			"level": 4,
+			"item_id": "世界樹の種",
+			"number": 4
+		},
+		{
+			"servant_id": "クー・フーリン(槍)",
+			"level": 5,
+			"item_id": "槍の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "クー・フーリン(槍)",
+			"level": 5,
+			"item_id": "世界樹の種",
+			"number": 8
+		},
+		{
+			"servant_id": "クー・フーリン(槍)",
+			"level": 6,
+			"item_id": "槍の秘石",
+			"number": 8
+		},
+		{
+			"servant_id": "クー・フーリン(槍)",
+			"level": 6,
+			"item_id": "混沌の爪",
+			"number": 2
+		},
+		{
+			"servant_id": "クー・フーリン(槍)",
+			"level": 7,
+			"item_id": "混沌の爪",
+			"number": 4
+		},
+		{
+			"servant_id": "クー・フーリン(槍)",
+			"level": 7,
+			"item_id": "英雄の証",
+			"number": 12
+		},
+		{
+			"servant_id": "クー・フーリン(槍)",
+			"level": 8,
+			"item_id": "英雄の証",
+			"number": 36
+		},
+		{
+			"servant_id": "クー・フーリン(槍)",
+			"level": 8,
+			"item_id": "鳳凰の羽根",
+			"number": 13
+		},
+		{
+			"servant_id": "クー・フーリン(槍)",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "エリザベート・バートリー",
+			"level": 1,
+			"item_id": "槍の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "エリザベート・バートリー",
+			"level": 2,
+			"item_id": "槍の輝石",
+			"number": 10
+		},
+		{
+			"servant_id": "エリザベート・バートリー",
+			"level": 3,
+			"item_id": "槍の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "エリザベート・バートリー",
+			"level": 4,
+			"item_id": "槍の魔石",
+			"number": 10
+		},
+		{
+			"servant_id": "エリザベート・バートリー",
+			"level": 4,
+			"item_id": "竜の逆鱗",
+			"number": 2
+		},
+		{
+			"servant_id": "エリザベート・バートリー",
+			"level": 5,
+			"item_id": "槍の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "エリザベート・バートリー",
+			"level": 5,
+			"item_id": "竜の逆鱗",
+			"number": 4
+		},
+		{
+			"servant_id": "エリザベート・バートリー",
+			"level": 6,
+			"item_id": "槍の秘石",
+			"number": 10
+		},
+		{
+			"servant_id": "エリザベート・バートリー",
+			"level": 6,
+			"item_id": "竜の牙",
+			"number": 10
+		},
+		{
+			"servant_id": "エリザベート・バートリー",
+			"level": 7,
+			"item_id": "竜の牙",
+			"number": 20
+		},
+		{
+			"servant_id": "エリザベート・バートリー",
+			"level": 7,
+			"item_id": "禁断の頁",
+			"number": 5
+		},
+		{
+			"servant_id": "エリザベート・バートリー",
+			"level": 8,
+			"item_id": "禁断の頁",
+			"number": 15
+		},
+		{
+			"servant_id": "エリザベート・バートリー",
+			"level": 8,
+			"item_id": "鳳凰の羽根",
+			"number": 16
+		},
+		{
+			"servant_id": "エリザベート・バートリー",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "武蔵坊弁慶",
+			"level": 1,
+			"item_id": "槍の輝石",
+			"number": 3
+		},
+		{
+			"servant_id": "武蔵坊弁慶",
+			"level": 2,
+			"item_id": "槍の輝石",
+			"number": 6
+		},
+		{
+			"servant_id": "武蔵坊弁慶",
+			"level": 3,
+			"item_id": "槍の魔石",
+			"number": 3
+		},
+		{
+			"servant_id": "武蔵坊弁慶",
+			"level": 4,
+			"item_id": "槍の魔石",
+			"number": 6
+		},
+		{
+			"servant_id": "武蔵坊弁慶",
+			"level": 4,
+			"item_id": "世界樹の種",
+			"number": 3
+		},
+		{
+			"servant_id": "武蔵坊弁慶",
+			"level": 5,
+			"item_id": "槍の秘石",
+			"number": 3
+		},
+		{
+			"servant_id": "武蔵坊弁慶",
+			"level": 5,
+			"item_id": "世界樹の種",
+			"number": 6
+		},
+		{
+			"servant_id": "武蔵坊弁慶",
+			"level": 6,
+			"item_id": "槍の秘石",
+			"number": 6
+		},
+		{
+			"servant_id": "武蔵坊弁慶",
+			"level": 6,
+			"item_id": "凶骨",
+			"number": 8
+		},
+		{
+			"servant_id": "武蔵坊弁慶",
+			"level": 7,
+			"item_id": "凶骨",
+			"number": 15
+		},
+		{
+			"servant_id": "武蔵坊弁慶",
+			"level": 7,
+			"item_id": "虚影の塵",
+			"number": 6
+		},
+		{
+			"servant_id": "武蔵坊弁慶",
+			"level": 8,
+			"item_id": "虚影の塵",
+			"number": 42
+		},
+		{
+			"servant_id": "武蔵坊弁慶",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "クー・フーリン〔プロトタイプ〕",
+			"level": 1,
+			"item_id": "槍の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "クー・フーリン〔プロトタイプ〕",
+			"level": 2,
+			"item_id": "槍の輝石",
+			"number": 8
+		},
+		{
+			"servant_id": "クー・フーリン〔プロトタイプ〕",
+			"level": 3,
+			"item_id": "槍の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "クー・フーリン〔プロトタイプ〕",
+			"level": 4,
+			"item_id": "槍の魔石",
+			"number": 8
+		},
+		{
+			"servant_id": "クー・フーリン〔プロトタイプ〕",
+			"level": 4,
+			"item_id": "世界樹の種",
+			"number": 4
+		},
+		{
+			"servant_id": "クー・フーリン〔プロトタイプ〕",
+			"level": 5,
+			"item_id": "槍の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "クー・フーリン〔プロトタイプ〕",
+			"level": 5,
+			"item_id": "世界樹の種",
+			"number": 8
+		},
+		{
+			"servant_id": "クー・フーリン〔プロトタイプ〕",
+			"level": 6,
+			"item_id": "槍の秘石",
+			"number": 8
+		},
+		{
+			"servant_id": "クー・フーリン〔プロトタイプ〕",
+			"level": 6,
+			"item_id": "虚影の塵",
+			"number": 7
+		},
+		{
+			"servant_id": "クー・フーリン〔プロトタイプ〕",
+			"level": 7,
+			"item_id": "虚影の塵",
+			"number": 13
+		},
+		{
+			"servant_id": "クー・フーリン〔プロトタイプ〕",
+			"level": 7,
+			"item_id": "英雄の証",
+			"number": 12
+		},
+		{
+			"servant_id": "クー・フーリン〔プロトタイプ〕",
+			"level": 8,
+			"item_id": "英雄の証",
+			"number": 36
+		},
+		{
+			"servant_id": "クー・フーリン〔プロトタイプ〕",
+			"level": 8,
+			"item_id": "八連双晶",
+			"number": 16
+		},
+		{
+			"servant_id": "クー・フーリン〔プロトタイプ〕",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "レオニダス一世",
+			"level": 1,
+			"item_id": "槍の輝石",
+			"number": 3
+		},
+		{
+			"servant_id": "レオニダス一世",
+			"level": 2,
+			"item_id": "槍の輝石",
+			"number": 6
+		},
+		{
+			"servant_id": "レオニダス一世",
+			"level": 3,
+			"item_id": "槍の魔石",
+			"number": 3
+		},
+		{
+			"servant_id": "レオニダス一世",
+			"level": 4,
+			"item_id": "槍の魔石",
+			"number": 6
+		},
+		{
+			"servant_id": "レオニダス一世",
+			"level": 4,
+			"item_id": "虚影の塵",
+			"number": 5
+		},
+		{
+			"servant_id": "レオニダス一世",
+			"level": 5,
+			"item_id": "槍の秘石",
+			"number": 3
+		},
+		{
+			"servant_id": "レオニダス一世",
+			"level": 5,
+			"item_id": "虚影の塵",
+			"number": 10
+		},
+		{
+			"servant_id": "レオニダス一世",
+			"level": 6,
+			"item_id": "槍の秘石",
+			"number": 6
+		},
+		{
+			"servant_id": "レオニダス一世",
+			"level": 6,
+			"item_id": "混沌の爪",
+			"number": 2
+		},
+		{
+			"servant_id": "レオニダス一世",
+			"level": 7,
+			"item_id": "混沌の爪",
+			"number": 3
+		},
+		{
+			"servant_id": "レオニダス一世",
+			"level": 7,
+			"item_id": "蛇の宝玉",
+			"number": 3
+		},
+		{
+			"servant_id": "レオニダス一世",
+			"level": 8,
+			"item_id": "蛇の宝玉",
+			"number": 8
+		},
+		{
+			"servant_id": "レオニダス一世",
+			"level": 8,
+			"item_id": "凶骨",
+			"number": 36
+		},
+		{
+			"servant_id": "レオニダス一世",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "ロムルス",
+			"level": 1,
+			"item_id": "槍の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "ロムルス",
+			"level": 2,
+			"item_id": "槍の輝石",
+			"number": 8
+		},
+		{
+			"servant_id": "ロムルス",
+			"level": 3,
+			"item_id": "槍の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "ロムルス",
+			"level": 4,
+			"item_id": "槍の魔石",
+			"number": 8
+		},
+		{
+			"servant_id": "ロムルス",
+			"level": 4,
+			"item_id": "鳳凰の羽根",
+			"number": 3
+		},
+		{
+			"servant_id": "ロムルス",
+			"level": 5,
+			"item_id": "槍の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "ロムルス",
+			"level": 5,
+			"item_id": "鳳凰の羽根",
+			"number": 6
+		},
+		{
+			"servant_id": "ロムルス",
+			"level": 6,
+			"item_id": "槍の秘石",
+			"number": 8
+		},
+		{
+			"servant_id": "ロムルス",
+			"level": 6,
+			"item_id": "八連双晶",
+			"number": 4
+		},
+		{
+			"servant_id": "ロムルス",
+			"level": 7,
+			"item_id": "八連双晶",
+			"number": 7
+		},
+		{
+			"servant_id": "ロムルス",
+			"level": 7,
+			"item_id": "無間の歯車",
+			"number": 4
+		},
+		{
+			"servant_id": "ロムルス",
+			"level": 8,
+			"item_id": "無間の歯車",
+			"number": 12
+		},
+		{
+			"servant_id": "ロムルス",
+			"level": 8,
+			"item_id": "虚影の塵",
+			"number": 32
+		},
+		{
+			"servant_id": "ロムルス",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "メドゥーサ",
+			"level": 1,
+			"item_id": "騎の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "メドゥーサ",
+			"level": 2,
+			"item_id": "騎の輝石",
+			"number": 8
+		},
+		{
+			"servant_id": "メドゥーサ",
+			"level": 3,
+			"item_id": "騎の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "メドゥーサ",
+			"level": 4,
+			"item_id": "騎の魔石",
+			"number": 8
+		},
+		{
+			"servant_id": "メドゥーサ",
+			"level": 4,
+			"item_id": "虚影の塵",
+			"number": 7
+		},
+		{
+			"servant_id": "メドゥーサ",
+			"level": 5,
+			"item_id": "騎の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "メドゥーサ",
+			"level": 5,
+			"item_id": "虚影の塵",
+			"number": 13
+		},
+		{
+			"servant_id": "メドゥーサ",
+			"level": 6,
+			"item_id": "騎の秘石",
+			"number": 8
+		},
+		{
+			"servant_id": "メドゥーサ",
+			"level": 6,
+			"item_id": "蛇の宝玉",
+			"number": 3
+		},
+		{
+			"servant_id": "メドゥーサ",
+			"level": 7,
+			"item_id": "蛇の宝玉",
+			"number": 6
+		},
+		{
+			"servant_id": "メドゥーサ",
+			"level": 7,
+			"item_id": "蛮神の心臓",
+			"number": 2
+		},
+		{
+			"servant_id": "メドゥーサ",
+			"level": 8,
+			"item_id": "蛮神の心臓",
+			"number": 5
+		},
+		{
+			"servant_id": "メドゥーサ",
+			"level": 8,
+			"item_id": "鳳凰の羽根",
+			"number": 13
+		},
+		{
+			"servant_id": "メドゥーサ",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "ゲオルギウス",
+			"level": 1,
+			"item_id": "騎の輝石",
+			"number": 3
+		},
+		{
+			"servant_id": "ゲオルギウス",
+			"level": 2,
+			"item_id": "騎の輝石",
+			"number": 6
+		},
+		{
+			"servant_id": "ゲオルギウス",
+			"level": 3,
+			"item_id": "騎の魔石",
+			"number": 3
+		},
+		{
+			"servant_id": "ゲオルギウス",
+			"level": 4,
+			"item_id": "騎の魔石",
+			"number": 6
+		},
+		{
+			"servant_id": "ゲオルギウス",
+			"level": 4,
+			"item_id": "鳳凰の羽根",
+			"number": 2
+		},
+		{
+			"servant_id": "ゲオルギウス",
+			"level": 5,
+			"item_id": "騎の秘石",
+			"number": 3
+		},
+		{
+			"servant_id": "ゲオルギウス",
+			"level": 5,
+			"item_id": "鳳凰の羽根",
+			"number": 4
+		},
+		{
+			"servant_id": "ゲオルギウス",
+			"level": 6,
+			"item_id": "騎の秘石",
+			"number": 6
+		},
+		{
+			"servant_id": "ゲオルギウス",
+			"level": 6,
+			"item_id": "英雄の証",
+			"number": 8
+		},
+		{
+			"servant_id": "ゲオルギウス",
+			"level": 7,
+			"item_id": "英雄の証",
+			"number": 15
+		},
+		{
+			"servant_id": "ゲオルギウス",
+			"level": 7,
+			"item_id": "無間の歯車",
+			"number": 3
+		},
+		{
+			"servant_id": "ゲオルギウス",
+			"level": 8,
+			"item_id": "無間の歯車",
+			"number": 9
+		},
+		{
+			"servant_id": "ゲオルギウス",
+			"level": 8,
+			"item_id": "隕蹄鉄",
+			"number": 12
+		},
+		{
+			"servant_id": "ゲオルギウス",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "エドワード・ティーチ",
+			"level": 1,
+			"item_id": "騎の輝石",
+			"number": 3
+		},
+		{
+			"servant_id": "エドワード・ティーチ",
+			"level": 2,
+			"item_id": "騎の輝石",
+			"number": 6
+		},
+		{
+			"servant_id": "エドワード・ティーチ",
+			"level": 3,
+			"item_id": "騎の魔石",
+			"number": 3
+		},
+		{
+			"servant_id": "エドワード・ティーチ",
+			"level": 4,
+			"item_id": "騎の魔石",
+			"number": 6
+		},
+		{
+			"servant_id": "エドワード・ティーチ",
+			"level": 4,
+			"item_id": "八連双晶",
+			"number": 3
+		},
+		{
+			"servant_id": "エドワード・ティーチ",
+			"level": 5,
+			"item_id": "騎の秘石",
+			"number": 3
+		},
+		{
+			"servant_id": "エドワード・ティーチ",
+			"level": 5,
+			"item_id": "八連双晶",
+			"number": 5
+		},
+		{
+			"servant_id": "エドワード・ティーチ",
+			"level": 6,
+			"item_id": "騎の秘石",
+			"number": 6
+		},
+		{
+			"servant_id": "エドワード・ティーチ",
+			"level": 6,
+			"item_id": "凶骨",
+			"number": 8
+		},
+		{
+			"servant_id": "エドワード・ティーチ",
+			"level": 7,
+			"item_id": "凶骨",
+			"number": 15
+		},
+		{
+			"servant_id": "エドワード・ティーチ",
+			"level": 7,
+			"item_id": "ﾎﾑﾝｸﾙｽﾍﾞﾋﾞｰ",
+			"number": 3
+		},
+		{
+			"servant_id": "エドワード・ティーチ",
+			"level": 8,
+			"item_id": "ﾎﾑﾝｸﾙｽﾍﾞﾋﾞｰ",
+			"number": 9
+		},
+		{
+			"servant_id": "エドワード・ティーチ",
+			"level": 8,
+			"item_id": "ｺﾞｰｽﾄﾗﾝﾀﾝ",
+			"number": 12
+		},
+		{
+			"servant_id": "エドワード・ティーチ",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "ブーディカ",
+			"level": 1,
+			"item_id": "騎の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "ブーディカ",
+			"level": 2,
+			"item_id": "騎の輝石",
+			"number": 8
+		},
+		{
+			"servant_id": "ブーディカ",
+			"level": 3,
+			"item_id": "騎の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "ブーディカ",
+			"level": 4,
+			"item_id": "騎の魔石",
+			"number": 8
+		},
+		{
+			"servant_id": "ブーディカ",
+			"level": 4,
+			"item_id": "凶骨",
+			"number": 10
+		},
+		{
+			"servant_id": "ブーディカ",
+			"level": 5,
+			"item_id": "騎の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "ブーディカ",
+			"level": 5,
+			"item_id": "凶骨",
+			"number": 20
+		},
+		{
+			"servant_id": "ブーディカ",
+			"level": 6,
+			"item_id": "騎の秘石",
+			"number": 8
+		},
+		{
+			"servant_id": "ブーディカ",
+			"level": 6,
+			"item_id": "鳳凰の羽根",
+			"number": 3
+		},
+		{
+			"servant_id": "ブーディカ",
+			"level": 7,
+			"item_id": "鳳凰の羽根",
+			"number": 6
+		},
+		{
+			"servant_id": "ブーディカ",
+			"level": 7,
+			"item_id": "蛇の宝玉",
+			"number": 4
+		},
+		{
+			"servant_id": "ブーディカ",
+			"level": 8,
+			"item_id": "蛇の宝玉",
+			"number": 10
+		},
+		{
+			"servant_id": "ブーディカ",
+			"level": 8,
+			"item_id": "虚影の塵",
+			"number": 32
+		},
+		{
+			"servant_id": "ブーディカ",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "牛若丸",
+			"level": 1,
+			"item_id": "騎の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "牛若丸",
+			"level": 2,
+			"item_id": "騎の輝石",
+			"number": 8
+		},
+		{
+			"servant_id": "牛若丸",
+			"level": 3,
+			"item_id": "騎の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "牛若丸",
+			"level": 4,
+			"item_id": "騎の魔石",
+			"number": 8
+		},
+		{
+			"servant_id": "牛若丸",
+			"level": 4,
+			"item_id": "隕蹄鉄",
+			"number": 4
+		},
+		{
+			"servant_id": "牛若丸",
+			"level": 5,
+			"item_id": "騎の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "牛若丸",
+			"level": 5,
+			"item_id": "隕蹄鉄",
+			"number": 7
+		},
+		{
+			"servant_id": "牛若丸",
+			"level": 6,
+			"item_id": "騎の秘石",
+			"number": 8
+		},
+		{
+			"servant_id": "牛若丸",
+			"level": 6,
+			"item_id": "英雄の証",
+			"number": 10
+		},
+		{
+			"servant_id": "牛若丸",
+			"level": 7,
+			"item_id": "英雄の証",
+			"number": 20
+		},
+		{
+			"servant_id": "牛若丸",
+			"level": 7,
+			"item_id": "無間の歯車",
+			"number": 4
+		},
+		{
+			"servant_id": "牛若丸",
+			"level": 8,
+			"item_id": "無間の歯車",
+			"number": 12
+		},
+		{
+			"servant_id": "牛若丸",
+			"level": 8,
+			"item_id": "八連双晶",
+			"number": 16
+		},
+		{
+			"servant_id": "牛若丸",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "アレキサンダー",
+			"level": 1,
+			"item_id": "騎の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "アレキサンダー",
+			"level": 2,
+			"item_id": "騎の輝石",
+			"number": 8
+		},
+		{
+			"servant_id": "アレキサンダー",
+			"level": 3,
+			"item_id": "騎の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "アレキサンダー",
+			"level": 4,
+			"item_id": "騎の魔石",
+			"number": 8
+		},
+		{
+			"servant_id": "アレキサンダー",
+			"level": 4,
+			"item_id": "八連双晶",
+			"number": 4
+		},
+		{
+			"servant_id": "アレキサンダー",
+			"level": 5,
+			"item_id": "騎の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "アレキサンダー",
+			"level": 5,
+			"item_id": "八連双晶",
+			"number": 7
+		},
+		{
+			"servant_id": "アレキサンダー",
+			"level": 6,
+			"item_id": "騎の秘石",
+			"number": 8
+		},
+		{
+			"servant_id": "アレキサンダー",
+			"level": 6,
+			"item_id": "隕蹄鉄",
+			"number": 4
+		},
+		{
+			"servant_id": "アレキサンダー",
+			"level": 7,
+			"item_id": "隕蹄鉄",
+			"number": 7
+		},
+		{
+			"servant_id": "アレキサンダー",
+			"level": 7,
+			"item_id": "混沌の爪",
+			"number": 3
+		},
+		{
+			"servant_id": "アレキサンダー",
+			"level": 8,
+			"item_id": "混沌の爪",
+			"number": 8
+		},
+		{
+			"servant_id": "アレキサンダー",
+			"level": 8,
+			"item_id": "英雄の証",
+			"number": 48
+		},
+		{
+			"servant_id": "アレキサンダー",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "マリー・アントワネット",
+			"level": 1,
+			"item_id": "騎の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "マリー・アントワネット",
+			"level": 2,
+			"item_id": "騎の輝石",
+			"number": 10
+		},
+		{
+			"servant_id": "マリー・アントワネット",
+			"level": 3,
+			"item_id": "騎の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "マリー・アントワネット",
+			"level": 4,
+			"item_id": "騎の魔石",
+			"number": 10
+		},
+		{
+			"servant_id": "マリー・アントワネット",
+			"level": 4,
+			"item_id": "蛇の宝玉",
+			"number": 4
+		},
+		{
+			"servant_id": "マリー・アントワネット",
+			"level": 5,
+			"item_id": "騎の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "マリー・アントワネット",
+			"level": 5,
+			"item_id": "蛇の宝玉",
+			"number": 7
+		},
+		{
+			"servant_id": "マリー・アントワネット",
+			"level": 6,
+			"item_id": "騎の秘石",
+			"number": 10
+		},
+		{
+			"servant_id": "マリー・アントワネット",
+			"level": 6,
+			"item_id": "鳳凰の羽根",
+			"number": 4
+		},
+		{
+			"servant_id": "マリー・アントワネット",
+			"level": 7,
+			"item_id": "鳳凰の羽根",
+			"number": 7
+		},
+		{
+			"servant_id": "マリー・アントワネット",
+			"level": 7,
+			"item_id": "蛮神の心臓",
+			"number": 2
+		},
+		{
+			"servant_id": "マリー・アントワネット",
+			"level": 8,
+			"item_id": "蛮神の心臓",
+			"number": 6
+		},
+		{
+			"servant_id": "マリー・アントワネット",
+			"level": 8,
+			"item_id": "無間の歯車",
+			"number": 20
+		},
+		{
+			"servant_id": "マリー・アントワネット",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "マルタ",
+			"level": 1,
+			"item_id": "騎の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "マルタ",
+			"level": 2,
+			"item_id": "騎の輝石",
+			"number": 10
+		},
+		{
+			"servant_id": "マルタ",
+			"level": 3,
+			"item_id": "騎の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "マルタ",
+			"level": 4,
+			"item_id": "騎の魔石",
+			"number": 10
+		},
+		{
+			"servant_id": "マルタ",
+			"level": 4,
+			"item_id": "世界樹の種",
+			"number": 5
+		},
+		{
+			"servant_id": "マルタ",
+			"level": 5,
+			"item_id": "騎の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "マルタ",
+			"level": 5,
+			"item_id": "世界樹の種",
+			"number": 10
+		},
+		{
+			"servant_id": "マルタ",
+			"level": 6,
+			"item_id": "騎の秘石",
+			"number": 10
+		},
+		{
+			"servant_id": "マルタ",
+			"level": 6,
+			"item_id": "竜の牙",
+			"number": 10
+		},
+		{
+			"servant_id": "マルタ",
+			"level": 7,
+			"item_id": "竜の牙",
+			"number": 20
+		},
+		{
+			"servant_id": "マルタ",
+			"level": 7,
+			"item_id": "鳳凰の羽根",
+			"number": 4
+		},
+		{
+			"servant_id": "マルタ",
+			"level": 8,
+			"item_id": "鳳凰の羽根",
+			"number": 12
+		},
+		{
+			"servant_id": "マルタ",
+			"level": 8,
+			"item_id": "竜の逆鱗",
+			"number": 8
+		},
+		{
+			"servant_id": "マルタ",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "メディア",
+			"level": 1,
+			"item_id": "術の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "メディア",
+			"level": 2,
+			"item_id": "術の輝石",
+			"number": 8
+		},
+		{
+			"servant_id": "メディア",
+			"level": 3,
+			"item_id": "術の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "メディア",
+			"level": 4,
+			"item_id": "術の魔石",
+			"number": 8
+		},
+		{
+			"servant_id": "メディア",
+			"level": 4,
+			"item_id": "虚影の塵",
+			"number": 7
+		},
+		{
+			"servant_id": "メディア",
+			"level": 5,
+			"item_id": "術の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "メディア",
+			"level": 5,
+			"item_id": "虚影の塵",
+			"number": 13
+		},
+		{
+			"servant_id": "メディア",
+			"level": 6,
+			"item_id": "術の秘石",
+			"number": 8
+		},
+		{
+			"servant_id": "メディア",
+			"level": 6,
+			"item_id": "竜の牙",
+			"number": 8
+		},
+		{
+			"servant_id": "メディア",
+			"level": 7,
+			"item_id": "竜の牙",
+			"number": 16
+		},
+		{
+			"servant_id": "メディア",
+			"level": 7,
+			"item_id": "ｺﾞｰｽﾄﾗﾝﾀﾝ",
+			"number": 4
+		},
+		{
+			"servant_id": "メディア",
+			"level": 8,
+			"item_id": "ｺﾞｰｽﾄﾗﾝﾀﾝ",
+			"number": 12
+		},
+		{
+			"servant_id": "メディア",
+			"level": 8,
+			"item_id": "禁断の頁",
+			"number": 16
+		},
+		{
+			"servant_id": "メディア",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "ジル・ド・レェ(術)",
+			"level": 1,
+			"item_id": "術の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "ジル・ド・レェ(術)",
+			"level": 2,
+			"item_id": "術の輝石",
+			"number": 8
+		},
+		{
+			"servant_id": "ジル・ド・レェ(術)",
+			"level": 3,
+			"item_id": "術の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "ジル・ド・レェ(術)",
+			"level": 4,
+			"item_id": "術の魔石",
+			"number": 8
+		},
+		{
+			"servant_id": "ジル・ド・レェ(術)",
+			"level": 4,
+			"item_id": "ﾎﾑﾝｸﾙｽﾍﾞﾋﾞｰ",
+			"number": 4
+		},
+		{
+			"servant_id": "ジル・ド・レェ(術)",
+			"level": 5,
+			"item_id": "術の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "ジル・ド・レェ(術)",
+			"level": 5,
+			"item_id": "ﾎﾑﾝｸﾙｽﾍﾞﾋﾞｰ",
+			"number": 7
+		},
+		{
+			"servant_id": "ジル・ド・レェ(術)",
+			"level": 6,
+			"item_id": "術の秘石",
+			"number": 8
+		},
+		{
+			"servant_id": "ジル・ド・レェ(術)",
+			"level": 6,
+			"item_id": "ｺﾞｰｽﾄﾗﾝﾀﾝ",
+			"number": 4
+		},
+		{
+			"servant_id": "ジル・ド・レェ(術)",
+			"level": 7,
+			"item_id": "ｺﾞｰｽﾄﾗﾝﾀﾝ",
+			"number": 7
+		},
+		{
+			"servant_id": "ジル・ド・レェ(術)",
+			"level": 7,
+			"item_id": "虚影の塵",
+			"number": 8
+		},
+		{
+			"servant_id": "ジル・ド・レェ(術)",
+			"level": 8,
+			"item_id": "虚影の塵",
+			"number": 24
+		},
+		{
+			"servant_id": "ジル・ド・レェ(術)",
+			"level": 8,
+			"item_id": "蛮神の心臓",
+			"number": 7
+		},
+		{
+			"servant_id": "ジル・ド・レェ(術)",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "ハンス・クリスチャン・アンデルセン",
+			"level": 1,
+			"item_id": "術の輝石",
+			"number": 3
+		},
+		{
+			"servant_id": "ハンス・クリスチャン・アンデルセン",
+			"level": 2,
+			"item_id": "術の輝石",
+			"number": 6
+		},
+		{
+			"servant_id": "ハンス・クリスチャン・アンデルセン",
+			"level": 3,
+			"item_id": "術の魔石",
+			"number": 3
+		},
+		{
+			"servant_id": "ハンス・クリスチャン・アンデルセン",
+			"level": 4,
+			"item_id": "術の魔石",
+			"number": 6
+		},
+		{
+			"servant_id": "ハンス・クリスチャン・アンデルセン",
+			"level": 4,
+			"item_id": "ﾎﾑﾝｸﾙｽﾍﾞﾋﾞｰ",
+			"number": 3
+		},
+		{
+			"servant_id": "ハンス・クリスチャン・アンデルセン",
+			"level": 5,
+			"item_id": "術の秘石",
+			"number": 3
+		},
+		{
+			"servant_id": "ハンス・クリスチャン・アンデルセン",
+			"level": 5,
+			"item_id": "ﾎﾑﾝｸﾙｽﾍﾞﾋﾞｰ",
+			"number": 5
+		},
+		{
+			"servant_id": "ハンス・クリスチャン・アンデルセン",
+			"level": 6,
+			"item_id": "術の秘石",
+			"number": 6
+		},
+		{
+			"servant_id": "ハンス・クリスチャン・アンデルセン",
+			"level": 6,
+			"item_id": "禁断の頁",
+			"number": 3
+		},
+		{
+			"servant_id": "ハンス・クリスチャン・アンデルセン",
+			"level": 7,
+			"item_id": "禁断の頁",
+			"number": 5
+		},
+		{
+			"servant_id": "ハンス・クリスチャン・アンデルセン",
+			"level": 7,
+			"item_id": "虚影の塵",
+			"number": 6
+		},
+		{
+			"servant_id": "ハンス・クリスチャン・アンデルセン",
+			"level": 8,
+			"item_id": "虚影の塵",
+			"number": 18
+		},
+		{
+			"servant_id": "ハンス・クリスチャン・アンデルセン",
+			"level": 8,
+			"item_id": "隕蹄鉄",
+			"number": 12
+		},
+		{
+			"servant_id": "ハンス・クリスチャン・アンデルセン",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "ウィリアム・シェイクスピア",
+			"level": 1,
+			"item_id": "術の輝石",
+			"number": 3
+		},
+		{
+			"servant_id": "ウィリアム・シェイクスピア",
+			"level": 2,
+			"item_id": "術の輝石",
+			"number": 6
+		},
+		{
+			"servant_id": "ウィリアム・シェイクスピア",
+			"level": 3,
+			"item_id": "術の魔石",
+			"number": 3
+		},
+		{
+			"servant_id": "ウィリアム・シェイクスピア",
+			"level": 4,
+			"item_id": "術の魔石",
+			"number": 6
+		},
+		{
+			"servant_id": "ウィリアム・シェイクスピア",
+			"level": 4,
+			"item_id": "禁断の頁",
+			"number": 3
+		},
+		{
+			"servant_id": "ウィリアム・シェイクスピア",
+			"level": 5,
+			"item_id": "術の秘石",
+			"number": 3
+		},
+		{
+			"servant_id": "ウィリアム・シェイクスピア",
+			"level": 5,
+			"item_id": "禁断の頁",
+			"number": 5
+		},
+		{
+			"servant_id": "ウィリアム・シェイクスピア",
+			"level": 6,
+			"item_id": "術の秘石",
+			"number": 6
+		},
+		{
+			"servant_id": "ウィリアム・シェイクスピア",
+			"level": 6,
+			"item_id": "ｺﾞｰｽﾄﾗﾝﾀﾝ",
+			"number": 3
+		},
+		{
+			"servant_id": "ウィリアム・シェイクスピア",
+			"level": 7,
+			"item_id": "ｺﾞｰｽﾄﾗﾝﾀﾝ",
+			"number": 5
+		},
+		{
+			"servant_id": "ウィリアム・シェイクスピア",
+			"level": 7,
+			"item_id": "虚影の塵",
+			"number": 6
+		},
+		{
+			"servant_id": "ウィリアム・シェイクスピア",
+			"level": 8,
+			"item_id": "虚影の塵",
+			"number": 18
+		},
+		{
+			"servant_id": "ウィリアム・シェイクスピア",
+			"level": 8,
+			"item_id": "蛇の宝玉",
+			"number": 10
+		},
+		{
+			"servant_id": "ウィリアム・シェイクスピア",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "メフィストフェレス",
+			"level": 1,
+			"item_id": "術の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "メフィストフェレス",
+			"level": 2,
+			"item_id": "術の輝石",
+			"number": 8
+		},
+		{
+			"servant_id": "メフィストフェレス",
+			"level": 3,
+			"item_id": "術の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "メフィストフェレス",
+			"level": 4,
+			"item_id": "術の魔石",
+			"number": 8
+		},
+		{
+			"servant_id": "メフィストフェレス",
+			"level": 4,
+			"item_id": "ﾎﾑﾝｸﾙｽﾍﾞﾋﾞｰ",
+			"number": 4
+		},
+		{
+			"servant_id": "メフィストフェレス",
+			"level": 5,
+			"item_id": "術の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "メフィストフェレス",
+			"level": 5,
+			"item_id": "ﾎﾑﾝｸﾙｽﾍﾞﾋﾞｰ",
+			"number": 7
+		},
+		{
+			"servant_id": "メフィストフェレス",
+			"level": 6,
+			"item_id": "術の秘石",
+			"number": 8
+		},
+		{
+			"servant_id": "メフィストフェレス",
+			"level": 6,
+			"item_id": "虚影の塵",
+			"number": 7
+		},
+		{
+			"servant_id": "メフィストフェレス",
+			"level": 7,
+			"item_id": "虚影の塵",
+			"number": 13
+		},
+		{
+			"servant_id": "メフィストフェレス",
+			"level": 7,
+			"item_id": "無間の歯車",
+			"number": 4
+		},
+		{
+			"servant_id": "メフィストフェレス",
+			"level": 8,
+			"item_id": "無間の歯車",
+			"number": 12
+		},
+		{
+			"servant_id": "メフィストフェレス",
+			"level": 8,
+			"item_id": "ｺﾞｰｽﾄﾗﾝﾀﾝ",
+			"number": 16
+		},
+		{
+			"servant_id": "メフィストフェレス",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "ヴォルフガング・アマデウス・モーツァルト",
+			"level": 1,
+			"item_id": "術の輝石",
+			"number": 2
+		},
+		{
+			"servant_id": "ヴォルフガング・アマデウス・モーツァルト",
+			"level": 2,
+			"item_id": "術の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "ヴォルフガング・アマデウス・モーツァルト",
+			"level": 3,
+			"item_id": "術の魔石",
+			"number": 2
+		},
+		{
+			"servant_id": "ヴォルフガング・アマデウス・モーツァルト",
+			"level": 4,
+			"item_id": "術の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "ヴォルフガング・アマデウス・モーツァルト",
+			"level": 4,
+			"item_id": "無間の歯車",
+			"number": 2
+		},
+		{
+			"servant_id": "ヴォルフガング・アマデウス・モーツァルト",
+			"level": 5,
+			"item_id": "術の秘石",
+			"number": 2
+		},
+		{
+			"servant_id": "ヴォルフガング・アマデウス・モーツァルト",
+			"level": 5,
+			"item_id": "無間の歯車",
+			"number": 4
+		},
+		{
+			"servant_id": "ヴォルフガング・アマデウス・モーツァルト",
+			"level": 6,
+			"item_id": "術の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "ヴォルフガング・アマデウス・モーツァルト",
+			"level": 6,
+			"item_id": "凶骨",
+			"number": 5
+		},
+		{
+			"servant_id": "ヴォルフガング・アマデウス・モーツァルト",
+			"level": 7,
+			"item_id": "凶骨",
+			"number": 10
+		},
+		{
+			"servant_id": "ヴォルフガング・アマデウス・モーツァルト",
+			"level": 7,
+			"item_id": "鳳凰の羽根",
+			"number": 2
+		},
+		{
+			"servant_id": "ヴォルフガング・アマデウス・モーツァルト",
+			"level": 8,
+			"item_id": "鳳凰の羽根",
+			"number": 5
+		},
+		{
+			"servant_id": "ヴォルフガング・アマデウス・モーツァルト",
+			"level": 8,
+			"item_id": "蛮神の心臓",
+			"number": 4
+		},
+		{
+			"servant_id": "ヴォルフガング・アマデウス・モーツァルト",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "諸葛孔明〔エルメロイⅡ世〕",
+			"level": 1,
+			"item_id": "術の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "諸葛孔明〔エルメロイⅡ世〕",
+			"level": 2,
+			"item_id": "術の輝石",
+			"number": 12
+		},
+		{
+			"servant_id": "諸葛孔明〔エルメロイⅡ世〕",
+			"level": 3,
+			"item_id": "術の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "諸葛孔明〔エルメロイⅡ世〕",
+			"level": 4,
+			"item_id": "術の魔石",
+			"number": 12
+		},
+		{
+			"servant_id": "諸葛孔明〔エルメロイⅡ世〕",
+			"level": 4,
+			"item_id": "禁断の頁",
+			"number": 5
+		},
+		{
+			"servant_id": "諸葛孔明〔エルメロイⅡ世〕",
+			"level": 5,
+			"item_id": "術の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "諸葛孔明〔エルメロイⅡ世〕",
+			"level": 5,
+			"item_id": "禁断の頁",
+			"number": 10
+		},
+		{
+			"servant_id": "諸葛孔明〔エルメロイⅡ世〕",
+			"level": 6,
+			"item_id": "術の秘石",
+			"number": 12
+		},
+		{
+			"servant_id": "諸葛孔明〔エルメロイⅡ世〕",
+			"level": 6,
+			"item_id": "虚影の塵",
+			"number": 10
+		},
+		{
+			"servant_id": "諸葛孔明〔エルメロイⅡ世〕",
+			"level": 7,
+			"item_id": "虚影の塵",
+			"number": 20
+		},
+		{
+			"servant_id": "諸葛孔明〔エルメロイⅡ世〕",
+			"level": 7,
+			"item_id": "蛮神の心臓",
+			"number": 3
+		},
+		{
+			"servant_id": "諸葛孔明〔エルメロイⅡ世〕",
+			"level": 8,
+			"item_id": "蛮神の心臓",
+			"number": 8
+		},
+		{
+			"servant_id": "諸葛孔明〔エルメロイⅡ世〕",
+			"level": 8,
+			"item_id": "鳳凰の羽根",
+			"number": 20
+		},
+		{
+			"servant_id": "諸葛孔明〔エルメロイⅡ世〕",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "クー・フーリン(術)",
+			"level": 1,
+			"item_id": "術の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "クー・フーリン(術)",
+			"level": 2,
+			"item_id": "術の輝石",
+			"number": 8
+		},
+		{
+			"servant_id": "クー・フーリン(術)",
+			"level": 3,
+			"item_id": "術の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "クー・フーリン(術)",
+			"level": 4,
+			"item_id": "術の魔石",
+			"number": 8
+		},
+		{
+			"servant_id": "クー・フーリン(術)",
+			"level": 4,
+			"item_id": "禁断の頁",
+			"number": 4
+		},
+		{
+			"servant_id": "クー・フーリン(術)",
+			"level": 5,
+			"item_id": "術の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "クー・フーリン(術)",
+			"level": 5,
+			"item_id": "禁断の頁",
+			"number": 7
+		},
+		{
+			"servant_id": "クー・フーリン(術)",
+			"level": 6,
+			"item_id": "術の秘石",
+			"number": 8
+		},
+		{
+			"servant_id": "クー・フーリン(術)",
+			"level": 6,
+			"item_id": "世界樹の種",
+			"number": 4
+		},
+		{
+			"servant_id": "クー・フーリン(術)",
+			"level": 7,
+			"item_id": "世界樹の種",
+			"number": 8
+		},
+		{
+			"servant_id": "クー・フーリン(術)",
+			"level": 7,
+			"item_id": "鳳凰の羽根",
+			"number": 4
+		},
+		{
+			"servant_id": "クー・フーリン(術)",
+			"level": 8,
+			"item_id": "鳳凰の羽根",
+			"number": 10
+		},
+		{
+			"servant_id": "クー・フーリン(術)",
+			"level": 8,
+			"item_id": "無間の歯車",
+			"number": 16
+		},
+		{
+			"servant_id": "クー・フーリン(術)",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "佐々木小次郎",
+			"level": 1,
+			"item_id": "殺の輝石",
+			"number": 2
+		},
+		{
+			"servant_id": "佐々木小次郎",
+			"level": 2,
+			"item_id": "殺の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "佐々木小次郎",
+			"level": 3,
+			"item_id": "殺の魔石",
+			"number": 2
+		},
+		{
+			"servant_id": "佐々木小次郎",
+			"level": 4,
+			"item_id": "殺の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "佐々木小次郎",
+			"level": 4,
+			"item_id": "虚影の塵",
+			"number": 4
+		},
+		{
+			"servant_id": "佐々木小次郎",
+			"level": 5,
+			"item_id": "殺の秘石",
+			"number": 2
+		},
+		{
+			"servant_id": "佐々木小次郎",
+			"level": 5,
+			"item_id": "虚影の塵",
+			"number": 7
+		},
+		{
+			"servant_id": "佐々木小次郎",
+			"level": 6,
+			"item_id": "殺の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "佐々木小次郎",
+			"level": 6,
+			"item_id": "英雄の証",
+			"number": 5
+		},
+		{
+			"servant_id": "佐々木小次郎",
+			"level": 7,
+			"item_id": "英雄の証",
+			"number": 10
+		},
+		{
+			"servant_id": "佐々木小次郎",
+			"level": 7,
+			"item_id": "凶骨",
+			"number": 6
+		},
+		{
+			"servant_id": "佐々木小次郎",
+			"level": 8,
+			"item_id": "凶骨",
+			"number": 18
+		},
+		{
+			"servant_id": "佐々木小次郎",
+			"level": 8,
+			"item_id": "八連双晶",
+			"number": 8
+		},
+		{
+			"servant_id": "佐々木小次郎",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "呪腕のハサン",
+			"level": 1,
+			"item_id": "殺の輝石",
+			"number": 3
+		},
+		{
+			"servant_id": "呪腕のハサン",
+			"level": 2,
+			"item_id": "殺の輝石",
+			"number": 6
+		},
+		{
+			"servant_id": "呪腕のハサン",
+			"level": 3,
+			"item_id": "殺の魔石",
+			"number": 3
+		},
+		{
+			"servant_id": "呪腕のハサン",
+			"level": 4,
+			"item_id": "殺の魔石",
+			"number": 6
+		},
+		{
+			"servant_id": "呪腕のハサン",
+			"level": 4,
+			"item_id": "無間の歯車",
+			"number": 3
+		},
+		{
+			"servant_id": "呪腕のハサン",
+			"level": 5,
+			"item_id": "殺の秘石",
+			"number": 3
+		},
+		{
+			"servant_id": "呪腕のハサン",
+			"level": 5,
+			"item_id": "無間の歯車",
+			"number": 5
+		},
+		{
+			"servant_id": "呪腕のハサン",
+			"level": 6,
+			"item_id": "殺の秘石",
+			"number": 6
+		},
+		{
+			"servant_id": "呪腕のハサン",
+			"level": 6,
+			"item_id": "凶骨",
+			"number": 8
+		},
+		{
+			"servant_id": "呪腕のハサン",
+			"level": 7,
+			"item_id": "凶骨",
+			"number": 15
+		},
+		{
+			"servant_id": "呪腕のハサン",
+			"level": 7,
+			"item_id": "ｺﾞｰｽﾄﾗﾝﾀﾝ",
+			"number": 3
+		},
+		{
+			"servant_id": "呪腕のハサン",
+			"level": 8,
+			"item_id": "ｺﾞｰｽﾄﾗﾝﾀﾝ",
+			"number": 9
+		},
+		{
+			"servant_id": "呪腕のハサン",
+			"level": 8,
+			"item_id": "ﾎﾑﾝｸﾙｽﾍﾞﾋﾞｰ",
+			"number": 12
+		},
+		{
+			"servant_id": "呪腕のハサン",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "ステンノ",
+			"level": 1,
+			"item_id": "殺の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "ステンノ",
+			"level": 2,
+			"item_id": "殺の輝石",
+			"number": 10
+		},
+		{
+			"servant_id": "ステンノ",
+			"level": 3,
+			"item_id": "殺の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "ステンノ",
+			"level": 4,
+			"item_id": "殺の魔石",
+			"number": 10
+		},
+		{
+			"servant_id": "ステンノ",
+			"level": 4,
+			"item_id": "蛮神の心臓",
+			"number": 2
+		},
+		{
+			"servant_id": "ステンノ",
+			"level": 5,
+			"item_id": "殺の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "ステンノ",
+			"level": 5,
+			"item_id": "蛮神の心臓",
+			"number": 4
+		},
+		{
+			"servant_id": "ステンノ",
+			"level": 6,
+			"item_id": "殺の秘石",
+			"number": 10
+		},
+		{
+			"servant_id": "ステンノ",
+			"level": 6,
+			"item_id": "蛇の宝玉",
+			"number": 4
+		},
+		{
+			"servant_id": "ステンノ",
+			"level": 7,
+			"item_id": "蛇の宝玉",
+			"number": 7
+		},
+		{
+			"servant_id": "ステンノ",
+			"level": 7,
+			"item_id": "混沌の爪",
+			"number": 3
+		},
+		{
+			"servant_id": "ステンノ",
+			"level": 8,
+			"item_id": "混沌の爪",
+			"number": 9
+		},
+		{
+			"servant_id": "ステンノ",
+			"level": 8,
+			"item_id": "竜の逆鱗",
+			"number": 8
+		},
+		{
+			"servant_id": "ステンノ",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "荊軻",
+			"level": 1,
+			"item_id": "殺の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "荊軻",
+			"level": 2,
+			"item_id": "殺の輝石",
+			"number": 8
+		},
+		{
+			"servant_id": "荊軻",
+			"level": 3,
+			"item_id": "殺の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "荊軻",
+			"level": 4,
+			"item_id": "殺の魔石",
+			"number": 8
+		},
+		{
+			"servant_id": "荊軻",
+			"level": 4,
+			"item_id": "八連双晶",
+			"number": 4
+		},
+		{
+			"servant_id": "荊軻",
+			"level": 5,
+			"item_id": "殺の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "荊軻",
+			"level": 5,
+			"item_id": "八連双晶",
+			"number": 7
+		},
+		{
+			"servant_id": "荊軻",
+			"level": 6,
+			"item_id": "殺の秘石",
+			"number": 8
+		},
+		{
+			"servant_id": "荊軻",
+			"level": 6,
+			"item_id": "凶骨",
+			"number": 10
+		},
+		{
+			"servant_id": "荊軻",
+			"level": 7,
+			"item_id": "凶骨",
+			"number": 20
+		},
+		{
+			"servant_id": "荊軻",
+			"level": 7,
+			"item_id": "鳳凰の羽根",
+			"number": 4
+		},
+		{
+			"servant_id": "荊軻",
+			"level": 8,
+			"item_id": "鳳凰の羽根",
+			"number": 10
+		},
+		{
+			"servant_id": "荊軻",
+			"level": 8,
+			"item_id": "虚影の塵",
+			"number": 32
+		},
+		{
+			"servant_id": "荊軻",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "シャルル＝アンリ・サンソン",
+			"level": 1,
+			"item_id": "殺の輝石",
+			"number": 3
+		},
+		{
+			"servant_id": "シャルル＝アンリ・サンソン",
+			"level": 2,
+			"item_id": "殺の輝石",
+			"number": 6
+		},
+		{
+			"servant_id": "シャルル＝アンリ・サンソン",
+			"level": 3,
+			"item_id": "殺の魔石",
+			"number": 3
+		},
+		{
+			"servant_id": "シャルル＝アンリ・サンソン",
+			"level": 4,
+			"item_id": "殺の魔石",
+			"number": 6
+		},
+		{
+			"servant_id": "シャルル＝アンリ・サンソン",
+			"level": 4,
+			"item_id": "虚影の塵",
+			"number": 5
+		},
+		{
+			"servant_id": "シャルル＝アンリ・サンソン",
+			"level": 5,
+			"item_id": "殺の秘石",
+			"number": 3
+		},
+		{
+			"servant_id": "シャルル＝アンリ・サンソン",
+			"level": 5,
+			"item_id": "虚影の塵",
+			"number": 10
+		},
+		{
+			"servant_id": "シャルル＝アンリ・サンソン",
+			"level": 6,
+			"item_id": "殺の秘石",
+			"number": 6
+		},
+		{
+			"servant_id": "シャルル＝アンリ・サンソン",
+			"level": 6,
+			"item_id": "凶骨",
+			"number": 8
+		},
+		{
+			"servant_id": "シャルル＝アンリ・サンソン",
+			"level": 7,
+			"item_id": "凶骨",
+			"number": 15
+		},
+		{
+			"servant_id": "シャルル＝アンリ・サンソン",
+			"level": 7,
+			"item_id": "禁断の頁",
+			"number": 3
+		},
+		{
+			"servant_id": "シャルル＝アンリ・サンソン",
+			"level": 8,
+			"item_id": "禁断の頁",
+			"number": 9
+		},
+		{
+			"servant_id": "シャルル＝アンリ・サンソン",
+			"level": 8,
+			"item_id": "ﾎﾑﾝｸﾙｽﾍﾞﾋﾞｰ",
+			"number": 12
+		},
+		{
+			"servant_id": "シャルル＝アンリ・サンソン",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "ファントム・オブ・ジ・オペラ",
+			"level": 1,
+			"item_id": "殺の輝石",
+			"number": 3
+		},
+		{
+			"servant_id": "ファントム・オブ・ジ・オペラ",
+			"level": 2,
+			"item_id": "殺の輝石",
+			"number": 6
+		},
+		{
+			"servant_id": "ファントム・オブ・ジ・オペラ",
+			"level": 3,
+			"item_id": "殺の魔石",
+			"number": 3
+		},
+		{
+			"servant_id": "ファントム・オブ・ジ・オペラ",
+			"level": 4,
+			"item_id": "殺の魔石",
+			"number": 6
+		},
+		{
+			"servant_id": "ファントム・オブ・ジ・オペラ",
+			"level": 4,
+			"item_id": "虚影の塵",
+			"number": 5
+		},
+		{
+			"servant_id": "ファントム・オブ・ジ・オペラ",
+			"level": 5,
+			"item_id": "殺の秘石",
+			"number": 3
+		},
+		{
+			"servant_id": "ファントム・オブ・ジ・オペラ",
+			"level": 5,
+			"item_id": "虚影の塵",
+			"number": 10
+		},
+		{
+			"servant_id": "ファントム・オブ・ジ・オペラ",
+			"level": 6,
+			"item_id": "殺の秘石",
+			"number": 6
+		},
+		{
+			"servant_id": "ファントム・オブ・ジ・オペラ",
+			"level": 6,
+			"item_id": "ｺﾞｰｽﾄﾗﾝﾀﾝ",
+			"number": 3
+		},
+		{
+			"servant_id": "ファントム・オブ・ジ・オペラ",
+			"level": 7,
+			"item_id": "ｺﾞｰｽﾄﾗﾝﾀﾝ",
+			"number": 5
+		},
+		{
+			"servant_id": "ファントム・オブ・ジ・オペラ",
+			"level": 7,
+			"item_id": "蛮神の心臓",
+			"number": 2
+		},
+		{
+			"servant_id": "ファントム・オブ・ジ・オペラ",
+			"level": 8,
+			"item_id": "蛮神の心臓",
+			"number": 4
+		},
+		{
+			"servant_id": "ファントム・オブ・ジ・オペラ",
+			"level": 8,
+			"item_id": "凶骨",
+			"number": 36
+		},
+		{
+			"servant_id": "ファントム・オブ・ジ・オペラ",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "マタ・ハリ",
+			"level": 1,
+			"item_id": "殺の輝石",
+			"number": 2
+		},
+		{
+			"servant_id": "マタ・ハリ",
+			"level": 2,
+			"item_id": "殺の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "マタ・ハリ",
+			"level": 3,
+			"item_id": "殺の魔石",
+			"number": 2
+		},
+		{
+			"servant_id": "マタ・ハリ",
+			"level": 4,
+			"item_id": "殺の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "マタ・ハリ",
+			"level": 4,
+			"item_id": "無間の歯車",
+			"number": 2
+		},
+		{
+			"servant_id": "マタ・ハリ",
+			"level": 5,
+			"item_id": "殺の秘石",
+			"number": 2
+		},
+		{
+			"servant_id": "マタ・ハリ",
+			"level": 5,
+			"item_id": "無間の歯車",
+			"number": 4
+		},
+		{
+			"servant_id": "マタ・ハリ",
+			"level": 6,
+			"item_id": "殺の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "マタ・ハリ",
+			"level": 6,
+			"item_id": "鳳凰の羽根",
+			"number": 2
+		},
+		{
+			"servant_id": "マタ・ハリ",
+			"level": 7,
+			"item_id": "鳳凰の羽根",
+			"number": 3
+		},
+		{
+			"servant_id": "マタ・ハリ",
+			"level": 7,
+			"item_id": "ﾎﾑﾝｸﾙｽﾍﾞﾋﾞｰ",
+			"number": 2
+		},
+		{
+			"servant_id": "マタ・ハリ",
+			"level": 8,
+			"item_id": "ﾎﾑﾝｸﾙｽﾍﾞﾋﾞｰ",
+			"number": 6
+		},
+		{
+			"servant_id": "マタ・ハリ",
+			"level": 8,
+			"item_id": "蛇の宝玉",
+			"number": 7
+		},
+		{
+			"servant_id": "マタ・ハリ",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "カーミラ",
+			"level": 1,
+			"item_id": "殺の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "カーミラ",
+			"level": 2,
+			"item_id": "殺の輝石",
+			"number": 10
+		},
+		{
+			"servant_id": "カーミラ",
+			"level": 3,
+			"item_id": "殺の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "カーミラ",
+			"level": 4,
+			"item_id": "殺の魔石",
+			"number": 10
+		},
+		{
+			"servant_id": "カーミラ",
+			"level": 4,
+			"item_id": "ﾎﾑﾝｸﾙｽﾍﾞﾋﾞｰ",
+			"number": 4
+		},
+		{
+			"servant_id": "カーミラ",
+			"level": 5,
+			"item_id": "殺の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "カーミラ",
+			"level": 5,
+			"item_id": "ﾎﾑﾝｸﾙｽﾍﾞﾋﾞｰ",
+			"number": 8
+		},
+		{
+			"servant_id": "カーミラ",
+			"level": 6,
+			"item_id": "殺の秘石",
+			"number": 10
+		},
+		{
+			"servant_id": "カーミラ",
+			"level": 6,
+			"item_id": "蛇の宝玉",
+			"number": 4
+		},
+		{
+			"servant_id": "カーミラ",
+			"level": 7,
+			"item_id": "蛇の宝玉",
+			"number": 7
+		},
+		{
+			"servant_id": "カーミラ",
+			"level": 7,
+			"item_id": "凶骨",
+			"number": 15
+		},
+		{
+			"servant_id": "カーミラ",
+			"level": 8,
+			"item_id": "凶骨",
+			"number": 45
+		},
+		{
+			"servant_id": "カーミラ",
+			"level": 8,
+			"item_id": "混沌の爪",
+			"number": 12
+		},
+		{
+			"servant_id": "カーミラ",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "ヘラクレス",
+			"level": 1,
+			"item_id": "狂の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "ヘラクレス",
+			"level": 2,
+			"item_id": "狂の輝石",
+			"number": 10
+		},
+		{
+			"servant_id": "ヘラクレス",
+			"level": 3,
+			"item_id": "狂の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "ヘラクレス",
+			"level": 4,
+			"item_id": "狂の魔石",
+			"number": 10
+		},
+		{
+			"servant_id": "ヘラクレス",
+			"level": 4,
+			"item_id": "蛮神の心臓",
+			"number": 2
+		},
+		{
+			"servant_id": "ヘラクレス",
+			"level": 5,
+			"item_id": "狂の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "ヘラクレス",
+			"level": 5,
+			"item_id": "蛮神の心臓",
+			"number": 4
+		},
+		{
+			"servant_id": "ヘラクレス",
+			"level": 6,
+			"item_id": "狂の秘石",
+			"number": 10
+		},
+		{
+			"servant_id": "ヘラクレス",
+			"level": 6,
+			"item_id": "八連双晶",
+			"number": 4
+		},
+		{
+			"servant_id": "ヘラクレス",
+			"level": 7,
+			"item_id": "八連双晶",
+			"number": 8
+		},
+		{
+			"servant_id": "ヘラクレス",
+			"level": 7,
+			"item_id": "英雄の証",
+			"number": 15
+		},
+		{
+			"servant_id": "ヘラクレス",
+			"level": 8,
+			"item_id": "英雄の証",
+			"number": 45
+		},
+		{
+			"servant_id": "ヘラクレス",
+			"level": 8,
+			"item_id": "竜の逆鱗",
+			"number": 8
+		},
+		{
+			"servant_id": "ヘラクレス",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "ランスロット",
+			"level": 1,
+			"item_id": "狂の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "ランスロット",
+			"level": 2,
+			"item_id": "狂の輝石",
+			"number": 10
+		},
+		{
+			"servant_id": "ランスロット",
+			"level": 3,
+			"item_id": "狂の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "ランスロット",
+			"level": 4,
+			"item_id": "狂の魔石",
+			"number": 10
+		},
+		{
+			"servant_id": "ランスロット",
+			"level": 4,
+			"item_id": "混沌の爪",
+			"number": 3
+		},
+		{
+			"servant_id": "ランスロット",
+			"level": 5,
+			"item_id": "狂の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "ランスロット",
+			"level": 5,
+			"item_id": "混沌の爪",
+			"number": 5
+		},
+		{
+			"servant_id": "ランスロット",
+			"level": 6,
+			"item_id": "狂の秘石",
+			"number": 10
+		},
+		{
+			"servant_id": "ランスロット",
+			"level": 6,
+			"item_id": "竜の逆鱗",
+			"number": 2
+		},
+		{
+			"servant_id": "ランスロット",
+			"level": 7,
+			"item_id": "竜の逆鱗",
+			"number": 4
+		},
+		{
+			"servant_id": "ランスロット",
+			"level": 7,
+			"item_id": "隕蹄鉄",
+			"number": 5
+		},
+		{
+			"servant_id": "ランスロット",
+			"level": 8,
+			"item_id": "隕蹄鉄",
+			"number": 15
+		},
+		{
+			"servant_id": "ランスロット",
+			"level": 8,
+			"item_id": "竜の牙",
+			"number": 48
+		},
+		{
+			"servant_id": "ランスロット",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "呂布奉先",
+			"level": 1,
+			"item_id": "狂の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "呂布奉先",
+			"level": 2,
+			"item_id": "狂の輝石",
+			"number": 8
+		},
+		{
+			"servant_id": "呂布奉先",
+			"level": 3,
+			"item_id": "狂の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "呂布奉先",
+			"level": 4,
+			"item_id": "狂の魔石",
+			"number": 8
+		},
+		{
+			"servant_id": "呂布奉先",
+			"level": 4,
+			"item_id": "凶骨",
+			"number": 10
+		},
+		{
+			"servant_id": "呂布奉先",
+			"level": 5,
+			"item_id": "狂の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "呂布奉先",
+			"level": 5,
+			"item_id": "凶骨",
+			"number": 20
+		},
+		{
+			"servant_id": "呂布奉先",
+			"level": 6,
+			"item_id": "狂の秘石",
+			"number": 8
+		},
+		{
+			"servant_id": "呂布奉先",
+			"level": 6,
+			"item_id": "隕蹄鉄",
+			"number": 4
+		},
+		{
+			"servant_id": "呂布奉先",
+			"level": 7,
+			"item_id": "隕蹄鉄",
+			"number": 7
+		},
+		{
+			"servant_id": "呂布奉先",
+			"level": 7,
+			"item_id": "八連双晶",
+			"number": 4
+		},
+		{
+			"servant_id": "呂布奉先",
+			"level": 8,
+			"item_id": "八連双晶",
+			"number": 12
+		},
+		{
+			"servant_id": "呂布奉先",
+			"level": 8,
+			"item_id": "虚影の塵",
+			"number": 32
+		},
+		{
+			"servant_id": "呂布奉先",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "スパルタクス",
+			"level": 1,
+			"item_id": "狂の輝石",
+			"number": 2
+		},
+		{
+			"servant_id": "スパルタクス",
+			"level": 2,
+			"item_id": "狂の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "スパルタクス",
+			"level": 3,
+			"item_id": "狂の魔石",
+			"number": 2
+		},
+		{
+			"servant_id": "スパルタクス",
+			"level": 4,
+			"item_id": "狂の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "スパルタクス",
+			"level": 4,
+			"item_id": "英雄の証",
+			"number": 5
+		},
+		{
+			"servant_id": "スパルタクス",
+			"level": 5,
+			"item_id": "狂の秘石",
+			"number": 2
+		},
+		{
+			"servant_id": "スパルタクス",
+			"level": 5,
+			"item_id": "英雄の証",
+			"number": 10
+		},
+		{
+			"servant_id": "スパルタクス",
+			"level": 6,
+			"item_id": "狂の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "スパルタクス",
+			"level": 6,
+			"item_id": "八連双晶",
+			"number": 2
+		},
+		{
+			"servant_id": "スパルタクス",
+			"level": 7,
+			"item_id": "八連双晶",
+			"number": 4
+		},
+		{
+			"servant_id": "スパルタクス",
+			"level": 7,
+			"item_id": "世界樹の種",
+			"number": 3
+		},
+		{
+			"servant_id": "スパルタクス",
+			"level": 8,
+			"item_id": "世界樹の種",
+			"number": 8
+		},
+		{
+			"servant_id": "スパルタクス",
+			"level": 8,
+			"item_id": "凶骨",
+			"number": 24
+		},
+		{
+			"servant_id": "スパルタクス",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "坂田金時",
+			"level": 1,
+			"item_id": "狂の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "坂田金時",
+			"level": 2,
+			"item_id": "狂の輝石",
+			"number": 12
+		},
+		{
+			"servant_id": "坂田金時",
+			"level": 3,
+			"item_id": "狂の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "坂田金時",
+			"level": 4,
+			"item_id": "狂の魔石",
+			"number": 12
+		},
+		{
+			"servant_id": "坂田金時",
+			"level": 4,
+			"item_id": "八連双晶",
+			"number": 5
+		},
+		{
+			"servant_id": "坂田金時",
+			"level": 5,
+			"item_id": "狂の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "坂田金時",
+			"level": 5,
+			"item_id": "八連双晶",
+			"number": 10
+		},
+		{
+			"servant_id": "坂田金時",
+			"level": 6,
+			"item_id": "狂の秘石",
+			"number": 12
+		},
+		{
+			"servant_id": "坂田金時",
+			"level": 6,
+			"item_id": "英雄の証",
+			"number": 15
+		},
+		{
+			"servant_id": "坂田金時",
+			"level": 7,
+			"item_id": "英雄の証",
+			"number": 29
+		},
+		{
+			"servant_id": "坂田金時",
+			"level": 7,
+			"item_id": "虚影の塵",
+			"number": 12
+		},
+		{
+			"servant_id": "坂田金時",
+			"level": 8,
+			"item_id": "虚影の塵",
+			"number": 36
+		},
+		{
+			"servant_id": "坂田金時",
+			"level": 8,
+			"item_id": "蛮神の心臓",
+			"number": 10
+		},
+		{
+			"servant_id": "坂田金時",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "ヴラド三世",
+			"level": 1,
+			"item_id": "狂の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "ヴラド三世",
+			"level": 2,
+			"item_id": "狂の輝石",
+			"number": 12
+		},
+		{
+			"servant_id": "ヴラド三世",
+			"level": 3,
+			"item_id": "狂の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "ヴラド三世",
+			"level": 4,
+			"item_id": "狂の魔石",
+			"number": 12
+		},
+		{
+			"servant_id": "ヴラド三世",
+			"level": 4,
+			"item_id": "混沌の爪",
+			"number": 3
+		},
+		{
+			"servant_id": "ヴラド三世",
+			"level": 5,
+			"item_id": "狂の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "ヴラド三世",
+			"level": 5,
+			"item_id": "混沌の爪",
+			"number": 6
+		},
+		{
+			"servant_id": "ヴラド三世",
+			"level": 6,
+			"item_id": "狂の秘石",
+			"number": 12
+		},
+		{
+			"servant_id": "ヴラド三世",
+			"level": 6,
+			"item_id": "竜の逆鱗",
+			"number": 2
+		},
+		{
+			"servant_id": "ヴラド三世",
+			"level": 7,
+			"item_id": "竜の逆鱗",
+			"number": 4
+		},
+		{
+			"servant_id": "ヴラド三世",
+			"level": 7,
+			"item_id": "凶骨",
+			"number": 18
+		},
+		{
+			"servant_id": "ヴラド三世",
+			"level": 8,
+			"item_id": "凶骨",
+			"number": 54
+		},
+		{
+			"servant_id": "ヴラド三世",
+			"level": 8,
+			"item_id": "虚影の塵",
+			"number": 48
+		},
+		{
+			"servant_id": "ヴラド三世",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "アステリオス",
+			"level": 1,
+			"item_id": "狂の輝石",
+			"number": 2
+		},
+		{
+			"servant_id": "アステリオス",
+			"level": 2,
+			"item_id": "狂の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "アステリオス",
+			"level": 3,
+			"item_id": "狂の魔石",
+			"number": 2
+		},
+		{
+			"servant_id": "アステリオス",
+			"level": 4,
+			"item_id": "狂の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "アステリオス",
+			"level": 4,
+			"item_id": "英雄の証",
+			"number": 5
+		},
+		{
+			"servant_id": "アステリオス",
+			"level": 5,
+			"item_id": "狂の秘石",
+			"number": 2
+		},
+		{
+			"servant_id": "アステリオス",
+			"level": 5,
+			"item_id": "英雄の証",
+			"number": 10
+		},
+		{
+			"servant_id": "アステリオス",
+			"level": 6,
+			"item_id": "狂の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "アステリオス",
+			"level": 6,
+			"item_id": "八連双晶",
+			"number": 2
+		},
+		{
+			"servant_id": "アステリオス",
+			"level": 7,
+			"item_id": "八連双晶",
+			"number": 4
+		},
+		{
+			"servant_id": "アステリオス",
+			"level": 7,
+			"item_id": "虚影の塵",
+			"number": 4
+		},
+		{
+			"servant_id": "アステリオス",
+			"level": 8,
+			"item_id": "虚影の塵",
+			"number": 12
+		},
+		{
+			"servant_id": "アステリオス",
+			"level": 8,
+			"item_id": "世界樹の種",
+			"number": 10
+		},
+		{
+			"servant_id": "アステリオス",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "カリギュラ",
+			"level": 1,
+			"item_id": "狂の輝石",
+			"number": 3
+		},
+		{
+			"servant_id": "カリギュラ",
+			"level": 2,
+			"item_id": "狂の輝石",
+			"number": 6
+		},
+		{
+			"servant_id": "カリギュラ",
+			"level": 3,
+			"item_id": "狂の魔石",
+			"number": 3
+		},
+		{
+			"servant_id": "カリギュラ",
+			"level": 4,
+			"item_id": "狂の魔石",
+			"number": 6
+		},
+		{
+			"servant_id": "カリギュラ",
+			"level": 4,
+			"item_id": "蛇の宝玉",
+			"number": 2
+		},
+		{
+			"servant_id": "カリギュラ",
+			"level": 5,
+			"item_id": "狂の秘石",
+			"number": 3
+		},
+		{
+			"servant_id": "カリギュラ",
+			"level": 5,
+			"item_id": "蛇の宝玉",
+			"number": 4
+		},
+		{
+			"servant_id": "カリギュラ",
+			"level": 6,
+			"item_id": "狂の秘石",
+			"number": 6
+		},
+		{
+			"servant_id": "カリギュラ",
+			"level": 6,
+			"item_id": "八連双晶",
+			"number": 3
+		},
+		{
+			"servant_id": "カリギュラ",
+			"level": 7,
+			"item_id": "八連双晶",
+			"number": 5
+		},
+		{
+			"servant_id": "カリギュラ",
+			"level": 7,
+			"item_id": "隕蹄鉄",
+			"number": 3
+		},
+		{
+			"servant_id": "カリギュラ",
+			"level": 8,
+			"item_id": "隕蹄鉄",
+			"number": 9
+		},
+		{
+			"servant_id": "カリギュラ",
+			"level": 8,
+			"item_id": "禁断の頁",
+			"number": 12
+		},
+		{
+			"servant_id": "カリギュラ",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "ダレイオス三世",
+			"level": 1,
+			"item_id": "狂の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "ダレイオス三世",
+			"level": 2,
+			"item_id": "狂の輝石",
+			"number": 8
+		},
+		{
+			"servant_id": "ダレイオス三世",
+			"level": 3,
+			"item_id": "狂の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "ダレイオス三世",
+			"level": 4,
+			"item_id": "狂の魔石",
+			"number": 8
+		},
+		{
+			"servant_id": "ダレイオス三世",
+			"level": 4,
+			"item_id": "鳳凰の羽根",
+			"number": 3
+		},
+		{
+			"servant_id": "ダレイオス三世",
+			"level": 5,
+			"item_id": "狂の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "ダレイオス三世",
+			"level": 5,
+			"item_id": "鳳凰の羽根",
+			"number": 6
+		},
+		{
+			"servant_id": "ダレイオス三世",
+			"level": 6,
+			"item_id": "狂の秘石",
+			"number": 8
+		},
+		{
+			"servant_id": "ダレイオス三世",
+			"level": 6,
+			"item_id": "八連双晶",
+			"number": 4
+		},
+		{
+			"servant_id": "ダレイオス三世",
+			"level": 7,
+			"item_id": "八連双晶",
+			"number": 7
+		},
+		{
+			"servant_id": "ダレイオス三世",
+			"level": 7,
+			"item_id": "虚影の塵",
+			"number": 8
+		},
+		{
+			"servant_id": "ダレイオス三世",
+			"level": 8,
+			"item_id": "虚影の塵",
+			"number": 24
+		},
+		{
+			"servant_id": "ダレイオス三世",
+			"level": 8,
+			"item_id": "隕蹄鉄",
+			"number": 16
+		},
+		{
+			"servant_id": "ダレイオス三世",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "清姫",
+			"level": 1,
+			"item_id": "狂の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "清姫",
+			"level": 2,
+			"item_id": "狂の輝石",
+			"number": 8
+		},
+		{
+			"servant_id": "清姫",
+			"level": 3,
+			"item_id": "狂の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "清姫",
+			"level": 4,
+			"item_id": "狂の魔石",
+			"number": 8
+		},
+		{
+			"servant_id": "清姫",
+			"level": 4,
+			"item_id": "凶骨",
+			"number": 10
+		},
+		{
+			"servant_id": "清姫",
+			"level": 5,
+			"item_id": "狂の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "清姫",
+			"level": 5,
+			"item_id": "凶骨",
+			"number": 20
+		},
+		{
+			"servant_id": "清姫",
+			"level": 6,
+			"item_id": "狂の秘石",
+			"number": 8
+		},
+		{
+			"servant_id": "清姫",
+			"level": 6,
+			"item_id": "ｺﾞｰｽﾄﾗﾝﾀﾝ",
+			"number": 4
+		},
+		{
+			"servant_id": "清姫",
+			"level": 7,
+			"item_id": "ｺﾞｰｽﾄﾗﾝﾀﾝ",
+			"number": 7
+		},
+		{
+			"servant_id": "清姫",
+			"level": 7,
+			"item_id": "世界樹の種",
+			"number": 5
+		},
+		{
+			"servant_id": "清姫",
+			"level": 8,
+			"item_id": "世界樹の種",
+			"number": 15
+		},
+		{
+			"servant_id": "清姫",
+			"level": 8,
+			"item_id": "竜の逆鱗",
+			"number": 7
+		},
+		{
+			"servant_id": "清姫",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "エイリーク・ブラッドアクス",
+			"level": 1,
+			"item_id": "狂の輝石",
+			"number": 3
+		},
+		{
+			"servant_id": "エイリーク・ブラッドアクス",
+			"level": 2,
+			"item_id": "狂の輝石",
+			"number": 6
+		},
+		{
+			"servant_id": "エイリーク・ブラッドアクス",
+			"level": 3,
+			"item_id": "狂の魔石",
+			"number": 3
+		},
+		{
+			"servant_id": "エイリーク・ブラッドアクス",
+			"level": 4,
+			"item_id": "狂の魔石",
+			"number": 6
+		},
+		{
+			"servant_id": "エイリーク・ブラッドアクス",
+			"level": 4,
+			"item_id": "ﾎﾑﾝｸﾙｽﾍﾞﾋﾞｰ",
+			"number": 3
+		},
+		{
+			"servant_id": "エイリーク・ブラッドアクス",
+			"level": 5,
+			"item_id": "狂の秘石",
+			"number": 3
+		},
+		{
+			"servant_id": "エイリーク・ブラッドアクス",
+			"level": 5,
+			"item_id": "ﾎﾑﾝｸﾙｽﾍﾞﾋﾞｰ",
+			"number": 5
+		},
+		{
+			"servant_id": "エイリーク・ブラッドアクス",
+			"level": 6,
+			"item_id": "狂の秘石",
+			"number": 6
+		},
+		{
+			"servant_id": "エイリーク・ブラッドアクス",
+			"level": 6,
+			"item_id": "凶骨",
+			"number": 8
+		},
+		{
+			"servant_id": "エイリーク・ブラッドアクス",
+			"level": 7,
+			"item_id": "凶骨",
+			"number": 15
+		},
+		{
+			"servant_id": "エイリーク・ブラッドアクス",
+			"level": 7,
+			"item_id": "混沌の爪",
+			"number": 2
+		},
+		{
+			"servant_id": "エイリーク・ブラッドアクス",
+			"level": 8,
+			"item_id": "混沌の爪",
+			"number": 6
+		},
+		{
+			"servant_id": "エイリーク・ブラッドアクス",
+			"level": 8,
+			"item_id": "虚影の塵",
+			"number": 24
+		},
+		{
+			"servant_id": "エイリーク・ブラッドアクス",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "タマモキャット",
+			"level": 1,
+			"item_id": "狂の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "タマモキャット",
+			"level": 2,
+			"item_id": "狂の輝石",
+			"number": 10
+		},
+		{
+			"servant_id": "タマモキャット",
+			"level": 3,
+			"item_id": "狂の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "タマモキャット",
+			"level": 4,
+			"item_id": "狂の魔石",
+			"number": 10
+		},
+		{
+			"servant_id": "タマモキャット",
+			"level": 4,
+			"item_id": "ﾎﾑﾝｸﾙｽﾍﾞﾋﾞｰ",
+			"number": 4
+		},
+		{
+			"servant_id": "タマモキャット",
+			"level": 5,
+			"item_id": "狂の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "タマモキャット",
+			"level": 5,
+			"item_id": "ﾎﾑﾝｸﾙｽﾍﾞﾋﾞｰ",
+			"number": 8
+		},
+		{
+			"servant_id": "タマモキャット",
+			"level": 6,
+			"item_id": "狂の秘石",
+			"number": 10
+		},
+		{
+			"servant_id": "タマモキャット",
+			"level": 6,
+			"item_id": "ｺﾞｰｽﾄﾗﾝﾀﾝ",
+			"number": 4
+		},
+		{
+			"servant_id": "タマモキャット",
+			"level": 7,
+			"item_id": "ｺﾞｰｽﾄﾗﾝﾀﾝ",
+			"number": 8
+		},
+		{
+			"servant_id": "タマモキャット",
+			"level": 7,
+			"item_id": "八連双晶",
+			"number": 5
+		},
+		{
+			"servant_id": "タマモキャット",
+			"level": 8,
+			"item_id": "八連双晶",
+			"number": 15
+		},
+		{
+			"servant_id": "タマモキャット",
+			"level": 8,
+			"item_id": "蛮神の心臓",
+			"number": 8
+		},
+		{
+			"servant_id": "タマモキャット",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク",
+			"level": 1,
+			"item_id": "剣の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク",
+			"level": 1,
+			"item_id": "弓の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク",
+			"level": 1,
+			"item_id": "槍の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク",
+			"level": 2,
+			"item_id": "騎の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク",
+			"level": 2,
+			"item_id": "術の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク",
+			"level": 2,
+			"item_id": "殺の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク",
+			"level": 2,
+			"item_id": "狂の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク",
+			"level": 3,
+			"item_id": "剣の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク",
+			"level": 3,
+			"item_id": "弓の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク",
+			"level": 3,
+			"item_id": "槍の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク",
+			"level": 4,
+			"item_id": "騎の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク",
+			"level": 4,
+			"item_id": "術の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク",
+			"level": 4,
+			"item_id": "殺の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク",
+			"level": 4,
+			"item_id": "狂の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク",
+			"level": 5,
+			"item_id": "剣の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク",
+			"level": 5,
+			"item_id": "弓の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク",
+			"level": 5,
+			"item_id": "槍の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク",
+			"level": 6,
+			"item_id": "騎の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク",
+			"level": 6,
+			"item_id": "術の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク",
+			"level": 6,
+			"item_id": "殺の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク",
+			"level": 6,
+			"item_id": "狂の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク",
+			"level": 7,
+			"item_id": "蛮神の心臓",
+			"number": 5
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク",
+			"level": 8,
+			"item_id": "蛮神の心臓",
+			"number": 15
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "オリオン",
+			"level": 1,
+			"item_id": "弓の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "オリオン",
+			"level": 2,
+			"item_id": "弓の輝石",
+			"number": 12
+		},
+		{
+			"servant_id": "オリオン",
+			"level": 3,
+			"item_id": "弓の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "オリオン",
+			"level": 4,
+			"item_id": "弓の魔石",
+			"number": 12
+		},
+		{
+			"servant_id": "オリオン",
+			"level": 4,
+			"item_id": "蛇の宝玉",
+			"number": 4
+		},
+		{
+			"servant_id": "オリオン",
+			"level": 5,
+			"item_id": "弓の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "オリオン",
+			"level": 5,
+			"item_id": "蛇の宝玉",
+			"number": 8
+		},
+		{
+			"servant_id": "オリオン",
+			"level": 6,
+			"item_id": "弓の秘石",
+			"number": 12
+		},
+		{
+			"servant_id": "オリオン",
+			"level": 6,
+			"item_id": "蛮神の心臓",
+			"number": 2
+		},
+		{
+			"servant_id": "オリオン",
+			"level": 7,
+			"item_id": "蛮神の心臓",
+			"number": 4
+		},
+		{
+			"servant_id": "オリオン",
+			"level": 7,
+			"item_id": "虚影の塵",
+			"number": 12
+		},
+		{
+			"servant_id": "オリオン",
+			"level": 8,
+			"item_id": "虚影の塵",
+			"number": 36
+		},
+		{
+			"servant_id": "オリオン",
+			"level": 8,
+			"item_id": "鳳凰の羽根",
+			"number": 20
+		},
+		{
+			"servant_id": "オリオン",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "エリザベート・バートリー〔ハロウィン〕",
+			"level": 1,
+			"item_id": "術の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "エリザベート・バートリー〔ハロウィン〕",
+			"level": 2,
+			"item_id": "術の輝石",
+			"number": 10
+		},
+		{
+			"servant_id": "エリザベート・バートリー〔ハロウィン〕",
+			"level": 3,
+			"item_id": "術の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "エリザベート・バートリー〔ハロウィン〕",
+			"level": 4,
+			"item_id": "術の魔石",
+			"number": 10
+		},
+		{
+			"servant_id": "エリザベート・バートリー〔ハロウィン〕",
+			"level": 4,
+			"item_id": "ｺﾞｰｽﾄﾗﾝﾀﾝ",
+			"number": 4
+		},
+		{
+			"servant_id": "エリザベート・バートリー〔ハロウィン〕",
+			"level": 5,
+			"item_id": "術の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "エリザベート・バートリー〔ハロウィン〕",
+			"level": 5,
+			"item_id": "ｺﾞｰｽﾄﾗﾝﾀﾝ",
+			"number": 8
+		},
+		{
+			"servant_id": "エリザベート・バートリー〔ハロウィン〕",
+			"level": 6,
+			"item_id": "術の秘石",
+			"number": 10
+		},
+		{
+			"servant_id": "エリザベート・バートリー〔ハロウィン〕",
+			"level": 6,
+			"item_id": "凶骨",
+			"number": 12
+		},
+		{
+			"servant_id": "エリザベート・バートリー〔ハロウィン〕",
+			"level": 7,
+			"item_id": "凶骨",
+			"number": 24
+		},
+		{
+			"servant_id": "エリザベート・バートリー〔ハロウィン〕",
+			"level": 7,
+			"item_id": "竜の牙",
+			"number": 12
+		},
+		{
+			"servant_id": "エリザベート・バートリー〔ハロウィン〕",
+			"level": 8,
+			"item_id": "竜の牙",
+			"number": 36
+		},
+		{
+			"servant_id": "エリザベート・バートリー〔ハロウィン〕",
+			"level": 8,
+			"item_id": "竜の逆鱗",
+			"number": 8
+		},
+		{
+			"servant_id": "エリザベート・バートリー〔ハロウィン〕",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "玉藻の前",
+			"level": 1,
+			"item_id": "術の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "玉藻の前",
+			"level": 2,
+			"item_id": "術の輝石",
+			"number": 12
+		},
+		{
+			"servant_id": "玉藻の前",
+			"level": 3,
+			"item_id": "術の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "玉藻の前",
+			"level": 4,
+			"item_id": "術の魔石",
+			"number": 12
+		},
+		{
+			"servant_id": "玉藻の前",
+			"level": 4,
+			"item_id": "凶骨",
+			"number": 15
+		},
+		{
+			"servant_id": "玉藻の前",
+			"level": 5,
+			"item_id": "術の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "玉藻の前",
+			"level": 5,
+			"item_id": "凶骨",
+			"number": 29
+		},
+		{
+			"servant_id": "玉藻の前",
+			"level": 6,
+			"item_id": "術の秘石",
+			"number": 12
+		},
+		{
+			"servant_id": "玉藻の前",
+			"level": 6,
+			"item_id": "ｺﾞｰｽﾄﾗﾝﾀﾝ",
+			"number": 5
+		},
+		{
+			"servant_id": "玉藻の前",
+			"level": 7,
+			"item_id": "ｺﾞｰｽﾄﾗﾝﾀﾝ",
+			"number": 10
+		},
+		{
+			"servant_id": "玉藻の前",
+			"level": 7,
+			"item_id": "世界樹の種",
+			"number": 8
+		},
+		{
+			"servant_id": "玉藻の前",
+			"level": 8,
+			"item_id": "世界樹の種",
+			"number": 22
+		},
+		{
+			"servant_id": "玉藻の前",
+			"level": 8,
+			"item_id": "禁断の頁",
+			"number": 24
+		},
+		{
+			"servant_id": "玉藻の前",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "ダビデ",
+			"level": 1,
+			"item_id": "弓の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "ダビデ",
+			"level": 2,
+			"item_id": "弓の輝石",
+			"number": 8
+		},
+		{
+			"servant_id": "ダビデ",
+			"level": 3,
+			"item_id": "弓の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "ダビデ",
+			"level": 4,
+			"item_id": "弓の魔石",
+			"number": 8
+		},
+		{
+			"servant_id": "ダビデ",
+			"level": 4,
+			"item_id": "ﾎﾑﾝｸﾙｽﾍﾞﾋﾞｰ",
+			"number": 4
+		},
+		{
+			"servant_id": "ダビデ",
+			"level": 5,
+			"item_id": "弓の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "ダビデ",
+			"level": 5,
+			"item_id": "ﾎﾑﾝｸﾙｽﾍﾞﾋﾞｰ",
+			"number": 7
+		},
+		{
+			"servant_id": "ダビデ",
+			"level": 6,
+			"item_id": "弓の秘石",
+			"number": 8
+		},
+		{
+			"servant_id": "ダビデ",
+			"level": 6,
+			"item_id": "虚影の塵",
+			"number": 7
+		},
+		{
+			"servant_id": "ダビデ",
+			"level": 7,
+			"item_id": "虚影の塵",
+			"number": 13
+		},
+		{
+			"servant_id": "ダビデ",
+			"level": 7,
+			"item_id": "英雄の証",
+			"number": 12
+		},
+		{
+			"servant_id": "ダビデ",
+			"level": 8,
+			"item_id": "英雄の証",
+			"number": 36
+		},
+		{
+			"servant_id": "ダビデ",
+			"level": 8,
+			"item_id": "八連双晶",
+			"number": 16
+		},
+		{
+			"servant_id": "ダビデ",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "ヘクトール",
+			"level": 1,
+			"item_id": "槍の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "ヘクトール",
+			"level": 2,
+			"item_id": "槍の輝石",
+			"number": 8
+		},
+		{
+			"servant_id": "ヘクトール",
+			"level": 3,
+			"item_id": "槍の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "ヘクトール",
+			"level": 4,
+			"item_id": "槍の魔石",
+			"number": 8
+		},
+		{
+			"servant_id": "ヘクトール",
+			"level": 4,
+			"item_id": "英雄の証",
+			"number": 10
+		},
+		{
+			"servant_id": "ヘクトール",
+			"level": 5,
+			"item_id": "槍の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "ヘクトール",
+			"level": 5,
+			"item_id": "英雄の証",
+			"number": 20
+		},
+		{
+			"servant_id": "ヘクトール",
+			"level": 6,
+			"item_id": "槍の秘石",
+			"number": 8
+		},
+		{
+			"servant_id": "ヘクトール",
+			"level": 6,
+			"item_id": "隕蹄鉄",
+			"number": 4
+		},
+		{
+			"servant_id": "ヘクトール",
+			"level": 7,
+			"item_id": "隕蹄鉄",
+			"number": 7
+		},
+		{
+			"servant_id": "ヘクトール",
+			"level": 7,
+			"item_id": "八連双晶",
+			"number": 4
+		},
+		{
+			"servant_id": "ヘクトール",
+			"level": 8,
+			"item_id": "八連双晶",
+			"number": 12
+		},
+		{
+			"servant_id": "ヘクトール",
+			"level": 8,
+			"item_id": "鳳凰の羽根",
+			"number": 13
+		},
+		{
+			"servant_id": "ヘクトール",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "フランシス・ドレイク",
+			"level": 1,
+			"item_id": "騎の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "フランシス・ドレイク",
+			"level": 2,
+			"item_id": "騎の輝石",
+			"number": 12
+		},
+		{
+			"servant_id": "フランシス・ドレイク",
+			"level": 3,
+			"item_id": "騎の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "フランシス・ドレイク",
+			"level": 4,
+			"item_id": "騎の魔石",
+			"number": 12
+		},
+		{
+			"servant_id": "フランシス・ドレイク",
+			"level": 4,
+			"item_id": "竜の牙",
+			"number": 12
+		},
+		{
+			"servant_id": "フランシス・ドレイク",
+			"level": 5,
+			"item_id": "騎の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "フランシス・ドレイク",
+			"level": 5,
+			"item_id": "竜の牙",
+			"number": 24
+		},
+		{
+			"servant_id": "フランシス・ドレイク",
+			"level": 6,
+			"item_id": "騎の秘石",
+			"number": 12
+		},
+		{
+			"servant_id": "フランシス・ドレイク",
+			"level": 6,
+			"item_id": "凶骨",
+			"number": 15
+		},
+		{
+			"servant_id": "フランシス・ドレイク",
+			"level": 7,
+			"item_id": "凶骨",
+			"number": 29
+		},
+		{
+			"servant_id": "フランシス・ドレイク",
+			"level": 7,
+			"item_id": "ｺﾞｰｽﾄﾗﾝﾀﾝ",
+			"number": 6
+		},
+		{
+			"servant_id": "フランシス・ドレイク",
+			"level": 8,
+			"item_id": "ｺﾞｰｽﾄﾗﾝﾀﾝ",
+			"number": 18
+		},
+		{
+			"servant_id": "フランシス・ドレイク",
+			"level": 8,
+			"item_id": "蛮神の心臓",
+			"number": 10
+		},
+		{
+			"servant_id": "フランシス・ドレイク",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "アン・ボニー＆メアリー・リード",
+			"level": 1,
+			"item_id": "騎の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "アン・ボニー＆メアリー・リード",
+			"level": 2,
+			"item_id": "騎の輝石",
+			"number": 10
+		},
+		{
+			"servant_id": "アン・ボニー＆メアリー・リード",
+			"level": 3,
+			"item_id": "騎の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "アン・ボニー＆メアリー・リード",
+			"level": 4,
+			"item_id": "騎の魔石",
+			"number": 10
+		},
+		{
+			"servant_id": "アン・ボニー＆メアリー・リード",
+			"level": 4,
+			"item_id": "ｺﾞｰｽﾄﾗﾝﾀﾝ",
+			"number": 4
+		},
+		{
+			"servant_id": "アン・ボニー＆メアリー・リード",
+			"level": 5,
+			"item_id": "騎の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "アン・ボニー＆メアリー・リード",
+			"level": 5,
+			"item_id": "ｺﾞｰｽﾄﾗﾝﾀﾝ",
+			"number": 8
+		},
+		{
+			"servant_id": "アン・ボニー＆メアリー・リード",
+			"level": 6,
+			"item_id": "騎の秘石",
+			"number": 10
+		},
+		{
+			"servant_id": "アン・ボニー＆メアリー・リード",
+			"level": 6,
+			"item_id": "ﾎﾑﾝｸﾙｽﾍﾞﾋﾞｰ",
+			"number": 4
+		},
+		{
+			"servant_id": "アン・ボニー＆メアリー・リード",
+			"level": 7,
+			"item_id": "ﾎﾑﾝｸﾙｽﾍﾞﾋﾞｰ",
+			"number": 8
+		},
+		{
+			"servant_id": "アン・ボニー＆メアリー・リード",
+			"level": 7,
+			"item_id": "虚影の塵",
+			"number": 10
+		},
+		{
+			"servant_id": "アン・ボニー＆メアリー・リード",
+			"level": 8,
+			"item_id": "虚影の塵",
+			"number": 30
+		},
+		{
+			"servant_id": "アン・ボニー＆メアリー・リード",
+			"level": 8,
+			"item_id": "混沌の爪",
+			"number": 12
+		},
+		{
+			"servant_id": "アン・ボニー＆メアリー・リード",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "メディア〔リリィ〕",
+			"level": 1,
+			"item_id": "術の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "メディア〔リリィ〕",
+			"level": 2,
+			"item_id": "術の輝石",
+			"number": 10
+		},
+		{
+			"servant_id": "メディア〔リリィ〕",
+			"level": 3,
+			"item_id": "術の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "メディア〔リリィ〕",
+			"level": 4,
+			"item_id": "術の魔石",
+			"number": 10
+		},
+		{
+			"servant_id": "メディア〔リリィ〕",
+			"level": 4,
+			"item_id": "ｺﾞｰｽﾄﾗﾝﾀﾝ",
+			"number": 4
+		},
+		{
+			"servant_id": "メディア〔リリィ〕",
+			"level": 5,
+			"item_id": "術の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "メディア〔リリィ〕",
+			"level": 5,
+			"item_id": "ｺﾞｰｽﾄﾗﾝﾀﾝ",
+			"number": 8
+		},
+		{
+			"servant_id": "メディア〔リリィ〕",
+			"level": 6,
+			"item_id": "術の秘石",
+			"number": 10
+		},
+		{
+			"servant_id": "メディア〔リリィ〕",
+			"level": 6,
+			"item_id": "虚影の塵",
+			"number": 8
+		},
+		{
+			"servant_id": "メディア〔リリィ〕",
+			"level": 7,
+			"item_id": "虚影の塵",
+			"number": 16
+		},
+		{
+			"servant_id": "メディア〔リリィ〕",
+			"level": 7,
+			"item_id": "蛮神の心臓",
+			"number": 2
+		},
+		{
+			"servant_id": "メディア〔リリィ〕",
+			"level": 8,
+			"item_id": "蛮神の心臓",
+			"number": 6
+		},
+		{
+			"servant_id": "メディア〔リリィ〕",
+			"level": 8,
+			"item_id": "禁断の頁",
+			"number": 20
+		},
+		{
+			"servant_id": "メディア〔リリィ〕",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "沖田総司",
+			"level": 1,
+			"item_id": "剣の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "沖田総司",
+			"level": 2,
+			"item_id": "剣の輝石",
+			"number": 12
+		},
+		{
+			"servant_id": "沖田総司",
+			"level": 3,
+			"item_id": "剣の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "沖田総司",
+			"level": 4,
+			"item_id": "剣の魔石",
+			"number": 12
+		},
+		{
+			"servant_id": "沖田総司",
+			"level": 4,
+			"item_id": "竜の牙",
+			"number": 12
+		},
+		{
+			"servant_id": "沖田総司",
+			"level": 5,
+			"item_id": "剣の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "沖田総司",
+			"level": 5,
+			"item_id": "竜の牙",
+			"number": 24
+		},
+		{
+			"servant_id": "沖田総司",
+			"level": 6,
+			"item_id": "剣の秘石",
+			"number": 12
+		},
+		{
+			"servant_id": "沖田総司",
+			"level": 6,
+			"item_id": "虚影の塵",
+			"number": 10
+		},
+		{
+			"servant_id": "沖田総司",
+			"level": 7,
+			"item_id": "虚影の塵",
+			"number": 20
+		},
+		{
+			"servant_id": "沖田総司",
+			"level": 7,
+			"item_id": "混沌の爪",
+			"number": 4
+		},
+		{
+			"servant_id": "沖田総司",
+			"level": 8,
+			"item_id": "混沌の爪",
+			"number": 11
+		},
+		{
+			"servant_id": "沖田総司",
+			"level": 8,
+			"item_id": "鳳凰の羽根",
+			"number": 20
+		},
+		{
+			"servant_id": "沖田総司",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "織田信長",
+			"level": 1,
+			"item_id": "弓の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "織田信長",
+			"level": 2,
+			"item_id": "弓の輝石",
+			"number": 10
+		},
+		{
+			"servant_id": "織田信長",
+			"level": 3,
+			"item_id": "弓の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "織田信長",
+			"level": 4,
+			"item_id": "弓の魔石",
+			"number": 10
+		},
+		{
+			"servant_id": "織田信長",
+			"level": 4,
+			"item_id": "凶骨",
+			"number": 12
+		},
+		{
+			"servant_id": "織田信長",
+			"level": 5,
+			"item_id": "弓の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "織田信長",
+			"level": 5,
+			"item_id": "凶骨",
+			"number": 24
+		},
+		{
+			"servant_id": "織田信長",
+			"level": 6,
+			"item_id": "弓の秘石",
+			"number": 10
+		},
+		{
+			"servant_id": "織田信長",
+			"level": 6,
+			"item_id": "八連双晶",
+			"number": 4
+		},
+		{
+			"servant_id": "織田信長",
+			"level": 7,
+			"item_id": "八連双晶",
+			"number": 8
+		},
+		{
+			"servant_id": "織田信長",
+			"level": 7,
+			"item_id": "混沌の爪",
+			"number": 3
+		},
+		{
+			"servant_id": "織田信長",
+			"level": 8,
+			"item_id": "混沌の爪",
+			"number": 9
+		},
+		{
+			"servant_id": "織田信長",
+			"level": 8,
+			"item_id": "蛮神の心臓",
+			"number": 8
+		},
+		{
+			"servant_id": "織田信長",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "スカサハ",
+			"level": 1,
+			"item_id": "槍の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "スカサハ",
+			"level": 2,
+			"item_id": "槍の輝石",
+			"number": 12
+		},
+		{
+			"servant_id": "スカサハ",
+			"level": 3,
+			"item_id": "槍の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "スカサハ",
+			"level": 4,
+			"item_id": "槍の魔石",
+			"number": 12
+		},
+		{
+			"servant_id": "スカサハ",
+			"level": 4,
+			"item_id": "虚影の塵",
+			"number": 10
+		},
+		{
+			"servant_id": "スカサハ",
+			"level": 5,
+			"item_id": "槍の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "スカサハ",
+			"level": 5,
+			"item_id": "虚影の塵",
+			"number": 20
+		},
+		{
+			"servant_id": "スカサハ",
+			"level": 6,
+			"item_id": "槍の秘石",
+			"number": 12
+		},
+		{
+			"servant_id": "スカサハ",
+			"level": 6,
+			"item_id": "凶骨",
+			"number": 15
+		},
+		{
+			"servant_id": "スカサハ",
+			"level": 7,
+			"item_id": "凶骨",
+			"number": 29
+		},
+		{
+			"servant_id": "スカサハ",
+			"level": 7,
+			"item_id": "鳳凰の羽根",
+			"number": 5
+		},
+		{
+			"servant_id": "スカサハ",
+			"level": 8,
+			"item_id": "鳳凰の羽根",
+			"number": 15
+		},
+		{
+			"servant_id": "スカサハ",
+			"level": 8,
+			"item_id": "蛮神の心臓",
+			"number": 10
+		},
+		{
+			"servant_id": "スカサハ",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "ディルムッド・オディナ",
+			"level": 1,
+			"item_id": "槍の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "ディルムッド・オディナ",
+			"level": 2,
+			"item_id": "槍の輝石",
+			"number": 8
+		},
+		{
+			"servant_id": "ディルムッド・オディナ",
+			"level": 3,
+			"item_id": "槍の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "ディルムッド・オディナ",
+			"level": 4,
+			"item_id": "槍の魔石",
+			"number": 8
+		},
+		{
+			"servant_id": "ディルムッド・オディナ",
+			"level": 4,
+			"item_id": "鳳凰の羽根",
+			"number": 3
+		},
+		{
+			"servant_id": "ディルムッド・オディナ",
+			"level": 5,
+			"item_id": "槍の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "ディルムッド・オディナ",
+			"level": 5,
+			"item_id": "鳳凰の羽根",
+			"number": 6
+		},
+		{
+			"servant_id": "ディルムッド・オディナ",
+			"level": 6,
+			"item_id": "槍の秘石",
+			"number": 8
+		},
+		{
+			"servant_id": "ディルムッド・オディナ",
+			"level": 6,
+			"item_id": "世界樹の種",
+			"number": 4
+		},
+		{
+			"servant_id": "ディルムッド・オディナ",
+			"level": 7,
+			"item_id": "世界樹の種",
+			"number": 8
+		},
+		{
+			"servant_id": "ディルムッド・オディナ",
+			"level": 7,
+			"item_id": "英雄の証",
+			"number": 12
+		},
+		{
+			"servant_id": "ディルムッド・オディナ",
+			"level": 8,
+			"item_id": "英雄の証",
+			"number": 36
+		},
+		{
+			"servant_id": "ディルムッド・オディナ",
+			"level": 8,
+			"item_id": "虚影の塵",
+			"number": 32
+		},
+		{
+			"servant_id": "ディルムッド・オディナ",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "フェルグス・マック・ロイ",
+			"level": 1,
+			"item_id": "剣の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "フェルグス・マック・ロイ",
+			"level": 2,
+			"item_id": "剣の輝石",
+			"number": 8
+		},
+		{
+			"servant_id": "フェルグス・マック・ロイ",
+			"level": 3,
+			"item_id": "剣の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "フェルグス・マック・ロイ",
+			"level": 4,
+			"item_id": "剣の魔石",
+			"number": 8
+		},
+		{
+			"servant_id": "フェルグス・マック・ロイ",
+			"level": 4,
+			"item_id": "八連双晶",
+			"number": 4
+		},
+		{
+			"servant_id": "フェルグス・マック・ロイ",
+			"level": 5,
+			"item_id": "剣の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "フェルグス・マック・ロイ",
+			"level": 5,
+			"item_id": "八連双晶",
+			"number": 7
+		},
+		{
+			"servant_id": "フェルグス・マック・ロイ",
+			"level": 6,
+			"item_id": "剣の秘石",
+			"number": 8
+		},
+		{
+			"servant_id": "フェルグス・マック・ロイ",
+			"level": 6,
+			"item_id": "英雄の証",
+			"number": 10
+		},
+		{
+			"servant_id": "フェルグス・マック・ロイ",
+			"level": 7,
+			"item_id": "英雄の証",
+			"number": 20
+		},
+		{
+			"servant_id": "フェルグス・マック・ロイ",
+			"level": 7,
+			"item_id": "世界樹の種",
+			"number": 5
+		},
+		{
+			"servant_id": "フェルグス・マック・ロイ",
+			"level": 8,
+			"item_id": "世界樹の種",
+			"number": 15
+		},
+		{
+			"servant_id": "フェルグス・マック・ロイ",
+			"level": 8,
+			"item_id": "隕蹄鉄",
+			"number": 16
+		},
+		{
+			"servant_id": "フェルグス・マック・ロイ",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔サンタオルタ〕",
+			"level": 1,
+			"item_id": "騎の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔サンタオルタ〕",
+			"level": 2,
+			"item_id": "騎の輝石",
+			"number": 10
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔サンタオルタ〕",
+			"level": 3,
+			"item_id": "騎の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔サンタオルタ〕",
+			"level": 4,
+			"item_id": "騎の魔石",
+			"number": 10
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔サンタオルタ〕",
+			"level": 4,
+			"item_id": "竜の牙",
+			"number": 10
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔サンタオルタ〕",
+			"level": 5,
+			"item_id": "騎の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔サンタオルタ〕",
+			"level": 5,
+			"item_id": "竜の牙",
+			"number": 20
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔サンタオルタ〕",
+			"level": 6,
+			"item_id": "騎の秘石",
+			"number": 10
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔サンタオルタ〕",
+			"level": 6,
+			"item_id": "隕蹄鉄",
+			"number": 4
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔サンタオルタ〕",
+			"level": 7,
+			"item_id": "隕蹄鉄",
+			"number": 8
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔サンタオルタ〕",
+			"level": 7,
+			"item_id": "竜の逆鱗",
+			"number": 2
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔サンタオルタ〕",
+			"level": 8,
+			"item_id": "竜の逆鱗",
+			"number": 6
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔サンタオルタ〕",
+			"level": 8,
+			"item_id": "蛮神の心臓",
+			"number": 8
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔サンタオルタ〕",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "ナーサリー・ライム",
+			"level": 1,
+			"item_id": "術の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "ナーサリー・ライム",
+			"level": 2,
+			"item_id": "術の輝石",
+			"number": 10
+		},
+		{
+			"servant_id": "ナーサリー・ライム",
+			"level": 3,
+			"item_id": "術の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "ナーサリー・ライム",
+			"level": 4,
+			"item_id": "術の魔石",
+			"number": 10
+		},
+		{
+			"servant_id": "ナーサリー・ライム",
+			"level": 4,
+			"item_id": "ｺﾞｰｽﾄﾗﾝﾀﾝ",
+			"number": 4
+		},
+		{
+			"servant_id": "ナーサリー・ライム",
+			"level": 5,
+			"item_id": "術の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "ナーサリー・ライム",
+			"level": 5,
+			"item_id": "ｺﾞｰｽﾄﾗﾝﾀﾝ",
+			"number": 8
+		},
+		{
+			"servant_id": "ナーサリー・ライム",
+			"level": 6,
+			"item_id": "術の秘石",
+			"number": 10
+		},
+		{
+			"servant_id": "ナーサリー・ライム",
+			"level": 6,
+			"item_id": "世界樹の種",
+			"number": 5
+		},
+		{
+			"servant_id": "ナーサリー・ライム",
+			"level": 7,
+			"item_id": "世界樹の種",
+			"number": 10
+		},
+		{
+			"servant_id": "ナーサリー・ライム",
+			"level": 7,
+			"item_id": "ﾎﾑﾝｸﾙｽﾍﾞﾋﾞｰ",
+			"number": 5
+		},
+		{
+			"servant_id": "ナーサリー・ライム",
+			"level": 8,
+			"item_id": "ﾎﾑﾝｸﾙｽﾍﾞﾋﾞｰ",
+			"number": 15
+		},
+		{
+			"servant_id": "ナーサリー・ライム",
+			"level": 8,
+			"item_id": "鳳凰の羽根",
+			"number": 16
+		},
+		{
+			"servant_id": "ナーサリー・ライム",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "ジャック・ザ・リッパー",
+			"level": 1,
+			"item_id": "殺の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "ジャック・ザ・リッパー",
+			"level": 2,
+			"item_id": "殺の輝石",
+			"number": 12
+		},
+		{
+			"servant_id": "ジャック・ザ・リッパー",
+			"level": 3,
+			"item_id": "殺の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "ジャック・ザ・リッパー",
+			"level": 4,
+			"item_id": "殺の魔石",
+			"number": 12
+		},
+		{
+			"servant_id": "ジャック・ザ・リッパー",
+			"level": 4,
+			"item_id": "虚影の塵",
+			"number": 10
+		},
+		{
+			"servant_id": "ジャック・ザ・リッパー",
+			"level": 5,
+			"item_id": "殺の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "ジャック・ザ・リッパー",
+			"level": 5,
+			"item_id": "虚影の塵",
+			"number": 20
+		},
+		{
+			"servant_id": "ジャック・ザ・リッパー",
+			"level": 6,
+			"item_id": "殺の秘石",
+			"number": 12
+		},
+		{
+			"servant_id": "ジャック・ザ・リッパー",
+			"level": 6,
+			"item_id": "凶骨",
+			"number": 15
+		},
+		{
+			"servant_id": "ジャック・ザ・リッパー",
+			"level": 7,
+			"item_id": "凶骨",
+			"number": 29
+		},
+		{
+			"servant_id": "ジャック・ザ・リッパー",
+			"level": 7,
+			"item_id": "蛮神の心臓",
+			"number": 3
+		},
+		{
+			"servant_id": "ジャック・ザ・リッパー",
+			"level": 8,
+			"item_id": "蛮神の心臓",
+			"number": 8
+		},
+		{
+			"servant_id": "ジャック・ザ・リッパー",
+			"level": 8,
+			"item_id": "混沌の爪",
+			"number": 15
+		},
+		{
+			"servant_id": "ジャック・ザ・リッパー",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "モードレッド",
+			"level": 1,
+			"item_id": "剣の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "モードレッド",
+			"level": 2,
+			"item_id": "剣の輝石",
+			"number": 12
+		},
+		{
+			"servant_id": "モードレッド",
+			"level": 3,
+			"item_id": "剣の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "モードレッド",
+			"level": 4,
+			"item_id": "剣の魔石",
+			"number": 12
+		},
+		{
+			"servant_id": "モードレッド",
+			"level": 4,
+			"item_id": "八連双晶",
+			"number": 5
+		},
+		{
+			"servant_id": "モードレッド",
+			"level": 5,
+			"item_id": "剣の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "モードレッド",
+			"level": 5,
+			"item_id": "八連双晶",
+			"number": 10
+		},
+		{
+			"servant_id": "モードレッド",
+			"level": 6,
+			"item_id": "剣の秘石",
+			"number": 12
+		},
+		{
+			"servant_id": "モードレッド",
+			"level": 6,
+			"item_id": "竜の牙",
+			"number": 12
+		},
+		{
+			"servant_id": "モードレッド",
+			"level": 7,
+			"item_id": "竜の牙",
+			"number": 24
+		},
+		{
+			"servant_id": "モードレッド",
+			"level": 7,
+			"item_id": "混沌の爪",
+			"number": 4
+		},
+		{
+			"servant_id": "モードレッド",
+			"level": 8,
+			"item_id": "混沌の爪",
+			"number": 11
+		},
+		{
+			"servant_id": "モードレッド",
+			"level": 8,
+			"item_id": "竜の逆鱗",
+			"number": 10
+		},
+		{
+			"servant_id": "モードレッド",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "ニコラ・テスラ",
+			"level": 1,
+			"item_id": "弓の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "ニコラ・テスラ",
+			"level": 2,
+			"item_id": "弓の輝石",
+			"number": 12
+		},
+		{
+			"servant_id": "ニコラ・テスラ",
+			"level": 3,
+			"item_id": "弓の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "ニコラ・テスラ",
+			"level": 4,
+			"item_id": "弓の魔石",
+			"number": 12
+		},
+		{
+			"servant_id": "ニコラ・テスラ",
+			"level": 4,
+			"item_id": "禁断の頁",
+			"number": 5
+		},
+		{
+			"servant_id": "ニコラ・テスラ",
+			"level": 5,
+			"item_id": "弓の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "ニコラ・テスラ",
+			"level": 5,
+			"item_id": "禁断の頁",
+			"number": 10
+		},
+		{
+			"servant_id": "ニコラ・テスラ",
+			"level": 6,
+			"item_id": "弓の秘石",
+			"number": 12
+		},
+		{
+			"servant_id": "ニコラ・テスラ",
+			"level": 6,
+			"item_id": "虚影の塵",
+			"number": 10
+		},
+		{
+			"servant_id": "ニコラ・テスラ",
+			"level": 7,
+			"item_id": "虚影の塵",
+			"number": 20
+		},
+		{
+			"servant_id": "ニコラ・テスラ",
+			"level": 7,
+			"item_id": "鳳凰の羽根",
+			"number": 5
+		},
+		{
+			"servant_id": "ニコラ・テスラ",
+			"level": 8,
+			"item_id": "鳳凰の羽根",
+			"number": 15
+		},
+		{
+			"servant_id": "ニコラ・テスラ",
+			"level": 8,
+			"item_id": "ｺﾞｰｽﾄﾗﾝﾀﾝ",
+			"number": 24
+		},
+		{
+			"servant_id": "ニコラ・テスラ",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔槍オルタ〕",
+			"level": 1,
+			"item_id": "槍の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔槍オルタ〕",
+			"level": 2,
+			"item_id": "槍の輝石",
+			"number": 10
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔槍オルタ〕",
+			"level": 3,
+			"item_id": "槍の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔槍オルタ〕",
+			"level": 4,
+			"item_id": "槍の魔石",
+			"number": 10
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔槍オルタ〕",
+			"level": 4,
+			"item_id": "鳳凰の羽根",
+			"number": 4
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔槍オルタ〕",
+			"level": 5,
+			"item_id": "槍の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔槍オルタ〕",
+			"level": 5,
+			"item_id": "鳳凰の羽根",
+			"number": 7
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔槍オルタ〕",
+			"level": 6,
+			"item_id": "槍の秘石",
+			"number": 10
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔槍オルタ〕",
+			"level": 6,
+			"item_id": "隕蹄鉄",
+			"number": 4
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔槍オルタ〕",
+			"level": 7,
+			"item_id": "隕蹄鉄",
+			"number": 8
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔槍オルタ〕",
+			"level": 7,
+			"item_id": "竜の牙",
+			"number": 12
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔槍オルタ〕",
+			"level": 8,
+			"item_id": "竜の牙",
+			"number": 36
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔槍オルタ〕",
+			"level": 8,
+			"item_id": "蛮神の心臓",
+			"number": 8
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔槍オルタ〕",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "ヴァン・ホーエンハイム・パラケルスス",
+			"level": 1,
+			"item_id": "術の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "ヴァン・ホーエンハイム・パラケルスス",
+			"level": 2,
+			"item_id": "術の輝石",
+			"number": 8
+		},
+		{
+			"servant_id": "ヴァン・ホーエンハイム・パラケルスス",
+			"level": 3,
+			"item_id": "術の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "ヴァン・ホーエンハイム・パラケルスス",
+			"level": 4,
+			"item_id": "術の魔石",
+			"number": 8
+		},
+		{
+			"servant_id": "ヴァン・ホーエンハイム・パラケルスス",
+			"level": 4,
+			"item_id": "無間の歯車",
+			"number": 4
+		},
+		{
+			"servant_id": "ヴァン・ホーエンハイム・パラケルスス",
+			"level": 5,
+			"item_id": "術の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "ヴァン・ホーエンハイム・パラケルスス",
+			"level": 5,
+			"item_id": "無間の歯車",
+			"number": 7
+		},
+		{
+			"servant_id": "ヴァン・ホーエンハイム・パラケルスス",
+			"level": 6,
+			"item_id": "術の秘石",
+			"number": 8
+		},
+		{
+			"servant_id": "ヴァン・ホーエンハイム・パラケルスス",
+			"level": 6,
+			"item_id": "禁断の頁",
+			"number": 4
+		},
+		{
+			"servant_id": "ヴァン・ホーエンハイム・パラケルスス",
+			"level": 7,
+			"item_id": "禁断の頁",
+			"number": 7
+		},
+		{
+			"servant_id": "ヴァン・ホーエンハイム・パラケルスス",
+			"level": 7,
+			"item_id": "虚影の塵",
+			"number": 8
+		},
+		{
+			"servant_id": "ヴァン・ホーエンハイム・パラケルスス",
+			"level": 8,
+			"item_id": "虚影の塵",
+			"number": 24
+		},
+		{
+			"servant_id": "ヴァン・ホーエンハイム・パラケルスス",
+			"level": 8,
+			"item_id": "凶骨",
+			"number": 48
+		},
+		{
+			"servant_id": "ヴァン・ホーエンハイム・パラケルスス",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "チャールズ・バベッジ",
+			"level": 1,
+			"item_id": "術の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "チャールズ・バベッジ",
+			"level": 2,
+			"item_id": "術の輝石",
+			"number": 8
+		},
+		{
+			"servant_id": "チャールズ・バベッジ",
+			"level": 3,
+			"item_id": "術の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "チャールズ・バベッジ",
+			"level": 4,
+			"item_id": "術の魔石",
+			"number": 8
+		},
+		{
+			"servant_id": "チャールズ・バベッジ",
+			"level": 4,
+			"item_id": "八連双晶",
+			"number": 4
+		},
+		{
+			"servant_id": "チャールズ・バベッジ",
+			"level": 5,
+			"item_id": "術の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "チャールズ・バベッジ",
+			"level": 5,
+			"item_id": "八連双晶",
+			"number": 7
+		},
+		{
+			"servant_id": "チャールズ・バベッジ",
+			"level": 6,
+			"item_id": "術の秘石",
+			"number": 8
+		},
+		{
+			"servant_id": "チャールズ・バベッジ",
+			"level": 6,
+			"item_id": "無間の歯車",
+			"number": 4
+		},
+		{
+			"servant_id": "チャールズ・バベッジ",
+			"level": 7,
+			"item_id": "無間の歯車",
+			"number": 7
+		},
+		{
+			"servant_id": "チャールズ・バベッジ",
+			"level": 7,
+			"item_id": "ｺﾞｰｽﾄﾗﾝﾀﾝ",
+			"number": 4
+		},
+		{
+			"servant_id": "チャールズ・バベッジ",
+			"level": 8,
+			"item_id": "ｺﾞｰｽﾄﾗﾝﾀﾝ",
+			"number": 12
+		},
+		{
+			"servant_id": "チャールズ・バベッジ",
+			"level": 8,
+			"item_id": "虚影の塵",
+			"number": 32
+		},
+		{
+			"servant_id": "チャールズ・バベッジ",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "ヘンリー・ジキル＆ハイド",
+			"level": 1,
+			"item_id": "殺の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "ヘンリー・ジキル＆ハイド",
+			"level": 2,
+			"item_id": "殺の輝石",
+			"number": 8
+		},
+		{
+			"servant_id": "ヘンリー・ジキル＆ハイド",
+			"level": 3,
+			"item_id": "殺の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "ヘンリー・ジキル＆ハイド",
+			"level": 4,
+			"item_id": "殺の魔石",
+			"number": 8
+		},
+		{
+			"servant_id": "ヘンリー・ジキル＆ハイド",
+			"level": 4,
+			"item_id": "虚影の塵",
+			"number": 7
+		},
+		{
+			"servant_id": "ヘンリー・ジキル＆ハイド",
+			"level": 5,
+			"item_id": "殺の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "ヘンリー・ジキル＆ハイド",
+			"level": 5,
+			"item_id": "虚影の塵",
+			"number": 13
+		},
+		{
+			"servant_id": "ヘンリー・ジキル＆ハイド",
+			"level": 6,
+			"item_id": "殺の秘石",
+			"number": 8
+		},
+		{
+			"servant_id": "ヘンリー・ジキル＆ハイド",
+			"level": 6,
+			"item_id": "凶骨",
+			"number": 10
+		},
+		{
+			"servant_id": "ヘンリー・ジキル＆ハイド",
+			"level": 7,
+			"item_id": "凶骨",
+			"number": 20
+		},
+		{
+			"servant_id": "ヘンリー・ジキル＆ハイド",
+			"level": 7,
+			"item_id": "蛮神の心臓",
+			"number": 2
+		},
+		{
+			"servant_id": "ヘンリー・ジキル＆ハイド",
+			"level": 8,
+			"item_id": "蛮神の心臓",
+			"number": 5
+		},
+		{
+			"servant_id": "ヘンリー・ジキル＆ハイド",
+			"level": 8,
+			"item_id": "ﾎﾑﾝｸﾙｽﾍﾞﾋﾞｰ",
+			"number": 16
+		},
+		{
+			"servant_id": "ヘンリー・ジキル＆ハイド",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "フランケンシュタイン",
+			"level": 1,
+			"item_id": "狂の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "フランケンシュタイン",
+			"level": 2,
+			"item_id": "狂の輝石",
+			"number": 10
+		},
+		{
+			"servant_id": "フランケンシュタイン",
+			"level": 3,
+			"item_id": "狂の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "フランケンシュタイン",
+			"level": 4,
+			"item_id": "狂の魔石",
+			"number": 10
+		},
+		{
+			"servant_id": "フランケンシュタイン",
+			"level": 4,
+			"item_id": "凶骨",
+			"number": 12
+		},
+		{
+			"servant_id": "フランケンシュタイン",
+			"level": 5,
+			"item_id": "狂の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "フランケンシュタイン",
+			"level": 5,
+			"item_id": "凶骨",
+			"number": 24
+		},
+		{
+			"servant_id": "フランケンシュタイン",
+			"level": 6,
+			"item_id": "狂の秘石",
+			"number": 10
+		},
+		{
+			"servant_id": "フランケンシュタイン",
+			"level": 6,
+			"item_id": "ﾎﾑﾝｸﾙｽﾍﾞﾋﾞｰ",
+			"number": 4
+		},
+		{
+			"servant_id": "フランケンシュタイン",
+			"level": 7,
+			"item_id": "ﾎﾑﾝｸﾙｽﾍﾞﾋﾞｰ",
+			"number": 8
+		},
+		{
+			"servant_id": "フランケンシュタイン",
+			"level": 7,
+			"item_id": "八連双晶",
+			"number": 5
+		},
+		{
+			"servant_id": "フランケンシュタイン",
+			"level": 8,
+			"item_id": "八連双晶",
+			"number": 15
+		},
+		{
+			"servant_id": "フランケンシュタイン",
+			"level": 8,
+			"item_id": "無間の歯車",
+			"number": 20
+		},
+		{
+			"servant_id": "フランケンシュタイン",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "アルジュナ",
+			"level": 1,
+			"item_id": "弓の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "アルジュナ",
+			"level": 2,
+			"item_id": "弓の輝石",
+			"number": 12
+		},
+		{
+			"servant_id": "アルジュナ",
+			"level": 3,
+			"item_id": "弓の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "アルジュナ",
+			"level": 4,
+			"item_id": "弓の魔石",
+			"number": 12
+		},
+		{
+			"servant_id": "アルジュナ",
+			"level": 4,
+			"item_id": "鳳凰の羽根",
+			"number": 4
+		},
+		{
+			"servant_id": "アルジュナ",
+			"level": 5,
+			"item_id": "弓の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "アルジュナ",
+			"level": 5,
+			"item_id": "鳳凰の羽根",
+			"number": 8
+		},
+		{
+			"servant_id": "アルジュナ",
+			"level": 6,
+			"item_id": "弓の秘石",
+			"number": 12
+		},
+		{
+			"servant_id": "アルジュナ",
+			"level": 6,
+			"item_id": "英雄の証",
+			"number": 15
+		},
+		{
+			"servant_id": "アルジュナ",
+			"level": 7,
+			"item_id": "世界樹の種",
+			"number": 8
+		},
+		{
+			"servant_id": "アルジュナ",
+			"level": 7,
+			"item_id": "英雄の証",
+			"number": 29
+		},
+		{
+			"servant_id": "アルジュナ",
+			"level": 8,
+			"item_id": "世界樹の種",
+			"number": 22
+		},
+		{
+			"servant_id": "アルジュナ",
+			"level": 8,
+			"item_id": "蛮神の心臓",
+			"number": 10
+		},
+		{
+			"servant_id": "アルジュナ",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "カルナ",
+			"level": 1,
+			"item_id": "槍の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "カルナ",
+			"level": 2,
+			"item_id": "槍の輝石",
+			"number": 12
+		},
+		{
+			"servant_id": "カルナ",
+			"level": 3,
+			"item_id": "槍の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "カルナ",
+			"level": 4,
+			"item_id": "槍の魔石",
+			"number": 12
+		},
+		{
+			"servant_id": "カルナ",
+			"level": 4,
+			"item_id": "無間の歯車",
+			"number": 5
+		},
+		{
+			"servant_id": "カルナ",
+			"level": 5,
+			"item_id": "槍の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "カルナ",
+			"level": 5,
+			"item_id": "無間の歯車",
+			"number": 10
+		},
+		{
+			"servant_id": "カルナ",
+			"level": 6,
+			"item_id": "槍の秘石",
+			"number": 12
+		},
+		{
+			"servant_id": "カルナ",
+			"level": 6,
+			"item_id": "八連双晶",
+			"number": 5
+		},
+		{
+			"servant_id": "カルナ",
+			"level": 7,
+			"item_id": "英雄の証",
+			"number": 18
+		},
+		{
+			"servant_id": "カルナ",
+			"level": 7,
+			"item_id": "八連双晶",
+			"number": 10
+		},
+		{
+			"servant_id": "カルナ",
+			"level": 8,
+			"item_id": "英雄の証",
+			"number": 54
+		},
+		{
+			"servant_id": "カルナ",
+			"level": 8,
+			"item_id": "蛮神の心臓",
+			"number": 10
+		},
+		{
+			"servant_id": "カルナ",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "謎のヒロインX",
+			"level": 1,
+			"item_id": "殺の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "謎のヒロインX",
+			"level": 2,
+			"item_id": "殺の輝石",
+			"number": 12
+		},
+		{
+			"servant_id": "謎のヒロインX",
+			"level": 3,
+			"item_id": "殺の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "謎のヒロインX",
+			"level": 4,
+			"item_id": "殺の魔石",
+			"number": 12
+		},
+		{
+			"servant_id": "謎のヒロインX",
+			"level": 4,
+			"item_id": "鳳凰の羽根",
+			"number": 4
+		},
+		{
+			"servant_id": "謎のヒロインX",
+			"level": 5,
+			"item_id": "殺の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "謎のヒロインX",
+			"level": 5,
+			"item_id": "鳳凰の羽根",
+			"number": 8
+		},
+		{
+			"servant_id": "謎のヒロインX",
+			"level": 6,
+			"item_id": "殺の秘石",
+			"number": 12
+		},
+		{
+			"servant_id": "謎のヒロインX",
+			"level": 6,
+			"item_id": "竜の牙",
+			"number": 12
+		},
+		{
+			"servant_id": "謎のヒロインX",
+			"level": 7,
+			"item_id": "竜の牙",
+			"number": 24
+		},
+		{
+			"servant_id": "謎のヒロインX",
+			"level": 7,
+			"item_id": "虚影の塵",
+			"number": 12
+		},
+		{
+			"servant_id": "謎のヒロインX",
+			"level": 8,
+			"item_id": "虚影の塵",
+			"number": 36
+		},
+		{
+			"servant_id": "謎のヒロインX",
+			"level": 8,
+			"item_id": "八連双晶",
+			"number": 24
+		},
+		{
+			"servant_id": "謎のヒロインX",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "フィン・マックール",
+			"level": 1,
+			"item_id": "槍の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "フィン・マックール",
+			"level": 2,
+			"item_id": "槍の輝石",
+			"number": 10
+		},
+		{
+			"servant_id": "フィン・マックール",
+			"level": 3,
+			"item_id": "槍の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "フィン・マックール",
+			"level": 4,
+			"item_id": "槍の魔石",
+			"number": 10
+		},
+		{
+			"servant_id": "フィン・マックール",
+			"level": 4,
+			"item_id": "凶骨",
+			"number": 12
+		},
+		{
+			"servant_id": "フィン・マックール",
+			"level": 5,
+			"item_id": "槍の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "フィン・マックール",
+			"level": 5,
+			"item_id": "凶骨",
+			"number": 24
+		},
+		{
+			"servant_id": "フィン・マックール",
+			"level": 6,
+			"item_id": "槍の秘石",
+			"number": 10
+		},
+		{
+			"servant_id": "フィン・マックール",
+			"level": 6,
+			"item_id": "鳳凰の羽根",
+			"number": 4
+		},
+		{
+			"servant_id": "フィン・マックール",
+			"level": 7,
+			"item_id": "鳳凰の羽根",
+			"number": 7
+		},
+		{
+			"servant_id": "フィン・マックール",
+			"level": 7,
+			"item_id": "八連双晶",
+			"number": 5
+		},
+		{
+			"servant_id": "フィン・マックール",
+			"level": 8,
+			"item_id": "八連双晶",
+			"number": 15
+		},
+		{
+			"servant_id": "フィン・マックール",
+			"level": 8,
+			"item_id": "蛇の宝玉",
+			"number": 16
+		},
+		{
+			"servant_id": "フィン・マックール",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "ブリュンヒルデ",
+			"level": 1,
+			"item_id": "槍の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "ブリュンヒルデ",
+			"level": 2,
+			"item_id": "槍の輝石",
+			"number": 12
+		},
+		{
+			"servant_id": "ブリュンヒルデ",
+			"level": 3,
+			"item_id": "槍の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "ブリュンヒルデ",
+			"level": 4,
+			"item_id": "槍の魔石",
+			"number": 12
+		},
+		{
+			"servant_id": "ブリュンヒルデ",
+			"level": 4,
+			"item_id": "世界樹の種",
+			"number": 6
+		},
+		{
+			"servant_id": "ブリュンヒルデ",
+			"level": 5,
+			"item_id": "槍の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "ブリュンヒルデ",
+			"level": 5,
+			"item_id": "世界樹の種",
+			"number": 12
+		},
+		{
+			"servant_id": "ブリュンヒルデ",
+			"level": 6,
+			"item_id": "槍の秘石",
+			"number": 12
+		},
+		{
+			"servant_id": "ブリュンヒルデ",
+			"level": 6,
+			"item_id": "蛮神の心臓",
+			"number": 2
+		},
+		{
+			"servant_id": "ブリュンヒルデ",
+			"level": 7,
+			"item_id": "蛮神の心臓",
+			"number": 4
+		},
+		{
+			"servant_id": "ブリュンヒルデ",
+			"level": 7,
+			"item_id": "鳳凰の羽根",
+			"number": 5
+		},
+		{
+			"servant_id": "ブリュンヒルデ",
+			"level": 8,
+			"item_id": "鳳凰の羽根",
+			"number": 15
+		},
+		{
+			"servant_id": "ブリュンヒルデ",
+			"level": 8,
+			"item_id": "混沌の爪",
+			"number": 15
+		},
+		{
+			"servant_id": "ブリュンヒルデ",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "ベオウルフ",
+			"level": 1,
+			"item_id": "狂の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "ベオウルフ",
+			"level": 2,
+			"item_id": "狂の輝石",
+			"number": 10
+		},
+		{
+			"servant_id": "ベオウルフ",
+			"level": 3,
+			"item_id": "狂の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "ベオウルフ",
+			"level": 4,
+			"item_id": "狂の魔石",
+			"number": 10
+		},
+		{
+			"servant_id": "ベオウルフ",
+			"level": 4,
+			"item_id": "八連双晶",
+			"number": 4
+		},
+		{
+			"servant_id": "ベオウルフ",
+			"level": 5,
+			"item_id": "狂の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "ベオウルフ",
+			"level": 5,
+			"item_id": "八連双晶",
+			"number": 8
+		},
+		{
+			"servant_id": "ベオウルフ",
+			"level": 6,
+			"item_id": "狂の秘石",
+			"number": 10
+		},
+		{
+			"servant_id": "ベオウルフ",
+			"level": 6,
+			"item_id": "英雄の証",
+			"number": 12
+		},
+		{
+			"servant_id": "ベオウルフ",
+			"level": 7,
+			"item_id": "英雄の証",
+			"number": 24
+		},
+		{
+			"servant_id": "ベオウルフ",
+			"level": 7,
+			"item_id": "世界樹の種",
+			"number": 6
+		},
+		{
+			"servant_id": "ベオウルフ",
+			"level": 8,
+			"item_id": "世界樹の種",
+			"number": 18
+		},
+		{
+			"servant_id": "ベオウルフ",
+			"level": 8,
+			"item_id": "竜の牙",
+			"number": 48
+		},
+		{
+			"servant_id": "ベオウルフ",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "ネロ・クラウディウス〔ブライド〕",
+			"level": 1,
+			"item_id": "剣の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "ネロ・クラウディウス〔ブライド〕",
+			"level": 2,
+			"item_id": "剣の輝石",
+			"number": 12
+		},
+		{
+			"servant_id": "ネロ・クラウディウス〔ブライド〕",
+			"level": 3,
+			"item_id": "剣の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "ネロ・クラウディウス〔ブライド〕",
+			"level": 4,
+			"item_id": "剣の魔石",
+			"number": 12
+		},
+		{
+			"servant_id": "ネロ・クラウディウス〔ブライド〕",
+			"level": 4,
+			"item_id": "ｺﾞｰｽﾄﾗﾝﾀﾝ",
+			"number": 5
+		},
+		{
+			"servant_id": "ネロ・クラウディウス〔ブライド〕",
+			"level": 5,
+			"item_id": "剣の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "ネロ・クラウディウス〔ブライド〕",
+			"level": 5,
+			"item_id": "ｺﾞｰｽﾄﾗﾝﾀﾝ",
+			"number": 10
+		},
+		{
+			"servant_id": "ネロ・クラウディウス〔ブライド〕",
+			"level": 6,
+			"item_id": "剣の秘石",
+			"number": 12
+		},
+		{
+			"servant_id": "ネロ・クラウディウス〔ブライド〕",
+			"level": 6,
+			"item_id": "八連双晶",
+			"number": 5
+		},
+		{
+			"servant_id": "ネロ・クラウディウス〔ブライド〕",
+			"level": 7,
+			"item_id": "八連双晶",
+			"number": 10
+		},
+		{
+			"servant_id": "ネロ・クラウディウス〔ブライド〕",
+			"level": 7,
+			"item_id": "蛇の宝玉",
+			"number": 5
+		},
+		{
+			"servant_id": "ネロ・クラウディウス〔ブライド〕",
+			"level": 8,
+			"item_id": "蛇の宝玉",
+			"number": 15
+		},
+		{
+			"servant_id": "ネロ・クラウディウス〔ブライド〕",
+			"level": 8,
+			"item_id": "無間の歯車",
+			"number": 24
+		},
+		{
+			"servant_id": "ネロ・クラウディウス〔ブライド〕",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "両儀式〔セイバー〕",
+			"level": 1,
+			"item_id": "剣の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "両儀式〔セイバー〕",
+			"level": 2,
+			"item_id": "剣の輝石",
+			"number": 12
+		},
+		{
+			"servant_id": "両儀式〔セイバー〕",
+			"level": 3,
+			"item_id": "剣の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "両儀式〔セイバー〕",
+			"level": 4,
+			"item_id": "剣の魔石",
+			"number": 12
+		},
+		{
+			"servant_id": "両儀式〔セイバー〕",
+			"level": 4,
+			"item_id": "鳳凰の羽根",
+			"number": 4
+		},
+		{
+			"servant_id": "両儀式〔セイバー〕",
+			"level": 5,
+			"item_id": "剣の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "両儀式〔セイバー〕",
+			"level": 5,
+			"item_id": "鳳凰の羽根",
+			"number": 8
+		},
+		{
+			"servant_id": "両儀式〔セイバー〕",
+			"level": 6,
+			"item_id": "剣の秘石",
+			"number": 12
+		},
+		{
+			"servant_id": "両儀式〔セイバー〕",
+			"level": 6,
+			"item_id": "虚影の塵",
+			"number": 10
+		},
+		{
+			"servant_id": "両儀式〔セイバー〕",
+			"level": 7,
+			"item_id": "虚影の塵",
+			"number": 20
+		},
+		{
+			"servant_id": "両儀式〔セイバー〕",
+			"level": 7,
+			"item_id": "八連双晶",
+			"number": 6
+		},
+		{
+			"servant_id": "両儀式〔セイバー〕",
+			"level": 8,
+			"item_id": "八連双晶",
+			"number": 18
+		},
+		{
+			"servant_id": "両儀式〔セイバー〕",
+			"level": 8,
+			"item_id": "ｺﾞｰｽﾄﾗﾝﾀﾝ",
+			"number": 24
+		},
+		{
+			"servant_id": "両儀式〔セイバー〕",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "両儀式〔アサシン〕",
+			"level": 1,
+			"item_id": "殺の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "両儀式〔アサシン〕",
+			"level": 2,
+			"item_id": "殺の輝石",
+			"number": 10
+		},
+		{
+			"servant_id": "両儀式〔アサシン〕",
+			"level": 3,
+			"item_id": "殺の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "両儀式〔アサシン〕",
+			"level": 4,
+			"item_id": "殺の魔石",
+			"number": 10
+		},
+		{
+			"servant_id": "両儀式〔アサシン〕",
+			"level": 4,
+			"item_id": "凶骨",
+			"number": 12
+		},
+		{
+			"servant_id": "両儀式〔アサシン〕",
+			"level": 5,
+			"item_id": "殺の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "両儀式〔アサシン〕",
+			"level": 5,
+			"item_id": "凶骨",
+			"number": 24
+		},
+		{
+			"servant_id": "両儀式〔アサシン〕",
+			"level": 6,
+			"item_id": "殺の秘石",
+			"number": 10
+		},
+		{
+			"servant_id": "両儀式〔アサシン〕",
+			"level": 6,
+			"item_id": "混沌の爪",
+			"number": 3
+		},
+		{
+			"servant_id": "両儀式〔アサシン〕",
+			"level": 7,
+			"item_id": "混沌の爪",
+			"number": 5
+		},
+		{
+			"servant_id": "両儀式〔アサシン〕",
+			"level": 7,
+			"item_id": "無間の歯車",
+			"number": 5
+		},
+		{
+			"servant_id": "両儀式〔アサシン〕",
+			"level": 8,
+			"item_id": "無間の歯車",
+			"number": 15
+		},
+		{
+			"servant_id": "両儀式〔アサシン〕",
+			"level": 8,
+			"item_id": "ﾎﾑﾝｸﾙｽﾍﾞﾋﾞｰ",
+			"number": 20
+		},
+		{
+			"servant_id": "両儀式〔アサシン〕",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "天草四郎",
+			"level": 1,
+			"item_id": "騎の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "天草四郎",
+			"level": 1,
+			"item_id": "術の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "天草四郎",
+			"level": 1,
+			"item_id": "殺の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "天草四郎",
+			"level": 2,
+			"item_id": "剣の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "天草四郎",
+			"level": 2,
+			"item_id": "弓の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "天草四郎",
+			"level": 2,
+			"item_id": "槍の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "天草四郎",
+			"level": 2,
+			"item_id": "狂の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "天草四郎",
+			"level": 3,
+			"item_id": "騎の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "天草四郎",
+			"level": 3,
+			"item_id": "術の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "天草四郎",
+			"level": 3,
+			"item_id": "殺の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "天草四郎",
+			"level": 4,
+			"item_id": "剣の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "天草四郎",
+			"level": 4,
+			"item_id": "弓の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "天草四郎",
+			"level": 4,
+			"item_id": "槍の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "天草四郎",
+			"level": 4,
+			"item_id": "狂の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "天草四郎",
+			"level": 5,
+			"item_id": "騎の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "天草四郎",
+			"level": 5,
+			"item_id": "術の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "天草四郎",
+			"level": 5,
+			"item_id": "殺の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "天草四郎",
+			"level": 6,
+			"item_id": "剣の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "天草四郎",
+			"level": 6,
+			"item_id": "弓の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "天草四郎",
+			"level": 6,
+			"item_id": "槍の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "天草四郎",
+			"level": 6,
+			"item_id": "狂の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "天草四郎",
+			"level": 7,
+			"item_id": "蛮神の心臓",
+			"number": 5
+		},
+		{
+			"servant_id": "天草四郎",
+			"level": 8,
+			"item_id": "蛮神の心臓",
+			"number": 15
+		},
+		{
+			"servant_id": "天草四郎",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "アストルフォ",
+			"level": 1,
+			"item_id": "騎の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "アストルフォ",
+			"level": 2,
+			"item_id": "騎の輝石",
+			"number": 10
+		},
+		{
+			"servant_id": "アストルフォ",
+			"level": 3,
+			"item_id": "騎の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "アストルフォ",
+			"level": 4,
+			"item_id": "騎の魔石",
+			"number": 10
+		},
+		{
+			"servant_id": "アストルフォ",
+			"level": 4,
+			"item_id": "八連双晶",
+			"number": 4
+		},
+		{
+			"servant_id": "アストルフォ",
+			"level": 5,
+			"item_id": "騎の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "アストルフォ",
+			"level": 5,
+			"item_id": "八連双晶",
+			"number": 8
+		},
+		{
+			"servant_id": "アストルフォ",
+			"level": 6,
+			"item_id": "騎の秘石",
+			"number": 10
+		},
+		{
+			"servant_id": "アストルフォ",
+			"level": 6,
+			"item_id": "隕蹄鉄",
+			"number": 4
+		},
+		{
+			"servant_id": "アストルフォ",
+			"level": 7,
+			"item_id": "隕蹄鉄",
+			"number": 8
+		},
+		{
+			"servant_id": "アストルフォ",
+			"level": 7,
+			"item_id": "禁断の頁",
+			"number": 5
+		},
+		{
+			"servant_id": "アストルフォ",
+			"level": 8,
+			"item_id": "禁断の頁",
+			"number": 15
+		},
+		{
+			"servant_id": "アストルフォ",
+			"level": 8,
+			"item_id": "世界樹の種",
+			"number": 24
+		},
+		{
+			"servant_id": "アストルフォ",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "子ギル",
+			"level": 1,
+			"item_id": "弓の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "子ギル",
+			"level": 2,
+			"item_id": "弓の輝石",
+			"number": 8
+		},
+		{
+			"servant_id": "子ギル",
+			"level": 3,
+			"item_id": "弓の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "子ギル",
+			"level": 4,
+			"item_id": "弓の魔石",
+			"number": 8
+		},
+		{
+			"servant_id": "子ギル",
+			"level": 4,
+			"item_id": "蛇の宝玉",
+			"number": 3
+		},
+		{
+			"servant_id": "子ギル",
+			"level": 5,
+			"item_id": "弓の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "子ギル",
+			"level": 5,
+			"item_id": "蛇の宝玉",
+			"number": 6
+		},
+		{
+			"servant_id": "子ギル",
+			"level": 6,
+			"item_id": "弓の秘石",
+			"number": 8
+		},
+		{
+			"servant_id": "子ギル",
+			"level": 6,
+			"item_id": "世界樹の種",
+			"number": 4
+		},
+		{
+			"servant_id": "子ギル",
+			"level": 7,
+			"item_id": "世界樹の種",
+			"number": 8
+		},
+		{
+			"servant_id": "子ギル",
+			"level": 7,
+			"item_id": "虚影の塵",
+			"number": 8
+		},
+		{
+			"servant_id": "子ギル",
+			"level": 8,
+			"item_id": "虚影の塵",
+			"number": 24
+		},
+		{
+			"servant_id": "子ギル",
+			"level": 8,
+			"item_id": "鳳凰の羽根",
+			"number": 13
+		},
+		{
+			"servant_id": "子ギル",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "巌窟王 エドモン・ダンテス",
+			"level": 1,
+			"item_id": "英雄の証",
+			"number": 10
+		},
+		{
+			"servant_id": "巌窟王 エドモン・ダンテス",
+			"level": 2,
+			"item_id": "世界樹の種",
+			"number": 10
+		},
+		{
+			"servant_id": "巌窟王 エドモン・ダンテス",
+			"level": 3,
+			"item_id": "竜の牙",
+			"number": 12
+		},
+		{
+			"servant_id": "巌窟王 エドモン・ダンテス",
+			"level": 4,
+			"item_id": "ｺﾞｰｽﾄﾗﾝﾀﾝ",
+			"number": 12
+		},
+		{
+			"servant_id": "巌窟王 エドモン・ダンテス",
+			"level": 5,
+			"item_id": "隕蹄鉄",
+			"number": 12
+		},
+		{
+			"servant_id": "巌窟王 エドモン・ダンテス",
+			"level": 6,
+			"item_id": "ﾎﾑﾝｸﾙｽﾍﾞﾋﾞｰ",
+			"number": 15
+		},
+		{
+			"servant_id": "巌窟王 エドモン・ダンテス",
+			"level": 7,
+			"item_id": "混沌の爪",
+			"number": 15
+		},
+		{
+			"servant_id": "巌窟王 エドモン・ダンテス",
+			"level": 8,
+			"item_id": "竜の逆鱗",
+			"number": 15
+		},
+		{
+			"servant_id": "巌窟王 エドモン・ダンテス",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "ナイチンゲール",
+			"level": 1,
+			"item_id": "狂の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "ナイチンゲール",
+			"level": 2,
+			"item_id": "狂の輝石",
+			"number": 12
+		},
+		{
+			"servant_id": "ナイチンゲール",
+			"level": 3,
+			"item_id": "狂の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "ナイチンゲール",
+			"level": 4,
+			"item_id": "狂の魔石",
+			"number": 12
+		},
+		{
+			"servant_id": "ナイチンゲール",
+			"level": 4,
+			"item_id": "世界樹の種",
+			"number": 6
+		},
+		{
+			"servant_id": "ナイチンゲール",
+			"level": 5,
+			"item_id": "狂の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "ナイチンゲール",
+			"level": 5,
+			"item_id": "世界樹の種",
+			"number": 12
+		},
+		{
+			"servant_id": "ナイチンゲール",
+			"level": 6,
+			"item_id": "狂の秘石",
+			"number": 12
+		},
+		{
+			"servant_id": "ナイチンゲール",
+			"level": 6,
+			"item_id": "鳳凰の羽根",
+			"number": 4
+		},
+		{
+			"servant_id": "ナイチンゲール",
+			"level": 7,
+			"item_id": "鳳凰の羽根",
+			"number": 8
+		},
+		{
+			"servant_id": "ナイチンゲール",
+			"level": 7,
+			"item_id": "血の涙石",
+			"number": 4
+		},
+		{
+			"servant_id": "ナイチンゲール",
+			"level": 8,
+			"item_id": "血の涙石",
+			"number": 11
+		},
+		{
+			"servant_id": "ナイチンゲール",
+			"level": 8,
+			"item_id": "ｺﾞｰｽﾄﾗﾝﾀﾝ",
+			"number": 24
+		},
+		{
+			"servant_id": "ナイチンゲール",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "クー・フーリン〔オルタ〕",
+			"level": 1,
+			"item_id": "狂の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "クー・フーリン〔オルタ〕",
+			"level": 2,
+			"item_id": "狂の輝石",
+			"number": 12
+		},
+		{
+			"servant_id": "クー・フーリン〔オルタ〕",
+			"level": 3,
+			"item_id": "狂の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "クー・フーリン〔オルタ〕",
+			"level": 4,
+			"item_id": "狂の魔石",
+			"number": 12
+		},
+		{
+			"servant_id": "クー・フーリン〔オルタ〕",
+			"level": 4,
+			"item_id": "混沌の爪",
+			"number": 3
+		},
+		{
+			"servant_id": "クー・フーリン〔オルタ〕",
+			"level": 5,
+			"item_id": "狂の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "クー・フーリン〔オルタ〕",
+			"level": 5,
+			"item_id": "混沌の爪",
+			"number": 6
+		},
+		{
+			"servant_id": "クー・フーリン〔オルタ〕",
+			"level": 6,
+			"item_id": "狂の秘石",
+			"number": 12
+		},
+		{
+			"servant_id": "クー・フーリン〔オルタ〕",
+			"level": 6,
+			"item_id": "凶骨",
+			"number": 15
+		},
+		{
+			"servant_id": "クー・フーリン〔オルタ〕",
+			"level": 7,
+			"item_id": "凶骨",
+			"number": 29
+		},
+		{
+			"servant_id": "クー・フーリン〔オルタ〕",
+			"level": 7,
+			"item_id": "蛇の宝玉",
+			"number": 5
+		},
+		{
+			"servant_id": "クー・フーリン〔オルタ〕",
+			"level": 8,
+			"item_id": "蛇の宝玉",
+			"number": 15
+		},
+		{
+			"servant_id": "クー・フーリン〔オルタ〕",
+			"level": 8,
+			"item_id": "虚影の塵",
+			"number": 48
+		},
+		{
+			"servant_id": "クー・フーリン〔オルタ〕",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "女王メイヴ",
+			"level": 1,
+			"item_id": "騎の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "女王メイヴ",
+			"level": 2,
+			"item_id": "騎の輝石",
+			"number": 12
+		},
+		{
+			"servant_id": "女王メイヴ",
+			"level": 3,
+			"item_id": "騎の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "女王メイヴ",
+			"level": 4,
+			"item_id": "騎の魔石",
+			"number": 12
+		},
+		{
+			"servant_id": "女王メイヴ",
+			"level": 4,
+			"item_id": "鳳凰の羽根",
+			"number": 4
+		},
+		{
+			"servant_id": "女王メイヴ",
+			"level": 5,
+			"item_id": "騎の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "女王メイヴ",
+			"level": 5,
+			"item_id": "鳳凰の羽根",
+			"number": 8
+		},
+		{
+			"servant_id": "女王メイヴ",
+			"level": 6,
+			"item_id": "騎の秘石",
+			"number": 12
+		},
+		{
+			"servant_id": "女王メイヴ",
+			"level": 6,
+			"item_id": "蛇の宝玉",
+			"number": 4
+		},
+		{
+			"servant_id": "女王メイヴ",
+			"level": 7,
+			"item_id": "蛇の宝玉",
+			"number": 8
+		},
+		{
+			"servant_id": "女王メイヴ",
+			"level": 7,
+			"item_id": "ｺﾞｰｽﾄﾗﾝﾀﾝ",
+			"number": 6
+		},
+		{
+			"servant_id": "女王メイヴ",
+			"level": 8,
+			"item_id": "ｺﾞｰｽﾄﾗﾝﾀﾝ",
+			"number": 18
+		},
+		{
+			"servant_id": "女王メイヴ",
+			"level": 8,
+			"item_id": "蛮神の心臓",
+			"number": 10
+		},
+		{
+			"servant_id": "女王メイヴ",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "エレナ・ブラヴァツキー",
+			"level": 1,
+			"item_id": "術の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "エレナ・ブラヴァツキー",
+			"level": 2,
+			"item_id": "術の輝石",
+			"number": 10
+		},
+		{
+			"servant_id": "エレナ・ブラヴァツキー",
+			"level": 3,
+			"item_id": "術の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "エレナ・ブラヴァツキー",
+			"level": 4,
+			"item_id": "術の魔石",
+			"number": 10
+		},
+		{
+			"servant_id": "エレナ・ブラヴァツキー",
+			"level": 4,
+			"item_id": "ｺﾞｰｽﾄﾗﾝﾀﾝ",
+			"number": 4
+		},
+		{
+			"servant_id": "エレナ・ブラヴァツキー",
+			"level": 5,
+			"item_id": "術の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "エレナ・ブラヴァツキー",
+			"level": 5,
+			"item_id": "ｺﾞｰｽﾄﾗﾝﾀﾝ",
+			"number": 8
+		},
+		{
+			"servant_id": "エレナ・ブラヴァツキー",
+			"level": 6,
+			"item_id": "術の秘石",
+			"number": 10
+		},
+		{
+			"servant_id": "エレナ・ブラヴァツキー",
+			"level": 6,
+			"item_id": "虚影の塵",
+			"number": 8
+		},
+		{
+			"servant_id": "エレナ・ブラヴァツキー",
+			"level": 7,
+			"item_id": "虚影の塵",
+			"number": 16
+		},
+		{
+			"servant_id": "エレナ・ブラヴァツキー",
+			"level": 7,
+			"item_id": "黒獣脂",
+			"number": 3
+		},
+		{
+			"servant_id": "エレナ・ブラヴァツキー",
+			"level": 8,
+			"item_id": "黒獣脂",
+			"number": 9
+		},
+		{
+			"servant_id": "エレナ・ブラヴァツキー",
+			"level": 8,
+			"item_id": "鳳凰の羽根",
+			"number": 16
+		},
+		{
+			"servant_id": "エレナ・ブラヴァツキー",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "ラーマ",
+			"level": 1,
+			"item_id": "剣の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "ラーマ",
+			"level": 2,
+			"item_id": "剣の輝石",
+			"number": 10
+		},
+		{
+			"servant_id": "ラーマ",
+			"level": 3,
+			"item_id": "剣の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "ラーマ",
+			"level": 4,
+			"item_id": "剣の魔石",
+			"number": 10
+		},
+		{
+			"servant_id": "ラーマ",
+			"level": 4,
+			"item_id": "蛮神の心臓",
+			"number": 2
+		},
+		{
+			"servant_id": "ラーマ",
+			"level": 5,
+			"item_id": "剣の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "ラーマ",
+			"level": 5,
+			"item_id": "蛮神の心臓",
+			"number": 4
+		},
+		{
+			"servant_id": "ラーマ",
+			"level": 6,
+			"item_id": "剣の秘石",
+			"number": 10
+		},
+		{
+			"servant_id": "ラーマ",
+			"level": 6,
+			"item_id": "世界樹の種",
+			"number": 5
+		},
+		{
+			"servant_id": "ラーマ",
+			"level": 7,
+			"item_id": "世界樹の種",
+			"number": 10
+		},
+		{
+			"servant_id": "ラーマ",
+			"level": 7,
+			"item_id": "混沌の爪",
+			"number": 3
+		},
+		{
+			"servant_id": "ラーマ",
+			"level": 8,
+			"item_id": "混沌の爪",
+			"number": 9
+		},
+		{
+			"servant_id": "ラーマ",
+			"level": 8,
+			"item_id": "凶骨",
+			"number": 60
+		},
+		{
+			"servant_id": "ラーマ",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "神槍 李書文",
+			"level": 1,
+			"item_id": "槍の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "神槍 李書文",
+			"level": 2,
+			"item_id": "槍の輝石",
+			"number": 10
+		},
+		{
+			"servant_id": "神槍 李書文",
+			"level": 3,
+			"item_id": "槍の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "神槍 李書文",
+			"level": 4,
+			"item_id": "槍の魔石",
+			"number": 10
+		},
+		{
+			"servant_id": "神槍 李書文",
+			"level": 4,
+			"item_id": "八連双晶",
+			"number": 4
+		},
+		{
+			"servant_id": "神槍 李書文",
+			"level": 5,
+			"item_id": "槍の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "神槍 李書文",
+			"level": 5,
+			"item_id": "八連双晶",
+			"number": 8
+		},
+		{
+			"servant_id": "神槍 李書文",
+			"level": 6,
+			"item_id": "槍の秘石",
+			"number": 10
+		},
+		{
+			"servant_id": "神槍 李書文",
+			"level": 6,
+			"item_id": "竜の牙",
+			"number": 10
+		},
+		{
+			"servant_id": "神槍 李書文",
+			"level": 7,
+			"item_id": "竜の牙",
+			"number": 20
+		},
+		{
+			"servant_id": "神槍 李書文",
+			"level": 7,
+			"item_id": "虚影の塵",
+			"number": 10
+		},
+		{
+			"servant_id": "神槍 李書文",
+			"level": 8,
+			"item_id": "虚影の塵",
+			"number": 30
+		},
+		{
+			"servant_id": "神槍 李書文",
+			"level": 8,
+			"item_id": "戦馬の幼角",
+			"number": 12
+		},
+		{
+			"servant_id": "神槍 李書文",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "トーマス・エジソン",
+			"level": 1,
+			"item_id": "術の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "トーマス・エジソン",
+			"level": 2,
+			"item_id": "術の輝石",
+			"number": 10
+		},
+		{
+			"servant_id": "トーマス・エジソン",
+			"level": 3,
+			"item_id": "術の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "トーマス・エジソン",
+			"level": 4,
+			"item_id": "術の魔石",
+			"number": 10
+		},
+		{
+			"servant_id": "トーマス・エジソン",
+			"level": 4,
+			"item_id": "英雄の証",
+			"number": 12
+		},
+		{
+			"servant_id": "トーマス・エジソン",
+			"level": 5,
+			"item_id": "術の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "トーマス・エジソン",
+			"level": 5,
+			"item_id": "英雄の証",
+			"number": 24
+		},
+		{
+			"servant_id": "トーマス・エジソン",
+			"level": 6,
+			"item_id": "術の秘石",
+			"number": 10
+		},
+		{
+			"servant_id": "トーマス・エジソン",
+			"level": 6,
+			"item_id": "禁断の頁",
+			"number": 4
+		},
+		{
+			"servant_id": "トーマス・エジソン",
+			"level": 7,
+			"item_id": "禁断の頁",
+			"number": 8
+		},
+		{
+			"servant_id": "トーマス・エジソン",
+			"level": 7,
+			"item_id": "蛮神の心臓",
+			"number": 2
+		},
+		{
+			"servant_id": "トーマス・エジソン",
+			"level": 8,
+			"item_id": "蛮神の心臓",
+			"number": 6
+		},
+		{
+			"servant_id": "トーマス・エジソン",
+			"level": 8,
+			"item_id": "混沌の爪",
+			"number": 12
+		},
+		{
+			"servant_id": "トーマス・エジソン",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "ジェロニモ",
+			"level": 1,
+			"item_id": "術の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "ジェロニモ",
+			"level": 2,
+			"item_id": "術の輝石",
+			"number": 8
+		},
+		{
+			"servant_id": "ジェロニモ",
+			"level": 3,
+			"item_id": "術の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "ジェロニモ",
+			"level": 4,
+			"item_id": "術の魔石",
+			"number": 8
+		},
+		{
+			"servant_id": "ジェロニモ",
+			"level": 4,
+			"item_id": "世界樹の種",
+			"number": 4
+		},
+		{
+			"servant_id": "ジェロニモ",
+			"level": 5,
+			"item_id": "術の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "ジェロニモ",
+			"level": 5,
+			"item_id": "世界樹の種",
+			"number": 8
+		},
+		{
+			"servant_id": "ジェロニモ",
+			"level": 6,
+			"item_id": "術の秘石",
+			"number": 8
+		},
+		{
+			"servant_id": "ジェロニモ",
+			"level": 6,
+			"item_id": "英雄の証",
+			"number": 10
+		},
+		{
+			"servant_id": "ジェロニモ",
+			"level": 7,
+			"item_id": "英雄の証",
+			"number": 20
+		},
+		{
+			"servant_id": "ジェロニモ",
+			"level": 7,
+			"item_id": "凶骨",
+			"number": 12
+		},
+		{
+			"servant_id": "ジェロニモ",
+			"level": 8,
+			"item_id": "凶骨",
+			"number": 36
+		},
+		{
+			"servant_id": "ジェロニモ",
+			"level": 8,
+			"item_id": "精霊根",
+			"number": 7
+		},
+		{
+			"servant_id": "ジェロニモ",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "ビリー・ザ・キッド",
+			"level": 1,
+			"item_id": "弓の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "ビリー・ザ・キッド",
+			"level": 2,
+			"item_id": "弓の輝石",
+			"number": 8
+		},
+		{
+			"servant_id": "ビリー・ザ・キッド",
+			"level": 3,
+			"item_id": "弓の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "ビリー・ザ・キッド",
+			"level": 4,
+			"item_id": "弓の魔石",
+			"number": 8
+		},
+		{
+			"servant_id": "ビリー・ザ・キッド",
+			"level": 4,
+			"item_id": "凶骨",
+			"number": 10
+		},
+		{
+			"servant_id": "ビリー・ザ・キッド",
+			"level": 5,
+			"item_id": "弓の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "ビリー・ザ・キッド",
+			"level": 5,
+			"item_id": "凶骨",
+			"number": 20
+		},
+		{
+			"servant_id": "ビリー・ザ・キッド",
+			"level": 6,
+			"item_id": "弓の秘石",
+			"number": 8
+		},
+		{
+			"servant_id": "ビリー・ザ・キッド",
+			"level": 6,
+			"item_id": "隕蹄鉄",
+			"number": 4
+		},
+		{
+			"servant_id": "ビリー・ザ・キッド",
+			"level": 7,
+			"item_id": "隕蹄鉄",
+			"number": 7
+		},
+		{
+			"servant_id": "ビリー・ザ・キッド",
+			"level": 7,
+			"item_id": "虚影の塵",
+			"number": 8
+		},
+		{
+			"servant_id": "ビリー・ザ・キッド",
+			"level": 8,
+			"item_id": "虚影の塵",
+			"number": 24
+		},
+		{
+			"servant_id": "ビリー・ザ・キッド",
+			"level": 8,
+			"item_id": "血の涙石",
+			"number": 10
+		},
+		{
+			"servant_id": "ビリー・ザ・キッド",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク〔オルタ〕",
+			"level": 1,
+			"item_id": "竜の牙",
+			"number": 10
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク〔オルタ〕",
+			"level": 2,
+			"item_id": "凶骨",
+			"number": 10
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク〔オルタ〕",
+			"level": 3,
+			"item_id": "世界樹の種",
+			"number": 12
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク〔オルタ〕",
+			"level": 4,
+			"item_id": "禁断の頁",
+			"number": 12
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク〔オルタ〕",
+			"level": 5,
+			"item_id": "蛇の宝玉",
+			"number": 12
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク〔オルタ〕",
+			"level": 6,
+			"item_id": "ｺﾞｰｽﾄﾗﾝﾀﾝ",
+			"number": 15
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク〔オルタ〕",
+			"level": 7,
+			"item_id": "戦馬の幼角",
+			"number": 15
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク〔オルタ〕",
+			"level": 8,
+			"item_id": "蛮神の心臓",
+			"number": 15
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク〔オルタ〕",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "アンリマユ",
+			"level": 1,
+			"item_id": "英雄の証",
+			"number": 10
+		},
+		{
+			"servant_id": "アンリマユ",
+			"level": 2,
+			"item_id": "虚影の塵",
+			"number": 10
+		},
+		{
+			"servant_id": "アンリマユ",
+			"level": 3,
+			"item_id": "凶骨",
+			"number": 12
+		},
+		{
+			"servant_id": "アンリマユ",
+			"level": 4,
+			"item_id": "ﾎﾑﾝｸﾙｽﾍﾞﾋﾞｰ",
+			"number": 12
+		},
+		{
+			"servant_id": "アンリマユ",
+			"level": 5,
+			"item_id": "ｺﾞｰｽﾄﾗﾝﾀﾝ",
+			"number": 12
+		},
+		{
+			"servant_id": "アンリマユ",
+			"level": 6,
+			"item_id": "無間の歯車",
+			"number": 15
+		},
+		{
+			"servant_id": "アンリマユ",
+			"level": 7,
+			"item_id": "血の涙石",
+			"number": 15
+		},
+		{
+			"servant_id": "アンリマユ",
+			"level": 8,
+			"item_id": "精霊根",
+			"number": 15
+		},
+		{
+			"servant_id": "アンリマユ",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "イスカンダル",
+			"level": 1,
+			"item_id": "騎の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "イスカンダル",
+			"level": 2,
+			"item_id": "騎の輝石",
+			"number": 12
+		},
+		{
+			"servant_id": "イスカンダル",
+			"level": 3,
+			"item_id": "騎の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "イスカンダル",
+			"level": 4,
+			"item_id": "騎の魔石",
+			"number": 12
+		},
+		{
+			"servant_id": "イスカンダル",
+			"level": 4,
+			"item_id": "英雄の証",
+			"number": 15
+		},
+		{
+			"servant_id": "イスカンダル",
+			"level": 5,
+			"item_id": "騎の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "イスカンダル",
+			"level": 5,
+			"item_id": "英雄の証",
+			"number": 29
+		},
+		{
+			"servant_id": "イスカンダル",
+			"level": 6,
+			"item_id": "騎の秘石",
+			"number": 12
+		},
+		{
+			"servant_id": "イスカンダル",
+			"level": 6,
+			"item_id": "隕蹄鉄",
+			"number": 5
+		},
+		{
+			"servant_id": "イスカンダル",
+			"level": 7,
+			"item_id": "隕蹄鉄",
+			"number": 10
+		},
+		{
+			"servant_id": "イスカンダル",
+			"level": 7,
+			"item_id": "世界樹の種",
+			"number": 8
+		},
+		{
+			"servant_id": "イスカンダル",
+			"level": 8,
+			"item_id": "世界樹の種",
+			"number": 22
+		},
+		{
+			"servant_id": "イスカンダル",
+			"level": 8,
+			"item_id": "鳳凰の羽根",
+			"number": 20
+		},
+		{
+			"servant_id": "イスカンダル",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "エミヤ〔アサシン〕",
+			"level": 1,
+			"item_id": "殺の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "エミヤ〔アサシン〕",
+			"level": 2,
+			"item_id": "殺の輝石",
+			"number": 10
+		},
+		{
+			"servant_id": "エミヤ〔アサシン〕",
+			"level": 3,
+			"item_id": "殺の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "エミヤ〔アサシン〕",
+			"level": 4,
+			"item_id": "殺の魔石",
+			"number": 10
+		},
+		{
+			"servant_id": "エミヤ〔アサシン〕",
+			"level": 4,
+			"item_id": "凶骨",
+			"number": 12
+		},
+		{
+			"servant_id": "エミヤ〔アサシン〕",
+			"level": 5,
+			"item_id": "殺の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "エミヤ〔アサシン〕",
+			"level": 5,
+			"item_id": "凶骨",
+			"number": 24
+		},
+		{
+			"servant_id": "エミヤ〔アサシン〕",
+			"level": 6,
+			"item_id": "殺の秘石",
+			"number": 10
+		},
+		{
+			"servant_id": "エミヤ〔アサシン〕",
+			"level": 6,
+			"item_id": "英雄の証",
+			"number": 12
+		},
+		{
+			"servant_id": "エミヤ〔アサシン〕",
+			"level": 7,
+			"item_id": "英雄の証",
+			"number": 24
+		},
+		{
+			"servant_id": "エミヤ〔アサシン〕",
+			"level": 7,
+			"item_id": "ﾎﾑﾝｸﾙｽﾍﾞﾋﾞｰ",
+			"number": 5
+		},
+		{
+			"servant_id": "エミヤ〔アサシン〕",
+			"level": 8,
+			"item_id": "ﾎﾑﾝｸﾙｽﾍﾞﾋﾞｰ",
+			"number": 15
+		},
+		{
+			"servant_id": "エミヤ〔アサシン〕",
+			"level": 8,
+			"item_id": "蛮神の心臓",
+			"number": 8
+		},
+		{
+			"servant_id": "エミヤ〔アサシン〕",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "百貌のハサン",
+			"level": 1,
+			"item_id": "殺の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "百貌のハサン",
+			"level": 2,
+			"item_id": "殺の輝石",
+			"number": 8
+		},
+		{
+			"servant_id": "百貌のハサン",
+			"level": 3,
+			"item_id": "殺の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "百貌のハサン",
+			"level": 4,
+			"item_id": "殺の魔石",
+			"number": 8
+		},
+		{
+			"servant_id": "百貌のハサン",
+			"level": 4,
+			"item_id": "八連双晶",
+			"number": 4
+		},
+		{
+			"servant_id": "百貌のハサン",
+			"level": 5,
+			"item_id": "殺の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "百貌のハサン",
+			"level": 5,
+			"item_id": "八連双晶",
+			"number": 7
+		},
+		{
+			"servant_id": "百貌のハサン",
+			"level": 6,
+			"item_id": "殺の秘石",
+			"number": 8
+		},
+		{
+			"servant_id": "百貌のハサン",
+			"level": 6,
+			"item_id": "虚影の塵",
+			"number": 7
+		},
+		{
+			"servant_id": "百貌のハサン",
+			"level": 7,
+			"item_id": "虚影の塵",
+			"number": 13
+		},
+		{
+			"servant_id": "百貌のハサン",
+			"level": 7,
+			"item_id": "凶骨",
+			"number": 12
+		},
+		{
+			"servant_id": "百貌のハサン",
+			"level": 8,
+			"item_id": "凶骨",
+			"number": 36
+		},
+		{
+			"servant_id": "百貌のハサン",
+			"level": 8,
+			"item_id": "混沌の爪",
+			"number": 10
+		},
+		{
+			"servant_id": "百貌のハサン",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "アイリスフィール〔天の衣〕",
+			"level": 1,
+			"item_id": "術の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "アイリスフィール〔天の衣〕",
+			"level": 2,
+			"item_id": "術の輝石",
+			"number": 10
+		},
+		{
+			"servant_id": "アイリスフィール〔天の衣〕",
+			"level": 3,
+			"item_id": "術の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "アイリスフィール〔天の衣〕",
+			"level": 4,
+			"item_id": "術の魔石",
+			"number": 10
+		},
+		{
+			"servant_id": "アイリスフィール〔天の衣〕",
+			"level": 4,
+			"item_id": "世界樹の種",
+			"number": 5
+		},
+		{
+			"servant_id": "アイリスフィール〔天の衣〕",
+			"level": 5,
+			"item_id": "術の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "アイリスフィール〔天の衣〕",
+			"level": 5,
+			"item_id": "世界樹の種",
+			"number": 10
+		},
+		{
+			"servant_id": "アイリスフィール〔天の衣〕",
+			"level": 6,
+			"item_id": "術の秘石",
+			"number": 10
+		},
+		{
+			"servant_id": "アイリスフィール〔天の衣〕",
+			"level": 6,
+			"item_id": "ﾎﾑﾝｸﾙｽﾍﾞﾋﾞｰ",
+			"number": 4
+		},
+		{
+			"servant_id": "アイリスフィール〔天の衣〕",
+			"level": 7,
+			"item_id": "ﾎﾑﾝｸﾙｽﾍﾞﾋﾞｰ",
+			"number": 8
+		},
+		{
+			"servant_id": "アイリスフィール〔天の衣〕",
+			"level": 7,
+			"item_id": "鳳凰の羽根",
+			"number": 4
+		},
+		{
+			"servant_id": "アイリスフィール〔天の衣〕",
+			"level": 8,
+			"item_id": "鳳凰の羽根",
+			"number": 12
+		},
+		{
+			"servant_id": "アイリスフィール〔天の衣〕",
+			"level": 8,
+			"item_id": "精霊根",
+			"number": 8
+		},
+		{
+			"servant_id": "アイリスフィール〔天の衣〕",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "酒呑童子",
+			"level": 1,
+			"item_id": "殺の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "酒呑童子",
+			"level": 2,
+			"item_id": "殺の輝石",
+			"number": 12
+		},
+		{
+			"servant_id": "酒呑童子",
+			"level": 3,
+			"item_id": "殺の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "酒呑童子",
+			"level": 4,
+			"item_id": "殺の魔石",
+			"number": 12
+		},
+		{
+			"servant_id": "酒呑童子",
+			"level": 4,
+			"item_id": "蛇の宝玉",
+			"number": 4
+		},
+		{
+			"servant_id": "酒呑童子",
+			"level": 5,
+			"item_id": "殺の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "酒呑童子",
+			"level": 5,
+			"item_id": "蛇の宝玉",
+			"number": 8
+		},
+		{
+			"servant_id": "酒呑童子",
+			"level": 6,
+			"item_id": "殺の秘石",
+			"number": 12
+		},
+		{
+			"servant_id": "酒呑童子",
+			"level": 6,
+			"item_id": "凶骨",
+			"number": 15
+		},
+		{
+			"servant_id": "酒呑童子",
+			"level": 7,
+			"item_id": "凶骨",
+			"number": 29
+		},
+		{
+			"servant_id": "酒呑童子",
+			"level": 7,
+			"item_id": "混沌の爪",
+			"number": 4
+		},
+		{
+			"servant_id": "酒呑童子",
+			"level": 8,
+			"item_id": "混沌の爪",
+			"number": 11
+		},
+		{
+			"servant_id": "酒呑童子",
+			"level": 8,
+			"item_id": "精霊根",
+			"number": 10
+		},
+		{
+			"servant_id": "酒呑童子",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "玄奘三蔵",
+			"level": 1,
+			"item_id": "術の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "玄奘三蔵",
+			"level": 2,
+			"item_id": "術の輝石",
+			"number": 12
+		},
+		{
+			"servant_id": "玄奘三蔵",
+			"level": 3,
+			"item_id": "術の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "玄奘三蔵",
+			"level": 4,
+			"item_id": "術の魔石",
+			"number": 12
+		},
+		{
+			"servant_id": "玄奘三蔵",
+			"level": 4,
+			"item_id": "八連双晶",
+			"number": 5
+		},
+		{
+			"servant_id": "玄奘三蔵",
+			"level": 5,
+			"item_id": "術の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "玄奘三蔵",
+			"level": 5,
+			"item_id": "八連双晶",
+			"number": 10
+		},
+		{
+			"servant_id": "玄奘三蔵",
+			"level": 6,
+			"item_id": "術の秘石",
+			"number": 12
+		},
+		{
+			"servant_id": "玄奘三蔵",
+			"level": 6,
+			"item_id": "世界樹の種",
+			"number": 6
+		},
+		{
+			"servant_id": "玄奘三蔵",
+			"level": 7,
+			"item_id": "世界樹の種",
+			"number": 12
+		},
+		{
+			"servant_id": "玄奘三蔵",
+			"level": 7,
+			"item_id": "隕蹄鉄",
+			"number": 6
+		},
+		{
+			"servant_id": "玄奘三蔵",
+			"level": 8,
+			"item_id": "隕蹄鉄",
+			"number": 18
+		},
+		{
+			"servant_id": "玄奘三蔵",
+			"level": 8,
+			"item_id": "禁断の頁",
+			"number": 24
+		},
+		{
+			"servant_id": "玄奘三蔵",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "源頼光",
+			"level": 1,
+			"item_id": "狂の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "源頼光",
+			"level": 2,
+			"item_id": "狂の輝石",
+			"number": 12
+		},
+		{
+			"servant_id": "源頼光",
+			"level": 3,
+			"item_id": "狂の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "源頼光",
+			"level": 4,
+			"item_id": "狂の魔石",
+			"number": 12
+		},
+		{
+			"servant_id": "源頼光",
+			"level": 4,
+			"item_id": "凶骨",
+			"number": 15
+		},
+		{
+			"servant_id": "源頼光",
+			"level": 5,
+			"item_id": "狂の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "源頼光",
+			"level": 5,
+			"item_id": "凶骨",
+			"number": 29
+		},
+		{
+			"servant_id": "源頼光",
+			"level": 6,
+			"item_id": "狂の秘石",
+			"number": 12
+		},
+		{
+			"servant_id": "源頼光",
+			"level": 6,
+			"item_id": "混沌の爪",
+			"number": 3
+		},
+		{
+			"servant_id": "源頼光",
+			"level": 7,
+			"item_id": "混沌の爪",
+			"number": 6
+		},
+		{
+			"servant_id": "源頼光",
+			"level": 7,
+			"item_id": "八連双晶",
+			"number": 6
+		},
+		{
+			"servant_id": "源頼光",
+			"level": 8,
+			"item_id": "八連双晶",
+			"number": 18
+		},
+		{
+			"servant_id": "源頼光",
+			"level": 8,
+			"item_id": "精霊根",
+			"number": 10
+		},
+		{
+			"servant_id": "源頼光",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "坂田金時〔ライダー〕",
+			"level": 1,
+			"item_id": "騎の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "坂田金時〔ライダー〕",
+			"level": 2,
+			"item_id": "騎の輝石",
+			"number": 10
+		},
+		{
+			"servant_id": "坂田金時〔ライダー〕",
+			"level": 3,
+			"item_id": "騎の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "坂田金時〔ライダー〕",
+			"level": 4,
+			"item_id": "騎の魔石",
+			"number": 10
+		},
+		{
+			"servant_id": "坂田金時〔ライダー〕",
+			"level": 4,
+			"item_id": "八連双晶",
+			"number": 4
+		},
+		{
+			"servant_id": "坂田金時〔ライダー〕",
+			"level": 5,
+			"item_id": "騎の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "坂田金時〔ライダー〕",
+			"level": 5,
+			"item_id": "八連双晶",
+			"number": 8
+		},
+		{
+			"servant_id": "坂田金時〔ライダー〕",
+			"level": 6,
+			"item_id": "騎の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "坂田金時〔ライダー〕",
+			"level": 6,
+			"item_id": "世界樹の種",
+			"number": 5
+		},
+		{
+			"servant_id": "坂田金時〔ライダー〕",
+			"level": 7,
+			"item_id": "世界樹の種",
+			"number": 10
+		},
+		{
+			"servant_id": "坂田金時〔ライダー〕",
+			"level": 7,
+			"item_id": "隕蹄鉄",
+			"number": 5
+		},
+		{
+			"servant_id": "坂田金時〔ライダー〕",
+			"level": 8,
+			"item_id": "隕蹄鉄",
+			"number": 15
+		},
+		{
+			"servant_id": "坂田金時〔ライダー〕",
+			"level": 8,
+			"item_id": "戦馬の幼角",
+			"number": 12
+		},
+		{
+			"servant_id": "坂田金時〔ライダー〕",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "茨木童子",
+			"level": 1,
+			"item_id": "狂の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "茨木童子",
+			"level": 2,
+			"item_id": "狂の輝石",
+			"number": 10
+		},
+		{
+			"servant_id": "茨木童子",
+			"level": 3,
+			"item_id": "狂の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "茨木童子",
+			"level": 4,
+			"item_id": "狂の魔石",
+			"number": 10
+		},
+		{
+			"servant_id": "茨木童子",
+			"level": 4,
+			"item_id": "混沌の爪",
+			"number": 3
+		},
+		{
+			"servant_id": "茨木童子",
+			"level": 5,
+			"item_id": "狂の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "茨木童子",
+			"level": 5,
+			"item_id": "混沌の爪",
+			"number": 5
+		},
+		{
+			"servant_id": "茨木童子",
+			"level": 6,
+			"item_id": "狂の秘石",
+			"number": 10
+		},
+		{
+			"servant_id": "茨木童子",
+			"level": 6,
+			"item_id": "八連双晶",
+			"number": 4
+		},
+		{
+			"servant_id": "茨木童子",
+			"level": 7,
+			"item_id": "八連双晶",
+			"number": 8
+		},
+		{
+			"servant_id": "茨木童子",
+			"level": 7,
+			"item_id": "虚影の塵",
+			"number": 10
+		},
+		{
+			"servant_id": "茨木童子",
+			"level": 8,
+			"item_id": "虚影の塵",
+			"number": 30
+		},
+		{
+			"servant_id": "茨木童子",
+			"level": 8,
+			"item_id": "血の涙石",
+			"number": 12
+		},
+		{
+			"servant_id": "茨木童子",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "風魔小太郎",
+			"level": 1,
+			"item_id": "殺の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "風魔小太郎",
+			"level": 2,
+			"item_id": "殺の輝石",
+			"number": 8
+		},
+		{
+			"servant_id": "風魔小太郎",
+			"level": 3,
+			"item_id": "殺の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "風魔小太郎",
+			"level": 4,
+			"item_id": "殺の魔石",
+			"number": 8
+		},
+		{
+			"servant_id": "風魔小太郎",
+			"level": 4,
+			"item_id": "虚影の塵",
+			"number": 7
+		},
+		{
+			"servant_id": "風魔小太郎",
+			"level": 5,
+			"item_id": "殺の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "風魔小太郎",
+			"level": 5,
+			"item_id": "虚影の塵",
+			"number": 13
+		},
+		{
+			"servant_id": "風魔小太郎",
+			"level": 6,
+			"item_id": "殺の秘石",
+			"number": 8
+		},
+		{
+			"servant_id": "風魔小太郎",
+			"level": 6,
+			"item_id": "凶骨",
+			"number": 10
+		},
+		{
+			"servant_id": "風魔小太郎",
+			"level": 7,
+			"item_id": "凶骨",
+			"number": 20
+		},
+		{
+			"servant_id": "風魔小太郎",
+			"level": 7,
+			"item_id": "世界樹の種",
+			"number": 5
+		},
+		{
+			"servant_id": "風魔小太郎",
+			"level": 8,
+			"item_id": "世界樹の種",
+			"number": 15
+		},
+		{
+			"servant_id": "風魔小太郎",
+			"level": 8,
+			"item_id": "混沌の爪",
+			"number": 10
+		},
+		{
+			"servant_id": "風魔小太郎",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "オジマンディアス",
+			"level": 1,
+			"item_id": "騎の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "オジマンディアス",
+			"level": 2,
+			"item_id": "騎の輝石",
+			"number": 12
+		},
+		{
+			"servant_id": "オジマンディアス",
+			"level": 3,
+			"item_id": "騎の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "オジマンディアス",
+			"level": 4,
+			"item_id": "騎の魔石",
+			"number": 12
+		},
+		{
+			"servant_id": "オジマンディアス",
+			"level": 4,
+			"item_id": "蛇の宝玉",
+			"number": 4
+		},
+		{
+			"servant_id": "オジマンディアス",
+			"level": 5,
+			"item_id": "騎の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "オジマンディアス",
+			"level": 5,
+			"item_id": "蛇の宝玉",
+			"number": 8
+		},
+		{
+			"servant_id": "オジマンディアス",
+			"level": 6,
+			"item_id": "騎の秘石",
+			"number": 12
+		},
+		{
+			"servant_id": "オジマンディアス",
+			"level": 6,
+			"item_id": "愚者の鎖",
+			"number": 15
+		},
+		{
+			"servant_id": "オジマンディアス",
+			"level": 7,
+			"item_id": "愚者の鎖",
+			"number": 29
+		},
+		{
+			"servant_id": "オジマンディアス",
+			"level": 7,
+			"item_id": "禁断の頁",
+			"number": 6
+		},
+		{
+			"servant_id": "オジマンディアス",
+			"level": 8,
+			"item_id": "禁断の頁",
+			"number": 18
+		},
+		{
+			"servant_id": "オジマンディアス",
+			"level": 8,
+			"item_id": "封魔のランプ",
+			"number": 15
+		},
+		{
+			"servant_id": "オジマンディアス",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔ランサー〕",
+			"level": 1,
+			"item_id": "槍の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔ランサー〕",
+			"level": 2,
+			"item_id": "槍の輝石",
+			"number": 12
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔ランサー〕",
+			"level": 3,
+			"item_id": "槍の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔ランサー〕",
+			"level": 4,
+			"item_id": "槍の魔石",
+			"number": 12
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔ランサー〕",
+			"level": 4,
+			"item_id": "大騎士勲章",
+			"number": 10
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔ランサー〕",
+			"level": 5,
+			"item_id": "槍の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔ランサー〕",
+			"level": 5,
+			"item_id": "大騎士勲章",
+			"number": 20
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔ランサー〕",
+			"level": 6,
+			"item_id": "槍の秘石",
+			"number": 12
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔ランサー〕",
+			"level": 6,
+			"item_id": "竜の牙",
+			"number": 12
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔ランサー〕",
+			"level": 7,
+			"item_id": "竜の牙",
+			"number": 24
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔ランサー〕",
+			"level": 7,
+			"item_id": "隕蹄鉄",
+			"number": 6
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔ランサー〕",
+			"level": 8,
+			"item_id": "隕蹄鉄",
+			"number": 18
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔ランサー〕",
+			"level": 8,
+			"item_id": "蛮神の心臓",
+			"number": 10
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔ランサー〕",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "ニトクリス",
+			"level": 1,
+			"item_id": "術の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "ニトクリス",
+			"level": 2,
+			"item_id": "術の輝石",
+			"number": 10
+		},
+		{
+			"servant_id": "ニトクリス",
+			"level": 3,
+			"item_id": "術の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "ニトクリス",
+			"level": 4,
+			"item_id": "術の魔石",
+			"number": 10
+		},
+		{
+			"servant_id": "ニトクリス",
+			"level": 4,
+			"item_id": "愚者の鎖",
+			"number": 12
+		},
+		{
+			"servant_id": "ニトクリス",
+			"level": 5,
+			"item_id": "術の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "ニトクリス",
+			"level": 5,
+			"item_id": "愚者の鎖",
+			"number": 24
+		},
+		{
+			"servant_id": "ニトクリス",
+			"level": 6,
+			"item_id": "術の秘石",
+			"number": 10
+		},
+		{
+			"servant_id": "ニトクリス",
+			"level": 6,
+			"item_id": "禁断の頁",
+			"number": 4
+		},
+		{
+			"servant_id": "ニトクリス",
+			"level": 7,
+			"item_id": "禁断の頁",
+			"number": 8
+		},
+		{
+			"servant_id": "ニトクリス",
+			"level": 7,
+			"item_id": "蛮神の心臓",
+			"number": 2
+		},
+		{
+			"servant_id": "ニトクリス",
+			"level": 8,
+			"item_id": "蛮神の心臓",
+			"number": 6
+		},
+		{
+			"servant_id": "ニトクリス",
+			"level": 8,
+			"item_id": "凶骨",
+			"number": 60
+		},
+		{
+			"servant_id": "ニトクリス",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "ランスロット〔セイバー〕",
+			"level": 1,
+			"item_id": "剣の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "ランスロット〔セイバー〕",
+			"level": 2,
+			"item_id": "剣の輝石",
+			"number": 10
+		},
+		{
+			"servant_id": "ランスロット〔セイバー〕",
+			"level": 3,
+			"item_id": "剣の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "ランスロット〔セイバー〕",
+			"level": 4,
+			"item_id": "剣の魔石",
+			"number": 10
+		},
+		{
+			"servant_id": "ランスロット〔セイバー〕",
+			"level": 4,
+			"item_id": "大騎士勲章",
+			"number": 8
+		},
+		{
+			"servant_id": "ランスロット〔セイバー〕",
+			"level": 5,
+			"item_id": "剣の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "ランスロット〔セイバー〕",
+			"level": 5,
+			"item_id": "大騎士勲章",
+			"number": 16
+		},
+		{
+			"servant_id": "ランスロット〔セイバー〕",
+			"level": 6,
+			"item_id": "剣の秘石",
+			"number": 10
+		},
+		{
+			"servant_id": "ランスロット〔セイバー〕",
+			"level": 6,
+			"item_id": "無間の歯車",
+			"number": 4
+		},
+		{
+			"servant_id": "ランスロット〔セイバー〕",
+			"level": 7,
+			"item_id": "無間の歯車",
+			"number": 8
+		},
+		{
+			"servant_id": "ランスロット〔セイバー〕",
+			"level": 7,
+			"item_id": "虚影の塵",
+			"number": 10
+		},
+		{
+			"servant_id": "ランスロット〔セイバー〕",
+			"level": 8,
+			"item_id": "虚影の塵",
+			"number": 30
+		},
+		{
+			"servant_id": "ランスロット〔セイバー〕",
+			"level": 8,
+			"item_id": "血の涙石",
+			"number": 12
+		},
+		{
+			"servant_id": "ランスロット〔セイバー〕",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "トリスタン",
+			"level": 1,
+			"item_id": "弓の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "トリスタン",
+			"level": 2,
+			"item_id": "弓の輝石",
+			"number": 10
+		},
+		{
+			"servant_id": "トリスタン",
+			"level": 3,
+			"item_id": "弓の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "トリスタン",
+			"level": 4,
+			"item_id": "弓の魔石",
+			"number": 10
+		},
+		{
+			"servant_id": "トリスタン",
+			"level": 4,
+			"item_id": "鳳凰の羽根",
+			"number": 4
+		},
+		{
+			"servant_id": "トリスタン",
+			"level": 5,
+			"item_id": "弓の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "トリスタン",
+			"level": 5,
+			"item_id": "鳳凰の羽根",
+			"number": 7
+		},
+		{
+			"servant_id": "トリスタン",
+			"level": 6,
+			"item_id": "弓の秘石",
+			"number": 10
+		},
+		{
+			"servant_id": "トリスタン",
+			"level": 6,
+			"item_id": "大騎士勲章",
+			"number": 8
+		},
+		{
+			"servant_id": "トリスタン",
+			"level": 7,
+			"item_id": "大騎士勲章",
+			"number": 16
+		},
+		{
+			"servant_id": "トリスタン",
+			"level": 7,
+			"item_id": "ｺﾞｰｽﾄﾗﾝﾀﾝ",
+			"number": 5
+		},
+		{
+			"servant_id": "トリスタン",
+			"level": 8,
+			"item_id": "ｺﾞｰｽﾄﾗﾝﾀﾝ",
+			"number": 15
+		},
+		{
+			"servant_id": "トリスタン",
+			"level": 8,
+			"item_id": "愚者の鎖",
+			"number": 60
+		},
+		{
+			"servant_id": "トリスタン",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "ガウェイン",
+			"level": 1,
+			"item_id": "剣の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "ガウェイン",
+			"level": 2,
+			"item_id": "剣の輝石",
+			"number": 10
+		},
+		{
+			"servant_id": "ガウェイン",
+			"level": 3,
+			"item_id": "剣の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "ガウェイン",
+			"level": 4,
+			"item_id": "剣の魔石",
+			"number": 10
+		},
+		{
+			"servant_id": "ガウェイン",
+			"level": 4,
+			"item_id": "竜の逆鱗",
+			"number": 2
+		},
+		{
+			"servant_id": "ガウェイン",
+			"level": 5,
+			"item_id": "剣の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "ガウェイン",
+			"level": 5,
+			"item_id": "竜の逆鱗",
+			"number": 4
+		},
+		{
+			"servant_id": "ガウェイン",
+			"level": 6,
+			"item_id": "剣の秘石",
+			"number": 10
+		},
+		{
+			"servant_id": "ガウェイン",
+			"level": 6,
+			"item_id": "八連双晶",
+			"number": 4
+		},
+		{
+			"servant_id": "ガウェイン",
+			"level": 7,
+			"item_id": "八連双晶",
+			"number": 8
+		},
+		{
+			"servant_id": "ガウェイン",
+			"level": 7,
+			"item_id": "竜の牙",
+			"number": 12
+		},
+		{
+			"servant_id": "ガウェイン",
+			"level": 8,
+			"item_id": "竜の牙",
+			"number": 36
+		},
+		{
+			"servant_id": "ガウェイン",
+			"level": 8,
+			"item_id": "精霊根",
+			"number": 8
+		},
+		{
+			"servant_id": "ガウェイン",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "静謐のハサン",
+			"level": 1,
+			"item_id": "殺の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "静謐のハサン",
+			"level": 2,
+			"item_id": "殺の輝石",
+			"number": 8
+		},
+		{
+			"servant_id": "静謐のハサン",
+			"level": 3,
+			"item_id": "殺の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "静謐のハサン",
+			"level": 4,
+			"item_id": "殺の魔石",
+			"number": 8
+		},
+		{
+			"servant_id": "静謐のハサン",
+			"level": 4,
+			"item_id": "愚者の鎖",
+			"number": 10
+		},
+		{
+			"servant_id": "静謐のハサン",
+			"level": 5,
+			"item_id": "殺の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "静謐のハサン",
+			"level": 5,
+			"item_id": "愚者の鎖",
+			"number": 20
+		},
+		{
+			"servant_id": "静謐のハサン",
+			"level": 6,
+			"item_id": "殺の秘石",
+			"number": 8
+		},
+		{
+			"servant_id": "静謐のハサン",
+			"level": 6,
+			"item_id": "凶骨",
+			"number": 10
+		},
+		{
+			"servant_id": "静謐のハサン",
+			"level": 7,
+			"item_id": "凶骨",
+			"number": 20
+		},
+		{
+			"servant_id": "静謐のハサン",
+			"level": 7,
+			"item_id": "虚影の塵",
+			"number": 8
+		},
+		{
+			"servant_id": "静謐のハサン",
+			"level": 8,
+			"item_id": "虚影の塵",
+			"number": 24
+		},
+		{
+			"servant_id": "静謐のハサン",
+			"level": 8,
+			"item_id": "封魔のランプ",
+			"number": 10
+		},
+		{
+			"servant_id": "静謐のハサン",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "俵藤太",
+			"level": 1,
+			"item_id": "弓の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "俵藤太",
+			"level": 2,
+			"item_id": "弓の輝石",
+			"number": 8
+		},
+		{
+			"servant_id": "俵藤太",
+			"level": 3,
+			"item_id": "弓の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "俵藤太",
+			"level": 4,
+			"item_id": "弓の魔石",
+			"number": 8
+		},
+		{
+			"servant_id": "俵藤太",
+			"level": 4,
+			"item_id": "英雄の証",
+			"number": 10
+		},
+		{
+			"servant_id": "俵藤太",
+			"level": 5,
+			"item_id": "弓の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "俵藤太",
+			"level": 5,
+			"item_id": "英雄の証",
+			"number": 20
+		},
+		{
+			"servant_id": "俵藤太",
+			"level": 6,
+			"item_id": "弓の秘石",
+			"number": 8
+		},
+		{
+			"servant_id": "俵藤太",
+			"level": 6,
+			"item_id": "世界樹の種",
+			"number": 4
+		},
+		{
+			"servant_id": "俵藤太",
+			"level": 7,
+			"item_id": "世界樹の種",
+			"number": 8
+		},
+		{
+			"servant_id": "俵藤太",
+			"level": 7,
+			"item_id": "八連双晶",
+			"number": 4
+		},
+		{
+			"servant_id": "俵藤太",
+			"level": 8,
+			"item_id": "八連双晶",
+			"number": 12
+		},
+		{
+			"servant_id": "俵藤太",
+			"level": 8,
+			"item_id": "智慧のスカラベ",
+			"number": 7
+		},
+		{
+			"servant_id": "俵藤太",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "ベディヴィエール",
+			"level": 1,
+			"item_id": "剣の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "ベディヴィエール",
+			"level": 2,
+			"item_id": "剣の輝石",
+			"number": 8
+		},
+		{
+			"servant_id": "ベディヴィエール",
+			"level": 3,
+			"item_id": "剣の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "ベディヴィエール",
+			"level": 4,
+			"item_id": "剣の魔石",
+			"number": 8
+		},
+		{
+			"servant_id": "ベディヴィエール",
+			"level": 4,
+			"item_id": "虚影の塵",
+			"number": 7
+		},
+		{
+			"servant_id": "ベディヴィエール",
+			"level": 5,
+			"item_id": "剣の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "ベディヴィエール",
+			"level": 5,
+			"item_id": "虚影の塵",
+			"number": 13
+		},
+		{
+			"servant_id": "ベディヴィエール",
+			"level": 6,
+			"item_id": "剣の秘石",
+			"number": 8
+		},
+		{
+			"servant_id": "ベディヴィエール",
+			"level": 6,
+			"item_id": "英雄の証",
+			"number": 10
+		},
+		{
+			"servant_id": "ベディヴィエール",
+			"level": 7,
+			"item_id": "英雄の証",
+			"number": 20
+		},
+		{
+			"servant_id": "ベディヴィエール",
+			"level": 7,
+			"item_id": "愚者の鎖",
+			"number": 12
+		},
+		{
+			"servant_id": "ベディヴィエール",
+			"level": 8,
+			"item_id": "愚者の鎖",
+			"number": 36
+		},
+		{
+			"servant_id": "ベディヴィエール",
+			"level": 8,
+			"item_id": "血の涙石",
+			"number": 10
+		},
+		{
+			"servant_id": "ベディヴィエール",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "レオナルド・ダ・ヴィンチ",
+			"level": 1,
+			"item_id": "術の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "レオナルド・ダ・ヴィンチ",
+			"level": 2,
+			"item_id": "術の輝石",
+			"number": 12
+		},
+		{
+			"servant_id": "レオナルド・ダ・ヴィンチ",
+			"level": 3,
+			"item_id": "術の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "レオナルド・ダ・ヴィンチ",
+			"level": 4,
+			"item_id": "術の魔石",
+			"number": 12
+		},
+		{
+			"servant_id": "レオナルド・ダ・ヴィンチ",
+			"level": 4,
+			"item_id": "鳳凰の羽根",
+			"number": 4
+		},
+		{
+			"servant_id": "レオナルド・ダ・ヴィンチ",
+			"level": 5,
+			"item_id": "術の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "レオナルド・ダ・ヴィンチ",
+			"level": 5,
+			"item_id": "鳳凰の羽根",
+			"number": 8
+		},
+		{
+			"servant_id": "レオナルド・ダ・ヴィンチ",
+			"level": 6,
+			"item_id": "術の秘石",
+			"number": 12
+		},
+		{
+			"servant_id": "レオナルド・ダ・ヴィンチ",
+			"level": 6,
+			"item_id": "無間の歯車",
+			"number": 5
+		},
+		{
+			"servant_id": "レオナルド・ダ・ヴィンチ",
+			"level": 7,
+			"item_id": "無間の歯車",
+			"number": 10
+		},
+		{
+			"servant_id": "レオナルド・ダ・ヴィンチ",
+			"level": 7,
+			"item_id": "禁断の頁",
+			"number": 6
+		},
+		{
+			"servant_id": "レオナルド・ダ・ヴィンチ",
+			"level": 8,
+			"item_id": "禁断の頁",
+			"number": 18
+		},
+		{
+			"servant_id": "レオナルド・ダ・ヴィンチ",
+			"level": 8,
+			"item_id": "黒獣脂",
+			"number": 15
+		},
+		{
+			"servant_id": "レオナルド・ダ・ヴィンチ",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "玉藻の前〔ランサー〕",
+			"level": 1,
+			"item_id": "槍の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "玉藻の前〔ランサー〕",
+			"level": 2,
+			"item_id": "槍の輝石",
+			"number": 12
+		},
+		{
+			"servant_id": "玉藻の前〔ランサー〕",
+			"level": 3,
+			"item_id": "槍の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "玉藻の前〔ランサー〕",
+			"level": 4,
+			"item_id": "槍の魔石",
+			"number": 12
+		},
+		{
+			"servant_id": "玉藻の前〔ランサー〕",
+			"level": 4,
+			"item_id": "世界樹の種",
+			"number": 6
+		},
+		{
+			"servant_id": "玉藻の前〔ランサー〕",
+			"level": 5,
+			"item_id": "槍の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "玉藻の前〔ランサー〕",
+			"level": 5,
+			"item_id": "世界樹の種",
+			"number": 12
+		},
+		{
+			"servant_id": "玉藻の前〔ランサー〕",
+			"level": 6,
+			"item_id": "槍の秘石",
+			"number": 12
+		},
+		{
+			"servant_id": "玉藻の前〔ランサー〕",
+			"level": 6,
+			"item_id": "鳳凰の羽根",
+			"number": 4
+		},
+		{
+			"servant_id": "玉藻の前〔ランサー〕",
+			"level": 7,
+			"item_id": "鳳凰の羽根",
+			"number": 8
+		},
+		{
+			"servant_id": "玉藻の前〔ランサー〕",
+			"level": 7,
+			"item_id": "混沌の爪",
+			"number": 4
+		},
+		{
+			"servant_id": "玉藻の前〔ランサー〕",
+			"level": 8,
+			"item_id": "混沌の爪",
+			"number": 11
+		},
+		{
+			"servant_id": "玉藻の前〔ランサー〕",
+			"level": 8,
+			"item_id": "蛮神の心臓",
+			"number": 10
+		},
+		{
+			"servant_id": "玉藻の前〔ランサー〕",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔アーチャー〕",
+			"level": 1,
+			"item_id": "弓の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔アーチャー〕",
+			"level": 2,
+			"item_id": "弓の輝石",
+			"number": 12
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔アーチャー〕",
+			"level": 3,
+			"item_id": "弓の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔アーチャー〕",
+			"level": 4,
+			"item_id": "弓の魔石",
+			"number": 12
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔アーチャー〕",
+			"level": 4,
+			"item_id": "竜の牙",
+			"number": 12
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔アーチャー〕",
+			"level": 5,
+			"item_id": "弓の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔アーチャー〕",
+			"level": 5,
+			"item_id": "竜の牙",
+			"number": 24
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔アーチャー〕",
+			"level": 6,
+			"item_id": "弓の秘石",
+			"number": 12
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔アーチャー〕",
+			"level": 6,
+			"item_id": "追憶の貝殻",
+			"number": 5
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔アーチャー〕",
+			"level": 7,
+			"item_id": "追憶の貝殻",
+			"number": 10
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔アーチャー〕",
+			"level": 7,
+			"item_id": "戦馬の幼角",
+			"number": 4
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔アーチャー〕",
+			"level": 8,
+			"item_id": "戦馬の幼角",
+			"number": 11
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔アーチャー〕",
+			"level": 8,
+			"item_id": "精霊根",
+			"number": 10
+		},
+		{
+			"servant_id": "アルトリア・ペンドラゴン〔アーチャー〕",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "マリー・アントワネット〔キャスター〕",
+			"level": 1,
+			"item_id": "術の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "マリー・アントワネット〔キャスター〕",
+			"level": 2,
+			"item_id": "術の輝石",
+			"number": 10
+		},
+		{
+			"servant_id": "マリー・アントワネット〔キャスター〕",
+			"level": 3,
+			"item_id": "術の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "マリー・アントワネット〔キャスター〕",
+			"level": 4,
+			"item_id": "術の魔石",
+			"number": 10
+		},
+		{
+			"servant_id": "マリー・アントワネット〔キャスター〕",
+			"level": 4,
+			"item_id": "追憶の貝殻",
+			"number": 4
+		},
+		{
+			"servant_id": "マリー・アントワネット〔キャスター〕",
+			"level": 5,
+			"item_id": "術の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "マリー・アントワネット〔キャスター〕",
+			"level": 5,
+			"item_id": "追憶の貝殻",
+			"number": 8
+		},
+		{
+			"servant_id": "マリー・アントワネット〔キャスター〕",
+			"level": 6,
+			"item_id": "術の秘石",
+			"number": 10
+		},
+		{
+			"servant_id": "マリー・アントワネット〔キャスター〕",
+			"level": 6,
+			"item_id": "世界樹の種",
+			"number": 5
+		},
+		{
+			"servant_id": "マリー・アントワネット〔キャスター〕",
+			"level": 7,
+			"item_id": "世界樹の種",
+			"number": 10
+		},
+		{
+			"servant_id": "マリー・アントワネット〔キャスター〕",
+			"level": 7,
+			"item_id": "蛇の宝玉",
+			"number": 4
+		},
+		{
+			"servant_id": "マリー・アントワネット〔キャスター〕",
+			"level": 8,
+			"item_id": "蛇の宝玉",
+			"number": 12
+		},
+		{
+			"servant_id": "マリー・アントワネット〔キャスター〕",
+			"level": 8,
+			"item_id": "無間の歯車",
+			"number": 20
+		},
+		{
+			"servant_id": "マリー・アントワネット〔キャスター〕",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "アン・ボニー＆メアリー・リード〔アーチャー〕",
+			"level": 1,
+			"item_id": "弓の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "アン・ボニー＆メアリー・リード〔アーチャー〕",
+			"level": 2,
+			"item_id": "弓の輝石",
+			"number": 10
+		},
+		{
+			"servant_id": "アン・ボニー＆メアリー・リード〔アーチャー〕",
+			"level": 3,
+			"item_id": "弓の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "アン・ボニー＆メアリー・リード〔アーチャー〕",
+			"level": 4,
+			"item_id": "弓の魔石",
+			"number": 10
+		},
+		{
+			"servant_id": "アン・ボニー＆メアリー・リード〔アーチャー〕",
+			"level": 4,
+			"item_id": "八連双晶",
+			"number": 4
+		},
+		{
+			"servant_id": "アン・ボニー＆メアリー・リード〔アーチャー〕",
+			"level": 5,
+			"item_id": "弓の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "アン・ボニー＆メアリー・リード〔アーチャー〕",
+			"level": 5,
+			"item_id": "八連双晶",
+			"number": 8
+		},
+		{
+			"servant_id": "アン・ボニー＆メアリー・リード〔アーチャー〕",
+			"level": 6,
+			"item_id": "弓の秘石",
+			"number": 10
+		},
+		{
+			"servant_id": "アン・ボニー＆メアリー・リード〔アーチャー〕",
+			"level": 6,
+			"item_id": "蛇の宝玉",
+			"number": 4
+		},
+		{
+			"servant_id": "アン・ボニー＆メアリー・リード〔アーチャー〕",
+			"level": 7,
+			"item_id": "蛇の宝玉",
+			"number": 7
+		},
+		{
+			"servant_id": "アン・ボニー＆メアリー・リード〔アーチャー〕",
+			"level": 7,
+			"item_id": "愚者の鎖",
+			"number": 15
+		},
+		{
+			"servant_id": "アン・ボニー＆メアリー・リード〔アーチャー〕",
+			"level": 8,
+			"item_id": "愚者の鎖",
+			"number": 45
+		},
+		{
+			"servant_id": "アン・ボニー＆メアリー・リード〔アーチャー〕",
+			"level": 8,
+			"item_id": "黒獣脂",
+			"number": 12
+		},
+		{
+			"servant_id": "アン・ボニー＆メアリー・リード〔アーチャー〕",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "モードレッド〔ライダー〕",
+			"level": 1,
+			"item_id": "騎の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "モードレッド〔ライダー〕",
+			"level": 2,
+			"item_id": "騎の輝石",
+			"number": 10
+		},
+		{
+			"servant_id": "モードレッド〔ライダー〕",
+			"level": 3,
+			"item_id": "騎の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "モードレッド〔ライダー〕",
+			"level": 4,
+			"item_id": "騎の魔石",
+			"number": 10
+		},
+		{
+			"servant_id": "モードレッド〔ライダー〕",
+			"level": 4,
+			"item_id": "大騎士勲章",
+			"number": 8
+		},
+		{
+			"servant_id": "モードレッド〔ライダー〕",
+			"level": 5,
+			"item_id": "騎の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "モードレッド〔ライダー〕",
+			"level": 5,
+			"item_id": "大騎士勲章",
+			"number": 16
+		},
+		{
+			"servant_id": "モードレッド〔ライダー〕",
+			"level": 6,
+			"item_id": "騎の秘石",
+			"number": 10
+		},
+		{
+			"servant_id": "モードレッド〔ライダー〕",
+			"level": 6,
+			"item_id": "追憶の貝殻",
+			"number": 4
+		},
+		{
+			"servant_id": "モードレッド〔ライダー〕",
+			"level": 7,
+			"item_id": "追憶の貝殻",
+			"number": 8
+		},
+		{
+			"servant_id": "モードレッド〔ライダー〕",
+			"level": 7,
+			"item_id": "ﾎﾑﾝｸﾙｽﾍﾞﾋﾞｰ",
+			"number": 5
+		},
+		{
+			"servant_id": "モードレッド〔ライダー〕",
+			"level": 8,
+			"item_id": "ﾎﾑﾝｸﾙｽﾍﾞﾋﾞｰ",
+			"number": 15
+		},
+		{
+			"servant_id": "モードレッド〔ライダー〕",
+			"level": 8,
+			"item_id": "血の涙石",
+			"number": 12
+		},
+		{
+			"servant_id": "モードレッド〔ライダー〕",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "スカサハ〔アサシン〕",
+			"level": 1,
+			"item_id": "殺の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "スカサハ〔アサシン〕",
+			"level": 2,
+			"item_id": "殺の輝石",
+			"number": 10
+		},
+		{
+			"servant_id": "スカサハ〔アサシン〕",
+			"level": 3,
+			"item_id": "殺の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "スカサハ〔アサシン〕",
+			"level": 4,
+			"item_id": "殺の魔石",
+			"number": 10
+		},
+		{
+			"servant_id": "スカサハ〔アサシン〕",
+			"level": 4,
+			"item_id": "世界樹の種",
+			"number": 5
+		},
+		{
+			"servant_id": "スカサハ〔アサシン〕",
+			"level": 5,
+			"item_id": "殺の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "スカサハ〔アサシン〕",
+			"level": 5,
+			"item_id": "世界樹の種",
+			"number": 10
+		},
+		{
+			"servant_id": "スカサハ〔アサシン〕",
+			"level": 6,
+			"item_id": "殺の秘石",
+			"number": 10
+		},
+		{
+			"servant_id": "スカサハ〔アサシン〕",
+			"level": 6,
+			"item_id": "追憶の貝殻",
+			"number": 4
+		},
+		{
+			"servant_id": "スカサハ〔アサシン〕",
+			"level": 7,
+			"item_id": "追憶の貝殻",
+			"number": 8
+		},
+		{
+			"servant_id": "スカサハ〔アサシン〕",
+			"level": 7,
+			"item_id": "精霊根",
+			"number": 2
+		},
+		{
+			"servant_id": "スカサハ〔アサシン〕",
+			"level": 8,
+			"item_id": "精霊根",
+			"number": 6
+		},
+		{
+			"servant_id": "スカサハ〔アサシン〕",
+			"level": 8,
+			"item_id": "智慧のスカラベ",
+			"number": 8
+		},
+		{
+			"servant_id": "スカサハ〔アサシン〕",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "清姫〔ランサー〕",
+			"level": 1,
+			"item_id": "槍の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "清姫〔ランサー〕",
+			"level": 2,
+			"item_id": "槍の輝石",
+			"number": 10
+		},
+		{
+			"servant_id": "清姫〔ランサー〕",
+			"level": 3,
+			"item_id": "槍の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "清姫〔ランサー〕",
+			"level": 4,
+			"item_id": "槍の魔石",
+			"number": 10
+		},
+		{
+			"servant_id": "清姫〔ランサー〕",
+			"level": 4,
+			"item_id": "追憶の貝殻",
+			"number": 4
+		},
+		{
+			"servant_id": "清姫〔ランサー〕",
+			"level": 5,
+			"item_id": "槍の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "清姫〔ランサー〕",
+			"level": 5,
+			"item_id": "追憶の貝殻",
+			"number": 8
+		},
+		{
+			"servant_id": "清姫〔ランサー〕",
+			"level": 6,
+			"item_id": "槍の秘石",
+			"number": 10
+		},
+		{
+			"servant_id": "清姫〔ランサー〕",
+			"level": 6,
+			"item_id": "八連双晶",
+			"number": 4
+		},
+		{
+			"servant_id": "清姫〔ランサー〕",
+			"level": 7,
+			"item_id": "八連双晶",
+			"number": 8
+		},
+		{
+			"servant_id": "清姫〔ランサー〕",
+			"level": 7,
+			"item_id": "竜の牙",
+			"number": 12
+		},
+		{
+			"servant_id": "清姫〔ランサー〕",
+			"level": 8,
+			"item_id": "竜の牙",
+			"number": 36
+		},
+		{
+			"servant_id": "清姫〔ランサー〕",
+			"level": 8,
+			"item_id": "竜の逆鱗",
+			"number": 8
+		},
+		{
+			"servant_id": "清姫〔ランサー〕",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "マルタ〔ルーラー〕",
+			"level": 1,
+			"item_id": "剣の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "マルタ〔ルーラー〕",
+			"level": 1,
+			"item_id": "騎の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "マルタ〔ルーラー〕",
+			"level": 1,
+			"item_id": "狂の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "マルタ〔ルーラー〕",
+			"level": 2,
+			"item_id": "弓の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "マルタ〔ルーラー〕",
+			"level": 2,
+			"item_id": "槍の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "マルタ〔ルーラー〕",
+			"level": 2,
+			"item_id": "術の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "マルタ〔ルーラー〕",
+			"level": 2,
+			"item_id": "殺の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "マルタ〔ルーラー〕",
+			"level": 3,
+			"item_id": "剣の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "マルタ〔ルーラー〕",
+			"level": 3,
+			"item_id": "騎の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "マルタ〔ルーラー〕",
+			"level": 3,
+			"item_id": "狂の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "マルタ〔ルーラー〕",
+			"level": 4,
+			"item_id": "弓の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "マルタ〔ルーラー〕",
+			"level": 4,
+			"item_id": "槍の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "マルタ〔ルーラー〕",
+			"level": 4,
+			"item_id": "術の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "マルタ〔ルーラー〕",
+			"level": 4,
+			"item_id": "殺の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "マルタ〔ルーラー〕",
+			"level": 5,
+			"item_id": "剣の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "マルタ〔ルーラー〕",
+			"level": 5,
+			"item_id": "騎の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "マルタ〔ルーラー〕",
+			"level": 5,
+			"item_id": "狂の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "マルタ〔ルーラー〕",
+			"level": 6,
+			"item_id": "弓の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "マルタ〔ルーラー〕",
+			"level": 6,
+			"item_id": "槍の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "マルタ〔ルーラー〕",
+			"level": 6,
+			"item_id": "術の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "マルタ〔ルーラー〕",
+			"level": 6,
+			"item_id": "殺の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "マルタ〔ルーラー〕",
+			"level": 7,
+			"item_id": "血の涙石",
+			"number": 6
+		},
+		{
+			"servant_id": "マルタ〔ルーラー〕",
+			"level": 8,
+			"item_id": "竜の逆鱗",
+			"number": 12
+		},
+		{
+			"servant_id": "マルタ〔ルーラー〕",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "イリヤスフィール・フォン・アインツベルン",
+			"level": 1,
+			"item_id": "術の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "イリヤスフィール・フォン・アインツベルン",
+			"level": 2,
+			"item_id": "術の輝石",
+			"number": 12
+		},
+		{
+			"servant_id": "イリヤスフィール・フォン・アインツベルン",
+			"level": 3,
+			"item_id": "術の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "イリヤスフィール・フォン・アインツベルン",
+			"level": 4,
+			"item_id": "術の魔石",
+			"number": 12
+		},
+		{
+			"servant_id": "イリヤスフィール・フォン・アインツベルン",
+			"level": 4,
+			"item_id": "禁断の頁",
+			"number": 5
+		},
+		{
+			"servant_id": "イリヤスフィール・フォン・アインツベルン",
+			"level": 5,
+			"item_id": "術の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "イリヤスフィール・フォン・アインツベルン",
+			"level": 5,
+			"item_id": "禁断の頁",
+			"number": 10
+		},
+		{
+			"servant_id": "イリヤスフィール・フォン・アインツベルン",
+			"level": 6,
+			"item_id": "術の秘石",
+			"number": 12
+		},
+		{
+			"servant_id": "イリヤスフィール・フォン・アインツベルン",
+			"level": 6,
+			"item_id": "世界樹の種",
+			"number": 6
+		},
+		{
+			"servant_id": "イリヤスフィール・フォン・アインツベルン",
+			"level": 7,
+			"item_id": "世界樹の種",
+			"number": 12
+		},
+		{
+			"servant_id": "イリヤスフィール・フォン・アインツベルン",
+			"level": 7,
+			"item_id": "ﾎﾑﾝｸﾙｽﾍﾞﾋﾞｰ",
+			"number": 6
+		},
+		{
+			"servant_id": "イリヤスフィール・フォン・アインツベルン",
+			"level": 8,
+			"item_id": "ﾎﾑﾝｸﾙｽﾍﾞﾋﾞｰ",
+			"number": 18
+		},
+		{
+			"servant_id": "イリヤスフィール・フォン・アインツベルン",
+			"level": 8,
+			"item_id": "精霊根",
+			"number": 10
+		},
+		{
+			"servant_id": "イリヤスフィール・フォン・アインツベルン",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "クロエ・フォン・アインツベルン",
+			"level": 1,
+			"item_id": "弓の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "クロエ・フォン・アインツベルン",
+			"level": 2,
+			"item_id": "弓の輝石",
+			"number": 10
+		},
+		{
+			"servant_id": "クロエ・フォン・アインツベルン",
+			"level": 3,
+			"item_id": "弓の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "クロエ・フォン・アインツベルン",
+			"level": 4,
+			"item_id": "弓の魔石",
+			"number": 10
+		},
+		{
+			"servant_id": "クロエ・フォン・アインツベルン",
+			"level": 4,
+			"item_id": "無間の歯車",
+			"number": 4
+		},
+		{
+			"servant_id": "クロエ・フォン・アインツベルン",
+			"level": 5,
+			"item_id": "弓の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "クロエ・フォン・アインツベルン",
+			"level": 5,
+			"item_id": "無間の歯車",
+			"number": 8
+		},
+		{
+			"servant_id": "クロエ・フォン・アインツベルン",
+			"level": 6,
+			"item_id": "弓の秘石",
+			"number": 10
+		},
+		{
+			"servant_id": "クロエ・フォン・アインツベルン",
+			"level": 6,
+			"item_id": "ﾎﾑﾝｸﾙｽﾍﾞﾋﾞｰ",
+			"number": 4
+		},
+		{
+			"servant_id": "クロエ・フォン・アインツベルン",
+			"level": 7,
+			"item_id": "ﾎﾑﾝｸﾙｽﾍﾞﾋﾞｰ",
+			"number": 8
+		},
+		{
+			"servant_id": "クロエ・フォン・アインツベルン",
+			"level": 7,
+			"item_id": "血の涙石",
+			"number": 3
+		},
+		{
+			"servant_id": "クロエ・フォン・アインツベルン",
+			"level": 8,
+			"item_id": "血の涙石",
+			"number": 9
+		},
+		{
+			"servant_id": "クロエ・フォン・アインツベルン",
+			"level": 8,
+			"item_id": "蛮神の心臓",
+			"number": 8
+		},
+		{
+			"servant_id": "クロエ・フォン・アインツベルン",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "エリザベート・バートリー〔ブレイブ〕",
+			"level": 1,
+			"item_id": "剣の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "エリザベート・バートリー〔ブレイブ〕",
+			"level": 2,
+			"item_id": "剣の輝石",
+			"number": 10
+		},
+		{
+			"servant_id": "エリザベート・バートリー〔ブレイブ〕",
+			"level": 3,
+			"item_id": "剣の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "エリザベート・バートリー〔ブレイブ〕",
+			"level": 4,
+			"item_id": "剣の魔石",
+			"number": 10
+		},
+		{
+			"servant_id": "エリザベート・バートリー〔ブレイブ〕",
+			"level": 4,
+			"item_id": "英雄の証",
+			"number": 12
+		},
+		{
+			"servant_id": "エリザベート・バートリー〔ブレイブ〕",
+			"level": 5,
+			"item_id": "剣の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "エリザベート・バートリー〔ブレイブ〕",
+			"level": 5,
+			"item_id": "英雄の証",
+			"number": 24
+		},
+		{
+			"servant_id": "エリザベート・バートリー〔ブレイブ〕",
+			"level": 6,
+			"item_id": "剣の秘石",
+			"number": 10
+		},
+		{
+			"servant_id": "エリザベート・バートリー〔ブレイブ〕",
+			"level": 6,
+			"item_id": "竜の牙",
+			"number": 10
+		},
+		{
+			"servant_id": "エリザベート・バートリー〔ブレイブ〕",
+			"level": 7,
+			"item_id": "竜の牙",
+			"number": 20
+		},
+		{
+			"servant_id": "エリザベート・バートリー〔ブレイブ〕",
+			"level": 7,
+			"item_id": "大騎士勲章",
+			"number": 10
+		},
+		{
+			"servant_id": "エリザベート・バートリー〔ブレイブ〕",
+			"level": 8,
+			"item_id": "大騎士勲章",
+			"number": 30
+		},
+		{
+			"servant_id": "エリザベート・バートリー〔ブレイブ〕",
+			"level": 8,
+			"item_id": "竜の逆鱗",
+			"number": 8
+		},
+		{
+			"servant_id": "エリザベート・バートリー〔ブレイブ〕",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "クレオパトラ",
+			"level": 1,
+			"item_id": "殺の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "クレオパトラ",
+			"level": 2,
+			"item_id": "殺の輝石",
+			"number": 12
+		},
+		{
+			"servant_id": "クレオパトラ",
+			"level": 3,
+			"item_id": "殺の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "クレオパトラ",
+			"level": 4,
+			"item_id": "殺の魔石",
+			"number": 12
+		},
+		{
+			"servant_id": "クレオパトラ",
+			"level": 4,
+			"item_id": "封魔のランプ",
+			"number": 3
+		},
+		{
+			"servant_id": "クレオパトラ",
+			"level": 5,
+			"item_id": "殺の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "クレオパトラ",
+			"level": 5,
+			"item_id": "封魔のランプ",
+			"number": 6
+		},
+		{
+			"servant_id": "クレオパトラ",
+			"level": 6,
+			"item_id": "殺の秘石",
+			"number": 12
+		},
+		{
+			"servant_id": "クレオパトラ",
+			"level": 6,
+			"item_id": "鳳凰の羽根",
+			"number": 4
+		},
+		{
+			"servant_id": "クレオパトラ",
+			"level": 7,
+			"item_id": "鳳凰の羽根",
+			"number": 8
+		},
+		{
+			"servant_id": "クレオパトラ",
+			"level": 7,
+			"item_id": "追憶の貝殻",
+			"number": 6
+		},
+		{
+			"servant_id": "クレオパトラ",
+			"level": 8,
+			"item_id": "追憶の貝殻",
+			"number": 18
+		},
+		{
+			"servant_id": "クレオパトラ",
+			"level": 8,
+			"item_id": "智慧のスカラベ",
+			"number": 10
+		},
+		{
+			"servant_id": "クレオパトラ",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "ヴラド三世〔EXTRA〕",
+			"level": 1,
+			"item_id": "槍の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "ヴラド三世〔EXTRA〕",
+			"level": 2,
+			"item_id": "槍の輝石",
+			"number": 10
+		},
+		{
+			"servant_id": "ヴラド三世〔EXTRA〕",
+			"level": 3,
+			"item_id": "槍の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "ヴラド三世〔EXTRA〕",
+			"level": 4,
+			"item_id": "槍の魔石",
+			"number": 10
+		},
+		{
+			"servant_id": "ヴラド三世〔EXTRA〕",
+			"level": 4,
+			"item_id": "愚者の鎖",
+			"number": 12
+		},
+		{
+			"servant_id": "ヴラド三世〔EXTRA〕",
+			"level": 5,
+			"item_id": "槍の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "ヴラド三世〔EXTRA〕",
+			"level": 5,
+			"item_id": "愚者の鎖",
+			"number": 24
+		},
+		{
+			"servant_id": "ヴラド三世〔EXTRA〕",
+			"level": 6,
+			"item_id": "槍の秘石",
+			"number": 10
+		},
+		{
+			"servant_id": "ヴラド三世〔EXTRA〕",
+			"level": 6,
+			"item_id": "英雄の証",
+			"number": 12
+		},
+		{
+			"servant_id": "ヴラド三世〔EXTRA〕",
+			"level": 7,
+			"item_id": "英雄の証",
+			"number": 24
+		},
+		{
+			"servant_id": "ヴラド三世〔EXTRA〕",
+			"level": 7,
+			"item_id": "八連双晶",
+			"number": 5
+		},
+		{
+			"servant_id": "ヴラド三世〔EXTRA〕",
+			"level": 8,
+			"item_id": "八連双晶",
+			"number": 15
+		},
+		{
+			"servant_id": "ヴラド三世〔EXTRA〕",
+			"level": 8,
+			"item_id": "蛮神の心臓",
+			"number": 8
+		},
+		{
+			"servant_id": "ヴラド三世〔EXTRA〕",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク・オルタ・サンタ・リリィ",
+			"level": 1,
+			"item_id": "槍の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク・オルタ・サンタ・リリィ",
+			"level": 2,
+			"item_id": "槍の輝石",
+			"number": 10
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク・オルタ・サンタ・リリィ",
+			"level": 3,
+			"item_id": "槍の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク・オルタ・サンタ・リリィ",
+			"level": 4,
+			"item_id": "槍の魔石",
+			"number": 10
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク・オルタ・サンタ・リリィ",
+			"level": 4,
+			"item_id": "追憶の貝殻",
+			"number": 4
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク・オルタ・サンタ・リリィ",
+			"level": 5,
+			"item_id": "槍の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク・オルタ・サンタ・リリィ",
+			"level": 5,
+			"item_id": "追憶の貝殻",
+			"number": 8
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク・オルタ・サンタ・リリィ",
+			"level": 6,
+			"item_id": "槍の秘石",
+			"number": 10
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク・オルタ・サンタ・リリィ",
+			"level": 6,
+			"item_id": "世界樹の種",
+			"number": 5
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク・オルタ・サンタ・リリィ",
+			"level": 7,
+			"item_id": "世界樹の種",
+			"number": 10
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク・オルタ・サンタ・リリィ",
+			"level": 7,
+			"item_id": "戦馬の幼角",
+			"number": 3
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク・オルタ・サンタ・リリィ",
+			"level": 8,
+			"item_id": "戦馬の幼角",
+			"number": 9
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク・オルタ・サンタ・リリィ",
+			"level": 8,
+			"item_id": "精霊根",
+			"number": 8
+		},
+		{
+			"servant_id": "ジャンヌ・ダルク・オルタ・サンタ・リリィ",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "イシュタル",
+			"level": 1,
+			"item_id": "弓の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "イシュタル",
+			"level": 2,
+			"item_id": "弓の輝石",
+			"number": 12
+		},
+		{
+			"servant_id": "イシュタル",
+			"level": 3,
+			"item_id": "弓の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "イシュタル",
+			"level": 4,
+			"item_id": "弓の魔石",
+			"number": 12
+		},
+		{
+			"servant_id": "イシュタル",
+			"level": 4,
+			"item_id": "鳳凰の羽根",
+			"number": 4
+		},
+		{
+			"servant_id": "イシュタル",
+			"level": 5,
+			"item_id": "弓の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "イシュタル",
+			"level": 5,
+			"item_id": "鳳凰の羽根",
+			"number": 8
+		},
+		{
+			"servant_id": "イシュタル",
+			"level": 6,
+			"item_id": "弓の秘石",
+			"number": 12
+		},
+		{
+			"servant_id": "イシュタル",
+			"level": 6,
+			"item_id": "八連双晶",
+			"number": 5
+		},
+		{
+			"servant_id": "イシュタル",
+			"level": 7,
+			"item_id": "八連双晶",
+			"number": 10
+		},
+		{
+			"servant_id": "イシュタル",
+			"level": 7,
+			"item_id": "蛇の宝玉",
+			"number": 5
+		},
+		{
+			"servant_id": "イシュタル",
+			"level": 8,
+			"item_id": "蛇の宝玉",
+			"number": 15
+		},
+		{
+			"servant_id": "イシュタル",
+			"level": 8,
+			"item_id": "封魔のランプ",
+			"number": 15
+		},
+		{
+			"servant_id": "イシュタル",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "エルキドゥ",
+			"level": 1,
+			"item_id": "槍の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "エルキドゥ",
+			"level": 2,
+			"item_id": "槍の輝石",
+			"number": 12
+		},
+		{
+			"servant_id": "エルキドゥ",
+			"level": 3,
+			"item_id": "槍の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "エルキドゥ",
+			"level": 4,
+			"item_id": "槍の魔石",
+			"number": 12
+		},
+		{
+			"servant_id": "エルキドゥ",
+			"level": 4,
+			"item_id": "八連双晶",
+			"number": 5
+		},
+		{
+			"servant_id": "エルキドゥ",
+			"level": 5,
+			"item_id": "槍の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "エルキドゥ",
+			"level": 5,
+			"item_id": "八連双晶",
+			"number": 10
+		},
+		{
+			"servant_id": "エルキドゥ",
+			"level": 6,
+			"item_id": "槍の秘石",
+			"number": 12
+		},
+		{
+			"servant_id": "エルキドゥ",
+			"level": 6,
+			"item_id": "愚者の鎖",
+			"number": 15
+		},
+		{
+			"servant_id": "エルキドゥ",
+			"level": 7,
+			"item_id": "愚者の鎖",
+			"number": 29
+		},
+		{
+			"servant_id": "エルキドゥ",
+			"level": 7,
+			"item_id": "ﾎﾑﾝｸﾙｽﾍﾞﾋﾞｰ",
+			"number": 6
+		},
+		{
+			"servant_id": "エルキドゥ",
+			"level": 8,
+			"item_id": "ﾎﾑﾝｸﾙｽﾍﾞﾋﾞｰ",
+			"number": 18
+		},
+		{
+			"servant_id": "エルキドゥ",
+			"level": 8,
+			"item_id": "原初の産毛",
+			"number": 15
+		},
+		{
+			"servant_id": "エルキドゥ",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "ケツァル・コアトル",
+			"level": 1,
+			"item_id": "騎の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "ケツァル・コアトル",
+			"level": 2,
+			"item_id": "騎の輝石",
+			"number": 12
+		},
+		{
+			"servant_id": "ケツァル・コアトル",
+			"level": 3,
+			"item_id": "騎の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "ケツァル・コアトル",
+			"level": 4,
+			"item_id": "騎の魔石",
+			"number": 12
+		},
+		{
+			"servant_id": "ケツァル・コアトル",
+			"level": 4,
+			"item_id": "蛇の宝玉",
+			"number": 4
+		},
+		{
+			"servant_id": "ケツァル・コアトル",
+			"level": 5,
+			"item_id": "騎の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "ケツァル・コアトル",
+			"level": 5,
+			"item_id": "蛇の宝玉",
+			"number": 8
+		},
+		{
+			"servant_id": "ケツァル・コアトル",
+			"level": 6,
+			"item_id": "騎の秘石",
+			"number": 12
+		},
+		{
+			"servant_id": "ケツァル・コアトル",
+			"level": 6,
+			"item_id": "竜の牙",
+			"number": 12
+		},
+		{
+			"servant_id": "ケツァル・コアトル",
+			"level": 7,
+			"item_id": "竜の牙",
+			"number": 24
+		},
+		{
+			"servant_id": "ケツァル・コアトル",
+			"level": 7,
+			"item_id": "愚者の鎖",
+			"number": 18
+		},
+		{
+			"servant_id": "ケツァル・コアトル",
+			"level": 8,
+			"item_id": "愚者の鎖",
+			"number": 54
+		},
+		{
+			"servant_id": "ケツァル・コアトル",
+			"level": 8,
+			"item_id": "呪獣胆石",
+			"number": 10
+		},
+		{
+			"servant_id": "ケツァル・コアトル",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "ギルガメッシュ〔キャスター〕",
+			"level": 1,
+			"item_id": "術の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "ギルガメッシュ〔キャスター〕",
+			"level": 2,
+			"item_id": "術の輝石",
+			"number": 10
+		},
+		{
+			"servant_id": "ギルガメッシュ〔キャスター〕",
+			"level": 3,
+			"item_id": "術の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "ギルガメッシュ〔キャスター〕",
+			"level": 4,
+			"item_id": "術の魔石",
+			"number": 10
+		},
+		{
+			"servant_id": "ギルガメッシュ〔キャスター〕",
+			"level": 4,
+			"item_id": "禁断の頁",
+			"number": 4
+		},
+		{
+			"servant_id": "ギルガメッシュ〔キャスター〕",
+			"level": 5,
+			"item_id": "術の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "ギルガメッシュ〔キャスター〕",
+			"level": 5,
+			"item_id": "禁断の頁",
+			"number": 8
+		},
+		{
+			"servant_id": "ギルガメッシュ〔キャスター〕",
+			"level": 6,
+			"item_id": "術の秘石",
+			"number": 10
+		},
+		{
+			"servant_id": "ギルガメッシュ〔キャスター〕",
+			"level": 6,
+			"item_id": "英雄の証",
+			"number": 12
+		},
+		{
+			"servant_id": "ギルガメッシュ〔キャスター〕",
+			"level": 7,
+			"item_id": "英雄の証",
+			"number": 24
+		},
+		{
+			"servant_id": "ギルガメッシュ〔キャスター〕",
+			"level": 7,
+			"item_id": "ｺﾞｰｽﾄﾗﾝﾀﾝ",
+			"number": 5
+		},
+		{
+			"servant_id": "ギルガメッシュ〔キャスター〕",
+			"level": 8,
+			"item_id": "ｺﾞｰｽﾄﾗﾝﾀﾝ",
+			"number": 15
+		},
+		{
+			"servant_id": "ギルガメッシュ〔キャスター〕",
+			"level": 8,
+			"item_id": "万死の毒針",
+			"number": 48
+		},
+		{
+			"servant_id": "ギルガメッシュ〔キャスター〕",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "メドゥーサ〔ランサー〕",
+			"level": 1,
+			"item_id": "槍の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "メドゥーサ〔ランサー〕",
+			"level": 2,
+			"item_id": "槍の輝石",
+			"number": 10
+		},
+		{
+			"servant_id": "メドゥーサ〔ランサー〕",
+			"level": 3,
+			"item_id": "槍の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "メドゥーサ〔ランサー〕",
+			"level": 4,
+			"item_id": "槍の魔石",
+			"number": 10
+		},
+		{
+			"servant_id": "メドゥーサ〔ランサー〕",
+			"level": 4,
+			"item_id": "世界樹の種",
+			"number": 5
+		},
+		{
+			"servant_id": "メドゥーサ〔ランサー〕",
+			"level": 5,
+			"item_id": "槍の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "メドゥーサ〔ランサー〕",
+			"level": 5,
+			"item_id": "世界樹の種",
+			"number": 10
+		},
+		{
+			"servant_id": "メドゥーサ〔ランサー〕",
+			"level": 6,
+			"item_id": "槍の秘石",
+			"number": 10
+		},
+		{
+			"servant_id": "メドゥーサ〔ランサー〕",
+			"level": 6,
+			"item_id": "追憶の貝殻",
+			"number": 4
+		},
+		{
+			"servant_id": "メドゥーサ〔ランサー〕",
+			"level": 7,
+			"item_id": "追憶の貝殻",
+			"number": 8
+		},
+		{
+			"servant_id": "メドゥーサ〔ランサー〕",
+			"level": 7,
+			"item_id": "原初の産毛",
+			"number": 3
+		},
+		{
+			"servant_id": "メドゥーサ〔ランサー〕",
+			"level": 8,
+			"item_id": "原初の産毛",
+			"number": 9
+		},
+		{
+			"servant_id": "メドゥーサ〔ランサー〕",
+			"level": 8,
+			"item_id": "蛇の宝玉",
+			"number": 16
+		},
+		{
+			"servant_id": "メドゥーサ〔ランサー〕",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "ゴルゴーン",
+			"level": 1,
+			"item_id": "凶骨",
+			"number": 8
+		},
+		{
+			"servant_id": "ゴルゴーン",
+			"level": 2,
+			"item_id": "愚者の鎖",
+			"number": 8
+		},
+		{
+			"servant_id": "ゴルゴーン",
+			"level": 3,
+			"item_id": "蛇の宝玉",
+			"number": 10
+		},
+		{
+			"servant_id": "ゴルゴーン",
+			"level": 4,
+			"item_id": "万死の毒針",
+			"number": 10
+		},
+		{
+			"servant_id": "ゴルゴーン",
+			"level": 5,
+			"item_id": "血の涙石",
+			"number": 10
+		},
+		{
+			"servant_id": "ゴルゴーン",
+			"level": 6,
+			"item_id": "原初の産毛",
+			"number": 12
+		},
+		{
+			"servant_id": "ゴルゴーン",
+			"level": 7,
+			"item_id": "蛮神の心臓",
+			"number": 12
+		},
+		{
+			"servant_id": "ゴルゴーン",
+			"level": 8,
+			"item_id": "呪獣胆石",
+			"number": 12
+		},
+		{
+			"servant_id": "ゴルゴーン",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "ジャガーマン",
+			"level": 1,
+			"item_id": "槍の輝石",
+			"number": 4
+		},
+		{
+			"servant_id": "ジャガーマン",
+			"level": 2,
+			"item_id": "槍の輝石",
+			"number": 8
+		},
+		{
+			"servant_id": "ジャガーマン",
+			"level": 3,
+			"item_id": "槍の魔石",
+			"number": 4
+		},
+		{
+			"servant_id": "ジャガーマン",
+			"level": 4,
+			"item_id": "槍の魔石",
+			"number": 8
+		},
+		{
+			"servant_id": "ジャガーマン",
+			"level": 4,
+			"item_id": "混沌の爪",
+			"number": 2
+		},
+		{
+			"servant_id": "ジャガーマン",
+			"level": 5,
+			"item_id": "槍の秘石",
+			"number": 4
+		},
+		{
+			"servant_id": "ジャガーマン",
+			"level": 5,
+			"item_id": "混沌の爪",
+			"number": 4
+		},
+		{
+			"servant_id": "ジャガーマン",
+			"level": 6,
+			"item_id": "槍の秘石",
+			"number": 8
+		},
+		{
+			"servant_id": "ジャガーマン",
+			"level": 6,
+			"item_id": "世界樹の種",
+			"number": 4
+		},
+		{
+			"servant_id": "ジャガーマン",
+			"level": 7,
+			"item_id": "世界樹の種",
+			"number": 8
+		},
+		{
+			"servant_id": "ジャガーマン",
+			"level": 7,
+			"item_id": "呪獣胆石",
+			"number": 2
+		},
+		{
+			"servant_id": "ジャガーマン",
+			"level": 8,
+			"item_id": "呪獣胆石",
+			"number": 5
+		},
+		{
+			"servant_id": "ジャガーマン",
+			"level": 8,
+			"item_id": "戦馬の幼角",
+			"number": 10
+		},
+		{
+			"servant_id": "ジャガーマン",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "マーリン",
+			"level": 1,
+			"item_id": "術の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "マーリン",
+			"level": 2,
+			"item_id": "術の輝石",
+			"number": 12
+		},
+		{
+			"servant_id": "マーリン",
+			"level": 3,
+			"item_id": "術の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "マーリン",
+			"level": 4,
+			"item_id": "術の魔石",
+			"number": 12
+		},
+		{
+			"servant_id": "マーリン",
+			"level": 4,
+			"item_id": "禁断の頁",
+			"number": 5
+		},
+		{
+			"servant_id": "マーリン",
+			"level": 5,
+			"item_id": "術の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "マーリン",
+			"level": 5,
+			"item_id": "禁断の頁",
+			"number": 10
+		},
+		{
+			"servant_id": "マーリン",
+			"level": 6,
+			"item_id": "術の秘石",
+			"number": 12
+		},
+		{
+			"servant_id": "マーリン",
+			"level": 6,
+			"item_id": "無間の歯車",
+			"number": 5
+		},
+		{
+			"servant_id": "マーリン",
+			"level": 7,
+			"item_id": "無間の歯車",
+			"number": 10
+		},
+		{
+			"servant_id": "マーリン",
+			"level": 7,
+			"item_id": "精霊根",
+			"number": 3
+		},
+		{
+			"servant_id": "マーリン",
+			"level": 8,
+			"item_id": "精霊根",
+			"number": 8
+		},
+		{
+			"servant_id": "マーリン",
+			"level": 8,
+			"item_id": "蛮神の心臓",
+			"number": 10
+		},
+		{
+			"servant_id": "マーリン",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "宮本武蔵",
+			"level": 1,
+			"item_id": "剣の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "宮本武蔵",
+			"level": 2,
+			"item_id": "剣の輝石",
+			"number": 12
+		},
+		{
+			"servant_id": "宮本武蔵",
+			"level": 3,
+			"item_id": "剣の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "宮本武蔵",
+			"level": 4,
+			"item_id": "剣の魔石",
+			"number": 12
+		},
+		{
+			"servant_id": "宮本武蔵",
+			"level": 4,
+			"item_id": "八連双晶",
+			"number": 5
+		},
+		{
+			"servant_id": "宮本武蔵",
+			"level": 5,
+			"item_id": "剣の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "宮本武蔵",
+			"level": 5,
+			"item_id": "八連双晶",
+			"number": 10
+		},
+		{
+			"servant_id": "宮本武蔵",
+			"level": 6,
+			"item_id": "剣の秘石",
+			"number": 12
+		},
+		{
+			"servant_id": "宮本武蔵",
+			"level": 6,
+			"item_id": "英雄の証",
+			"number": 15
+		},
+		{
+			"servant_id": "宮本武蔵",
+			"level": 7,
+			"item_id": "英雄の証",
+			"number": 29
+		},
+		{
+			"servant_id": "宮本武蔵",
+			"level": 7,
+			"item_id": "虚影の塵",
+			"number": 12
+		},
+		{
+			"servant_id": "宮本武蔵",
+			"level": 8,
+			"item_id": "虚影の塵",
+			"number": 36
+		},
+		{
+			"servant_id": "宮本武蔵",
+			"level": 8,
+			"item_id": "原初の産毛",
+			"number": 15
+		},
+		{
+			"servant_id": "宮本武蔵",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		},
+		{
+			"servant_id": "“山の翁”",
+			"level": 1,
+			"item_id": "殺の輝石",
+			"number": 5
+		},
+		{
+			"servant_id": "“山の翁”",
+			"level": 2,
+			"item_id": "殺の輝石",
+			"number": 12
+		},
+		{
+			"servant_id": "“山の翁”",
+			"level": 3,
+			"item_id": "殺の魔石",
+			"number": 5
+		},
+		{
+			"servant_id": "“山の翁”",
+			"level": 4,
+			"item_id": "殺の魔石",
+			"number": 12
+		},
+		{
+			"servant_id": "“山の翁”",
+			"level": 4,
+			"item_id": "愚者の鎖",
+			"number": 15
+		},
+		{
+			"servant_id": "“山の翁”",
+			"level": 5,
+			"item_id": "殺の秘石",
+			"number": 5
+		},
+		{
+			"servant_id": "“山の翁”",
+			"level": 5,
+			"item_id": "愚者の鎖",
+			"number": 29
+		},
+		{
+			"servant_id": "“山の翁”",
+			"level": 6,
+			"item_id": "殺の秘石",
+			"number": 12
+		},
+		{
+			"servant_id": "“山の翁”",
+			"level": 6,
+			"item_id": "凶骨",
+			"number": 15
+		},
+		{
+			"servant_id": "“山の翁”",
+			"level": 7,
+			"item_id": "凶骨",
+			"number": 29
+		},
+		{
+			"servant_id": "“山の翁”",
+			"level": 7,
+			"item_id": "万死の毒針",
+			"number": 15
+		},
+		{
+			"servant_id": "“山の翁”",
+			"level": 8,
+			"item_id": "万死の毒針",
+			"number": 44
+		},
+		{
+			"servant_id": "“山の翁”",
+			"level": 8,
+			"item_id": "ｺﾞｰｽﾄﾗﾝﾀﾝ",
+			"number": 24
+		},
+		{
+			"servant_id": "“山の翁”",
+			"level": 9,
+			"item_id": "伝承結晶",
+			"number": 1
+		}
+	];
+
+/***/ },
+/* 279 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -37648,7 +50395,7 @@
 	];
 
 /***/ },
-/* 278 */
+/* 280 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37656,8 +50403,6 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
@@ -37667,9 +50412,9 @@
 	
 	var _reactRouter = __webpack_require__(178);
 	
-	var _reactFa = __webpack_require__(279);
+	var _reactFa = __webpack_require__(281);
 	
-	var _QueryLink = __webpack_require__(290);
+	var _QueryLink = __webpack_require__(292);
 	
 	var _QueryLink2 = _interopRequireDefault(_QueryLink);
 	
@@ -37694,19 +50439,25 @@
 	    var _this = _possibleConstructorReturn(this, (ModelsTable.__proto__ || Object.getPrototypeOf(ModelsTable)).call(this, props));
 	
 	    _this.state = {};
-	    _this.state.models = (_this$props$models = _this.props.models).order.apply(_this$props$models, _toConsumableArray(_this.props.order));
-	    _this.state.orders = _this.props.order;
-	    _this.columns = props.columns;
+	    _this.state.orders = _this.props.order || [];
+	    _this.state.models = (_this$props$models = _this.props.models).order.apply(_this$props$models, _toConsumableArray(_this.state.orders));
+	    _this.component = _this.props.component || DefaultTdComponent;
+	    _this.columns = _this.props.columns;
 	    return _this;
 	  }
 	
 	  _createClass(ModelsTable, [{
+	    key: 'isValuePrimitive',
+	    value: function isValuePrimitive(value) {
+	      return value.constructor == String || value.constructor == Number;
+	    }
+	  }, {
 	    key: 'getDeepsCount',
 	    value: function getDeepsCount(ary) {
 	      var _this2 = this;
 	
 	      var a = ary.map(function (e) {
-	        if ((typeof e === 'undefined' ? 'undefined' : _typeof(e)) === 'object' && !Array.isArray(e)) {
+	        if (e.constructor == Object) {
 	          return 1 + _this2.getDeepsCount(e[Object.keys(e)[0]]);
 	        } else {
 	          return 1;
@@ -37720,7 +50471,7 @@
 	      var _this3 = this;
 	
 	      return ary.reduce(function (r, e) {
-	        if (e.constructor == String) {
+	        if (_this3.isValuePrimitive(e)) {
 	          return r + 1;
 	        }
 	        return r + _this3.getNodeCount(e[Object.keys(e)[0]]);
@@ -37792,9 +50543,13 @@
 	      var _this4 = this;
 	
 	      var attrs = columns.filter(function (e) {
-	        return e.constructor == String;
+	        return _this4.isValuePrimitive(e);
 	      }).map(function (e) {
-	        return { value: model[e] };
+	        return {
+	          column: e,
+	          model: model,
+	          value: model[e]
+	        };
 	      });
 	      var hasManyAssoc = columns.filter(function (e) {
 	        return e.constructor == Object;
@@ -37931,7 +50686,7 @@
 	                    { key: 'head_' + i + '_' + k, colSpan: _this8.getNodeCount(v) },
 	                    k
 	                  );
-	                } else if (e.constructor == String) {
+	                } else if (_this8.isValuePrimitive(e)) {
 	                  var deepsCount = _this8.getDeepsCount(ary);
 	                  var _k = 'head_' + i + '_' + e;
 	                  if (trIndex === 0) {
@@ -37964,11 +50719,13 @@
 	              'tr',
 	              { key: 'table_' + i },
 	              tr.map(function (td, j) {
-	                return _react2.default.createElement(
-	                  'td',
-	                  { key: 'table_' + i + '_' + j, rowSpan: td.rowSpan },
-	                  td.value
-	                );
+	                return new _this8.component({
+	                  column: td.column,
+	                  model: td.model,
+	                  key: 'table_' + i + '_' + j,
+	                  rowSpan: td.rowSpan,
+	                  value: td.value
+	                }).render();
 	              })
 	            );
 	          })
@@ -37981,9 +50738,32 @@
 	}(_react.Component);
 	
 	exports.default = ModelsTable;
+	
+	var DefaultTdComponent = function (_Component2) {
+	  _inherits(DefaultTdComponent, _Component2);
+	
+	  function DefaultTdComponent() {
+	    _classCallCheck(this, DefaultTdComponent);
+	
+	    return _possibleConstructorReturn(this, (DefaultTdComponent.__proto__ || Object.getPrototypeOf(DefaultTdComponent)).apply(this, arguments));
+	  }
+	
+	  _createClass(DefaultTdComponent, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'td',
+	        { key: this.props.key, rowSpan: this.props.rowSpan },
+	        this.props.value
+	      );
+	    }
+	  }]);
+
+	  return DefaultTdComponent;
+	}(_react.Component);
 
 /***/ },
-/* 279 */
+/* 281 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -37998,13 +50778,13 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	__webpack_require__(280);
+	__webpack_require__(282);
 	
-	var _Icon = __webpack_require__(288);
+	var _Icon = __webpack_require__(290);
 	
 	var _Icon2 = _interopRequireDefault(_Icon);
 	
-	var _IconStack = __webpack_require__(289);
+	var _IconStack = __webpack_require__(291);
 	
 	var _IconStack2 = _interopRequireDefault(_IconStack);
 	
@@ -38014,20 +50794,20 @@
 
 
 /***/ },
-/* 280 */
+/* 282 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 281 */,
-/* 282 */,
 /* 283 */,
 /* 284 */,
 /* 285 */,
 /* 286 */,
 /* 287 */,
-/* 288 */
+/* 288 */,
+/* 289 */,
+/* 290 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -38149,7 +50929,7 @@
 
 
 /***/ },
-/* 289 */
+/* 291 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -38235,7 +51015,7 @@
 
 
 /***/ },
-/* 290 */
+/* 292 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38252,7 +51032,7 @@
 	
 	var _reactRouter = __webpack_require__(178);
 	
-	var _path = __webpack_require__(291);
+	var _path = __webpack_require__(293);
 	
 	var _path2 = _interopRequireDefault(_path);
 	
@@ -38293,7 +51073,7 @@
 	exports.default = QueryLink;
 
 /***/ },
-/* 291 */
+/* 293 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
@@ -38321,7 +51101,7 @@
 	
 	
 	var isWindows = process.platform === 'win32';
-	var util = __webpack_require__(292);
+	var util = __webpack_require__(294);
 	
 	
 	// resolves . and .. elements in a path array with directory names there
@@ -38928,7 +51708,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 292 */
+/* 294 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39084,7 +51864,7 @@
 	};
 
 /***/ },
-/* 293 */
+/* 295 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39104,6 +51884,12 @@
 	var _Servant = __webpack_require__(249);
 	
 	var _Servant2 = _interopRequireDefault(_Servant);
+	
+	var _ModelsTable = __webpack_require__(280);
+	
+	var _ModelsTable2 = _interopRequireDefault(_ModelsTable);
+	
+	var _ActiveObject = __webpack_require__(250);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -39128,6 +51914,8 @@
 	  _createClass(Servant, [{
 	    key: 'render',
 	    value: function render() {
+	      var _this2 = this;
+	
 	      return _react2.default.createElement(
 	        'article',
 	        null,
@@ -39175,6 +51963,80 @@
 	          this.model.evolutions.map(function (e, i) {
 	            return _react2.default.createElement(Evolution, { key: 'evolution' + (i + 1), model: e, level: i + 1 });
 	          })
+	        ),
+	        _react2.default.createElement(
+	          'section',
+	          { className: 'container' },
+	          _react2.default.createElement(
+	            'h2',
+	            null,
+	            '\u30B9\u30AD\u30EB\u30A2\u30A4\u30C6\u30E0'
+	          ),
+	          _react2.default.createElement(
+	            'table',
+	            { className: 'table table-bordered' },
+	            _react2.default.createElement(
+	              'thead',
+	              null,
+	              _react2.default.createElement(
+	                'tr',
+	                null,
+	                _react2.default.createElement(
+	                  'th',
+	                  null,
+	                  'level'
+	                ),
+	                _react2.default.createElement(
+	                  'th',
+	                  null,
+	                  '\u7D20\u6750'
+	                ),
+	                _react2.default.createElement(
+	                  'th',
+	                  null,
+	                  '\u500B\u6570'
+	                )
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'tbody',
+	              null,
+	              [1, 2, 3, 4, 5, 6, 7, 8, 9].map(function (level) {
+	                var evoItems = _this2.model.skillEvolutions[level - 1];
+	                return evoItems.map(function (e, i, ary) {
+	                  return _react2.default.createElement(
+	                    'tr',
+	                    null,
+	                    function () {
+	                      if (i === 0) {
+	                        return _react2.default.createElement(
+	                          'td',
+	                          { rowSpan: ary.length },
+	                          level,
+	                          '>',
+	                          level + 1
+	                        );
+	                      }
+	                    }(),
+	                    _react2.default.createElement(
+	                      'td',
+	                      null,
+	                      _react2.default.createElement(
+	                        _reactRouter.Link,
+	                        { to: '/items/' + e.item_id },
+	                        e.item_id
+	                      )
+	                    ),
+	                    _react2.default.createElement(
+	                      'td',
+	                      null,
+	                      e.number
+	                    )
+	                  );
+	                });
+	              })
+	            )
+	          )
 	        )
 	      );
 	    }
@@ -39285,7 +52147,7 @@
 	}(_react.Component);
 
 /***/ },
-/* 294 */
+/* 296 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39371,7 +52233,7 @@
 	exports.default = Items;
 
 /***/ },
-/* 295 */
+/* 297 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39388,11 +52250,15 @@
 	
 	var _reactRouter = __webpack_require__(178);
 	
-	var _data = __webpack_require__(296);
+	var _data = __webpack_require__(298);
 	
 	var _Item = __webpack_require__(269);
 	
 	var _Item2 = _interopRequireDefault(_Item);
+	
+	var _Servant = __webpack_require__(249);
+	
+	var _Servant2 = _interopRequireDefault(_Servant);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -39417,6 +52283,8 @@
 	  _createClass(Item, [{
 	    key: 'render',
 	    value: function render() {
+	      var _this2 = this;
+	
 	      return _react2.default.createElement(
 	        'article',
 	        null,
@@ -39459,13 +52327,50 @@
 	          ),
 	          _react2.default.createElement(
 	            'table',
-	            null,
+	            { className: 'table table-bordered' },
+	            _react2.default.createElement(
+	              'thead',
+	              null,
+	              _react2.default.createElement(
+	                'tr',
+	                null,
+	                _react2.default.createElement(
+	                  'th',
+	                  null,
+	                  '\u30B5\u30FC\u30F4\u30A1\u30F3\u30C8'
+	                ),
+	                _react2.default.createElement(
+	                  'th',
+	                  null,
+	                  '\u4F7F\u7528\u5148'
+	                )
+	              )
+	            ),
 	            _react2.default.createElement(
 	              'tbody',
 	              null,
-	              this.model.servants.map(function (e, i) {
-	                return _react2.default.createElement(Servant, { key: i + '_' + e.id, servant: e });
-	              })
+	              function () {
+	                var evo = _this2.model.servants;
+	                var skill = _this2.model.skillEvolutionItems.map(function (e) {
+	                  return e.servant;
+	                }).filter(function (e) {
+	                  return (e || {}).constructor == _Servant2.default;
+	                }); // idが表記ゆれ
+	                var all = evo.concat(skill).uniq(function (a, b) {
+	                  return a.id === b.id;
+	                });
+	                return all.map(function (e, i) {
+	                  var situation = {
+	                    evolution: evo.map(function (e) {
+	                      return e.id;
+	                    }).includes(e.id),
+	                    skillEvolutioin: skill.map(function (e) {
+	                      return e.id;
+	                    }).includes(e.id)
+	                  };
+	                  return _react2.default.createElement(Servant, { key: i + '_' + e.id, servant: e, situation: situation });
+	                });
+	              }()
 	            )
 	          )
 	        )
@@ -39490,6 +52395,8 @@
 	  _createClass(Servant, [{
 	    key: 'render',
 	    value: function render() {
+	      var _this4 = this;
+	
 	      return _react2.default.createElement(
 	        'tr',
 	        null,
@@ -39501,6 +52408,20 @@
 	            { to: '/servants/' + this.props.servant.id },
 	            this.props.servant.id
 	          )
+	        ),
+	        _react2.default.createElement(
+	          'td',
+	          null,
+	          function () {
+	            var result = [];
+	            if (_this4.props.situation.evolution) {
+	              result.push('再臨');
+	            }
+	            if (_this4.props.situation.skillEvolutioin) {
+	              result.push('スキル');
+	            }
+	            return result.join();
+	          }()
 	        )
 	      );
 	    }
@@ -39510,7 +52431,7 @@
 	}(_react.Component);
 
 /***/ },
-/* 296 */
+/* 298 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -39571,7 +52492,7 @@
 	}];
 
 /***/ },
-/* 297 */
+/* 299 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39588,7 +52509,7 @@
 	
 	var _reactRouter = __webpack_require__(178);
 	
-	var _data = __webpack_require__(296);
+	var _data = __webpack_require__(298);
 	
 	var _Area = __webpack_require__(259);
 	
@@ -39650,7 +52571,7 @@
 	exports.default = Areas;
 
 /***/ },
-/* 298 */
+/* 300 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39733,7 +52654,7 @@
 	exports.default = Area;
 
 /***/ },
-/* 299 */
+/* 301 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39810,7 +52731,7 @@
 	exports.default = Points;
 
 /***/ },
-/* 300 */
+/* 302 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39899,7 +52820,7 @@
 	exports.default = Point;
 
 /***/ },
-/* 301 */
+/* 303 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39976,7 +52897,7 @@
 	exports.default = Quests;
 
 /***/ },
-/* 302 */
+/* 304 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40086,7 +53007,7 @@
 	exports.default = Quest;
 
 /***/ },
-/* 303 */
+/* 305 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40163,7 +53084,7 @@
 	exports.default = Enemys;
 
 /***/ },
-/* 304 */
+/* 306 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
