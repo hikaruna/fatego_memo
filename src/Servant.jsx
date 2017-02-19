@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import ServantModel from 'models/Servant.js';
+import ModelsTable from 'ModelsTable.jsx';
+import { ActiveCollection } from 'ActiveObject.js';
 
 export default class Servant extends Component {
   constructor(props) {
@@ -29,6 +31,44 @@ export default class Servant extends Component {
           {this.model.evolutions.map((e,i) => {
             return <Evolution key={`evolution${i+1}`} model={e} level={i+1} />;
           })}
+        </section>
+        <section className="container">
+          <h2>スキルアイテム</h2>
+          <table className="table table-bordered">
+            <thead>
+              <tr>
+                <th>level</th>
+                <th>素材</th>
+                <th>個数</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[1,2,3,4,5,6,7,8,9].map(level => {
+                const evoItems = this.model.skillEvolutions[level-1];
+                return evoItems.map((e,i,ary) => {
+                  return (
+                    <tr>
+                      {(() => {
+                        if(i === 0 ) {
+                          return (
+                            <td rowSpan={ary.length}>
+                              {level}>{level+1}
+                            </td>
+                          );
+                        }
+                      })()}
+                      <td>
+                        <Link to={`/items/${e.item_id}`}>
+                          {e.item_id}
+                        </Link>
+                      </td>
+                      <td>{e.number}</td>
+                    </tr>
+                  );
+                });
+              })}
+            </tbody>
+          </table>
         </section>
       </article>
     );

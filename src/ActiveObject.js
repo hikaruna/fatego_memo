@@ -119,6 +119,13 @@ export class ActiveCollection {
     this.type = type;
   }
 
+  static fromArray(models) {
+    return new ActiveCollection(
+      models.map(model => model.value),
+      models[0].constructor
+    );
+  }
+
   where(option = {}) {
     return new ActiveCollection(
       this.data.filter(e => {

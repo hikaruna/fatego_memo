@@ -8,15 +8,19 @@ export default class ModelsTable extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    this.state.models = this.props.models.order(...this.props.order);
-    this.state.orders = this.props.order;
+    this.state.orders = this.props.order || [];
+    this.state.models = this.props.models.order(...this.state.orders);
     this.component = this.props.component || DefaultTdComponent;
     this.columns = this.props.columns;
   }
 
+  isValuePrimitive(value) {
+    return value.constructor == String || value.constructor == Number;
+  }
+
   getDeepsCount(ary) {
     let a = ary.map(e => {
-      if(typeof e === 'object' && !Array.isArray(e)) {
+      if(e.constructor == Object) {
         return 1 + this.getDeepsCount(e[Object.keys(e)[0]]);
       }else {
         return 1;
@@ -27,7 +31,7 @@ export default class ModelsTable extends Component {
 
   getNodeCount(ary) {
     return ary.reduce((r,e) => {
-      if(e.constructor == String) {
+      if(this.isValuePrimitive(e)) {
         return r+1;
       }
       return r+this.getNodeCount(e[Object.keys(e)[0]]);
@@ -74,7 +78,7 @@ export default class ModelsTable extends Component {
   }
 
   buildTRecordsForOneModel(columns, model) {
-    let attrs = columns.filter(e => e.constructor == String).map(e => {
+    let attrs = columns.filter(e => this.isValuePrimitive(e)).map(e => {
       return {
         column: e,
         model: model,
@@ -182,7 +186,7 @@ export default class ModelsTable extends Component {
                     const k = Object.keys(e)[0];
                     const v = e[k];
                     return ( <th key={`head_${i}_${k}`} colSpan={this.getNodeCount(v)}>{k}</th>);
-                  }else if(e.constructor == String) {
+                  }else if(this.isValuePrimitive(e)) {
                     const deepsCount = this.getDeepsCount(ary);
                     const k = `head_${i}_${e}`;
                     if(trIndex === 0) {
@@ -223,7 +227,7 @@ export default class ModelsTable extends Component {
 }
 
 class DefaultTdComponent extends Component {
-  retnder() {
+  render() {
     return <td key={this.props.key} rowSpan={this.props.rowSpan}>{this.props.value}</td>;
   }
 }
