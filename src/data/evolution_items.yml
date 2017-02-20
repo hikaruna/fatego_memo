@@ -1,72 +1,72 @@
-- servant_id: アルトリア・ペンドラゴン
+- servant_id: アルトリア・ペンドラゴン(セイバー)
   item_id: セイバーピース
   level: 1
   number: 5
-- servant_id: アルトリア・ペンドラゴン
+- servant_id: アルトリア・ペンドラゴン(セイバー)
   item_id: 竜の牙
   level: 2
   number: 18
-- servant_id: アルトリア・ペンドラゴン
+- servant_id: アルトリア・ペンドラゴン(セイバー)
   item_id: セイバーピース
   level: 2
   number: 12
-- servant_id: アルトリア・ペンドラゴン
+- servant_id: アルトリア・ペンドラゴン(セイバー)
   item_id: 鳳凰の羽根
   level: 3
   number: 4
-- servant_id: アルトリア・ペンドラゴン
+- servant_id: アルトリア・ペンドラゴン(セイバー)
   item_id: 英雄の証
   level: 3
   number: 29
-- servant_id: アルトリア・ペンドラゴン
+- servant_id: アルトリア・ペンドラゴン(セイバー)
   item_id: セイバーモニュメント
   level: 3
   number: 5
-- servant_id: アルトリア・ペンドラゴン
+- servant_id: アルトリア・ペンドラゴン(セイバー)
   item_id: 鳳凰の羽根
   level: 4
   number: 8
-- servant_id: アルトリア・ペンドラゴン
+- servant_id: アルトリア・ペンドラゴン(セイバー)
   item_id: 竜の逆鱗
   level: 4
   number: 5
-- servant_id: アルトリア・ペンドラゴン
+- servant_id: アルトリア・ペンドラゴン(セイバー)
   item_id: セイバーモニュメント
   level: 4
   number: 12
-- servant_id: アルトリア・ペンドラゴン(オルタ)
+- servant_id: アルトリア・ペンドラゴン(オルタ)(セイバー)
   item_id: セイバーピース
   level: 1
   number: 4
-- servant_id: アルトリア・ペンドラゴン(オルタ)
+- servant_id: アルトリア・ペンドラゴン(オルタ)(セイバー)
   item_id: 竜の牙
   level: 2
   number: 15
-- servant_id: アルトリア・ペンドラゴン(オルタ)
+- servant_id: アルトリア・ペンドラゴン(オルタ)(セイバー)
   item_id: セイバーピース
   level: 2
   number: 10
-- servant_id: アルトリア・ペンドラゴン(オルタ)
+- servant_id: アルトリア・ペンドラゴン(オルタ)(セイバー)
   item_id: 竜の逆鱗
   level: 3
   number: 2
-- servant_id: アルトリア・ペンドラゴン(オルタ)
+- servant_id: アルトリア・ペンドラゴン(オルタ)(セイバー)
   item_id: 混沌の爪
   level: 3
   number: 5
-- servant_id: アルトリア・ペンドラゴン(オルタ)
+- servant_id: アルトリア・ペンドラゴン(オルタ)(セイバー)
   item_id: セイバーモニュメント
   level: 3
   number: 4
-- servant_id: アルトリア・ペンドラゴン(オルタ)
+- servant_id: アルトリア・ペンドラゴン(オルタ)(セイバー)
   item_id: 竜の逆鱗
   level: 4
   number: 4
-- servant_id: アルトリア・ペンドラゴン(オルタ)
+- servant_id: アルトリア・ペンドラゴン(オルタ)(セイバー)
   item_id: 蛮神の心臓
   level: 4
   number: 4
-- servant_id: アルトリア・ペンドラゴン(オルタ)
+- servant_id: アルトリア・ペンドラゴン(オルタ)(セイバー)
   item_id: セイバーモニュメント
   level: 4
   number: 10
@@ -250,39 +250,39 @@
   item_id: セイバーモニュメント
   level: 4
   number: 12
-- servant_id: ジル・ド・レェ
+- servant_id: ジル・ド・レェ(セイバー)
   item_id: セイバーピース
   level: 1
   number: 4
-- servant_id: ジル・ド・レェ
+- servant_id: ジル・ド・レェ(セイバー)
   item_id: 英雄の証
   level: 2
   number: 15
-- servant_id: ジル・ド・レェ
+- servant_id: ジル・ド・レェ(セイバー)
   item_id: セイバーピース
   level: 2
   number: 8
-- servant_id: ジル・ド・レェ
+- servant_id: ジル・ド・レェ(セイバー)
   item_id: 虚影の塵
   level: 3
   number: 13
-- servant_id: ジル・ド・レェ
+- servant_id: ジル・ド・レェ(セイバー)
   item_id: 凶骨
   level: 3
   number: 10
-- servant_id: ジル・ド・レェ
+- servant_id: ジル・ド・レェ(セイバー)
   item_id: セイバーモニュメント
   level: 3
   number: 4
-- servant_id: ジル・ド・レェ
+- servant_id: ジル・ド・レェ(セイバー)
   item_id: 凶骨
   level: 4
   number: 20
-- servant_id: ジル・ド・レェ
+- servant_id: ジル・ド・レェ(セイバー)
   item_id: 蛮神の心臓
   level: 4
   number: 4
-- servant_id: ジル・ド・レェ
+- servant_id: ジル・ド・レェ(セイバー)
   item_id: セイバーモニュメント
   level: 4
   number: 8
@@ -538,39 +538,39 @@
   item_id: アーチャーモニュメント
   level: 4
   number: 4
-- servant_id: クー・フーリン
+- servant_id: クー・フーリン(ランサー)
   item_id: ランサーピース
   level: 1
   number: 4
-- servant_id: クー・フーリン
+- servant_id: クー・フーリン(ランサー)
   item_id: 混沌の爪
   level: 2
   number: 3
-- servant_id: クー・フーリン
+- servant_id: クー・フーリン(ランサー)
   item_id: ランサーピース
   level: 2
   number: 8
-- servant_id: クー・フーリン
+- servant_id: クー・フーリン(ランサー)
   item_id: 世界樹の種
   level: 3
   number: 8
-- servant_id: クー・フーリン
+- servant_id: クー・フーリン(ランサー)
   item_id: 八連双晶
   level: 3
   number: 4
-- servant_id: クー・フーリン
+- servant_id: クー・フーリン(ランサー)
   item_id: ランサーモニュメント
   level: 3
   number: 4
-- servant_id: クー・フーリン
+- servant_id: クー・フーリン(ランサー)
   item_id: 鳳凰の羽根
   level: 4
   number: 7
-- servant_id: クー・フーリン
+- servant_id: クー・フーリン(ランサー)
   item_id: 八連双晶
   level: 4
   number: 7
-- servant_id: クー・フーリン
+- servant_id: クー・フーリン(ランサー)
   item_id: ランサーモニュメント
   level: 4
   number: 8
@@ -1078,39 +1078,39 @@
   item_id: キャスターモニュメント
   level: 4
   number: 8
-- servant_id: ジル・ド・レェ
+- servant_id: ジル・ド・レェ(キャスター)
   item_id: キャスターピース
   level: 1
   number: 4
-- servant_id: ジル・ド・レェ
+- servant_id: ジル・ド・レェ(キャスター)
   item_id: ゴーストランタン
   level: 2
   number: 5
-- servant_id: ジル・ド・レェ
+- servant_id: ジル・ド・レェ(キャスター)
   item_id: キャスターピース
   level: 2
   number: 8
-- servant_id: ジル・ド・レェ
+- servant_id: ジル・ド・レェ(キャスター)
   item_id: 禁断の頁
   level: 3
   number: 4
-- servant_id: ジル・ド・レェ
+- servant_id: ジル・ド・レェ(キャスター)
   item_id: ホムンクルスベビー
   level: 3
   number: 7
-- servant_id: ジル・ド・レェ
+- servant_id: ジル・ド・レェ(キャスター)
   item_id: キャスターモニュメント
   level: 3
   number: 4
-- servant_id: ジル・ド・レェ
+- servant_id: ジル・ド・レェ(キャスター)
   item_id: 禁断の頁
   level: 4
   number: 7
-- servant_id: ジル・ド・レェ
+- servant_id: ジル・ド・レェ(キャスター)
   item_id: 蛮神の心臓
   level: 4
   number: 4
-- servant_id: ジル・ド・レェ
+- servant_id: ジル・ド・レェ(キャスター)
   item_id: キャスターモニュメント
   level: 4
   number: 8
@@ -1294,39 +1294,39 @@
   item_id: キャスターモニュメント
   level: 4
   number: 12
-- servant_id: クー・フーリン
+- servant_id: クー・フーリン(キャスター)
   item_id: キャスターピース
   level: 1
   number: 4
-- servant_id: クー・フーリン
+- servant_id: クー・フーリン(キャスター)
   item_id: 世界樹の種
   level: 2
   number: 6
-- servant_id: クー・フーリン
+- servant_id: クー・フーリン(キャスター)
   item_id: キャスターピース
   level: 2
   number: 8
-- servant_id: クー・フーリン
+- servant_id: クー・フーリン(キャスター)
   item_id: 混沌の爪
   level: 3
   number: 2
-- servant_id: クー・フーリン
+- servant_id: クー・フーリン(キャスター)
   item_id: 禁断の頁
   level: 3
   number: 7
-- servant_id: クー・フーリン
+- servant_id: クー・フーリン(キャスター)
   item_id: キャスターモニュメント
   level: 3
   number: 4
-- servant_id: クー・フーリン
+- servant_id: クー・フーリン(キャスター)
   item_id: 混沌の爪
   level: 4
   number: 4
-- servant_id: クー・フーリン
+- servant_id: クー・フーリン(キャスター)
   item_id: 無間の歯車
   level: 4
   number: 8
-- servant_id: クー・フーリン
+- servant_id: クー・フーリン(キャスター)
   item_id: キャスターモニュメント
   level: 4
   number: 8
@@ -1654,39 +1654,39 @@
   item_id: バーサーカーモニュメント
   level: 4
   number: 10
-- servant_id: ランスロット
+- servant_id: ランスロット(バーサーカー)
   item_id: バーサーカーピース
   level: 1
   number: 4
-- servant_id: ランスロット
+- servant_id: ランスロット(バーサーカー)
   item_id: 竜の逆鱗
   level: 2
   number: 3
-- servant_id: ランスロット
+- servant_id: ランスロット(バーサーカー)
   item_id: バーサーカーピース
   level: 2
   number: 10
-- servant_id: ランスロット
+- servant_id: ランスロット(バーサーカー)
   item_id: 虚影の塵
   level: 3
   number: 8
-- servant_id: ランスロット
+- servant_id: ランスロット(バーサーカー)
   item_id: 混沌の爪
   level: 3
   number: 5
-- servant_id: ランスロット
+- servant_id: ランスロット(バーサーカー)
   item_id: バーサーカーモニュメント
   level: 3
   number: 4
-- servant_id: ランスロット
+- servant_id: ランスロット(バーサーカー)
   item_id: 虚影の塵
   level: 4
   number: 16
-- servant_id: ランスロット
+- servant_id: ランスロット(バーサーカー)
   item_id: 竜の牙
   level: 4
   number: 24
-- servant_id: ランスロット
+- servant_id: ランスロット(バーサーカー)
   item_id: バーサーカーモニュメント
   level: 4
   number: 10
@@ -2682,39 +2682,39 @@
   item_id: アーチャーモニュメント
   level: 4
   number: 12
-- servant_id: アルトリア・ペンドラゴン(オルタ)
+- servant_id: アルトリア・ペンドラゴン(オルタ)(ランサー)
   item_id: ランサーピース
   level: 1
   number: 4
-- servant_id: アルトリア・ペンドラゴン(オルタ)
+- servant_id: アルトリア・ペンドラゴン(オルタ)(ランサー)
   item_id: 隕蹄鉄
   level: 2
   number: 6
-- servant_id: アルトリア・ペンドラゴン(オルタ)
+- servant_id: アルトリア・ペンドラゴン(オルタ)(ランサー)
   item_id: ランサーピース
   level: 2
   number: 10
-- servant_id: アルトリア・ペンドラゴン(オルタ)
+- servant_id: アルトリア・ペンドラゴン(オルタ)(ランサー)
   item_id: 鳳凰の羽根
   level: 3
   number: 7
-- servant_id: アルトリア・ペンドラゴン(オルタ)
+- servant_id: アルトリア・ペンドラゴン(オルタ)(ランサー)
   item_id: 竜の逆鱗
   level: 3
   number: 2
-- servant_id: アルトリア・ペンドラゴン(オルタ)
+- servant_id: アルトリア・ペンドラゴン(オルタ)(ランサー)
   item_id: ランサーモニュメント
   level: 3
   number: 4
-- servant_id: アルトリア・ペンドラゴン(オルタ)
+- servant_id: アルトリア・ペンドラゴン(オルタ)(ランサー)
   item_id: 竜の逆鱗
   level: 4
   number: 4
-- servant_id: アルトリア・ペンドラゴン(オルタ)
+- servant_id: アルトリア・ペンドラゴン(オルタ)(ランサー)
   item_id: 蛮神の心臓
   level: 4
   number: 4
-- servant_id: アルトリア・ペンドラゴン(オルタ)
+- servant_id: アルトリア・ペンドラゴン(オルタ)(ランサー)
   item_id: ランサーモニュメント
   level: 4
   number: 10
@@ -4058,39 +4058,39 @@
   item_id: ライダーモニュメント
   level: 4
   number: 12
-- servant_id: アルトリア(ランサー)
+- servant_id: アルトリア・ペンドラゴン(ランサー)
   item_id: ランサーピース
   level: 1
   number: 5
-- servant_id: アルトリア(ランサー)
+- servant_id: アルトリア・ペンドラゴン(ランサー)
   item_id: 竜の牙
   level: 2
   number: 18
-- servant_id: アルトリア(ランサー)
+- servant_id: アルトリア・ペンドラゴン(ランサー)
   item_id: ランサーピース
   level: 2
   number: 12
-- servant_id: アルトリア(ランサー)
+- servant_id: アルトリア・ペンドラゴン(ランサー)
   item_id: 大騎士勲章
   level: 3
   number: 20
-- servant_id: アルトリア(ランサー)
+- servant_id: アルトリア・ペンドラゴン(ランサー)
   item_id: 戦馬の幼角
   level: 3
   number: 3
-- servant_id: アルトリア(ランサー)
+- servant_id: アルトリア・ペンドラゴン(ランサー)
   item_id: ランサーモニュメント
   level: 3
   number: 5
-- servant_id: アルトリア(ランサー)
+- servant_id: アルトリア・ペンドラゴン(ランサー)
   item_id: 戦馬の幼角
   level: 4
   number: 6
-- servant_id: アルトリア(ランサー)
+- servant_id: アルトリア・ペンドラゴン(ランサー)
   item_id: 竜の逆鱗
   level: 4
   number: 5
-- servant_id: アルトリア(ランサー)
+- servant_id: アルトリア・ペンドラゴン(ランサー)
   item_id: ランサーモニュメント
   level: 4
   number: 12
@@ -4130,39 +4130,39 @@
   item_id: キャスターモニュメント
   level: 4
   number: 10
-- servant_id: ランスロット
+- servant_id: ランスロット(セイバー)
   item_id: セイバーピース
   level: 1
   number: 4
-- servant_id: ランスロット
+- servant_id: ランスロット(セイバー)
   item_id: 無間の歯車
   level: 2
   number: 6
-- servant_id: ランスロット
+- servant_id: ランスロット(セイバー)
   item_id: セイバーピース
   level: 2
   number: 10
-- servant_id: ランスロット
+- servant_id: ランスロット(セイバー)
   item_id: 大騎士勲章
   level: 3
   number: 16
-- servant_id: ランスロット
+- servant_id: ランスロット(セイバー)
   item_id: 竜の牙
   level: 3
   number: 10
-- servant_id: ランスロット
+- servant_id: ランスロット(セイバー)
   item_id: セイバーモニュメント
   level: 3
   number: 4
-- servant_id: ランスロット
+- servant_id: ランスロット(セイバー)
   item_id: 竜の牙
   level: 4
   number: 20
-- servant_id: ランスロット
+- servant_id: ランスロット(セイバー)
   item_id: 竜の逆鱗
   level: 4
   number: 4
-- servant_id: ランスロット
+- servant_id: ランスロット(セイバー)
   item_id: セイバーモニュメント
   level: 4
   number: 10
@@ -5130,39 +5130,39 @@
   item_id: セイバーモニュメント
   level: 4
   number: 12
-- servant_id: "“山の翁”"
+- servant_id: “山の翁”
   item_id: アサシンピース
   level: 1
   number: 5
-- servant_id: "“山の翁”"
+- servant_id: “山の翁”
   item_id: 凶骨
   level: 2
   number: 22
-- servant_id: "“山の翁”"
+- servant_id: “山の翁”
   item_id: アサシンピース
   level: 2
   number: 12
-- servant_id: "“山の翁”"
+- servant_id: “山の翁”
   item_id: 愚者の鎖
   level: 3
   number: 29
-- servant_id: "“山の翁”"
+- servant_id: “山の翁”
   item_id: 呪獣胆石
   level: 3
   number: 2
-- servant_id: "“山の翁”"
+- servant_id: “山の翁”
   item_id: アサシンモニュメント
   level: 3
   number: 5
-- servant_id: "“山の翁”"
+- servant_id: “山の翁”
   item_id: 呪獣胆石
   level: 4
   number: 4
-- servant_id: "“山の翁”"
+- servant_id: “山の翁”
   item_id: 虚影の塵
   level: 4
   number: 24
-- servant_id: "“山の翁”"
+- servant_id: “山の翁”
   item_id: アサシンモニュメント
   level: 4
   number: 12

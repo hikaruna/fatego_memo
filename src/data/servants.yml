@@ -1,7 +1,7 @@
-- id: アルトリア・ペンドラゴン
+- id: アルトリア・ペンドラゴン(セイバー)
   rarity: 5
   class: セイバー
-- id: アルトリア・ペンドラゴン(オルタ)
+- id: アルトリア・ペンドラゴン(オルタ)(セイバー)
   rarity: 4
   class: セイバー
 - id: アルトリア・ペンドラゴン(リリィ)
@@ -43,7 +43,7 @@
 - id: アーラシュ
   rarity: 1
   class: アーチャー
-- id: クー・フーリン
+- id: クー・フーリン(ランサー)
   rarity: 3
   class: ランサー
 - id: エリザベート・バートリー
@@ -88,7 +88,7 @@
 - id: メディア
   rarity: 3
   class: キャスター
-- id: ジル・ド・レェ
+- id: ジル・ド・レェ(キャスター)
   rarity: 3
   class: キャスター
 - id: ハンス・クリスチャン・アンデルセン
@@ -136,7 +136,7 @@
 - id: ヘラクレス
   rarity: 4
   class: バーサーカー
-- id: ランスロット
+- id: ランスロット(バーサーカー)
   rarity: 4
   class: バーサーカー
 - id: 呂布奉先
@@ -171,7 +171,7 @@
   class: バーサーカー
 - id: ジャンヌ・ダルク
   rarity: 5
-  class: ルーラー
+  class: undefined
 - id: オリオン
   rarity: 5
   class: アーチャー
@@ -270,7 +270,7 @@
   class: アサシン
 - id: 天草四郎
   rarity: 5
-  class: ルーラー
+  class: undefined
 - id: アストルフォ
   rarity: 4
   class: ライダー
@@ -346,7 +346,7 @@
 - id: オジマンディアス
   rarity: 5
   class: ライダー
-- id: アルトリア(ランサー)
+- id: アルトリア・ペンドラゴン(ランサー)
   rarity: 5
   class: ランサー
 - id: ニトクリス
@@ -396,7 +396,7 @@
   class: ランサー
 - id: マルタ(ルーラー)
   rarity: 4
-  class: ルーラー
+  class: undefined
 - id: イリヤスフィール・フォン・アインツベルン
   rarity: 5
   class: キャスター

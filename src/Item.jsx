@@ -40,7 +40,6 @@ export default class Item extends Component {
                 const evo   = this.model.servants;
                 const skill = this.model.skillEvolutionItems
                   .map(e=> e.servant)
-                  .filter(e=> (e || {}).constructor == ServantModel); // idが表記ゆれ
                 const all = evo
                   .concat(skill)
                   .uniq((a,b)=> a.id === b.id);
