@@ -171,7 +171,7 @@
   class: バーサーカー
 - id: ジャンヌ・ダルク
   rarity: 5
-  class: undefined
+  class: ルーラー
 - id: オリオン
   rarity: 5
   class: アーチャー
@@ -270,7 +270,7 @@
   class: アサシン
 - id: 天草四郎
   rarity: 5
-  class: undefined
+  class: ルーラー
 - id: アストルフォ
   rarity: 4
   class: ライダー
@@ -396,7 +396,7 @@
   class: ランサー
 - id: マルタ(ルーラー)
   rarity: 4
-  class: undefined
+  class: ルーラー
 - id: イリヤスフィール・フォン・アインツベルン
   rarity: 5
   class: キャスター
