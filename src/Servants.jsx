@@ -8,8 +8,6 @@ export default class Servants extends Component {
 
   constructor(props) {
     super(props);
-    const query = Util.parseUrlQuery(props.location.search);
-    this.order = (query.order || []);
     let where = Object.assign({}, props.params.where);
     this.servants = ServantModel.where(where);
   }
@@ -19,7 +17,6 @@ export default class Servants extends Component {
       <ModelsTable
         models={this.servants}
         columns={ServantModel.columns}
-        order={this.order}
         component={Servant}
       />
     );

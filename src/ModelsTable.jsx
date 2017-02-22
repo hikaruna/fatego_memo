@@ -1,17 +1,21 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
+import { browserHistory, Link } from 'react-router';
 import { Icon } from 'react-fa';
 import QueryLink from 'QueryLink.jsx';
+import Util from 'Util.js';
 
 export default class ModelsTable extends Component {
 
   constructor(props) {
     super(props);
     this.state = {};
-    this.state.orders = this.props.order || [];
-    this.state.models = this.props.models.order(...this.state.orders);
+    this.importStateFromLocation();
     this.component = this.props.component || DefaultTdComponent;
     this.columns = this.props.columns;
+  }
+
+  importStateFromLocation() {
+    this.state.order = new URL(location.toString()).searchParams.get('order');
   }
 
   isValuePrimitive(value) {
@@ -134,25 +138,21 @@ export default class ModelsTable extends Component {
     if(!this.columns.includes(column)) {
       return
     }
-
-    let orders = this.state.orders
-    orders = orders.map(order => this.parseOrderString(order));
-
-    const order = orders.filter(e => e.by === column)[0] || null;
-    if(order === null) {
-      return <Icon name="sort" />;
-    }
-    if(order.direction === 'asc') {
+    let d = this.getOrderedDirectionBy(column);
+    if(d === 'asc') {
       return <Icon name="sort-asc" />;
-    }else if(order.direction === 'desc') {
+    }else if(d === 'desc') {
       return <Icon name="sort-desc" />;
     }else {
-      throw new Error(`Illegal order direction ${orderDirection}`);
+      return <Icon name="sort" />;
     }
   }
 
   // 'attr desc' -> {by: 'attr', direction: 'desc'}
   parseOrderString(orderString) {
+    if(!/^(.*)(?: (asc|desc))?$/.test(orderString)) {
+      return null;
+    }
     const matched = orderString.match(/(.*) (asc|desc)$/);
     if(matched == null) {
       return {by: orderString, direction: 'asc'};
@@ -161,16 +161,33 @@ export default class ModelsTable extends Component {
     }
   }
 
-  onSort(column) {
-    let order = this.state.orders
-      .map(order => this.parseOrderString(order))
-      .filter(order => order.by === column)[0] || null;
-    if(order === null || order.direction === 'desc') {
-      this.state.orders = [`${column} asc`];
-    }else {
-      this.state.orders = [`${column} desc`];
+  getOrderedDirectionBy(column) {
+    if(!this.state.order) {
+      return null;
     }
-    this.state.models = this.state.models.order(...this.state.orders);
+    let order = this.parseOrderString(this.state.order);
+    if(order === null) {
+      return null;
+    }
+    if(order.by !== column) {
+      return null;
+    }
+    return order.direction;
+  }
+
+  onSort(column) {
+    let direction = this.getOrderedDirectionBy(column) === 'asc' ? ' desc' : '';
+    if(this.state.order) {
+      let b = (this.parseOrderString(this.state.order) || {});
+      if(b.by === column && b.direction === 'asc') {
+        direction = ' desc';
+      }
+    }
+
+    let url = new URL(location.toString());
+    url.searchParams.set('order', `${column}${direction}`);
+    browserHistory.push(url.pathname + url.search + url.hash);
+    this.importStateFromLocation();
     this.forceUpdate();
   }
 
@@ -205,7 +222,7 @@ export default class ModelsTable extends Component {
           })}
         </thead>
         <tbody>
-          {this.buildTRecordsForManyModels(this.columns, this.state.models).map((tr,i) => {
+          {this.buildTRecordsForManyModels(this.columns, this.sortedModels).map((tr,i) => {
             return (
               <tr key={`table_${i}`}>
                 {tr.map((td,j) => {
@@ -223,6 +240,14 @@ export default class ModelsTable extends Component {
         </tbody>
       </table>
     );
+  }
+
+  get sortedModels() {
+    let models = this.props.models;
+    if(this.state.order) {
+      models = models.order(this.state.order);
+    }
+    return models;
   }
 }
 

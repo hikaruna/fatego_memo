@@ -142,7 +142,7 @@ export class ActiveCollection {
       args.reverse().reduce((result, arg) => {
         let key;
         let order;
-        if(typeof arg === 'string') {
+        if(arg.constructor == String) {
           // case "key asc|desc"
           const matched = arg.match(/(.*) (asc|desc)$/);
           if(matched == null) {
@@ -152,10 +152,12 @@ export class ActiveCollection {
             key = matched[1];
             order = matched[2];
           }
-        }else {
+        }else if(arg.constructor == Object) {
           // case { "key": "asc|desc" }
           key = Object.keys(arg)[0];
           order = arg[Object.keys(arg)[0]];
+        }else {
+          throw Error(`IllegalArgument ${arg}`);
         }
         return result.sort(this.generateDictionaryCompare(key, order));
       }, this.data.slice()),
