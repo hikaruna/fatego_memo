@@ -27077,8 +27077,6 @@
 	
 	    var _this = _possibleConstructorReturn(this, (Servants.__proto__ || Object.getPrototypeOf(Servants)).call(this, props));
 	
-	    var query = _Util2.default.parseUrlQuery(props.location.search);
-	    _this.order = query.order || [];
 	    var where = Object.assign({}, props.params.where);
 	    _this.servants = _Servant2.default.where(where);
 	    return _this;
@@ -27090,7 +27088,6 @@
 	      return _react2.default.createElement(_ModelsTable2.default, {
 	        models: this.servants,
 	        columns: _Servant2.default.columns,
-	        order: this.order,
 	        component: Servant
 	      });
 	    }
@@ -27457,7 +27454,7 @@
 	      return new ActiveCollection(args.reverse().reduce(function (result, arg) {
 	        var key = void 0;
 	        var order = void 0;
-	        if (typeof arg === 'string') {
+	        if (arg.constructor == String) {
 	          // case "key asc|desc"
 	          var matched = arg.match(/(.*) (asc|desc)$/);
 	          if (matched == null) {
@@ -27467,10 +27464,12 @@
 	            key = matched[1];
 	            order = matched[2];
 	          }
-	        } else {
+	        } else if (arg.constructor == Object) {
 	          // case { "key": "asc|desc" }
 	          key = Object.keys(arg)[0];
 	          order = arg[Object.keys(arg)[0]];
+	        } else {
+	          throw Error('IllegalArgument ' + arg);
 	        }
 	        return result.sort(_this2.generateDictionaryCompare(key, order));
 	      }, this.data.slice()), this.type);
@@ -50418,6 +50417,10 @@
 	
 	var _QueryLink2 = _interopRequireDefault(_QueryLink);
 	
+	var _Util = __webpack_require__(251);
+	
+	var _Util2 = _interopRequireDefault(_Util);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -50431,22 +50434,24 @@
 	var ModelsTable = function (_Component) {
 	  _inherits(ModelsTable, _Component);
 	
-	  function ModelsTable(props) {
-	    var _this$props$models;
-	
+	  function ModelsTable(props, context) {
 	    _classCallCheck(this, ModelsTable);
 	
 	    var _this = _possibleConstructorReturn(this, (ModelsTable.__proto__ || Object.getPrototypeOf(ModelsTable)).call(this, props));
 	
 	    _this.state = {};
-	    _this.state.orders = _this.props.order || [];
-	    _this.state.models = (_this$props$models = _this.props.models).order.apply(_this$props$models, _toConsumableArray(_this.state.orders));
+	    _this.importStateFromLocation();
 	    _this.component = _this.props.component || DefaultTdComponent;
 	    _this.columns = _this.props.columns;
 	    return _this;
 	  }
 	
 	  _createClass(ModelsTable, [{
+	    key: 'importStateFromLocation',
+	    value: function importStateFromLocation() {
+	      this.state.order = new URL(location.toString()).searchParams.get('order');
+	    }
+	  }, {
 	    key: 'isValuePrimitive',
 	    value: function isValuePrimitive(value) {
 	      return value.constructor == String || value.constructor == Number;
@@ -50605,29 +50610,16 @@
 	  }, {
 	    key: 'renderSortIcon',
 	    value: function renderSortIcon(column) {
-	      var _this6 = this;
-	
 	      if (!this.columns.includes(column)) {
 	        return;
 	      }
-	
-	      var orders = this.state.orders;
-	      orders = orders.map(function (order) {
-	        return _this6.parseOrderString(order);
-	      });
-	
-	      var order = orders.filter(function (e) {
-	        return e.by === column;
-	      })[0] || null;
-	      if (order === null) {
-	        return _react2.default.createElement(_reactFa.Icon, { name: 'sort' });
-	      }
-	      if (order.direction === 'asc') {
+	      var d = this.getOrderedDirectionBy(column);
+	      if (d === 'asc') {
 	        return _react2.default.createElement(_reactFa.Icon, { name: 'sort-asc' });
-	      } else if (order.direction === 'desc') {
+	      } else if (d === 'desc') {
 	        return _react2.default.createElement(_reactFa.Icon, { name: 'sort-desc' });
 	      } else {
-	        throw new Error('Illegal order direction ' + orderDirection);
+	        return _react2.default.createElement(_reactFa.Icon, { name: 'sort' });
 	      }
 	    }
 	
@@ -50636,6 +50628,9 @@
 	  }, {
 	    key: 'parseOrderString',
 	    value: function parseOrderString(orderString) {
+	      if (!/^(.*)(?: (asc|desc))?$/.test(orderString)) {
+	        return null;
+	      }
 	      var matched = orderString.match(/(.*) (asc|desc)$/);
 	      if (matched == null) {
 	        return { by: orderString, direction: 'asc' };
@@ -50644,28 +50639,36 @@
 	      }
 	    }
 	  }, {
+	    key: 'getOrderedDirectionBy',
+	    value: function getOrderedDirectionBy(column) {
+	      if (!this.state.order) {
+	        return null;
+	      }
+	      var order = this.parseOrderString(this.state.order);
+	      if (order === null) {
+	        return null;
+	      }
+	      if (order.by !== column) {
+	        return null;
+	      }
+	      return order.direction;
+	    }
+	  }, {
 	    key: 'onSort',
 	    value: function onSort(column) {
-	      var _this7 = this,
-	          _state$models;
-	
-	      var order = this.state.orders.map(function (order) {
-	        return _this7.parseOrderString(order);
-	      }).filter(function (order) {
-	        return order.by === column;
-	      })[0] || null;
-	      if (order === null || order.direction === 'desc') {
-	        this.state.orders = [column + ' asc'];
-	      } else {
-	        this.state.orders = [column + ' desc'];
-	      }
-	      this.state.models = (_state$models = this.state.models).order.apply(_state$models, _toConsumableArray(this.state.orders));
+	      this.importStateFromLocation();
 	      this.forceUpdate();
+	    }
+	  }, {
+	    key: 'getSortUrlParamValueByColumn',
+	    value: function getSortUrlParamValueByColumn(column) {
+	      var d = this.getOrderedDirectionBy(column) === 'asc' ? ' desc' : '';
+	      return '' + column + d;
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _this8 = this;
+	      var _this6 = this;
 	
 	      return _react2.default.createElement(
 	        'table',
@@ -50673,31 +50676,38 @@
 	        _react2.default.createElement(
 	          'thead',
 	          null,
-	          Array(this.getDeepsCount(this.columns)).fill().map(function (_, trIndex) {
+	          Array(this.getDeepsCount(this.columns)).fill().map(function (unUsed, trIndex) {
 	            return _react2.default.createElement(
 	              'tr',
 	              { key: trIndex },
-	              _this8.unwrapWithCount(_this8.props.columns, trIndex).map(function (e, i, ary) {
+	              _this6.unwrapWithCount(_this6.props.columns, trIndex).map(function (e, i, ary) {
 	                if (e.constructor == Object) {
 	                  var k = Object.keys(e)[0];
 	                  var v = e[k];
 	                  return _react2.default.createElement(
 	                    'th',
-	                    { key: 'head_' + i + '_' + k, colSpan: _this8.getNodeCount(v) },
+	                    { key: 'head_' + i + '_' + k, colSpan: _this6.getNodeCount(v) },
 	                    k
 	                  );
-	                } else if (_this8.isValuePrimitive(e)) {
-	                  var deepsCount = _this8.getDeepsCount(ary);
+	                } else if (_this6.isValuePrimitive(e)) {
+	                  var deepsCount = _this6.getDeepsCount(ary);
 	                  var _k = 'head_' + i + '_' + e;
 	                  if (trIndex === 0) {
 	                    return _react2.default.createElement(
 	                      'th',
-	                      { key: _k, rowSpan: deepsCount, onClick: function onClick() {
-	                          return _this8.onSort(e);
-	                        } },
-	                      e,
-	                      ' ',
-	                      _this8.renderSortIcon(e)
+	                      { key: _k, rowSpan: deepsCount },
+	                      _react2.default.createElement(
+	                        _QueryLink2.default,
+	                        {
+	                          onPushed: function onPushed() {
+	                            return _this6.onSort(e);
+	                          },
+	                          query: { order: _this6.getSortUrlParamValueByColumn(e) }
+	                        },
+	                        e,
+	                        ' ',
+	                        _this6.renderSortIcon(e)
+	                      )
 	                    );
 	                  } else {
 	                    return _react2.default.createElement(
@@ -50714,12 +50724,12 @@
 	        _react2.default.createElement(
 	          'tbody',
 	          null,
-	          this.buildTRecordsForManyModels(this.columns, this.state.models).map(function (tr, i) {
+	          this.buildTRecordsForManyModels(this.columns, this.sortedModels).map(function (tr, i) {
 	            return _react2.default.createElement(
 	              'tr',
 	              { key: 'table_' + i },
 	              tr.map(function (td, j) {
-	                return new _this8.component({
+	                return new _this6.component({
 	                  column: td.column,
 	                  model: td.model,
 	                  key: 'table_' + i + '_' + j,
@@ -50731,6 +50741,15 @@
 	          })
 	        )
 	      );
+	    }
+	  }, {
+	    key: 'sortedModels',
+	    get: function get() {
+	      var models = this.props.models;
+	      if (this.state.order) {
+	        models = models.order(this.state.order);
+	      }
+	      return models;
 	    }
 	  }]);
 	
@@ -51024,6 +51043,8 @@
 	  value: true
 	});
 	
+	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	var _react = __webpack_require__(1);
@@ -51044,8 +51065,9 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var QueryLink = function (_Link) {
-	  _inherits(QueryLink, _Link);
+	// 現在のpathのqueryだけを変えてonPushedをcallする
+	var QueryLink = function (_Component) {
+	  _inherits(QueryLink, _Component);
 	
 	  function QueryLink() {
 	    _classCallCheck(this, QueryLink);
@@ -51054,23 +51076,79 @@
 	  }
 	
 	  _createClass(QueryLink, [{
+	    key: 'onClick',
+	    value: function onClick(event) {
+	      event.preventDefault();
+	      _reactRouter.browserHistory.push(QueryLink.getToByQuery(this.props.query));
+	      this.props.onPushed(event);
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var base = _path2.default.basename(location.pathname);
-	      var to = base + this.props.q;
-	      var children = this.props.children;
+	      var _this2 = this;
+	
 	      return _react2.default.createElement(
 	        _reactRouter.Link,
-	        { to: to },
-	        children
+	        {
+	          to: QueryLink.getToByQuery(this.props.query),
+	          onClick: function onClick(event) {
+	            return _this2.onClick(event);
+	          }
+	        },
+	        this.props.children
 	      );
+	    }
+	  }], [{
+	    key: 'getToByQuery',
+	    value: function getToByQuery(query) {
+	      var url = new URL(location.toString());
+	      url.pathname = url.pathname.split('/').pop();
+	      var _iteratorNormalCompletion = true;
+	      var _didIteratorError = false;
+	      var _iteratorError = undefined;
+	
+	      try {
+	        for (var _iterator = Object.entries(query)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+	          var _step$value = _slicedToArray(_step.value, 2),
+	              key = _step$value[0],
+	              value = _step$value[1];
+	
+	          url.searchParams.set(key, value);
+	        }
+	      } catch (err) {
+	        _didIteratorError = true;
+	        _iteratorError = err;
+	      } finally {
+	        try {
+	          if (!_iteratorNormalCompletion && _iterator.return) {
+	            _iterator.return();
+	          }
+	        } finally {
+	          if (_didIteratorError) {
+	            throw _iteratorError;
+	          }
+	        }
+	      }
+	
+	      var pathname = url.pathname.replace(/^\//, '');
+	      return pathname + url.search;
 	    }
 	  }]);
 	
 	  return QueryLink;
-	}(_reactRouter.Link);
+	}(_react.Component);
 	
 	exports.default = QueryLink;
+	
+	
+	QueryLink.propTypes = {
+	  query: _react2.default.PropTypes.object,
+	  onPushed: _react2.default.PropTypes.func
+	};
+	QueryLink.defaultProps = {
+	  query: {},
+	  onPushed: function onPushed() {}
+	};
 
 /***/ },
 /* 293 */
