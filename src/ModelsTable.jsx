@@ -6,7 +6,7 @@ import Util from 'Util.js';
 
 export default class ModelsTable extends Component {
 
-  constructor(props) {
+  constructor(props,context) {
     super(props);
     this.state = {};
     this.importStateFromLocation();
@@ -176,26 +176,20 @@ export default class ModelsTable extends Component {
   }
 
   onSort(column) {
-    let direction = this.getOrderedDirectionBy(column) === 'asc' ? ' desc' : '';
-    if(this.state.order) {
-      let b = (this.parseOrderString(this.state.order) || {});
-      if(b.by === column && b.direction === 'asc') {
-        direction = ' desc';
-      }
-    }
-
-    let url = new URL(location.toString());
-    url.searchParams.set('order', `${column}${direction}`);
-    browserHistory.push(url.pathname + url.search + url.hash);
     this.importStateFromLocation();
     this.forceUpdate();
+  }
+
+  getSortUrlParamValueByColumn(column) {
+    let d = this.getOrderedDirectionBy(column) === 'asc' ? ' desc' : '';
+    return `${column}${d}`;
   }
 
   render() {
     return (
       <table className="table table-bordered">
         <thead>
-          {Array(this.getDeepsCount(this.columns)).fill().map((_,trIndex) => {
+          {Array(this.getDeepsCount(this.columns)).fill().map((unUsed,trIndex) => {
             return (
               <tr key={trIndex}>
                 {this.unwrapWithCount(this.props.columns, trIndex).map((e,i,ary) => {
@@ -208,8 +202,13 @@ export default class ModelsTable extends Component {
                     const k = `head_${i}_${e}`;
                     if(trIndex === 0) {
                       return (
-                        <th key={k} rowSpan={deepsCount} onClick={() => this.onSort(e)}>
-                          {e} {this.renderSortIcon(e)} 
+                        <th key={k} rowSpan={deepsCount}>
+                          <QueryLink
+                            onPushed={() => this.onSort(e)}
+                            query={{order: this.getSortUrlParamValueByColumn(e)}}
+                          >
+                            {e} {this.renderSortIcon(e)}
+                          </QueryLink>
                         </th>
                       );
                     }else {
