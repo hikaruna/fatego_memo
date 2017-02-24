@@ -3,6 +3,7 @@ import { browserHistory, Link } from 'react-router';
 import { Icon } from 'react-fa';
 import QueryLink from 'QueryLink.jsx';
 import Util from 'Util.js';
+import qs from 'qs'
 
 export default class ModelsTable extends Component {
 
@@ -16,6 +17,7 @@ export default class ModelsTable extends Component {
 
   importStateFromLocation() {
     this.state.order = new URL(location.toString()).searchParams.get('order');
+    this.state.where = qs.parse(location.search.replace(/^\?/,'')).where;
   }
 
   isValuePrimitive(value) {
@@ -221,7 +223,7 @@ export default class ModelsTable extends Component {
           })}
         </thead>
         <tbody>
-          {this.buildTRecordsForManyModels(this.columns, this.sortedModels).map((tr,i) => {
+          {this.buildTRecordsForManyModels(this.columns, this.filterdSortedModels).map((tr,i) => {
             return (
               <tr key={`table_${i}`}>
                 {tr.map((td,j) => {
@@ -241,8 +243,11 @@ export default class ModelsTable extends Component {
     );
   }
 
-  get sortedModels() {
+  get filterdSortedModels() {
     let models = this.props.models;
+    if(this.state.where) {
+      models = models.where(this.state.where);
+    }
     if(this.state.order) {
       models = models.order(this.state.order);
     }

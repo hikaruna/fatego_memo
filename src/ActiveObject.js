@@ -130,7 +130,7 @@ export class ActiveCollection {
     return new ActiveCollection(
       this.data.filter(e => {
         return Object.keys(option).reduce((ac,c)=> {
-          return ac && (option[c] === e[c]);
+          return ac && (option[c] == e[c]);
         }, true);
       }),
       this.type
